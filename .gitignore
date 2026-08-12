@@ -32,3 +32,9 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+
+# 本地文档（不上传仓库）
+架构图-*.md
+任务板清单.md
+三个后台代理解析.md
+学习链接.py
