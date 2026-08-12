@@ -8,7 +8,7 @@ Skill 支持框架
 - Claude Code 的 SKILL.md YAML frontmatter 格式
 
 用法：
-    from agent.skill_support import init_skills, get_skill_registry
+    from skill_support import init_skills, get_skill_registry
 
     # 异步初始化（应用启动时调用一次，避免阻塞事件循环）
     await init_skills()
@@ -30,7 +30,7 @@ from .loader import load_all_skills, reload_skill
 from .registry import SkillRegistry, get_skill_registry
 from .tools import SKILL_TOOLS, list_skills, invoke_skill
 
-logger = logging.getLogger("agent.skill_support")
+logger = logging.getLogger("skill_support")
 
 
 async def init_skills() -> SkillRegistry:

@@ -1,0 +1,253 @@
+{
+  "title_cn": "四月是你的谎言",
+  "title_jp": "四月は君の嘘",
+  "url": "https://bangumi.lol/subject/100444",
+  "stats": {
+    "rating": "8.0",
+    "rank": "#242",
+    "rating_desc": "力荐"
+  },
+  "tags": [
+    {
+      "name": "恋爱",
+      "count": 5920
+    },
+    {
+      "name": "音乐",
+      "count": 4514
+    },
+    {
+      "name": "A-1Pictures",
+      "count": 4285
+    },
+    {
+      "name": "治愈",
+      "count": 3637
+    },
+    {
+      "name": "青春",
+      "count": 3018
+    }
+  ],
+  "summary_jp": "有马公生的母亲一心想把有马培育成举世闻名的钢琴家，而有马也不负母亲的期望，在念小学时就赢得许多钢琴比赛的大奖。11岁的秋天，有马的母亲过世，从此他再也听不见自己弹奏的钢琴声，沮丧的他也只好放弃演奏，但在14岁那年，经由儿时玩伴的介绍，有马认识了小提琴手宫园薰，并被薰的自由奔放吸引，没想到薰竟开口邀请公生在比赛时担任她的伴奏…",
+  "episodes": [
+    {
+      "ep": 1,
+      "title_cn": "单调·多彩",
+      "title_jp": "モノトーン・カラフル",
+      "air_date": "2014-10-09"
+    },
+    {
+      "ep": 2,
+      "title_cn": "友人A",
+      "title_jp": "友人A",
+      "air_date": "2014-10-16"
+    },
+    {
+      "ep": 3,
+      "title_cn": "春光里",
+      "title_jp": "春の中",
+      "air_date": "2014-10-23"
+    },
+    {
+      "ep": 4,
+      "title_cn": "启程",
+      "title_jp": "旅立ち",
+      "air_date": "2014-10-30"
+    },
+    {
+      "ep": 5,
+      "title_cn": "阴云密布",
+      "title_jp": "どんてんもよう",
+      "air_date": "2014-11-06"
+    },
+    {
+      "ep": 6,
+      "title_cn": "归途",
+      "title_jp": "帰り道",
+      "air_date": "2014-11-13"
+    },
+    {
+      "ep": 7,
+      "title_cn": "暗影低语",
+      "title_jp": "カゲささやく",
+      "air_date": "2014-11-20"
+    },
+    {
+      "ep": 8,
+      "title_cn": "回响",
+      "title_jp": "響け",
+      "air_date": "2014-11-27"
+    },
+    {
+      "ep": 9,
+      "title_cn": "共鸣",
+      "title_jp": "共鳴",
+      "air_date": "2014-12-04"
+    },
+    {
+      "ep": 10,
+      "title_cn": "与你共赏的景色",
+      "title_jp": "君といた景色",
+      "air_date": "2014-12-11"
+    },
+    {
+      "ep": 11,
+      "title_cn": "生命之光",
+      "title_jp": "命の灯",
+      "air_date": "2014-12-18"
+    },
+    {
+      "ep": 12,
+      "title_cn": "闪耀的小星星",
+      "title_jp": "トゥインクル　リトルスター",
+      "air_date": "2015-01-08"
+    },
+    {
+      "ep": 13,
+      "title_cn": "爱的忧伤",
+      "title_jp": "愛の悲しみ",
+      "air_date": "2015-01-15"
+    },
+    {
+      "ep": 14,
+      "title_cn": "足迹",
+      "title_jp": "足跡",
+      "air_date": "2015-01-22"
+    },
+    {
+      "ep": 15,
+      "title_cn": "骗子",
+      "title_jp": "うそつき",
+      "air_date": "2015-01-29"
+    },
+    {
+      "ep": 16,
+      "title_cn": "相似的人",
+      "title_jp": "似たもの同士",
+      "air_date": "2015-02-05"
+    },
+    {
+      "ep": 17,
+      "title_cn": "暮光",
+      "title_jp": "トワイライト",
+      "air_date": "2015-02-12"
+    },
+    {
+      "ep": 18,
+      "title_cn": "心心相印",
+      "title_jp": "心重ねる",
+      "air_date": "2015-02-19"
+    },
+    {
+      "ep": 19,
+      "title_cn": "再见了 英雄",
+      "title_jp": "さよなら ヒーロー",
+      "air_date": "2015-02-26"
+    },
+    {
+      "ep": 20,
+      "title_cn": "手与手",
+      "title_jp": "手と手",
+      "air_date": "2015-03-05"
+    },
+    {
+      "ep": 21,
+      "title_cn": "雪",
+      "title_jp": "雪",
+      "air_date": "2015-03-12"
+    },
+    {
+      "ep": 22,
+      "title_cn": "春风",
+      "title_jp": "春風",
+      "air_date": "2015-03-19"
+    }
+  ],
+  "characters": [
+    {
+      "name_cn": "有马公生",
+      "name_jp": "有馬公生",
+      "role": "主角",
+      "cv": "花江夏樹",
+      "url": "https://bangumi.lol/character/26002"
+    },
+    {
+      "name_cn": "宫园薰",
+      "name_jp": "宮園かをり",
+      "role": "主角",
+      "cv": "種田梨沙",
+      "url": "https://bangumi.lol/character/26003"
+    },
+    {
+      "name_cn": "泽部椿",
+      "name_jp": "澤部椿",
+      "role": "主角",
+      "cv": "佐倉綾音",
+      "url": "https://bangumi.lol/character/26004"
+    },
+    {
+      "name_cn": "渡亮太",
+      "name_jp": "渡亮太",
+      "role": "主角",
+      "cv": "逢坂良太",
+      "url": "https://bangumi.lol/character/26005"
+    },
+    {
+      "name_cn": "相座武士",
+      "name_jp": "相座武士",
+      "role": "配角",
+      "cv": "梶裕貴",
+      "url": "https://bangumi.lol/character/26006"
+    },
+    {
+      "name_cn": "井川绘见",
+      "name_jp": "井川絵見",
+      "role": "配角",
+      "cv": "早見沙織",
+      "url": "https://bangumi.lol/character/26007"
+    },
+    {
+      "name_cn": "有马早希",
+      "name_jp": "有馬早希",
+      "role": "配角",
+      "cv": "能登麻美子",
+      "url": "https://bangumi.lol/character/28250"
+    },
+    {
+      "name_cn": "相座凪",
+      "name_jp": "相座凪",
+      "role": "配角",
+      "cv": "茅野愛衣",
+      "url": "https://bangumi.lol/character/28784"
+    },
+    {
+      "name_cn": "濑户纮子",
+      "name_jp": "瀬戸紘子",
+      "role": "配角",
+      "cv": "園崎未恵",
+      "url": "https://bangumi.lol/character/31403"
+    },
+    {
+      "name_cn": "三池俊也",
+      "name_jp": "三池俊也",
+      "role": "配角",
+      "cv": "寺崎裕香",
+      "url": "https://bangumi.lol/character/31404"
+    },
+    {
+      "name_cn": "柏木奈绪",
+      "name_jp": "柏木奈緒",
+      "role": "配角",
+      "cv": "石上静香",
+      "url": "https://bangumi.lol/character/33893"
+    },
+    {
+      "name_cn": "",
+      "name_jp": "市立墨谷中学校",
+      "role": "客串",
+      "cv": "",
+      "url": "https://bangumi.lol/character/170488"
+    }
+  ]
+}

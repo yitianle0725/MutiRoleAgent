@@ -554,7 +554,7 @@ class UnifiedMiddleware(AgentMiddleware):
         # 获取 Skill 摘要（动态获取，保持每轮都有）
         skills_summary = ""
         try:
-            from agent.skill_support import get_skill_registry
+            from skill_support import get_skill_registry
             registry = get_skill_registry()
             if registry.count > 0:
                 skills_summary = registry.build_skills_summary()

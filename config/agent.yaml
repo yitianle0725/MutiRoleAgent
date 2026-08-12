@@ -4,6 +4,8 @@
 context:
   trim_max_tokens: 6000
   trim_max_rounds: 15
+  llm_turn_timeout: 90
+  turn_queue_timeout: 5
 
 # ---- 工具超时（秒） ----
 tool_timeouts:

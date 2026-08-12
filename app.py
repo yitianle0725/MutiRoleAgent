@@ -14,6 +14,7 @@ from datetime import datetime, date
 import streamlit as st
 from agent.react_agent import ReactAgent
 from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_display_name
+from channels.manager import agent_cache
 from db.chat_db import chat_db
 from agent.knowledge_base import KnowledgeBaseService
 from utils.path_tool import get_abs_path
@@ -31,7 +32,20 @@ st.set_page_config(
 # ==================== 会话状态初始化 ====================
 
 def _init_agent_sync(session_id: str, user_id: str | None = None, default_persona: str | None = None) -> ReactAgent:
-    """在 Streamlit 启动时同步完成 Agent 异步初始化。"""
+    """在 Streamlit 启动时同步完成 Agent 异步初始化。
+
+    优先从跨 channel 共享的 ``agent_cache`` 获取，缓存未命中时才创建新实例。
+    """
+    # 快速路径：缓存命中
+    cached = agent_cache.get(session_id)
+    if cached is not None:
+        # 如果 user_id / persona 变化，淘汰旧缓存
+        if (user_id and cached.user_id != user_id) or \
+           (default_persona and cached.default_persona != default_persona):
+            agent_cache.evict(session_id)
+        else:
+            return cached
+
     agent = ReactAgent(session_id=session_id, user_id=user_id, default_persona=default_persona)
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
@@ -39,6 +53,7 @@ def _init_agent_sync(session_id: str, user_id: str | None = None, default_person
         loop.run_until_complete(agent.init_agent())
     finally:
         loop.close()
+    agent_cache.put(session_id, agent)
     return agent
 
 
@@ -206,6 +221,7 @@ with st.sidebar:
 
     if st.button("🗑️ 清空对话历史", use_container_width=True):
         agent.clear_history()
+        agent_cache.evict(current_sid)
         st.session_state["message"] = []
         st.rerun()
 
@@ -252,6 +268,7 @@ with st.sidebar:
                 with c2:
                     if st.button("🗑", key=f"del_{sid}", help=f"删除会话 {stitle}"):
                         chat_db.clear_session(sid)
+                        agent_cache.evict(sid)
                         if is_current:
                             # 删除当前会话 → 切到最近一个或新建
                             remaining = chat_db.list_sessions_with_meta(limit=1)
@@ -351,7 +368,7 @@ with st.sidebar:
     st.header("🧩 可用 Skill")
 
     try:
-        from agent.skill_support import get_skill_registry
+        from skill_support import get_skill_registry
         registry = get_skill_registry()
         skills = registry.list_all()
         if skills:

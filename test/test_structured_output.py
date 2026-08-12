@@ -275,7 +275,7 @@ assert result is not None and result.valid
 print("32/10 Pipeline.process: context 方式 OK ✓")
 
 # ==================== 6. Skill Loader (output_schema) ====================
-from agent.skill_support.loader import parse_skill_md
+from skill_support.loader import parse_skill_md
 print("33/10 Skill Loader 导入 OK")
 
 # 6a) parse_skill_md 提取 output_schema

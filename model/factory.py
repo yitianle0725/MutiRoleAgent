@@ -44,7 +44,6 @@ import os
 
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-import httpx
 
 from utils.config_handler import rag_config
 
@@ -54,6 +53,7 @@ load_dotenv()
 _LLM_API_KEY = os.getenv("LLM_API_KEY") or os.getenv("DASHSCOPE_API_KEY")
 _LLM_BASE_URL = os.getenv("LLM_BASE_URL") or "https://dashscope.aliyuncs.com/compatible-mode/v1"
 _LLM_MODEL = os.getenv("LLM_MODEL") or rag_config.get("chat_model_name", "qwen3-max")
+_LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "60"))
 
 
 def _create_chat_model() -> ChatOpenAI:
@@ -61,18 +61,16 @@ def _create_chat_model() -> ChatOpenAI:
 
     统一使用 OpenAI 兼容协议，通过 ``LLM_BASE_URL`` 区分不同厂商。
     默认连接阿里百炼 DashScope 兼容端点。
+
+    可通过 ``LLM_TIMEOUT`` 环境变量调整超时（默认 300 秒）。
     """
     return ChatOpenAI(
         model=_LLM_MODEL,
         api_key=_LLM_API_KEY,  # type: ignore[arg-type]
         base_url=_LLM_BASE_URL,
-        timeout=httpx.Timeout(
-            connect=15.0,   # 连接超时：15 秒连不上就报错
-            read=300.0,     # 读取超时：qwen3-max 推理可能较慢
-            write=30.0,     # 写入超时：发送请求体最多 30 秒
-            pool=15.0,      # 连接池超时：与 connect 一致，避免假死
-        ),
-        max_retries=2,
+        timeout=_LLM_TIMEOUT,
+        max_retries=1,
+        streaming=True,
     )
 
 

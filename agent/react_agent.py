@@ -21,6 +21,7 @@ ReAct Agent 主控制器
 """
 
 import asyncio
+import threading
 import uuid
 from langchain.agents import create_agent
 from langchain_core.messages import AIMessage, ToolMessage, HumanMessage, SystemMessage
@@ -31,6 +32,7 @@ from utils.logger_handler import logger
 from utils.prompt_loader import load_system_prompts
 from utils.session_store import session_store
 from utils.context_trimmer import trim_history, history_stats
+from utils.conversation_tracer import ConversationTracer
 from db.chat_db import chat_db
 from agent.agent_state import create_agent_state
 from agent.stream_events import TextChunk, ToolEvent, StructuredData
@@ -38,20 +40,22 @@ from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
 from agent.user_profile_extractor import extract_and_save_profile, build_profile_context
 from agent.cita.semantic import SemanticEngine, SemanticAnalysis
-from agent.tools.agent_tools import (
+from tools.agent_tools import (
     search_anime, fetch_anime, get_season_anime,
     rag_summarize, switch_persona, reset_persona,
     get_public_ip, get_current_time,
     maps_weather, maps_ip_location,
 )
-from agent.tools.mcp_client import mcp_manager
-from agent.tools.unified_middleware import UnifiedMiddleware
-from agent.skill_support import init_skills, get_skill_registry, SKILL_TOOLS
+from tools.mcp_client import mcp_manager
+from tools.unified_middleware import UnifiedMiddleware
+from skill_support import init_skills, get_skill_registry, SKILL_TOOLS
 
 # 裁剪参数（从 agent.yaml 读取，可运行时调整）
 _TRIM_CFG = agent_config.get("context", {})
 TRIM_MAX_TOKENS = _TRIM_CFG.get("trim_max_tokens", 6000)
 TRIM_MAX_ROUNDS = _TRIM_CFG.get("trim_max_rounds", 15)
+LLM_TURN_TIMEOUT = float(_TRIM_CFG.get("llm_turn_timeout", 90))
+TURN_QUEUE_TIMEOUT = float(_TRIM_CFG.get("turn_queue_timeout", 5))
 
 
 class ReactAgent:
@@ -79,6 +83,7 @@ class ReactAgent:
         self.session_id = session_id
         self.user_id = user_id
         self.default_persona = default_persona
+        self._turn_lock = threading.Lock()
         self.agent = None            # LangGraph 编译后的图
         self._initialized = False    # 是否已完成异步初始化
 
@@ -218,7 +223,10 @@ class ReactAgent:
 
     # ==================== Chat 路径（轻量，无工具） ====================
 
-    async def _execute_chat(self, query: str, history: list, trace_id: str):
+    async def _execute_chat(
+        self, query: str, history: list, trace_id: str,
+        tracer: "ConversationTracer | None" = None,
+    ):
         """轻量 Chat 路径：直接 LLM 调用，无工具、无 ReAct 循环。
 
         相比 Agent 路径节省：
@@ -234,6 +242,7 @@ class ReactAgent:
             query: 用户输入文本。
             history: 裁剪后的历史消息列表。
             trace_id: 本轮唯一标识。
+            tracer: 对话诊断追踪器（可选）。
 
         Yields:
             TextChunk: 文字片段（与 Agent 路径统一格式）。
@@ -370,6 +379,8 @@ class ReactAgent:
 
         # 持久化
         full_response = "".join(response_chunks)
+        if tracer:
+            tracer.chat_path_done(len(full_response))
         logger.info(
             f"[trace={trace_id}] Chat 完成: "
             f"响应长度={len(full_response)}"
@@ -390,6 +401,11 @@ class ReactAgent:
         if full_response:
             session_store.append_pair(self.session_id, query, full_response)
             chat_db.save_pair(self.session_id, query, full_response)
+            if tracer:
+                tracer.persist(
+                    session_store.history_length(self.session_id),
+                    chat_db.session_message_count(self.session_id),
+                )
 
             # 会话元数据更新
             msg_count = session_store.history_length(self.session_id)
@@ -403,7 +419,7 @@ class ReactAgent:
 
             # 会话标题自动生成
             if meta is None or not meta.get("title"):
-                await self._generate_session_title(query)
+                self._save_title_from_query(query)
 
             # 用户画像提取（异步后台）
             if self.user_id:
@@ -447,6 +463,26 @@ class ReactAgent:
     # ==================== 核心执行 ====================
 
     async def execute_stream_async(self, query: str):
+        """Run one turn at a time for each conversation session."""
+        acquired = await asyncio.to_thread(
+            self._turn_lock.acquire, True, TURN_QUEUE_TIMEOUT
+        )
+        if not acquired:
+            logger.warning("[ReactAgent] Overlapping request rejected")
+            yield TextChunk(content="\n\n正在处理上一条消息，请等待其完成后再发送。")
+            return
+
+        try:
+            async with asyncio.timeout(LLM_TURN_TIMEOUT):
+                async for event in self._execute_stream_locked(query):
+                    yield event
+        except TimeoutError:
+            logger.warning("[ReactAgent] Turn timed out after %.0f seconds", LLM_TURN_TIMEOUT)
+            yield TextChunk(content="\n\n请求超时，请稍后重试。")
+        finally:
+            self._turn_lock.release()
+
+    async def _execute_stream_locked(self, query: str):
         """
         异步流式执行，产出结构化事件（TextChunk | ToolEvent）。
 
@@ -464,15 +500,19 @@ class ReactAgent:
 
         # ---- trace_id: 本轮对话唯一标识 ----
         trace_id = str(uuid.uuid4())[:8]
-        logger.info(f"[trace={trace_id}] 开始处理: {query[:50]}")
+        tracer = ConversationTracer(session_id=self.session_id, trace_id=trace_id)
+        tracer.enter(query)
 
         # ---- 1) 加载并裁剪历史消息 ----
         raw_history = session_store.get_history(self.session_id)
+        tracer.load_history(raw_history)
+
         trimmed_history = trim_history(
             raw_history,
             max_tokens=TRIM_MAX_TOKENS,
             max_rounds=TRIM_MAX_ROUNDS,
         )
+        tracer.after_trim(raw_history, trimmed_history)
 
         # ---- 2) Decision Engine 快/慢路由 ----
         decision = decision_engine.evaluate(
@@ -480,6 +520,7 @@ class ReactAgent:
             session_id=self.session_id,
             history=trimmed_history,
         )
+        tracer.decision(decision.route, decision.confidence, decision.reason)
         logger.info(
             f"[trace={trace_id}] Decision: route={decision.route} "
             f"conf={decision.confidence:.2f} reason={decision.reason}"
@@ -487,8 +528,10 @@ class ReactAgent:
 
         # ---- 2a) Chat 路径：直接 LLM，无工具 ----
         if decision.is_chat:
-            async for event in self._execute_chat(query, trimmed_history, trace_id):
+            tracer.chat_path_start(len(trimmed_history))
+            async for event in self._execute_chat(query, trimmed_history, trace_id, tracer):
                 yield event
+            tracer.exit()
             return
 
         # ---- 2b) Agent 路径：完整 ReAct Agent（原有流程） ----
@@ -499,6 +542,7 @@ class ReactAgent:
             persona=self.default_persona,
             history=trimmed_history,
         )
+        tracer.agent_path_start(len(state["messages"]))
 
         # ---- 3) 流式执行 + 事件分类 ----
         response_chunks: list[str] = []
@@ -512,6 +556,7 @@ class ReactAgent:
                     # 3a) 工具调用事件
                     if latest_msg.tool_calls:
                         for tc in latest_msg.tool_calls:
+                            tracer.agent_tool_call(tc["name"])
                             logger.info(f"[trace={trace_id}] 调用工具: {tc['name']}")
                             yield ToolEvent(
                                 phase="start",
@@ -535,9 +580,11 @@ class ReactAgent:
                 # —— Tool 消息：工具返回结果 ——
                 elif isinstance(latest_msg, ToolMessage):
                     result_text = self._extract_content(latest_msg)
+                    tool_name = getattr(latest_msg, "name", "unknown")
+                    tracer.agent_tool_done(tool_name, len(result_text))
                     yield ToolEvent(
                         phase="end",
-                        tool_name=getattr(latest_msg, "name", "unknown"),
+                        tool_name=tool_name,
                         result_preview=(
                             result_text[:200] + "…" if len(result_text) > 200
                             else result_text
@@ -546,6 +593,7 @@ class ReactAgent:
 
             # ---- 4) 持久化本轮对话（内存 + SQLite 双写） ----
             full_response = "".join(response_chunks)
+            tracer.agent_path_done(len(full_response), token_stats)
             logger.info(
                 f"[trace={trace_id}] 完成: tokens={token_stats}, "
                 f"响应长度={len(full_response)}"
@@ -566,6 +614,10 @@ class ReactAgent:
             if full_response:
                 session_store.append_pair(self.session_id, query, full_response)
                 chat_db.save_pair(self.session_id, query, full_response)
+                tracer.persist(
+                    session_store.history_length(self.session_id),
+                    chat_db.session_message_count(self.session_id),
+                )
 
                 # ---- 4a) 更新会话元数据（消息计数） ----
                 msg_count = session_store.history_length(self.session_id)
@@ -590,7 +642,7 @@ class ReactAgent:
 
                 # ---- 4c) 会话标题自动生成（首次对话后，同步） ----
                 if meta is None or not meta.get("title"):
-                    await self._generate_session_title(query)
+                    self._save_title_from_query(query)
 
                 # ---- 4c) 用户画像提取（异步，不阻塞） ----
                 if self.user_id:
@@ -605,12 +657,21 @@ class ReactAgent:
                     except RuntimeError:
                         pass  # 不在 async 上下文中，跳过（非 Streamlit 环境）
 
+            tracer.exit()  # Agent 路径成功退出
+
         except Exception as e:
+            tracer.exit(error=f"{type(e).__name__}: {e}")
             logger.error(
                 f"[ReactAgent] 流式执行异常: {type(e).__name__}: {e}",
                 exc_info=True,
             )
             yield TextChunk(content=f"\n\n⚠️ 处理请求时发生错误（{type(e).__name__}），请重试。")
+
+    def _save_title_from_query(self, first_query: str) -> None:
+        """Save a useful local title without making another model request."""
+        title = " ".join(first_query.strip().split())[:30]
+        if title:
+            chat_db.upsert_session_meta(self.session_id, title=title)
 
     def _generate_title_async(self, first_query: str):
         """异步生成会话标题（基于第一条用户消息）。"""
@@ -647,20 +708,50 @@ class ReactAgent:
         同步流式接口，yield 结构化事件（TextChunk | ToolEvent）。
 
         用于 Streamlit 这类同步框架中直接调用，无需手动管理事件循环。
-        """
-        async_gen = self.execute_stream_async(query)
 
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        try:
-            while True:
-                try:
-                    event = loop.run_until_complete(async_gen.__anext__())
-                    yield event
-                except StopAsyncIteration:
-                    break
-        finally:
-            loop.close()
+        使用后台线程 + asyncio.run() 确保所有异步操作在同一个
+        事件循环中完成，避免 httpx.AsyncClient 跨循环错乱导致挂死。
+        """
+        import queue
+        import threading
+
+        result_queue: queue.Queue = queue.Queue()
+
+        async def _run() -> None:
+            try:
+                async for event in self.execute_stream_async(query):
+                    result_queue.put(("event", event))
+            except Exception as e:
+                result_queue.put(("error", e))
+            finally:
+                result_queue.put(("done", None))
+
+        def _target() -> None:
+            asyncio.run(_run())
+
+        thread = threading.Thread(target=_target, daemon=True)
+        thread.start()
+
+        while True:
+            try:
+                kind, value = result_queue.get(timeout=300)
+            except queue.Empty:
+                yield TextChunk(content="\n\n⚠️ 请求超时（300s），请重试。")
+                break
+
+            if kind == "done":
+                break
+            elif kind == "error":
+                logger.error(
+                    f"[ReactAgent] 流式执行异常: {type(value).__name__}: {value}",
+                    exc_info=True,
+                )
+                yield TextChunk(content=f"\n\n⚠️ 处理请求时发生错误（{type(value).__name__}），请重试。")
+                break
+            else:
+                yield value
+
+        thread.join(timeout=5)
 
     def execute_stream_text(self, query: str):
         """

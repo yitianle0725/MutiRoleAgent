@@ -1,0 +1,277 @@
+{
+  "title_cn": "龙与虎",
+  "title_jp": "とらドラ！",
+  "url": "https://bangumi.lol/subject/909",
+  "stats": {
+    "rating": "8.0",
+    "rank": "#246",
+    "rating_desc": "力荐"
+  },
+  "tags": [
+    {
+      "name": "钉宫理惠",
+      "count": 5722
+    },
+    {
+      "name": "校园",
+      "count": 5152
+    },
+    {
+      "name": "龙与虎",
+      "count": 5034
+    },
+    {
+      "name": "恋爱",
+      "count": 4329
+    },
+    {
+      "name": "J.C.STAFF",
+      "count": 4306
+    }
+  ],
+  "summary_jp": "因眼神凶恶而被班里同学看作不良少年的高须龙儿，进入了高中二年级，并幸运地和暗恋的少女栉枝实乃梨同班，对崭新的校园生活满怀希望。\n\r\n　　开学典礼后龙儿与校内最恐怖的有“掌上老虎”之称的逢坂大河狭路相逢，周围人一同陷入了惊恐状态。然而他意外地发现，逢坂同时也是实乃梨的闺蜜。\n\r\n　　在二人相遇的当晚，龙儿知道了原来她暗恋的是自己的好友北村祐作，而自己暗恋实乃梨的事也被大河知道了！互相了解对方情况的两人结成了“恋爱同盟战线”，开始了半共同生活……",
+  "episodes": [
+    {
+      "ep": 1,
+      "title_cn": "龙与虎",
+      "title_jp": "虎と竜",
+      "air_date": "2008-10-01"
+    },
+    {
+      "ep": 2,
+      "title_cn": "龙儿与大河",
+      "title_jp": "竜児と大河",
+      "air_date": "2008-10-08"
+    },
+    {
+      "ep": 3,
+      "title_cn": "你的歌",
+      "title_jp": "君の歌",
+      "air_date": "2008-10-15"
+    },
+    {
+      "ep": 4,
+      "title_cn": "那时候的表情",
+      "title_jp": "あのときの顔",
+      "air_date": "2008-10-22"
+    },
+    {
+      "ep": 5,
+      "title_cn": "川嶋亚美",
+      "title_jp": "かわしまあみ",
+      "air_date": "2008-10-29"
+    },
+    {
+      "ep": 6,
+      "title_cn": "真正的自己",
+      "title_jp": "ほんとの自分",
+      "air_date": "2008-11-05"
+    },
+    {
+      "ep": 7,
+      "title_cn": "泳池开放",
+      "title_jp": "プールびらき",
+      "air_date": "2008-11-12"
+    },
+    {
+      "ep": 8,
+      "title_cn": "为谁而战",
+      "title_jp": "だれのため",
+      "air_date": "2008-11-19"
+    },
+    {
+      "ep": 9,
+      "title_cn": "与你共赴海滩",
+      "title_jp": "海にいこうと君は",
+      "air_date": "2008-11-26"
+    },
+    {
+      "ep": 10,
+      "title_cn": "烟花",
+      "title_jp": "花火",
+      "air_date": "2008-12-03"
+    },
+    {
+      "ep": 11,
+      "title_cn": "大桥高中文化祭【前编】",
+      "title_jp": "大橋高校文化祭【前編】",
+      "air_date": "2008-12-10"
+    },
+    {
+      "ep": 12,
+      "title_cn": "大桥高中文化祭【中编】",
+      "title_jp": "大橋高校文化祭【中編】",
+      "air_date": "2008-12-17"
+    },
+    {
+      "ep": 13,
+      "title_cn": "大桥高中文化祭【后编】",
+      "title_jp": "大橋高校文化祭【後編】",
+      "air_date": "2008-12-24"
+    },
+    {
+      "ep": 14,
+      "title_cn": "幸福的掌中老虎",
+      "title_jp": "しあわせの手乗りタイガー",
+      "air_date": "2009-01-07"
+    },
+    {
+      "ep": 15,
+      "title_cn": "星星、好遥远",
+      "title_jp": "星は、遠く",
+      "air_date": "2009-01-14"
+    },
+    {
+      "ep": 16,
+      "title_cn": "踏出的一步",
+      "title_jp": "踏み出す一歩",
+      "air_date": "2009-01-21"
+    },
+    {
+      "ep": 17,
+      "title_cn": "圣诞节水星将逆转",
+      "title_jp": "クリスマスに水星は逆行する",
+      "air_date": "2009-01-28"
+    },
+    {
+      "ep": 18,
+      "title_cn": "在圣诞树之下",
+      "title_jp": "もみの木の下で",
+      "air_date": "2009-02-04"
+    },
+    {
+      "ep": 19,
+      "title_cn": "圣诞派对",
+      "title_jp": "聖夜祭",
+      "air_date": "2009-02-11"
+    },
+    {
+      "ep": 20,
+      "title_cn": "一直，就这样",
+      "title_jp": "ずっと、このまま",
+      "air_date": "2009-02-18"
+    },
+    {
+      "ep": 21,
+      "title_cn": "无论怎么做",
+      "title_jp": "どうしたって",
+      "air_date": "2009-02-25"
+    },
+    {
+      "ep": 22,
+      "title_cn": "有你的景色",
+      "title_jp": "君のいる景色",
+      "air_date": "2009-03-04"
+    },
+    {
+      "ep": 23,
+      "title_cn": "应该前进的道路",
+      "title_jp": "進むべき道",
+      "air_date": "2009-03-11"
+    },
+    {
+      "ep": 24,
+      "title_cn": "告白",
+      "title_jp": "告白",
+      "air_date": "2009-03-18"
+    },
+    {
+      "ep": 25,
+      "title_cn": "龙与虎！",
+      "title_jp": "とらドラ！",
+      "air_date": "2009-03-25"
+    },
+    {
+      "ep": 1,
+      "title_cn": "亚美的模仿秀150连发!!",
+      "title_jp": "亜美のモノマネ150連発!!",
+      "air_date": ""
+    }
+  ],
+  "characters": [
+    {
+      "name_cn": "高须龙儿",
+      "name_jp": "高須竜児",
+      "role": "主角",
+      "cv": "間島淳司",
+      "url": "https://bangumi.lol/character/11778"
+    },
+    {
+      "name_cn": "逢坂大河",
+      "name_jp": "逢坂大河",
+      "role": "主角",
+      "cv": "釘宮理恵",
+      "url": "https://bangumi.lol/character/1762"
+    },
+    {
+      "name_cn": "栉枝实乃梨",
+      "name_jp": "櫛枝実乃梨",
+      "role": "主角",
+      "cv": "堀江由衣",
+      "url": "https://bangumi.lol/character/10456"
+    },
+    {
+      "name_cn": "川岛亚美",
+      "name_jp": "川嶋亜美",
+      "role": "主角",
+      "cv": "喜多村英梨",
+      "url": "https://bangumi.lol/character/319"
+    },
+    {
+      "name_cn": "北村佑作",
+      "name_jp": "北村祐作",
+      "role": "主角",
+      "cv": "野島裕史",
+      "url": "https://bangumi.lol/character/12563"
+    },
+    {
+      "name_cn": "高须泰子",
+      "name_jp": "高須泰子",
+      "role": "配角",
+      "cv": "大原さやか",
+      "url": "https://bangumi.lol/character/16660"
+    },
+    {
+      "name_cn": "小鹦",
+      "name_jp": "インコちゃん",
+      "role": "配角",
+      "cv": "後藤沙緒里",
+      "url": "https://bangumi.lol/character/16664"
+    },
+    {
+      "name_cn": "恋洼百合",
+      "name_jp": "恋ヶ窪ゆり",
+      "role": "配角",
+      "cv": "田中理恵",
+      "url": "https://bangumi.lol/character/6341"
+    },
+    {
+      "name_cn": "狩野堇",
+      "name_jp": "狩野すみれ",
+      "role": "配角",
+      "cv": "甲斐田裕子",
+      "url": "https://bangumi.lol/character/16662"
+    },
+    {
+      "name_cn": "春田浩次",
+      "name_jp": "春田浩次",
+      "role": "配角",
+      "cv": "吉野裕行",
+      "url": "https://bangumi.lol/character/6340"
+    },
+    {
+      "name_cn": "能登久光",
+      "name_jp": "能登久光",
+      "role": "配角",
+      "cv": "興津和幸",
+      "url": "https://bangumi.lol/character/6339"
+    },
+    {
+      "name_cn": "木原麻耶",
+      "name_jp": "木原麻耶",
+      "role": "配角",
+      "cv": "野中藍",
+      "url": "https://bangumi.lol/character/16661"
+    }
+  ]
+}
