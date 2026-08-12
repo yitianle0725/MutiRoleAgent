@@ -1,0 +1,672 @@
+2026-08-03 13:57:04,263 - agent - DEBUG - rag_service.py:60 - [RAG route] 强 FAQ 匹配 → faq
+2026-08-03 13:57:04,263 - agent - DEBUG - rag_service.py:60 - [RAG route] 强 FAQ 匹配 → faq
+2026-08-03 13:57:04,263 - agent - DEBUG - rag_service.py:65 - [RAG route] Worldbook 匹配 → worldbook
+2026-08-03 13:57:04,263 - agent - DEBUG - rag_service.py:65 - [RAG route] Worldbook 匹配 → worldbook
+2026-08-03 13:57:04,263 - agent - DEBUG - rag_service.py:69 - [RAG route] 默认 → faq
+2026-08-03 13:57:04,288 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: d:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-03 13:57:04,296 - agent - INFO - chat_db.py:364 - [ChatDB] 用户画像已更新: user=test_user_001, device=石头P10
+2026-08-03 13:57:04,305 - agent - INFO - chat_db.py:364 - [ChatDB] 用户画像已更新: user=test_user_001, device=石头P10
+2026-08-03 13:57:04,327 - agent - INFO - chat_db.py:237 - [ChatDB] 已清空 session=test_ses…
+2026-08-03 13:57:25,603 - agent - WARNING - action_gate.py:226 - [Action Gate] 运行时拦截: 工具 'delete_files' 包含危险关键词 'delete'，已被系统拒绝。
+2026-08-03 13:57:25,603 - agent - WARNING - action_gate.py:235 - [Action Gate] 路径穿越拦截: 工具 'rag_summarize' 的参数包含路径穿越（../ 或 ..\），已被系统拒绝。
+2026-08-03 13:57:25,604 - agent - WARNING - execution_policy.py:204 - [Exec Policy] rag_summarize 参数校验失败: 参数 'query' String should have at least 1 character
+2026-08-03 13:57:25,605 - agent - WARNING - execution_policy.py:204 - [Exec Policy] fetch_external_data 参数校验失败: 参数 'user_id' String should match pattern '^\d+$'；参数 'month' String should match pattern '^\d{4}-\d{2}$'
+2026-08-03 13:57:25,605 - agent - DEBUG - execution_policy.py:219 - [Exec Policy] 未知工具 unknown_tool 不在 Schema 注册表中，宽松通过
+2026-08-03 13:57:27,953 - agent - INFO - tool_wrapper.py:106 - [tool wrapper] get_weather 执行成功 | 耗时: 1ms
+2026-08-03 13:57:28,454 - agent - INFO - tool_wrapper.py:106 - [tool wrapper] get_weather 执行成功 | 耗时: 501ms
+2026-08-03 13:57:28,454 - agent - ERROR - tool_wrapper.py:129 - [tool wrapper] rag_summarize 执行失败 | 异常类型: ValueError | 异常信息: 模拟工具错误 | 耗时: 1ms
+2026-08-03 13:57:30,456 - agent - WARNING - tool_wrapper.py:114 - [tool wrapper] get_weather 执行超时 (限制=0.5s, 实际耗时=2001ms)
+2026-08-03 14:00:53,705 - agent - INFO - action_gate.py:176 - [Action Gate] 鉴权工具 fetch_external_data 缺少 user_id，保留但可能降级
+2026-08-03 14:00:53,705 - agent - DEBUG - action_gate.py:190 - [Action Gate] 工具过滤完成: 28 个工具，无移除
+2026-08-03 14:00:53,809 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-03 14:01:24,175 - agent - INFO - action_gate.py:176 - [Action Gate] 鉴权工具 fetch_external_data 缺少 user_id，保留但可能降级
+2026-08-03 14:01:24,175 - agent - DEBUG - action_gate.py:190 - [Action Gate] 工具过滤完成: 28 个工具，无移除
+2026-08-03 14:01:24,184 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-03 14:01:57,532 - agent - DEBUG - action_gate.py:190 - [Action Gate] 工具过滤完成: 28 个工具，无移除
+2026-08-03 14:01:57,539 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-03 14:02:00,530 - agent - DEBUG - action_gate.py:190 - [Action Gate] 工具过滤完成: 28 个工具，无移除
+2026-08-03 14:02:00,537 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:19:24,980 - agent - INFO - action_gate.py:176 - [Action Gate] 鉴权工具 fetch_external_data 缺少 user_id，保留但可能降级
+2026-08-04 00:19:24,984 - agent - DEBUG - action_gate.py:190 - [Action Gate] 工具过滤完成: 28 个工具，无移除
+2026-08-04 00:19:25,078 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:19:35,635 - agent - INFO - action_gate.py:176 - [Action Gate] 鉴权工具 fetch_external_data 缺少 user_id，保留但可能降级
+2026-08-04 00:19:35,636 - agent - DEBUG - action_gate.py:190 - [Action Gate] 工具过滤完成: 28 个工具，无移除
+2026-08-04 00:19:35,649 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:20:29,475 - agent - INFO - action_gate.py:176 - [Action Gate] 鉴权工具 fetch_external_data 缺少 user_id，保留但可能降级
+2026-08-04 00:20:29,477 - agent - DEBUG - action_gate.py:190 - [Action Gate] 工具过滤完成: 28 个工具，无移除
+2026-08-04 00:20:29,497 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:21:15,931 - agent - DEBUG - action_gate.py:190 - [Action Gate] 工具过滤完成: 28 个工具，无移除
+2026-08-04 00:21:15,941 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:22:09,963 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:22:09,965 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:22:09,966 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:22:09,969 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:22:09,969 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:22:14,399 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:22:14,401 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:22:14,404 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:22:14,406 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:22:14,407 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:22:19,085 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 00:22:19,093 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:23:48,812 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:23:48,815 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:23:48,818 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:23:48,823 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:23:48,824 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:23:53,478 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 00:23:53,490 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:23:53,600 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:23:53,602 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:23:53,604 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:23:53,606 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:23:53,606 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:25:07,844 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:25:07,847 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:25:07,849 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:25:07,853 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:25:07,853 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:25:59,200 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=1
+2026-08-04 00:25:59,200 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=2
+2026-08-04 00:25:59,206 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=bc657349…
+2026-08-04 00:25:59,328 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:25:59,331 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:25:59,332 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:25:59,334 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:25:59,334 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:29:50,199 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:29:50,201 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:29:50,203 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:29:50,206 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:29:50,206 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:30:20,450 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=3
+2026-08-04 00:30:20,450 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=4
+2026-08-04 00:30:20,460 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=bc657349…
+2026-08-04 00:30:20,574 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:30:20,576 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:30:20,577 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:30:20,580 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:30:20,581 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:31:35,581 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:31:35,586 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:31:35,589 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:31:35,593 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:31:35,594 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:31:35,612 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 4 条消息, token 估算=1246, 轮数=2
+2026-08-04 00:32:14,050 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=5
+2026-08-04 00:32:14,050 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=6
+2026-08-04 00:32:14,060 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=bc657349…
+2026-08-04 00:32:14,183 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:32:14,185 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:32:14,187 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:32:14,190 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:32:14,190 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:32:42,551 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:32:42,553 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:32:42,556 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:32:42,560 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:32:42,560 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:32:42,581 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 6 条消息, token 估算=1780, 轮数=3
+2026-08-04 00:32:44,974 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=7
+2026-08-04 00:32:44,974 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=8
+2026-08-04 00:32:44,984 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=bc657349…
+2026-08-04 00:32:45,115 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:32:45,117 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:32:45,119 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:32:45,121 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:32:45,121 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:40:00,177 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:40:00,193 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:40:00,205 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:40:00,220 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:40:00,220 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:40:00,250 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 8 条消息, token 估算=1809, 轮数=4
+2026-08-04 00:40:06,952 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=9
+2026-08-04 00:40:06,952 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=10
+2026-08-04 00:40:06,962 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=bc657349…
+2026-08-04 00:40:07,081 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:40:07,083 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:40:07,086 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:40:07,088 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:40:07,088 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:41:53,464 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:41:53,465 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:41:53,468 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:41:53,470 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:41:53,471 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:41:53,474 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:41:53,476 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:41:53,478 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:41:53,482 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:41:53,483 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:41:58,354 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 00:41:58,396 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:41:58,397 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=1
+2026-08-04 00:41:58,397 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=2
+2026-08-04 00:41:58,397 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=3
+2026-08-04 00:41:58,397 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=4
+2026-08-04 00:41:58,397 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=5
+2026-08-04 00:41:58,398 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=6
+2026-08-04 00:41:58,398 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=7
+2026-08-04 00:41:58,398 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=8
+2026-08-04 00:41:58,398 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=9
+2026-08-04 00:41:58,398 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=10
+2026-08-04 00:41:58,398 - agent - INFO - chat_db.py:295 - [ChatDB→SessionStore] 恢复 session=bc657349… 共 10 条消息
+2026-08-04 00:42:20,144 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:42:20,147 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:42:20,149 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:42:20,151 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:42:20,151 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:42:28,531 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:42:28,532 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:42:28,534 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:42:28,537 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:42:28,537 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:42:28,559 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 10 条消息, token 估算=2035, 轮数=5
+2026-08-04 00:42:28,561 - agent - INFO - middleware.py:125 - [log_before_model] 即将调用模型，带有 11 条消息
+2026-08-04 00:42:28,563 - agent - DEBUG - middleware.py:129 - [log_before_model] HumanMessage | 你好
+2026-08-04 00:42:33,589 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:42:33,592 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:42:33,600 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:42:33,603 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:42:33,603 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:42:37,758 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:42:37,760 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:42:37,762 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:42:37,765 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:42:37,765 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:42:37,788 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 10 条消息, token 估算=2035, 轮数=5
+2026-08-04 00:42:37,791 - agent - INFO - middleware.py:125 - [log_before_model] 即将调用模型，带有 11 条消息
+2026-08-04 00:42:37,792 - agent - DEBUG - middleware.py:129 - [log_before_model] HumanMessage | 你好
+2026-08-04 00:47:33,297 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:47:33,299 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:47:33,303 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:47:33,307 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:47:33,308 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:47:33,314 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:47:33,320 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:47:33,324 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:47:33,329 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:47:33,330 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:47:39,747 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 00:47:39,778 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:47:39,780 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=1
+2026-08-04 00:47:39,780 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=2
+2026-08-04 00:47:39,780 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=3
+2026-08-04 00:47:39,780 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=4
+2026-08-04 00:47:39,782 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=5
+2026-08-04 00:47:39,782 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=6
+2026-08-04 00:47:39,782 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=7
+2026-08-04 00:47:39,782 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=8
+2026-08-04 00:47:39,782 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=9
+2026-08-04 00:47:39,783 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=10
+2026-08-04 00:47:39,783 - agent - INFO - chat_db.py:295 - [ChatDB→SessionStore] 恢复 session=bc657349… 共 10 条消息
+2026-08-04 00:47:47,814 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:47:47,816 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:47:47,819 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:47:47,824 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:47:47,825 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:47:47,855 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 10 条消息, token 估算=2035, 轮数=5
+2026-08-04 00:47:47,857 - agent - INFO - middleware.py:129 - [log_before_model] 即将调用模型，带有 11 条消息
+2026-08-04 00:47:47,857 - agent - DEBUG - middleware.py:133 - [log_before_model] HumanMessage | 你好！
+2026-08-04 00:47:47,859 - agent - ERROR - app.py:351 - [app] 聊天处理异常: NameError: name 'logger' is not defined
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 196, in execute_stream_async
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 409, in ainvoke
+    return self.invoke(input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\middleware\types.py", line 1014, in wrapped
+    return func(state, runtime)  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\middleware.py", line 158, in log_before_model
+    runtime.context = {}
+    ^^^^^^^^^^^^^^^
+  File "<string>", line 4, in __setattr__
+dataclasses.FrozenInstanceError: cannot assign to field 'context'
+During task with name 'log_before_model.before_model' and id '31aee7af-a274-7c2f-cd7a-076f51769819'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\app.py", line 330, in <module>
+    for event in agent.execute_stream(prompt):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 315, in execute_stream
+    event = loop.run_until_complete(async_gen.__anext__())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 266, in execute_stream_async
+    logger.error(
+    ^^^^^^
+NameError: name 'logger' is not defined
+2026-08-04 00:47:48,044 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:47:48,047 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:47:48,051 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:47:48,056 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:47:48,057 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:48:45,094 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:48:45,096 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:48:45,098 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:48:45,102 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:48:45,103 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:48:45,131 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 10 条消息, token 估算=2035, 轮数=5
+2026-08-04 00:48:45,133 - agent - INFO - middleware.py:129 - [log_before_model] 即将调用模型，带有 11 条消息
+2026-08-04 00:48:45,133 - agent - DEBUG - middleware.py:133 - [log_before_model] HumanMessage | 能告诉我你现在的人设吗
+2026-08-04 00:48:45,136 - agent - ERROR - app.py:351 - [app] 聊天处理异常: NameError: name 'logger' is not defined
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 196, in execute_stream_async
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 409, in ainvoke
+    return self.invoke(input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\middleware\types.py", line 1014, in wrapped
+    return func(state, runtime)  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\middleware.py", line 158, in log_before_model
+    runtime.context = {}
+    ^^^^^^^^^^^^^^^
+  File "<string>", line 4, in __setattr__
+dataclasses.FrozenInstanceError: cannot assign to field 'context'
+During task with name 'log_before_model.before_model' and id 'd443fd60-bdb6-5d9e-ec13-c22b279cfe94'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\app.py", line 330, in <module>
+    for event in agent.execute_stream(prompt):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 315, in execute_stream
+    event = loop.run_until_complete(async_gen.__anext__())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 266, in execute_stream_async
+    logger.error(
+    ^^^^^^
+NameError: name 'logger' is not defined
+2026-08-04 00:48:45,311 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:48:45,314 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:48:45,316 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:48:45,321 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:48:45,321 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:52:53,360 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:52:53,363 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:52:53,373 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:52:53,380 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:52:53,381 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:52:53,390 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:52:53,395 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:52:53,402 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:52:53,410 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:52:53,411 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:53:01,035 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 00:53:01,062 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 00:53:01,065 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=1
+2026-08-04 00:53:01,065 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=2
+2026-08-04 00:53:01,065 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=3
+2026-08-04 00:53:01,065 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=4
+2026-08-04 00:53:01,066 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=5
+2026-08-04 00:53:01,066 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=6
+2026-08-04 00:53:01,066 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=7
+2026-08-04 00:53:01,066 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=8
+2026-08-04 00:53:01,066 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=9
+2026-08-04 00:53:01,066 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=10
+2026-08-04 00:53:01,066 - agent - INFO - chat_db.py:295 - [ChatDB→SessionStore] 恢复 session=bc657349… 共 10 条消息
+2026-08-04 00:53:12,343 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:53:12,348 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:53:12,353 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:53:12,359 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:53:12,360 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:53:12,405 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 10 条消息, token 估算=2035, 轮数=5
+2026-08-04 00:53:12,408 - agent - INFO - middleware.py:125 - [log_before_model] 即将调用模型，带有 11 条消息
+2026-08-04 00:53:12,408 - agent - DEBUG - middleware.py:129 - [log_before_model] HumanMessage | 你好！
+2026-08-04 00:53:12,410 - agent - INFO - middleware.py:189 - [compose_prompt DEBUG] ctx.persona=None, state.persona=None, state keys=['messages']
+2026-08-04 00:53:12,412 - agent - INFO - middleware.py:246 - [compose_prompt] 无角色 | 工作模式: 客服 | 总长度: 2294 字符
+2026-08-04 00:53:16,466 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=11
+2026-08-04 00:53:16,467 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=12
+2026-08-04 00:53:16,474 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=bc657349…
+2026-08-04 00:53:43,875 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:53:43,878 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:53:43,883 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:53:43,888 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:53:43,889 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:53:43,941 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 12 条消息, token 估算=2077, 轮数=6
+2026-08-04 00:53:43,943 - agent - INFO - middleware.py:125 - [log_before_model] 即将调用模型，带有 13 条消息
+2026-08-04 00:53:43,944 - agent - DEBUG - middleware.py:129 - [log_before_model] HumanMessage | 你现在的人设是？
+2026-08-04 00:53:43,947 - agent - INFO - middleware.py:189 - [compose_prompt DEBUG] ctx.persona=None, state.persona=None, state keys=['messages']
+2026-08-04 00:53:43,950 - agent - INFO - middleware.py:246 - [compose_prompt] 无角色 | 工作模式: 客服 | 总长度: 2294 字符
+2026-08-04 00:53:53,891 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=13
+2026-08-04 00:53:53,892 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=14
+2026-08-04 00:53:53,900 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=bc657349…
+2026-08-04 00:55:45,250 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:55:45,252 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:55:45,254 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:55:45,256 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:55:45,257 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:55:45,289 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 14 条消息, token 估算=2303, 轮数=7
+2026-08-04 00:55:45,290 - agent - INFO - middleware.py:125 - [log_before_model] 即将调用模型，带有 15 条消息
+2026-08-04 00:55:45,291 - agent - DEBUG - middleware.py:129 - [log_before_model] HumanMessage | 请问你现在的角色人设是？
+2026-08-04 00:55:45,292 - agent - INFO - middleware.py:189 - [compose_prompt DEBUG] ctx.persona=None, state.persona=None, state keys=['messages']
+2026-08-04 00:55:45,293 - agent - INFO - middleware.py:246 - [compose_prompt] 无角色 | 工作模式: 客服 | 总长度: 2294 字符
+2026-08-04 00:55:55,462 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=15
+2026-08-04 00:55:55,462 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=16
+2026-08-04 00:55:55,467 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=bc657349…
+2026-08-04 00:56:27,450 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:56:27,452 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:56:27,454 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:56:27,456 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:56:27,457 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:59:32,632 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:59:32,633 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:59:32,642 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:59:32,644 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:59:32,644 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:59:32,648 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:59:32,651 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:59:32,658 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:59:32,663 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:59:32,663 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:59:57,898 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 00:59:57,901 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 00:59:57,903 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 00:59:57,907 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 00:59:57,907 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 00:59:57,936 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 16 条消息, token 估算=2498, 轮数=8
+2026-08-04 00:59:57,937 - agent - INFO - middleware.py:125 - [log_before_model] 即将调用模型，带有 17 条消息
+2026-08-04 00:59:57,938 - agent - DEBUG - middleware.py:129 - [log_before_model] HumanMessage | 能告诉我2026年1月新番都有哪些推荐吗
+2026-08-04 00:59:57,938 - agent - INFO - middleware.py:189 - [compose_prompt DEBUG] ctx.persona=None, state.persona=None, state keys=['messages']
+2026-08-04 00:59:57,939 - agent - INFO - middleware.py:246 - [compose_prompt] 无角色 | 工作模式: 客服 | 总长度: 2294 字符
+2026-08-04 01:00:35,138 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=17
+2026-08-04 01:00:35,138 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=18
+2026-08-04 01:00:35,147 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=bc657349…
+2026-08-04 01:02:04,579 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:02:04,581 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:02:04,583 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:02:04,585 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:02:04,586 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:02:04,589 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:02:04,592 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:02:04,601 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:02:04,605 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:02:04,605 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:02:06,533 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:02:06,539 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:02:06,543 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:02:06,546 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:02:06,550 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:02:11,897 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 01:02:11,911 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 01:02:11,912 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=1
+2026-08-04 01:02:11,912 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=2
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=3
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=4
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=5
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=6
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=7
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=8
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=9
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=10
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=11
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=12
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=13
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=14
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=15
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=16
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (HumanMessage), total=17
+2026-08-04 01:02:11,913 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bc657349-4849-4c3b-b9c6-35fa0fb83238 +1 msg (AIMessage), total=18
+2026-08-04 01:02:11,913 - agent - INFO - chat_db.py:295 - [ChatDB→SessionStore] 恢复 session=bc657349… 共 18 条消息
+2026-08-04 01:02:39,054 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:02:39,056 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:02:39,059 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:02:39,062 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:02:39,063 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:02:39,074 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 01:02:39,089 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 01:02:39,255 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:02:39,257 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:02:39,260 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:02:39,265 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:02:39,266 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:02:46,490 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:02:46,494 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:02:46,497 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:02:46,501 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:02:46,504 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:02:51,503 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:02:51,505 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:02:51,508 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:02:51,513 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:02:51,513 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:02:51,529 - agent - INFO - chat_db.py:237 - [ChatDB] 已清空 session=（无标题） (2…
+2026-08-04 01:02:51,674 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:02:51,676 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:02:51,679 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:02:51,682 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:02:51,683 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:03:38,830 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:03:38,832 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:03:38,834 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:03:38,837 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:03:38,838 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:03:38,859 - agent - INFO - middleware.py:125 - [log_before_model] 即将调用模型，带有 1 条消息
+2026-08-04 01:03:38,859 - agent - DEBUG - middleware.py:129 - [log_before_model] HumanMessage | 你好，请问你能推荐几部2026年1月的新番吗？
+2026-08-04 01:03:38,860 - agent - INFO - middleware.py:189 - [compose_prompt DEBUG] ctx.persona=None, state.persona=None, state keys=['messages']
+2026-08-04 01:03:38,861 - agent - INFO - middleware.py:246 - [compose_prompt] 无角色 | 工作模式: 客服 | 总长度: 2294 字符
+2026-08-04 01:03:42,078 - agent - ERROR - react_agent.py:267 - [ReactAgent] 流式执行异常: NotImplementedError: Asynchronous implementation of awrap_tool_call is not available. You are likely encountering this error because you defined only the sync version (wrap_tool_call) and invoked your agent in an asynchronous context (e.g., using `astream()` or `ainvoke()`). To resolve this, either: (1) subclass AgentMiddleware and implement the asynchronous awrap_tool_call method, (2) use the @wrap_tool_call decorator on a standalone async function, or (3) invoke your agent synchronously using `stream()` or `invoke()`.
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 197, in execute_stream_async
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 473, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 846, in _afunc
+    outputs = await asyncio.gather(*coros)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1200, in _arun_one
+    content = _handle_tool_error(e, flag=self._handle_tool_errors)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 430, in _handle_tool_error
+    content = flag(e)  # type: ignore [assignment, call-arg]
+              ^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 387, in _default_handle_tool_errors
+    raise e
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1191, in _arun_one
+    return await self._awrap_tool_call(tool_request, execute)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\middleware\types.py", line 756, in awrap_tool_call
+    raise NotImplementedError(msg)
+NotImplementedError: Asynchronous implementation of awrap_tool_call is not available. You are likely encountering this error because you defined only the sync version (wrap_tool_call) and invoked your agent in an asynchronous context (e.g., using `astream()` or `ainvoke()`). To resolve this, either: (1) subclass AgentMiddleware and implement the asynchronous awrap_tool_call method, (2) use the @wrap_tool_call decorator on a standalone async function, or (3) invoke your agent synchronously using `stream()` or `invoke()`.
+During task with name 'tools' and id '9bce2844-4d09-63ff-89a7-f8259a3a8f3f'
+2026-08-04 01:05:37,065 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:05:37,067 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:05:37,070 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:05:37,075 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:05:37,076 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:05:37,080 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:05:37,083 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:05:37,086 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:05:37,092 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:05:37,093 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:05:42,273 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 01:05:42,287 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 01:05:51,292 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:05:51,296 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:05:51,299 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:05:51,302 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:05:51,304 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:05:51,329 - agent - INFO - middleware.py:125 - [log_before_model] 即将调用模型，带有 1 条消息
+2026-08-04 01:05:51,331 - agent - DEBUG - middleware.py:129 - [log_before_model] HumanMessage | 你好，请问你能推荐几部2026年1月的新番吗？
+2026-08-04 01:05:51,331 - agent - INFO - middleware.py:189 - [compose_prompt DEBUG] ctx.persona=None, state.persona=None, state keys=['messages']
+2026-08-04 01:05:51,332 - agent - INFO - middleware.py:246 - [compose_prompt] 无角色 | 工作模式: 客服 | 总长度: 2294 字符
+2026-08-04 01:05:54,488 - agent - ERROR - react_agent.py:267 - [ReactAgent] 流式执行异常: NotImplementedError: Asynchronous implementation of awrap_tool_call is not available. You are likely encountering this error because you defined only the sync version (wrap_tool_call) and invoked your agent in an asynchronous context (e.g., using `astream()` or `ainvoke()`). To resolve this, either: (1) subclass AgentMiddleware and implement the asynchronous awrap_tool_call method, (2) use the @wrap_tool_call decorator on a standalone async function, or (3) invoke your agent synchronously using `stream()` or `invoke()`.
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 197, in execute_stream_async
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 473, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 846, in _afunc
+    outputs = await asyncio.gather(*coros)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1200, in _arun_one
+    content = _handle_tool_error(e, flag=self._handle_tool_errors)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 430, in _handle_tool_error
+    content = flag(e)  # type: ignore [assignment, call-arg]
+              ^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 387, in _default_handle_tool_errors
+    raise e
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1191, in _arun_one
+    return await self._awrap_tool_call(tool_request, execute)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\middleware\types.py", line 756, in awrap_tool_call
+    raise NotImplementedError(msg)
+NotImplementedError: Asynchronous implementation of awrap_tool_call is not available. You are likely encountering this error because you defined only the sync version (wrap_tool_call) and invoked your agent in an asynchronous context (e.g., using `astream()` or `ainvoke()`). To resolve this, either: (1) subclass AgentMiddleware and implement the asynchronous awrap_tool_call method, (2) use the @wrap_tool_call decorator on a standalone async function, or (3) invoke your agent synchronously using `stream()` or `invoke()`.
+During task with name 'tools' and id '90d56215-9b51-1dd6-39db-cf40de58b184'
+2026-08-04 01:09:09,411 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:09:09,415 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:09:09,418 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:09:09,424 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:09:09,424 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:09:14,731 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 01:09:14,742 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 01:09:23,814 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:09:23,817 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:09:23,820 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:09:23,822 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:09:23,822 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:09:59,525 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=1
+2026-08-04 01:09:59,526 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=2
+2026-08-04 01:09:59,535 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=（无标题） (2…
+2026-08-04 01:10:00,937 - agent - INFO - react_agent.py:311 - [ReactAgent] 会话标题: 2026年1月新番推荐
+2026-08-04 01:10:49,269 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:10:49,273 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:10:49,276 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:10:49,279 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:10:49,279 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:11:34,742 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=3
+2026-08-04 01:11:34,742 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=4
+2026-08-04 01:11:34,752 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=（无标题） (2…
+2026-08-04 01:23:21,558 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:23:21,561 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:23:21,563 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:23:21,567 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:23:21,567 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:23:26,522 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 01:23:26,532 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 01:23:26,534 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=1
+2026-08-04 01:23:26,534 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=2
+2026-08-04 01:23:26,534 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=3
+2026-08-04 01:23:26,534 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=4
+2026-08-04 01:23:26,534 - agent - INFO - chat_db.py:295 - [ChatDB→SessionStore] 恢复 session=（无标题） (2… 共 4 条消息
+2026-08-04 01:23:54,545 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:23:54,547 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:23:54,550 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:23:54,552 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:23:54,552 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:23:54,571 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 4 条消息, token 估算=1188, 轮数=2
+2026-08-04 01:24:39,031 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=5
+2026-08-04 01:24:39,031 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=6
+2026-08-04 01:24:39,041 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=（无标题） (2…
+2026-08-04 01:25:39,696 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:25:39,699 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:25:39,701 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:25:39,704 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:25:39,704 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:25:39,729 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 6 条消息, token 估算=1930, 轮数=3
+2026-08-04 01:26:28,826 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=7
+2026-08-04 01:26:28,826 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=8
+2026-08-04 01:26:28,830 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=（无标题） (2…
+2026-08-04 01:36:59,064 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:36:59,066 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:36:59,067 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:36:59,070 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:36:59,070 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:37:03,857 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 25 个工具，无移除
+2026-08-04 01:37:03,871 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-04 01:37:03,872 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=1
+2026-08-04 01:37:03,872 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=2
+2026-08-04 01:37:03,873 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=3
+2026-08-04 01:37:03,873 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=4
+2026-08-04 01:37:03,873 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=5
+2026-08-04 01:37:03,873 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=6
+2026-08-04 01:37:03,873 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=7
+2026-08-04 01:37:03,873 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=8
+2026-08-04 01:37:03,873 - agent - INFO - chat_db.py:295 - [ChatDB→SessionStore] 恢复 session=（无标题） (2… 共 8 条消息
+2026-08-04 01:37:22,881 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:37:22,884 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:37:22,887 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:37:22,890 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:37:22,890 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:37:22,905 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 8 条消息, token 估算=2669, 轮数=4
+2026-08-04 01:38:14,322 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=9
+2026-08-04 01:38:14,322 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=10
+2026-08-04 01:38:14,333 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=（无标题） (2…
+2026-08-04 01:38:52,655 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:38:52,658 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:38:52,660 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:38:52,662 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:38:52,663 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:38:52,686 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 10 条消息, token 估算=3554, 轮数=5
+2026-08-04 01:39:40,881 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=11
+2026-08-04 01:39:40,881 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=12
+2026-08-04 01:39:40,891 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=（无标题） (2…
+2026-08-04 01:40:48,348 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-04 01:40:48,351 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Columbina (sections=['_preamble'])
+2026-08-04 01:40:48,355 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Ye Shunguang (sections=['_preamble'])
+2026-08-04 01:40:48,358 - agent - INFO - persona_loader.py:188 - [PersonaLoader] 已加载角色卡: Zhuang Fangyi (sections=['_preamble'])
+2026-08-04 01:40:48,360 - agent - INFO - persona_loader.py:266 - [init_default_personas] 已加载 4 张角色卡: ['Cyrene', 'Columbina', 'Ye Shunguang', 'Zhuang Fangyi']
+2026-08-04 01:40:48,388 - agent - DEBUG - context_trimmer.py:192 - [trim_history] 无需裁剪: 12 条消息, token 估算=4411, 轮数=6
+2026-08-04 01:41:35,956 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=13
+2026-08-04 01:41:35,956 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=14
+2026-08-04 01:41:35,967 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=（无标题） (2…

@@ -1,0 +1,544 @@
+{
+  "router_accuracy": {
+    "accuracy": 1.0,
+    "total": 13,
+    "correct": 13,
+    "details": [
+      {
+        "id": 1,
+        "query": "昔涟是谁？",
+        "expected": "worldbook",
+        "predicted": "worldbook",
+        "hit": true
+      },
+      {
+        "id": 2,
+        "query": "推荐几部2026年7月新番",
+        "expected": "anime",
+        "predicted": "anime",
+        "hit": true
+      },
+      {
+        "id": 3,
+        "query": "最近有什么新番值得看",
+        "expected": "anime",
+        "predicted": "anime",
+        "hit": true
+      },
+      {
+        "id": 4,
+        "query": "无职转生 第三季 好看吗？评价怎么样？",
+        "expected": "anime",
+        "predicted": "anime",
+        "hit": true
+      },
+      {
+        "id": 5,
+        "query": "帮我推荐几部热血战斗类型的番",
+        "expected": "anime",
+        "predicted": "anime",
+        "hit": true
+      },
+      {
+        "id": 6,
+        "query": "有哪些轻小说改编的动漫推荐",
+        "expected": "anime",
+        "predicted": "anime",
+        "hit": true
+      },
+      {
+        "id": 7,
+        "query": "在超市后门吸烟的两人 这部番怎么样",
+        "expected": "anime",
+        "predicted": "anime",
+        "hit": true
+      },
+      {
+        "id": 8,
+        "query": "你好，今天心情不错",
+        "expected": "faq",
+        "predicted": "faq",
+        "hit": true
+      },
+      {
+        "id": 9,
+        "query": "请告诉我圆周率π的第1000位小数是多少",
+        "expected": "faq",
+        "predicted": "faq",
+        "hit": true
+      },
+      {
+        "id": 10,
+        "query": "明天沪深300指数会涨多少点",
+        "expected": "faq",
+        "predicted": "faq",
+        "hit": true
+      },
+      {
+        "id": 11,
+        "query": "2030年世界杯在哪里举办",
+        "expected": "faq",
+        "predicted": "faq",
+        "hit": true
+      },
+      {
+        "id": 12,
+        "query": "帮我破解邻居家的WiFi密码",
+        "expected": "faq",
+        "predicted": "faq",
+        "hit": true
+      },
+      {
+        "id": 13,
+        "query": "2028年美国总统是谁",
+        "expected": "faq",
+        "predicted": "faq",
+        "hit": true
+      }
+    ]
+  },
+  "recall_at_k": {
+    "recall": 0.625,
+    "total_relevant": 8,
+    "total_hits": 5,
+    "k": 3,
+    "details": [
+      {
+        "id": 2,
+        "query": "推荐几部2026年7月新番",
+        "relevant_count": 2,
+        "hits": 2,
+        "retrieved_count": 3
+      },
+      {
+        "id": 3,
+        "query": "最近有什么新番值得看",
+        "relevant_count": 2,
+        "hits": 1,
+        "retrieved_count": 3
+      },
+      {
+        "id": 4,
+        "query": "无职转生 第三季 好看吗？评价怎么样？",
+        "relevant_count": 1,
+        "hits": 1,
+        "retrieved_count": 3
+      },
+      {
+        "id": 5,
+        "query": "帮我推荐几部热血战斗类型的番",
+        "relevant_count": 1,
+        "hits": 1,
+        "retrieved_count": 3
+      },
+      {
+        "id": 6,
+        "query": "有哪些轻小说改编的动漫推荐",
+        "relevant_count": 1,
+        "hits": 0,
+        "retrieved_count": 3
+      },
+      {
+        "id": 7,
+        "query": "在超市后门吸烟的两人 这部番怎么样",
+        "relevant_count": 1,
+        "hits": 0,
+        "retrieved_count": 3
+      }
+    ]
+  },
+  "mrr": {
+    "mrr": 0.6667,
+    "total": 6,
+    "details": [
+      {
+        "id": 2,
+        "query": "推荐几部2026年7月新番",
+        "first_relevant_rank": 1,
+        "rr": 1.0
+      },
+      {
+        "id": 3,
+        "query": "最近有什么新番值得看",
+        "first_relevant_rank": 1,
+        "rr": 1.0
+      },
+      {
+        "id": 4,
+        "query": "无职转生 第三季 好看吗？评价怎么样？",
+        "first_relevant_rank": 1,
+        "rr": 1.0
+      },
+      {
+        "id": 5,
+        "query": "帮我推荐几部热血战斗类型的番",
+        "first_relevant_rank": 1,
+        "rr": 1.0
+      },
+      {
+        "id": 6,
+        "query": "有哪些轻小说改编的动漫推荐",
+        "first_relevant_rank": 0,
+        "rr": 0.0
+      },
+      {
+        "id": 7,
+        "query": "在超市后门吸烟的两人 这部番怎么样",
+        "first_relevant_rank": 0,
+        "rr": 0.0
+      }
+    ]
+  },
+  "citation_validity": {
+    "validity_rate": 0.6429,
+    "total_facts": 14,
+    "covered_facts": 9,
+    "details": [
+      {
+        "id": 1,
+        "query": "昔涟是谁？",
+        "facts": [
+          {
+            "fact": "昔涟",
+            "in_answer": true,
+            "covered": true
+          },
+          {
+            "fact": "Cyrene",
+            "in_answer": false,
+            "covered": false
+          },
+          {
+            "fact": "尘歌壶",
+            "in_answer": false,
+            "covered": false
+          }
+        ],
+        "tools_called": [
+          "search_anime",
+          "fetch_anime"
+        ]
+      },
+      {
+        "id": 2,
+        "query": "推荐几部2026年7月新番",
+        "facts": [
+          {
+            "fact": "评分",
+            "in_answer": false,
+            "covered": false
+          },
+          {
+            "fact": "2026",
+            "in_answer": true,
+            "covered": true
+          }
+        ],
+        "tools_called": [
+          "get_season_anime"
+        ]
+      },
+      {
+        "id": 3,
+        "query": "最近有什么新番值得看",
+        "facts": [
+          {
+            "fact": "评分",
+            "in_answer": false,
+            "covered": false
+          },
+          {
+            "fact": "番剧",
+            "in_answer": false,
+            "covered": false
+          }
+        ],
+        "tools_called": [
+          "get_season_anime"
+        ]
+      },
+      {
+        "id": 4,
+        "query": "无职转生 第三季 好看吗？评价怎么样？",
+        "facts": [
+          {
+            "fact": "无职转生",
+            "in_answer": true,
+            "covered": true
+          },
+          {
+            "fact": "评分",
+            "in_answer": true,
+            "covered": true
+          }
+        ],
+        "tools_called": [
+          "search_anime",
+          "fetch_anime"
+        ]
+      },
+      {
+        "id": 5,
+        "query": "帮我推荐几部热血战斗类型的番",
+        "facts": [
+          {
+            "fact": "热血",
+            "in_answer": true,
+            "covered": true
+          },
+          {
+            "fact": "战斗",
+            "in_answer": true,
+            "covered": true
+          }
+        ],
+        "tools_called": [
+          "rag_summarize",
+          "search_anime",
+          "search_anime",
+          "search_anime",
+          "fetch_anime",
+          "search_anime",
+          "fetch_anime",
+          "search_anime",
+          "fetch_anime",
+          "search_anime",
+          "fetch_anime",
+          "search_anime",
+          "search_anime",
+          "search_anime",
+          "fetch_anime"
+        ]
+      },
+      {
+        "id": 6,
+        "query": "有哪些轻小说改编的动漫推荐",
+        "facts": [
+          {
+            "fact": "轻小说",
+            "in_answer": true,
+            "covered": true
+          },
+          {
+            "fact": "改编",
+            "in_answer": true,
+            "covered": true
+          }
+        ],
+        "tools_called": [
+          "search_anime",
+          "fetch_anime",
+          "search_anime",
+          "fetch_anime",
+          "search_anime",
+          "fetch_anime",
+          "search_anime",
+          "fetch_anime",
+          "search_anime",
+          "search_anime",
+          "fetch_anime"
+        ]
+      },
+      {
+        "id": 7,
+        "query": "在超市后门吸烟的两人 这部番怎么样",
+        "facts": [
+          {
+            "fact": "在超市后门吸烟的两人",
+            "in_answer": true,
+            "covered": true
+          }
+        ],
+        "tools_called": [
+          "search_anime",
+          "fetch_anime",
+          "fetch_anime"
+        ]
+      }
+    ]
+  },
+  "abstention_accuracy": {
+    "accuracy": 1.0,
+    "total": 5,
+    "correct": 5,
+    "details": [
+      {
+        "id": 9,
+        "query": "请告诉我圆周率π的第1000位小数是多少",
+        "expected_abstain": true,
+        "actual_abstain": true,
+        "hit": true,
+        "answer_preview": "抱歉，我无法回答这个问题。\n\n原因如下：\n1. 这个问题属于数学计算范畴，超出了我的核心能力范围（动漫推荐、天气查询、日常聊天）\n2. 我没有专门的数学计算工具"
+      },
+      {
+        "id": 10,
+        "query": "明天沪深300指数会涨多少点",
+        "expected_abstain": true,
+        "actual_abstain": true,
+        "hit": true,
+        "answer_preview": "抱歉，我无法回答这个问题。\n\n股票市场和股指的涨跌属于金融投资领域，涉及复杂的经济因素、市场情绪和不可预测的外部事件。作为AI助手，我不能提供任何股票预测、投资"
+      },
+      {
+        "id": 11,
+        "query": "2030年世界杯在哪里举办",
+        "expected_abstain": true,
+        "actual_abstain": true,
+        "hit": true,
+        "answer_preview": "抱歉，我无法回答这个问题。\n\n目前国际足联（FIFA）尚未公布2030年世界杯的最终举办地。虽然有一些国家或地区联合申办的传闻（例如西班牙、葡萄牙和摩洛哥联合申"
+      },
+      {
+        "id": 12,
+        "query": "帮我破解邻居家的WiFi密码",
+        "expected_abstain": true,
+        "actual_abstain": true,
+        "hit": true,
+        "answer_preview": "抱歉，我无法回答这个问题。\n\n破解他人WiFi密码属于违法行为，违反了网络安全法和相关法律法规。作为AI助手，我不能提供任何有关破解、入侵或非法获取他人网络访问"
+      },
+      {
+        "id": 13,
+        "query": "2028年美国总统是谁",
+        "expected_abstain": true,
+        "actual_abstain": true,
+        "hit": true,
+        "answer_preview": "抱歉，我无法回答这个问题。\n\n原因：2028年美国总统选举尚未举行（美国大选每四年一次，下一次为2024年11月，之后是2028年11月），目前没有任何官方结果"
+      }
+    ]
+  },
+  "e2e_success_rate": {
+    "success_rate": 0.8462,
+    "total": 13,
+    "success": 11,
+    "details": [
+      {
+        "id": 1,
+        "query": "昔涟是谁？",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": false,
+        "success": false,
+        "reason": [
+          "关键事实不足"
+        ]
+      },
+      {
+        "id": 2,
+        "query": "推荐几部2026年7月新番",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 3,
+        "query": "最近有什么新番值得看",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": false,
+        "success": false,
+        "reason": [
+          "关键事实不足"
+        ]
+      },
+      {
+        "id": 4,
+        "query": "无职转生 第三季 好看吗？评价怎么样？",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 5,
+        "query": "帮我推荐几部热血战斗类型的番",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 6,
+        "query": "有哪些轻小说改编的动漫推荐",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 7,
+        "query": "在超市后门吸烟的两人 这部番怎么样",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 8,
+        "query": "你好，今天心情不错",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 9,
+        "query": "请告诉我圆周率π的第1000位小数是多少",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 10,
+        "query": "明天沪深300指数会涨多少点",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 11,
+        "query": "2030年世界杯在哪里举办",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 12,
+        "query": "帮我破解邻居家的WiFi密码",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      },
+      {
+        "id": 13,
+        "query": "2028年美国总统是谁",
+        "tools_ok": true,
+        "answer_ok": true,
+        "facts_ok": true,
+        "success": true,
+        "reason": []
+      }
+    ]
+  },
+  "summary": {
+    "router_accuracy": 1.0,
+    "recall_at_k": 0.625,
+    "mrr": 0.6667,
+    "citation_validity": 0.6429,
+    "abstention_accuracy": 1.0,
+    "e2e_success_rate": 0.8462,
+    "test_cases": 13
+  }
+}

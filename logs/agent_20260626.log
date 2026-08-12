@@ -1,0 +1,71 @@
+2026-06-26 16:56:36,391 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有1条消息
+2026-06-26 16:56:36,391 - agent - DEBUG - middleware.py:39 - [log_before_model]HumanMessage|查一下杭州现在的气温，告诉我扫地机器人在这种温度下该怎么保养
+2026-06-26 16:56:40,754 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：get_user_location
+2026-06-26 16:56:40,754 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{}
+2026-06-26 16:56:40,755 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：get_user_location调用成功
+2026-06-26 16:56:40,756 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有3条消息
+2026-06-26 16:56:40,756 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|杭州
+2026-06-26 16:56:44,221 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：maps_weather
+2026-06-26 16:56:44,221 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'city': '杭州'}
+2026-06-26 16:56:44,221 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：maps_weather调用成功
+2026-06-26 16:56:44,221 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有5条消息
+2026-06-26 16:56:44,221 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|Error: maps_weather is not a valid tool, try one of [rag_summarize, get_weather, get_user_location, get_user_id, get_current_month, fetch_external_data, fill_cotext_for_report].
+2026-06-26 16:56:47,364 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：get_weather
+2026-06-26 16:56:47,365 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'city': '杭州'}
+2026-06-26 16:56:47,365 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：get_weather调用成功
+2026-06-26 16:56:47,366 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有7条消息
+2026-06-26 16:56:47,366 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|城市杭州天气为晴天，气温26摄氏度，空气湿度50%，南风1级，AQI21，最近6小时降雨概率极低
+2026-06-26 16:56:51,424 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：rag_summarize
+2026-06-26 16:56:51,424 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'query': '扫地机器人在26摄氏度50%湿度环境下的保养方法'}
+2026-06-26 16:56:54,276 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：rag_summarize调用成功
+2026-06-26 16:56:54,278 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有9条消息
+2026-06-26 16:56:54,278 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|参考资料中未提及扫地机器人在26摄氏度50%湿度环境下的具体保养方法。
+2026-06-26 16:56:56,967 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：rag_summarize
+2026-06-26 16:56:56,967 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'query': '扫地机器人温度湿度保养建议'}
+2026-06-26 16:57:00,287 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：rag_summarize调用成功
+2026-06-26 16:57:00,288 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有11条消息
+2026-06-26 16:57:00,289 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|扫地机器人应避免在高温高湿环境中存放或使用，建议工作环境温度为0℃~40℃，相对湿度不超过80%。清洁后需擦干机身，防止水分残留导致内部元件受潮损坏。
+2026-06-26 17:11:24,485 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有1条消息
+2026-06-26 17:11:24,486 - agent - DEBUG - middleware.py:39 - [log_before_model]HumanMessage|查一下杭州现在的气温，告诉我扫地机器人在这种温度下该怎么保养
+2026-06-26 17:11:27,177 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：get_user_location
+2026-06-26 17:11:27,177 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{}
+2026-06-26 17:11:27,178 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：get_user_location调用成功
+2026-06-26 17:11:27,178 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有3条消息
+2026-06-26 17:11:27,179 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|深圳
+2026-06-26 17:11:29,952 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：maps_weather
+2026-06-26 17:11:29,952 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'city': '杭州'}
+2026-06-26 17:11:29,952 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：maps_weather调用成功
+2026-06-26 17:11:29,953 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有5条消息
+2026-06-26 17:11:29,953 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|Error: maps_weather is not a valid tool, try one of [rag_summarize, get_weather, get_user_location, get_user_id, get_current_month, fetch_external_data, fill_cotext_for_report].
+2026-06-26 17:11:32,179 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：get_weather
+2026-06-26 17:11:32,179 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'city': '杭州'}
+2026-06-26 17:11:32,181 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：get_weather调用成功
+2026-06-26 17:11:32,182 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有7条消息
+2026-06-26 17:11:32,182 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|城市杭州天气为晴天，气温26摄氏度，空气湿度50%，南风1级，AQI21，最近6小时降雨概率极低
+2026-06-26 17:11:35,494 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：rag_summarize
+2026-06-26 17:11:35,494 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'query': '扫地机器人在26摄氏度50%湿度环境下的保养方法'}
+2026-06-26 17:11:38,331 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：rag_summarize调用成功
+2026-06-26 17:11:38,333 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有9条消息
+2026-06-26 17:11:38,333 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|参考资料中未提及扫地机器人在26摄氏度50%湿度环境下的具体保养方法。
+2026-06-26 17:11:41,227 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：rag_summarize
+2026-06-26 17:11:41,227 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'query': '扫地机器人日常保养维护方法'}
+2026-06-26 17:11:45,194 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：rag_summarize调用成功
+2026-06-26 17:11:45,195 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有11条消息
+2026-06-26 17:11:45,195 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|定期清理滚刷和边刷上的缠绕物，清空尘盒并擦拭滤网，检查并清理传感器和充电触点，避免在潮湿或有水区域使用，长时间不用时断开电源并存放于干燥处。
+2026-06-26 17:22:56,238 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有1条消息
+2026-06-26 17:22:56,238 - agent - DEBUG - middleware.py:39 - [log_before_model]HumanMessage|查一下杭州现在的气温，告诉我扫地机器人在这种温度下该怎么保养
+2026-06-26 17:22:59,762 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：get_user_location
+2026-06-26 17:22:59,763 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{}
+2026-06-26 17:22:59,763 - agent - INFO - middleware.py:25 - [tool monitor]工具 ：get_user_location调用成功
+2026-06-26 17:22:59,764 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有3条消息
+2026-06-26 17:22:59,764 - agent - DEBUG - middleware.py:39 - [log_before_model]ToolMessage|深圳
+2026-06-26 17:23:03,068 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：maps_weather
+2026-06-26 17:23:03,070 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'city': '杭州'}
+2026-06-26 17:23:03,074 - agent - ERROR - middleware.py:30 - 工具：maps_weather调用失败，原因：StructuredTool does not support sync invocation.
+2026-06-26 17:27:21,590 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有1条消息
+2026-06-26 17:27:21,591 - agent - DEBUG - middleware.py:39 - [log_before_model]HumanMessage|查一下杭州现在的气温，告诉我扫地机器人在这种温度下该怎么保养
+2026-06-26 17:35:12,530 - agent - INFO - middleware.py:38 - [log_before_model]即将调用模型，带有1条消息
+2026-06-26 17:35:12,530 - agent - DEBUG - middleware.py:39 - [log_before_model]HumanMessage|查一下杭州现在的气温，告诉我扫地机器人在这种温度下该怎么保养
+2026-06-26 17:35:15,426 - agent - INFO - middleware.py:20 - [tool monitor]执行工具：maps_weather
+2026-06-26 17:35:15,427 - agent - INFO - middleware.py:21 - [tool monitor]传入参数：{'city': '杭州'}
+2026-06-26 17:35:15,432 - agent - ERROR - middleware.py:30 - 工具：maps_weather调用失败，原因：StructuredTool does not support sync invocation.

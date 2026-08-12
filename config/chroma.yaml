@@ -1,0 +1,39 @@
+# ---- 通用 RAG 配置 ----
+persist_directory: chroma_db
+k: 3
+chunk_size: 200
+chunk_overlap: 20
+separators: ["\n\n", "\n", ".", "!", "?", "。", "！", "？", " ", ""]
+
+# ---- 混合检索 (Vector + BM25 + Reranker) ----
+retrieval:
+  dense_weight: 0.7
+  sparse_weight: 0.3
+  reranker_enabled: false       # bge-reranker-base ~1.1GB, 按需开启
+  reranker_top_k: 10            # 送入 reranker 的候选数
+  reranker_final_k: 5           # reranker 最终返回数
+
+# ---- Embedding Worker 线程池 ----
+batch_size: 32
+max_workers: 4
+
+# ---- FAQ 知识库（产品文档/故障排除/选购指南） ----
+faq:
+  collection_name: faq
+  data_path: data/faq
+  md5_hex_store: faq_md5.text
+  allow_knowledge_file_type: ["txt", "pdf"]
+
+# ---- Worldbook 世界观知识库（角色/剧情/世界观） ----
+worldbook:
+  collection_name: worldbook
+  data_path: data/worldbook
+  md5_hex_store: worldbook_md5.text
+  allow_knowledge_file_type: ["txt", "pdf"]
+
+# ---- Anime 动漫知识库（爬取的番剧 JSON 数据） ----
+anime:
+  collection_name: anime
+  data_path: data/anime
+  md5_hex_store: anime_md5.text
+  allow_knowledge_file_type: ["json"]

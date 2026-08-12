@@ -1,0 +1,131 @@
+# ==================== CITA 2.0 上下文管理配置 ====================
+# Context / Intent / Token / Allocation
+
+# ---- Token 预算分配 ----
+budget:
+  # 总预算（tokens），默认 8000
+  total_budget: 8000
+  # 各层最大占比（和为 1.0）
+  allocation:
+    system_prompt: 0.30    # System Prompt（工具规则 + 安全 + 输出格式）
+    persona_overlay: 0.15  # Persona Overlay（角色人设 + 世界观 + 语气）
+    history: 0.35          # 对话历史
+    skill_instruction: 0.20 # Skill 指令
+  # 预算警告阈值（超过时触发 Reducer）
+  warning_threshold: 0.75
+  # 紧急裁剪阈值（超过时强制裁剪 History）
+  critical_threshold: 0.90
+
+# ---- 实体提取 ----
+entities:
+  # 番名识别模式
+  anime_title:
+    # 书名号包裹的
+    bracket_pattern: "《([^》]+)》"
+    # 常见番名关键词后缀
+    title_suffixes:
+      - 物语
+      - 战记
+      - 冒险
+      - 传说
+      - 日记
+      - 少年
+      - 少女
+      - 英雄
+      - 魔法
+      - 幻想
+      - 物语
+      - 世界
+      - 之旅
+      - 之刃
+      - の
+  # 角色名（从 persona 系统中提取）
+  character_names:
+    - Cyrene
+    - 昔涟
+    - Columbina
+    - 哥伦比娜
+    - 叶瞬光
+    - 庄芳怡
+  # 时间表达式
+  time_patterns:
+    - 今天
+    - 明天
+    - 昨天
+    - 本周
+    - 这周
+    - 本月
+    - 今年
+    - 最近
+    - 当前
+    - 现在
+    - 刚才
+    - 刚刚
+  # 地点表达式
+  location_indicators:
+    - 在.*(?:市|省|区|县|镇|村)
+    - (?:北京|上海|广州|深圳|杭州|成都|武汉|南京|天津|重庆|苏州|西安)
+    - 本地
+    - 这里
+    - 那里
+
+# ---- 情绪检测增强 ----
+emotions:
+  # 强度阈值
+  intensity:
+    low: 0.3
+    medium: 0.6
+    high: 0.8
+  # 否定前缀（翻转情绪）
+  negation_words:
+    - 不
+    - 没
+    - 没有
+    - 别
+    - 不要
+    - 并非
+    - 未必
+
+# ---- 意图分类增强 ----
+intent:
+  # 多标签分类（一条消息可以有多个意图）
+  multi_label: true
+  # 意图权重（用于优先级排序）
+  weights:
+    chitchat: 0.5
+    task: 0.7
+    report: 0.9
+    emergency: 1.0
+  # 上下文关联窗口（消息数）
+  context_window: 3
+
+# ---- Reducer 配置 ----
+reducer:
+  # 去重相似度阈值（0-1，越高越严格）
+  dedup_threshold: 0.75
+  # 最小保留轮数
+  min_rounds: 3
+  # 摘要最大长度（字符）
+  summary_max_chars: 200
+  # 无关消息裁剪策略
+  irrelevance:
+    # 纯表情/符号视为无关
+    emoji_only: true
+    # 单字回复视为无关
+    single_char: true
+    # 重复消息视为无关（如连续"继续"）
+    repeated_continuation: true
+  # 重要性评分权重
+  importance_weights:
+    has_entity: 0.30
+    has_question: 0.25
+    has_emotion: 0.20
+    is_recent: 0.15
+    length_factor: 0.10
+
+# ---- 与 context_trimmer 协作 ----
+coordination:
+  # CITA 管"分多少"（预算分配）
+  # Trimmer 管"裁哪些"（选择要保留的消息）
+  # CITA 计算各层预算上限 → Trimmer 按预算裁剪
+  trim_strategy: "budget_first"  # budget_first: 先算预算再裁剪 | trim_first: 先裁剪再算预算

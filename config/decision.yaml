@@ -1,0 +1,219 @@
+# ==================== Decision Engine 关键词配置 ====================
+# 规则匹配层的关键词，覆盖 ~85% 场景
+
+# ---- Agent 触发词（任何匹配 → 走 Agent 路径） ----
+agent_triggers:
+  # 动漫相关
+  anime:
+    - 推荐
+    - 番剧
+    - 新番
+    - 动漫
+    - 动画
+    - 评分
+    - bangumi
+    - 声优
+    - 本季
+    - 季度
+    - 连载
+    - 完结
+    - 剧场版
+    - OVA
+    - 轻改
+    - 漫改
+    - 这部番
+    - 好看吗
+    - 值得看
+    - 有没有
+    - 有没有什么
+    - 类似的
+    - 和.*类似
+    - 同类型
+    - 看点
+    - 想看
+    - 找.*番
+    - 找.*动漫
+    - 求.*番
+    - 求推荐
+
+  # 天气相关
+  weather:
+    - 天气
+    - 气温
+    - 温度
+    - 下雨
+    - 湿度
+    - 雾霾
+    - 降雨
+    - 风力
+    - 空气质量
+
+  # 文件操作
+  file:
+    - 文件
+    - 下载
+    - 导出
+    - PDF
+    - pdf
+    - Excel
+    - excel
+    - Word
+    - word
+    - PPT
+    - ppt
+    - 文档
+    - 表格
+    - 幻灯片
+
+  # 搜索相关
+  search:
+    - 搜索
+    - 查一下
+    - 帮我找
+    - 最新
+    - 新闻
+    - 实时
+    - 网上
+
+  # 报告相关
+  report:
+    - 报告
+    - 统计
+    - 使用记录
+    - 月度
+    - 使用情况
+
+# ---- Skill 命名空间（提及即触发 Agent） ----
+skill_namespaces:
+  - recommend-anime
+  - season-overview
+  - anime-deep-dive
+  - weather-lifestyle
+  - download-novel
+  - file-processor
+  - pdf
+  - pptx
+  - xlsx
+  - docx
+
+# ---- 追问/继续/重试（在 Agent 上下文中继续走 Agent） ----
+agent_continuations:
+  - 再推荐
+  - 继续
+  - 还有吗
+  - 换一批
+  - 再来
+  - 类似的
+  - 重试
+  - retry
+  - 更多
+
+# ---- CITA 闲聊信号加强（这些明确走 Chat） ----
+chat_signals:
+  greetings:
+    - 你好
+    - 您好
+    - 嗨
+    - 哈喽
+    - 在吗
+    - 早上好
+    - 晚上好
+    - hi
+    - hello
+    - hey
+
+  gratitude:
+    - 谢谢
+    - 感谢
+    - 多谢
+    - 辛苦了
+
+  farewell:
+    - 再见
+    - 拜拜
+    - 晚安
+    - bye
+
+  self_intro:
+    - 你是谁
+    - 你叫什么
+    - 你能做什么
+    - 介绍一下
+    - 你是什么
+
+  emotional:
+    - 心情不好
+    - 心情不太好
+    - 心情很差
+    - 心情糟
+    - 难过
+    - 开心
+    - 无聊
+    - 累了
+    - 好累
+    - 烦
+    - 郁闷
+    - 寂寞
+    - 想哭
+    - 压力
+    - 不开心
+    - 不高兴
+
+  opinion:
+    - 你觉得呢
+    - 你怎么看
+
+  meta:
+    - 你真好
+    - 你真可爱
+    - 你好聪明
+    - 好喜欢你
+    - 爱你
+
+  simple_ack:
+    - 嗯
+    - 好的
+    - 知道了
+    - 明白了
+    - 懂了
+    - 好看
+    - 不错
+    - 很棒
+    - 太棒了
+    - 有意思
+
+# ---- LLM 层配置 ----
+llm_layer:
+  # 是否启用 LLM 二分类（规则不确定时使用）
+  enabled: true
+  # 快分类提示词
+  prompt: |
+    判断以下用户消息是否需要调用工具（搜索、天气、文件、推荐等）。
+    仅回答 "chat"（不需要工具，纯闲聊）或 "agent"（需要工具）。
+    不要输出其他任何文字。
+
+  # LLM 层仅在以下条件触发
+  # 规则层 confidence < 0.6 时才启用
+  min_rule_confidence: 0.6
+
+# ---- 缓存配置 ----
+cache:
+  # 同话题连续 chat 不重复判断
+  # 连续 N 条消息后，自动继续 chat 模式
+  chat_streak_threshold: 2
+  # 缓存 TTL（秒）
+  ttl_seconds: 300
+  # 用户切换话题时重置（以下关键词表示话题切换）
+  topic_change_signals:
+    - 对了
+    - 话说
+    - 另外
+    - 换个话题
+    - 问个问题
+    - 帮我
+    - 我想
+
+# ---- 监控配置 ----
+monitoring:
+  # 统计窗口（最近 N 条消息的 chat/agent 比例）
+  stats_window: 50

@@ -1,0 +1,34 @@
+# Action Gate 配置文件
+# ====================
+# 控制工具调用的白名单/黑名单/风险拦截规则。
+# 遵循项目现有 YAML 配置模式（参考 agent.yaml、chroma.yaml）。
+
+# ---- MCP 远端工具白名单 ----
+# 仅此列表中的 MCP 工具允许被注入 Agent。
+# 远端新增工具默认拒绝，需手动加白后方可使用。
+mcp_tool_whitelist:
+  # 高德地图 MCP（amap）
+  - maps_weather
+  - maps_ip_location
+  - maps_text_search
+  - maps_search_detail
+  - maps_direction_walking_by_address
+  - maps_direction_driving_by_address
+  - maps_direction_transit_integrated_by_address
+  # WebSearch MCP（阿里百炼实时搜索）
+  - web_search
+  - web_search_prime
+
+# ---- 危险工具名关键词 ----
+# 工具名（不区分大小写）包含任一关键词即拒绝加载，并记录告警。
+blocked_name_patterns:
+  - delete
+  - remove
+  - exec
+  - shell
+  - admin
+  - drop
+  - sudo
+  - \bkill\b
+  - mkdir
+  - rmdir

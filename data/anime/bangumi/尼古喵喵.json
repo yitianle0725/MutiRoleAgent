@@ -1,0 +1,193 @@
+{
+  "title_cn": "尼古喵喵",
+  "title_jp": "ヤニねこ",
+  "url": "https://bangumi.lol/subject/622206",
+  "stats": {
+    "rating": "7.2",
+    "rank": "#1938",
+    "rating_desc": "推荐"
+  },
+  "tags": [
+    {
+      "name": "2026年7月",
+      "count": 988
+    },
+    {
+      "name": "搞笑",
+      "count": 955
+    },
+    {
+      "name": "漫画改",
+      "count": 889
+    },
+    {
+      "name": "TV",
+      "count": 720
+    },
+    {
+      "name": "日常",
+      "count": 705
+    }
+  ],
+  "summary_jp": "在一个人类与兽人共存的世界里，住着一只整天抽着烟、过着懒散生活的兽人——「尼古喵喵」。没钱！没生活能力！简直是个废物！礼仪和道德早就跟烟蒂一起被丢进垃圾桶了。一只又臭、又脏、又懒惰的猫。每天都过着抽烟、吐烟、闲聊，日复一日的生活。虽然很邋遢，但却有点疗愈！一群让人讨厌不起来的废渣猫猫们烟雾缭绕的日常。\n\n\n\n\n\n\n\r\n[简介原文]\n\r\n人間と獣人が共存する世界で、タバコを吸ってダラダラ生きる獣人・ヤニねこ。\n\r\n金なし！生活力なし！ろくでなし！マナーやモラルは吸い殻と一緒に捨ててきた。\n\r\nヤニ臭くて、汚くて、怠惰でクズ。吸って、吐いて、ダベって、燃えて。だけど、それなりに充実した日々を過ごしてます。\n\r\nけっこう汚いけど、ちょっとだけ励まされる！SNSでバズり散らかしたマンガが、まさかのTVアニメ化に挑む！\n\r\n放送できなかったらごめんにゃさい！なんだか憎めないクズねこたちがおくる、ヤニまみれな日常をゆる〜く見守ってください。",
+  "episodes": [
+    {
+      "ep": 1,
+      "title_cn": "本喵就是尼古喵喵",
+      "title_jp": "ニャーがヤニねこにゃ",
+      "air_date": "2026-07-02"
+    },
+    {
+      "ep": 2,
+      "title_cn": "本喵的学妹们喵",
+      "title_jp": "ニャーの後輩たちにゃ",
+      "air_date": "2026-07-09"
+    },
+    {
+      "ep": 3,
+      "title_cn": "本喵比起装傻更适合吐槽",
+      "title_jp": "ニャーはボケよりツッコミ寄りにゃ",
+      "air_date": "2026-07-16"
+    },
+    {
+      "ep": 4,
+      "title_cn": "本喵的身边全是怪人喵",
+      "title_jp": "ニャーのまわりは変人ばかりにゃ",
+      "air_date": "2026-07-23"
+    },
+    {
+      "ep": 5,
+      "title_cn": "本喵一行人要去祕境喵",
+      "title_jp": "ニャーたち秘境に行くにゃ",
+      "air_date": "2026-07-30"
+    },
+    {
+      "ep": 6,
+      "title_cn": "",
+      "title_jp": "ニャーの夏が始まって終わるにゃ",
+      "air_date": "2026-08-06"
+    },
+    {
+      "ep": 7,
+      "title_cn": "",
+      "title_jp": "",
+      "air_date": "2026-08-13"
+    },
+    {
+      "ep": 8,
+      "title_cn": "",
+      "title_jp": "",
+      "air_date": "2026-08-20"
+    },
+    {
+      "ep": 9,
+      "title_cn": "",
+      "title_jp": "",
+      "air_date": "2026-08-27"
+    },
+    {
+      "ep": 10,
+      "title_cn": "",
+      "title_jp": "",
+      "air_date": "2026-09-03"
+    },
+    {
+      "ep": 11,
+      "title_cn": "",
+      "title_jp": "",
+      "air_date": "2026-09-10"
+    },
+    {
+      "ep": 12,
+      "title_cn": "",
+      "title_jp": "",
+      "air_date": "2026-09-17"
+    }
+  ],
+  "characters": [
+    {
+      "name_cn": "尼古喵喵",
+      "name_jp": "ヤニねこ",
+      "role": "主角",
+      "cv": "夏吉ゆうこ",
+      "url": "https://bangumi.lol/character/174916"
+    },
+    {
+      "name_cn": "妹子",
+      "name_jp": "妹子",
+      "role": "配角",
+      "cv": "本泉莉奈",
+      "url": "https://bangumi.lol/character/174918"
+    },
+    {
+      "name_cn": "嗑药猫",
+      "name_jp": "ヤクねこ",
+      "role": "配角",
+      "cv": "松岡美里",
+      "url": "https://bangumi.lol/character/174921"
+    },
+    {
+      "name_cn": "性爱猫",
+      "name_jp": "ハメねこ",
+      "role": "配角",
+      "cv": "船戸ゆり絵",
+      "url": "https://bangumi.lol/character/174923"
+    },
+    {
+      "name_cn": "房东",
+      "name_jp": "大家",
+      "role": "配角",
+      "cv": "稲田徹",
+      "url": "https://bangumi.lol/character/174924"
+    },
+    {
+      "name_cn": "关西猫",
+      "name_jp": "カンサイねこ",
+      "role": "配角",
+      "cv": "清水彩香",
+      "url": "https://bangumi.lol/character/207434"
+    },
+    {
+      "name_cn": "酒精猫",
+      "name_jp": "アルねこ",
+      "role": "配角",
+      "cv": "井澤詩織",
+      "url": "https://bangumi.lol/character/207435"
+    },
+    {
+      "name_cn": "小鸡鸡达郎",
+      "name_jp": "おちんぽ達郎",
+      "role": "配角",
+      "cv": "明智璃子",
+      "url": "https://bangumi.lol/character/207436"
+    },
+    {
+      "name_cn": "西春兰",
+      "name_jp": "西春蘭",
+      "role": "配角",
+      "cv": "真白健太朗",
+      "url": "https://bangumi.lol/character/215973"
+    },
+    {
+      "name_cn": "",
+      "name_jp": "字書きねこ",
+      "role": "配角",
+      "cv": "中林新夏",
+      "url": "https://bangumi.lol/character/217859"
+    },
+    {
+      "name_cn": "拉尼",
+      "name_jp": "ラニ",
+      "role": "配角",
+      "cv": "伊瀬茉莉也",
+      "url": "https://bangumi.lol/character/218246"
+    },
+    {
+      "name_cn": "花",
+      "name_jp": "ハナ",
+      "role": "配角",
+      "cv": "田中有紀",
+      "url": "https://bangumi.lol/character/216509"
+    }
+  ]
+}

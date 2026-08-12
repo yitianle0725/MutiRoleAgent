@@ -1,0 +1,13 @@
+2026-07-28 16:47:26,899 - agent - INFO - chat_db.py:84 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\Agent项目练习_智扫通\data/chat_history.db
+2026-07-28 16:48:20,747 - agent - DEBUG - session_store.py:75 - [SessionStore] session=37586ffb-f27c-4734-ae11-a50b23f9987c +1 msg (HumanMessage), total=1
+2026-07-28 16:48:20,748 - agent - DEBUG - session_store.py:75 - [SessionStore] session=37586ffb-f27c-4734-ae11-a50b23f9987c +1 msg (AIMessage), total=2
+2026-07-28 16:48:20,754 - agent - DEBUG - chat_db.py:130 - [ChatDB] 写入 pair: session=37586ffb…
+2026-07-28 16:49:39,142 - agent - DEBUG - session_store.py:75 - [SessionStore] session=37586ffb-f27c-4734-ae11-a50b23f9987c +1 msg (HumanMessage), total=3
+2026-07-28 16:49:39,146 - agent - DEBUG - session_store.py:75 - [SessionStore] session=37586ffb-f27c-4734-ae11-a50b23f9987c +1 msg (AIMessage), total=4
+2026-07-28 16:49:39,152 - agent - DEBUG - chat_db.py:130 - [ChatDB] 写入 pair: session=37586ffb…
+2026-07-28 17:24:38,100 - agent - INFO - chat_db.py:84 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\Agent项目练习_智扫通\data/chat_history.db
+2026-07-28 17:33:50,153 - agent - INFO - chat_db.py:84 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\Agent项目练习_智扫通\data/chat_history.db
+2026-07-28 17:51:04,234 - agent - INFO - chat_db.py:84 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\Agent项目练习_智扫通\data/chat_history.db
+2026-07-28 18:12:16,498 - agent - INFO - chat_db.py:84 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\Agent项目练习_智扫通\data/chat_history.db
+2026-07-28 20:23:03,394 - agent - INFO - chat_db.py:84 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\Agent项目练习_智扫通\data/chat_history.db
+2026-07-28 21:24:41,132 - agent - INFO - chat_db.py:84 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\Agent项目练习_智扫通\data/chat_history.db

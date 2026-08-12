@@ -1,0 +1,16 @@
+{
+  "anime": {
+    "provider": "dashscope",
+    "model": "text-embedding-v4",
+    "dims": 1024,
+    "created_at": "2026-08-12T16:41:39.025737",
+    "updated_at": "2026-08-12T16:41:39.025737"
+  },
+  "faq": {
+    "provider": "dashscope",
+    "model": "text-embedding-v4",
+    "dims": 1024,
+    "created_at": "2026-08-12T16:41:41.688600",
+    "updated_at": "2026-08-12T16:41:41.688600"
+  }
+}

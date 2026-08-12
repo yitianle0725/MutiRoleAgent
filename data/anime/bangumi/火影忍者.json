@@ -1,0 +1,120 @@
+{
+  "title_cn": "火影忍者",
+  "title_jp": "NARUTO -ナルト-",
+  "url": "https://bangumi.lol/subject/34373",
+  "stats": {
+    "rating": "7.6",
+    "rank": "#1790",
+    "rating_desc": "力荐"
+  },
+  "tags": [
+    {
+      "name": "漫画",
+      "count": 389
+    },
+    {
+      "name": "岸本齐史",
+      "count": 283
+    },
+    {
+      "name": "热血",
+      "count": 244
+    },
+    {
+      "name": "JUMP",
+      "count": 171
+    },
+    {
+      "name": "民工",
+      "count": 116
+    }
+  ],
+  "summary_jp": "《火影忍者》是日本漫画家岸本齐史的代表作，作品自1999年开始在《周刊少年JUMP》上连载后，读者反应非常热烈。随后，《火影忍者》的TV动画在日本东京电视台播放，成为最受欢迎的动漫作品之一。故事成功地将原本隐藏在黑暗中，用世界上最强大的毅力和最艰辛的努力去做最密不可宣和隐讳残酷的事情的忍者，描绘成了太阳下最值得骄傲最光明无限的的职业。在这个忍者的世界中，每一位年轻的主人翁都在开拓着属于自己的忍道。",
+  "episodes": [],
+  "characters": [
+    {
+      "name_cn": "漩涡鸣人",
+      "name_jp": "うずまきナルト",
+      "role": "主角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/2162"
+    },
+    {
+      "name_cn": "宇智波佐助",
+      "name_jp": "うちはサスケ",
+      "role": "主角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6500"
+    },
+    {
+      "name_cn": "春野樱",
+      "name_jp": "春野サクラ",
+      "role": "主角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6827"
+    },
+    {
+      "name_cn": "旗木卡卡西",
+      "name_jp": "はたけカカシ",
+      "role": "主角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6536"
+    },
+    {
+      "name_cn": "手鞠",
+      "name_jp": "テマリ",
+      "role": "配角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6309"
+    },
+    {
+      "name_cn": "自来也",
+      "name_jp": "自来也",
+      "role": "配角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6511"
+    },
+    {
+      "name_cn": "日向雏田",
+      "name_jp": "日向ヒナタ",
+      "role": "配角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6540"
+    },
+    {
+      "name_cn": "我爱罗",
+      "name_jp": "我愛羅",
+      "role": "配角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6543"
+    },
+    {
+      "name_cn": "油女志乃",
+      "name_jp": "油女シノ",
+      "role": "配角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6833"
+    },
+    {
+      "name_cn": "角都",
+      "name_jp": "角都",
+      "role": "配角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6851"
+    },
+    {
+      "name_cn": "飞段",
+      "name_jp": "飛段",
+      "role": "配角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6852"
+    },
+    {
+      "name_cn": "蝎",
+      "name_jp": "サソリ",
+      "role": "配角",
+      "cv": "",
+      "url": "https://bangumi.lol/character/6853"
+    }
+  ]
+}

@@ -1,0 +1,937 @@
+{
+  "info": {
+    "季度": "202504_春季档",
+    "共收录": 66,
+    "原创动画": 11,
+    "漫画改编": 29,
+    "小说改编": 18,
+    "游戏改编": 3,
+    "其他题材改编": 5
+  },
+  "animes": [
+    {
+      "title_cn": "机动战士高达GQuuuuuuX",
+      "title_jp": "機動戦士Gundam GQuuuuuuX",
+      "type": "原创动画",
+      "tag": "科幻/机战/IF",
+      "staff": {
+        "原作": "",
+        "音乐": "照井顺政/莲尾理之",
+        "动画制作": "studio khara/SUNRISE"
+      },
+      "broadcast": "4/8周二深夜 (全12话)",
+      "anime_official_link": "https://gundaminfo.cn/about-gundam/series-pages/gquuuuuux/",
+      "PV_link": "https://www.bilibili.com/video/BV1hCzmY4Ewk/"
+    },
+    {
+      "title_cn": "LAZARUS",
+      "title_jp": "LAZARUS ラザロ",
+      "type": "原创动画",
+      "tag": "科幻/特工/动作",
+      "staff": {
+        "原作": "",
+        "音乐": "KamasiWashington/Bonobo/FloatingPoints",
+        "动画制作": "MAPPA"
+      },
+      "broadcast": "4/6周日深夜 (全13话)",
+      "anime_official_link": "https://lazarus.aniplex.co.jp/",
+      "PV_link": "https://www.bilibili.com/video/BV1SE9GYoE4P/"
+    },
+    {
+      "title_cn": "启示录酒店",
+      "title_jp": "アポカリプスホテル",
+      "type": "原创动画",
+      "tag": "",
+      "staff": {
+        "原作": "",
+        "音乐": "藤泽庆昌",
+        "动画制作": "CygamesPictures"
+      },
+      "broadcast": "4/8周二深夜 (全12话)",
+      "anime_official_link": "https://apocalypse-hotel.jp/",
+      "PV_link": "https://www.bilibili.com/video/BV1tYoqYNEJm/"
+    },
+    {
+      "title_cn": "月出之战",
+      "title_jp": "MOONRISE",
+      "type": "原创动画",
+      "tag": "科幻/动作/战争",
+      "staff": {
+        "原作": "",
+        "音乐": "川崎龙",
+        "动画制作": "WIT Studio"
+      },
+      "broadcast": "4/10网络放送",
+      "anime_official_link": "https://www.netflix.com/title/81251383",
+      "PV_link": "https://www.bilibili.com/video/BV11EXpYCEA4"
+    },
+    {
+      "title_cn": "MIRU 我们的未来",
+      "title_jp": "未ル わたしのみらい",
+      "type": "原创动画",
+      "tag": "",
+      "staff": {
+        "原作": "",
+        "音乐": "",
+        "动画制作": ""
+      },
+      "broadcast": "4/2周三深夜 (全5话)",
+      "anime_official_link": "https://miru-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1PvRaYrEhh/"
+    },
+    {
+      "title_cn": "时光流逝 饭菜依旧美味",
+      "title_jp": "日々は過ぎれど飯うまし",
+      "type": "原创动画",
+      "tag": "日常/美食/社团",
+      "staff": {
+        "原作": "",
+        "音乐": "水谷广实",
+        "动画制作": "P.A.WORKS"
+      },
+      "broadcast": "4/12周六深夜 (全12话)",
+      "anime_official_link": "https://hibimeshi.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1wg6fYkEU6/"
+    },
+    {
+      "title_cn": "古典之星",
+      "title_jp": "CLASSIC★STARS",
+      "type": "原创动画",
+      "tag": "科幻/校园/音乐",
+      "staff": {
+        "原作": "",
+        "音乐": "Elements Garden",
+        "动画制作": "Platinum Vision"
+      },
+      "broadcast": "4/5周六深夜 (全13话)",
+      "anime_official_link": "https://classicstars-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1mYoqYNEZN/"
+    },
+    {
+      "title_cn": "公主专场管弦乐",
+      "title_jp": "Princess Session Orchestra",
+      "type": "原创动画",
+      "tag": "魔法/歌姬/动作",
+      "staff": {
+        "原作": "",
+        "音乐": "Elements Garden",
+        "动画制作": "SILVER LINK."
+      },
+      "broadcast": "4/6周日早间 (全48话)",
+      "anime_official_link": "https://princess-session.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1LKX4YuExW/"
+    },
+    {
+      "title_cn": "前桥魔女",
+      "title_jp": "前橋ウィッチーズ",
+      "type": "原创动画",
+      "tag": "魔法/偶像/花店",
+      "staff": {
+        "原作": "",
+        "音乐": "羽深由理",
+        "动画制作": "SUNRISE"
+      },
+      "broadcast": "4/6周日晚间 (全12话)",
+      "anime_official_link": "https://maebashi-witches.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1m7Ape6Eht/"
+    },
+    {
+      "title_cn": "秘密的偶像公主 RING篇",
+      "title_jp": "ひみつのアイプリ リング編",
+      "type": "原创动画",
+      "tag": "音乐/偶像/变身",
+      "staff": {
+        "原作": "",
+        "音乐": "森Izumi",
+        "动画制作": "OLM/同友A&E"
+      },
+      "broadcast": "4/6周日上午 (长篇)",
+      "anime_official_link": "https://aipri.jp/anime/special/ring/",
+      "PV_link": "https://www.bilibili.com/video/BV1Uw9wYZE29/"
+    },
+    {
+      "title_cn": "莉可丽丝 朋友是时间小偷",
+      "title_jp": "リコリス・リコイル Friends are thieves of time.",
+      "type": "原创动画",
+      "tag": "日常/短篇/外传",
+      "staff": {
+        "原作": "",
+        "音乐": "睦月周平",
+        "动画制作": "A-1 Pictures"
+      },
+      "broadcast": "4/16周三晚间 (全6话)[泡面番]",
+      "anime_official_link": "https://lycoris-recoil.com/shortmovie/",
+      "PV_link": "https://www.bilibili.com/video/BV1ohXnYoEiw/"
+    },
+    {
+      "title_cn": "黑执事 第5期 绿魔女篇",
+      "title_jp": "黒執事 -緑の魔女編-",
+      "type": "漫画改编动画",
+      "tag": "奇幻/悬疑/主仆",
+      "staff": {
+        "原作": "枢梁",
+        "音乐": "川崎龙",
+        "动画制作": "CloverWorks"
+      },
+      "broadcast": "4/5周六深夜 (全13话)",
+      "anime_official_link": "https://www.kuroshitsuji.tv/emeraldwitch/",
+      "PV_link": "https://www.bilibili.com/video/BV1dBoBYSEXN/"
+    },
+    {
+      "title_cn": "搞笑漫画日和 第5期",
+      "title_jp": "増田こうすけ劇場 ギャグマンガ日和GO",
+      "type": "漫画改编动画",
+      "tag": "搞笑/无厘头",
+      "staff": {
+        "原作": "增田幸助",
+        "音乐": "山本治彦",
+        "动画制作": "Studio DEEN"
+      },
+      "broadcast": "4/5周六晚间 (全12话)[泡面番]",
+      "anime_official_link": "https://www.gagbi-go.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1cvPJexEvm/"
+    },
+    {
+      "title_cn": "炎炎消防队 第3期 Part.1",
+      "title_jp": "炎炎ノ消防隊 参ノ章",
+      "type": "漫画改编动画",
+      "tag": "科学奇幻/动作",
+      "staff": {
+        "原作": "大久保笃",
+        "音乐": "末广健一郎",
+        "动画制作": "david production"
+      },
+      "broadcast": "4/4周五深夜 (2季度/分割)P1=12话",
+      "anime_official_link": "https://fireforce-anime.jp/",
+      "PV_link": "https://www.bilibili.com/video/BV1LYPpesEcP/"
+    },
+    {
+      "title_cn": "战队大失格 第2期",
+      "title_jp": "戦隊大失格 2nd season",
+      "type": "漫画改编动画",
+      "tag": "",
+      "staff": {
+        "原作": "春场葱",
+        "音乐": "池赖广",
+        "动画制作": "YostarPictures"
+      },
+      "broadcast": "4/13周日深夜 (全12话)",
+      "anime_official_link": "https://sh-anime.shochiku.co.jp/anime-sentai-daishikkaku/",
+      "PV_link": "https://www.bilibili.com/video/BV1NV9SYdEfu/"
+    },
+    {
+      "title_cn": "防风铃 / 防风少年 第2期",
+      "title_jp": "WIND BREAKER Season 2",
+      "type": "漫画改编动画",
+      "tag": "群像/不良/格斗",
+      "staff": {
+        "原作": "Nii Satoru",
+        "音乐": "高桥谅",
+        "动画制作": "CloverWorks"
+      },
+      "broadcast": "4/3周四深夜 (全12话)",
+      "anime_official_link": "https://wb-anime.net/",
+      "PV_link": "https://www.bilibili.com/video/BV1HjRMYiEer/"
+    },
+    {
+      "title_cn": "测不准的阿波连同学 第2期",
+      "title_jp": "阿波連さんははかれない season2",
+      "type": "漫画改编动画",
+      "tag": "校园/恋爱/喜剧",
+      "staff": {
+        "原作": "水安里",
+        "音乐": "神前晓/MONACA",
+        "动画制作": "FelixFilm"
+      },
+      "broadcast": "4/7周一晚间 (全12话)",
+      "anime_official_link": "https://aharen-pr.com/",
+      "PV_link": "https://www.bilibili.com/video/BV15X92YaEKM/"
+    },
+    {
+      "title_cn": "新 全力兔子 第2期",
+      "title_jp": "全力ウサギ シーズン2",
+      "type": "漫画改编动画",
+      "tag": "工地/喜剧/励志",
+      "staff": {
+        "原作": "IKEDAKei/长滨睦辉",
+        "音乐": "SCOOP MUSIC",
+        "动画制作": "Rising Force"
+      },
+      "broadcast": "4/9周三晚间",
+      "anime_official_link": "https://zenryoku-usagi-anime.com/",
+      "PV_link": ""
+    },
+    {
+      "title_cn": "赛马娘 芦毛灰姑娘 Part.1",
+      "title_jp": "ウマ娘 シンデレラグレイ",
+      "type": "漫画改编动画",
+      "tag": "赛马拟人/竞技",
+      "staff": {
+        "原作": "Cygames/三浦武弘/佐佐木启悟",
+        "音乐": "川井宪次",
+        "动画制作": "CygamesPictures"
+      },
+      "broadcast": "4/6周日下午 (P1=13话)",
+      "anime_official_link": "https://anime-cinderellagray.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1pGPuehE6Z/?spm_id_from=..search-card.all.click"
+    },
+    {
+      "title_cn": "新 剑勇传说",
+      "title_jp": "真•侍伝 YAIBA",
+      "type": "漫画改编动画",
+      "tag": "奇幻/战斗/重制",
+      "staff": {
+        "原作": "青山刚昌",
+        "音乐": "山田丰/出羽良彰",
+        "动画制作": "WIT Studio"
+      },
+      "broadcast": "4/5周六下午 (半年)",
+      "anime_official_link": "https://www.yaiba-pr.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1GM9hY7EEm/"
+    },
+    {
+      "title_cn": "三岁开始做王者",
+      "title_jp": "最強の王様、二度目の人生は何をする？",
+      "type": "漫画改编动画",
+      "tag": "转生/奇幻/冒险",
+      "staff": {
+        "原作": "Fuyuki23·TurtleMe",
+        "音乐": "井内启二",
+        "动画制作": "Studio A-CAT"
+      },
+      "broadcast": "4/2周三深夜 (P1=12话)",
+      "anime_official_link": "https://saikyo2dome-tbate.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1HjRMYiEvz/"
+    },
+    {
+      "title_cn": "魔女与使魔",
+      "title_jp": "ウィッチウォッチ",
+      "type": "漫画改编动画",
+      "tag": "魔法/恋爱喜剧",
+      "staff": {
+        "原作": "篠原健太",
+        "音乐": "桥本由香利",
+        "动画制作": "Bibury动画工作室"
+      },
+      "broadcast": "4/6周日下午 (全25话)",
+      "anime_official_link": "https://witchwatch-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1zywReEEMo/"
+    },
+    {
+      "title_cn": "外星人沐沐",
+      "title_jp": "宇宙人ムームー",
+      "type": "漫画改编动画",
+      "tag": "科幻/奇妙日常",
+      "staff": {
+        "原作": "宫下裕树",
+        "音乐": "栗乐团",
+        "动画制作": "OLM"
+      },
+      "broadcast": "4/9周三深夜 (全24话)",
+      "anime_official_link": "https://ucyujin-mumu.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1eoPvexEed/"
+    },
+    {
+      "title_cn": "忍者与杀手二人组的日常生活",
+      "title_jp": "忍者と殺し屋のふたりぐらし",
+      "type": "漫画改编动画",
+      "tag": "日常/杀戮/反差",
+      "staff": {
+        "原作": "HundredBurger",
+        "音乐": "葛西龙之介",
+        "动画制作": "SHAFT"
+      },
+      "broadcast": "4/10周四晚间 (全12话)",
+      "anime_official_link": "https://ninkoro.jp/",
+      "PV_link": "https://www.bilibili.com/video/BV1AaAmeMEfQ/"
+    },
+    {
+      "title_cn": "mono女孩",
+      "title_jp": "mono",
+      "type": "漫画改编动画",
+      "tag": "日常/喜剧/社团",
+      "staff": {
+        "原作": "Afro",
+        "音乐": "百石元",
+        "动画制作": "Soigne"
+      },
+      "broadcast": "4/12周六深夜 (全12话)",
+      "anime_official_link": "https://mono-weekend.photo/",
+      "PV_link": "https://www.bilibili.com/video/BV1YYA5ebE3F/"
+    },
+    {
+      "title_cn": "杂旅",
+      "title_jp": "ざつ旅-That's Journey-",
+      "type": "漫画改编动画",
+      "tag": "旅行/日常/治愈",
+      "staff": {
+        "原作": "石坂Kenta",
+        "音乐": "藤泽庆昌",
+        "动画制作": "Makaria"
+      },
+      "broadcast": "4/7周一晚间 (全12话)",
+      "anime_official_link": "https://zatsutabi.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1J2X9YdELh/"
+    },
+    {
+      "title_cn": "阳光马达棒球场",
+      "title_jp": "ボールパークでつかまえて！",
+      "type": "漫画改编动画",
+      "tag": "日常/球场/群像",
+      "staff": {
+        "原作": "须贺达郎",
+        "音乐": "广川惠一/高桥邦幸",
+        "动画制作": "EMT Squared"
+      },
+      "broadcast": "4/1周二深夜 (全12话)",
+      "anime_official_link": "https://anime-ballpark.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1GKoBYkEKw/"
+    },
+    {
+      "title_cn": "摇滚乐是淑女的嗜好",
+      "title_jp": "ロックは淑女の嗜みでして",
+      "type": "漫画改编动画",
+      "tag": "女校/摇滚/颜艺",
+      "staff": {
+        "原作": "福田宏",
+        "音乐": "",
+        "动画制作": "BN Pictures"
+      },
+      "broadcast": "4/3周四深夜 (全13话)",
+      "anime_official_link": "https://rocklady.rocks/",
+      "PV_link": "https://www.bilibili.com/video/BV1PkD3YrEEU/"
+    },
+    {
+      "title_cn": "紫云寺家的孩子们",
+      "title_jp": "紫雲寺家の子供たち",
+      "type": "漫画改编动画",
+      "tag": "恋爱/姐弟/兄妹",
+      "staff": {
+        "原作": "宫岛礼吏",
+        "音乐": "Akki·星银乃丈·堀江晶太",
+        "动画制作": "动画工房"
+      },
+      "broadcast": "4/8周二晚间 (全12话)",
+      "anime_official_link": "https://shiunjifamily.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1E29UY5Edv/"
+    },
+    {
+      "title_cn": "拜托请穿上 鹰峰同学",
+      "title_jp": "履いてください、鷹峰さん",
+      "type": "漫画改编动画",
+      "tag": "时穿/恋爱/涩涩",
+      "staff": {
+        "原作": "柊裕一/伊藤麻耶",
+        "音乐": "中冢武",
+        "动画制作": "LIDENFILMS"
+      },
+      "broadcast": "4/2周三晚间 (全12话)",
+      "anime_official_link": "https://takaminesan.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1iEPteuEBv/"
+    },
+    {
+      "title_cn": "快藏起来 玛琪娜同学",
+      "title_jp": "かくして！ マキナさん!!",
+      "type": "漫画改编动画",
+      "tag": "人机/恋爱/涩涩",
+      "staff": {
+        "原作": "里好",
+        "音乐": "松野恭平",
+        "动画制作": "BloomZ"
+      },
+      "broadcast": "4/6周日深夜 (全12话)[每话12min±]",
+      "anime_official_link": "https://makinasan-anime.com/",
+      "PV_link": ""
+    },
+    {
+      "title_cn": "爱有些沉重的黑暗精灵从异世界追过来了",
+      "title_jp": "ちょっとだけ愛が重いダークエルフが異世界から追いかけてきた",
+      "type": "漫画改编动画",
+      "tag": "逆穿/恋爱/涩涩",
+      "staff": {
+        "原作": "中乃空",
+        "音乐": "远藤千裕",
+        "动画制作": "Elias"
+      },
+      "broadcast": "4/6周日深夜 (全12话)[每话12min±]",
+      "anime_official_link": "https://aiomodarkelf.deregula.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1HCQPYDExA/"
+    },
+    {
+      "title_cn": "九龙大众浪漫",
+      "title_jp": "九龍ジェネリックロマンス",
+      "type": "漫画改编动画",
+      "tag": "日常/恋爱/悬疑",
+      "staff": {
+        "原作": "眉月啍/中谷友纪子",
+        "音乐": "佐高陵平",
+        "动画制作": "Arvo Animation"
+      },
+      "broadcast": "4/5周六深夜 (全13话)",
+      "anime_official_link": "https://kowloongr.jp/anime/index.html",
+      "PV_link": "https://www.bilibili.com/video/BV1SF9oYmEkD/"
+    },
+    {
+      "title_cn": "中禅寺老师的灵怪讲义实录",
+      "title_jp": "中禅寺先生物怪講義録 先生が謎を解いてしまうから。",
+      "type": "漫画改编动画",
+      "tag": "怪奇/推理/悬疑",
+      "staff": {
+        "原作": "京极夏彦·田村半藏",
+        "音乐": "广川惠一/高田龙一",
+        "动画制作": "100studio"
+      },
+      "broadcast": "4/7周一晚间 (全12话)",
+      "anime_official_link": "https://chuzenji-anime.jp/",
+      "PV_link": "https://www.bilibili.com/video/BV1ShoqYiEAE/"
+    },
+    {
+      "title_cn": "每日男公关",
+      "title_jp": "EverydayHost",
+      "type": "漫画改编动画",
+      "tag": "",
+      "staff": {
+        "原作": "GotoNimo",
+        "音乐": "",
+        "动画制作": "Fanworks"
+      },
+      "broadcast": "4/4周五深夜 [泡面番]",
+      "anime_official_link": "https://www.tv-tokyo.co.jp/anime/everydayhost/",
+      "PV_link": "https://www.bilibili.com/video/BV1mN9oY5EFu/"
+    },
+    {
+      "title_cn": "欢迎来到魔法少女村(非法占据中)",
+      "title_jp": "おいでよ 魔法少女村（不法占拠）",
+      "type": "漫画改编动画",
+      "tag": "",
+      "staff": {
+        "原作": "Gingham/尾中健",
+        "音乐": "",
+        "动画制作": "胜鬨Studio"
+      },
+      "broadcast": "4/3周四深夜 (全13话)[泡面番]",
+      "anime_official_link": "https://x.com/Agamalgam/status/1900426668155822330",
+      "PV_link": ""
+    },
+    {
+      "title_cn": "想征服世界的小怪兽",
+      "title_jp": "かいじゅうせかいせいふく",
+      "type": "漫画改编动画",
+      "tag": "奇妙日常/喜剧",
+      "staff": {
+        "原作": "星之子 (寿屋)",
+        "音乐": "",
+        "动画制作": "DLE"
+      },
+      "broadcast": "4/5周六早间 [泡面番]",
+      "anime_official_link": "https://kaijyu-sekai.com/",
+      "PV_link": ""
+    },
+    {
+      "title_cn": "竹轮战记 用我的可爱侵略地球",
+      "title_jp": "ちくわ戦記～おれのカワイイで地球侵略～",
+      "type": "漫画改编动画",
+      "tag": "奇妙日常/喜剧",
+      "staff": {
+        "原作": "BUBU",
+        "音乐": "Morrigan/Imageworks Studio",
+        "动画制作": ""
+      },
+      "broadcast": "4/8周二晚间 [泡面番]",
+      "anime_official_link": "https://chikuwa-anime.cycomi.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1FrX7YWEte/"
+    },
+    {
+      "title_cn": "海贼王谈恋爱",
+      "title_jp": "恋するワンピース",
+      "type": "漫画改编动画",
+      "tag": "",
+      "staff": {
+        "原作": "",
+        "音乐": "",
+        "动画制作": "东映动画"
+      },
+      "broadcast": "4/1~4/5晚间 [竖版泡面番]",
+      "anime_official_link": "https://one-piece.com/op/koisuru/",
+      "PV_link": ""
+    },
+    {
+      "title_cn": "小市民系列 第2期",
+      "title_jp": "小市民シリーズ 第2期",
+      "type": "小说改编动画",
+      "tag": "推理/日常/甜点",
+      "staff": {
+        "原作": "米泽穗信",
+        "音乐": "小畑贵裕",
+        "动画制作": "Lapin Track"
+      },
+      "broadcast": "4/5周六深夜 (全11话)",
+      "anime_official_link": "https://shoshimin-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1zeRAYUEwm/"
+    },
+    {
+      "title_cn": "再见 地球 第2期",
+      "title_jp": "ばいばい、アース 第2シーズン",
+      "type": "小说改编动画",
+      "tag": "奇幻/冒险/战斗",
+      "staff": {
+        "原作": "冲方丁/新渡积",
+        "音乐": "Kevin Penkin",
+        "动画制作": "LIDENFILMS"
+      },
+      "broadcast": "4/4周五深夜 (全10话)",
+      "anime_official_link": "https://bye2earth.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1s2Nfe5E4a/"
+    },
+    {
+      "title_cn": "你与我最后的战场亦或是世界起始的圣战 第2期",
+      "title_jp": "キミと僕の最後の戦場、あるいは世界が始まる聖戦 Season II",
+      "type": "小说改编动画",
+      "tag": "魔法科技/恋爱",
+      "staff": {
+        "原作": "细音启/稻叶友纪",
+        "音乐": "Elements Garden",
+        "动画制作": "StudioPallet/SILVER LINK."
+      },
+      "broadcast": "4/10周四晚间 (全12话)",
+      "anime_official_link": "https://kimisentv.com/",
+      "PV_link": "https://www.bilibili.com/bangumi/play/ep828127"
+    },
+    {
+      "title_cn": "打了300年的史莱姆不知不觉就练到了满级 第2期",
+      "title_jp": "スライム倒して300年、知らないうちにレベルMAXになってました 〜そのに(2)〜",
+      "type": "小说改编动画",
+      "tag": "转生/奇幻/傲天",
+      "staff": {
+        "原作": "森田季节",
+        "音乐": "井内启二",
+        "动画制作": "Teddy"
+      },
+      "broadcast": "4/5周六晚间 (全12话)",
+      "anime_official_link": "https://slime300-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1sirPYFEJU/"
+    },
+    {
+      "title_cn": "新 红发少女安妮",
+      "title_jp": "アン・シャーリー",
+      "type": "小说改编动画",
+      "tag": "日常/成长/重制",
+      "staff": {
+        "原作": "露西·莫德·蒙哥马利",
+        "音乐": "大岛满",
+        "动画制作": "Answer Studio"
+      },
+      "broadcast": "4/5周六下午 (全24话)",
+      "anime_official_link": "https://anime-ann-e.jp/",
+      "PV_link": "https://www.bilibili.com/video/BV18mQ5YZEhC/"
+    },
+    {
+      "title_cn": "男女之间存在友情吗(不存在)",
+      "title_jp": "男女の友情は成立する？（いや、しないっ!!）",
+      "type": "小说改编动画",
+      "tag": "校园/恋爱/党争",
+      "staff": {
+        "原作": "七菜NANA",
+        "音乐": "市川淳",
+        "动画制作": "J.C.STAFF"
+      },
+      "broadcast": "4/4周五晚间 (全12话)",
+      "anime_official_link": "https://danjoru.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1CJRYY6EuP/"
+    },
+    {
+      "title_cn": "推理要在晚餐后",
+      "title_jp": "謎解きはディナーのあとで",
+      "type": "小说改编动画",
+      "tag": "刑警/推理/喜剧",
+      "staff": {
+        "原作": "东川笃哉",
+        "音乐": "滨刚",
+        "动画制作": "Madhouse"
+      },
+      "broadcast": "4/4周五深夜 (全12话)",
+      "anime_official_link": "https://nazod-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1Ea96YQEMx/"
+    },
+    {
+      "title_cn": "记忆缝线 YourForma",
+      "title_jp": "ユア・フォルマ",
+      "type": "小说改编动画",
+      "tag": "",
+      "staff": {
+        "原作": "菊石Mareho",
+        "音乐": "加藤达也",
+        "动画制作": "Geno Studio"
+      },
+      "broadcast": "4/2周三深夜",
+      "anime_official_link": "https://www.yourforma-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV11eKLe4EXX/"
+    },
+    {
+      "title_cn": "直到某魔女死去",
+      "title_jp": "ある魔女が死ぬまで",
+      "type": "小说改编动画",
+      "tag": "奇幻/公路/情感",
+      "staff": {
+        "原作": "坂",
+        "音乐": "立山秋航",
+        "动画制作": "EMT Squared"
+      },
+      "broadcast": "4/1周二深夜 (全12话)",
+      "anime_official_link": "https://arumajo-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1CnXRYaEgR/"
+    },
+    {
+      "title_cn": "鬼人幻灯抄",
+      "title_jp": "鬼人幻燈抄",
+      "type": "小说改编动画",
+      "tag": "鬼怪/兄妹/战斗",
+      "staff": {
+        "原作": "中西MOTOO",
+        "音乐": "高田龙一/广川惠一/高桥邦幸",
+        "动画制作": "横滨动画Lab"
+      },
+      "broadcast": "3/31周一晚间 (全24话)",
+      "anime_official_link": "https://kijin-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1Hyo2YUEFy/"
+    },
+    {
+      "title_cn": "神统记",
+      "title_jp": "神統記",
+      "type": "小说改编动画",
+      "tag": "转生/奇幻/战争",
+      "staff": {
+        "原作": "谷舞司 (主妇与生活社)",
+        "音乐": "藤泽健至",
+        "动画制作": "旭Production"
+      },
+      "broadcast": "4/11周五深夜 (全12话)",
+      "anime_official_link": "https://teogonia-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1E6421f7zp/"
+    },
+    {
+      "title_cn": "乡下大叔成为剑圣",
+      "title_jp": "片田舎のおっさん、剣聖になる",
+      "type": "小说改编动画",
+      "tag": "奇幻/战斗/师徒",
+      "staff": {
+        "原作": "佐贺崎茂",
+        "音乐": "高梨康治",
+        "动画制作": "Passione/Hayabusa Film"
+      },
+      "broadcast": "4/5周六深夜 (全12话)",
+      "anime_official_link": "https://ossan-kensei.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1FZNPeEE4M/"
+    },
+    {
+      "title_cn": "我是星际国家的恶德领主",
+      "title_jp": "俺は星間国家の悪徳領主！",
+      "type": "小说改编动画",
+      "tag": "转生/误解/喜剧",
+      "staff": {
+        "原作": "三岛与梦",
+        "音乐": "濑尾祐介/成田旬",
+        "动画制作": "Quad"
+      },
+      "broadcast": "4/5周六深夜 (全12话)3/25先行放送",
+      "anime_official_link": "https://seikankokka-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1PvRaYrEFM/"
+    },
+    {
+      "title_cn": "被放逐的天才治愈师转为地下医生的快乐生活",
+      "title_jp": "一瞬で治療していたのに役立たずと追放された天才治癒師、闇ヒーラーとして楽しく生きる",
+      "type": "小说改编动画",
+      "tag": "奇幻/误解/傲天",
+      "staff": {
+        "原作": "菱川Sakaku/泽田庆宏",
+        "音乐": "富贵晴美",
+        "动画制作": "Makaria"
+      },
+      "broadcast": "4/3周四深夜 (全12话)",
+      "anime_official_link": "https://sh-anime.shochiku.co.jp/yamihealer/",
+      "PV_link": "https://www.bilibili.com/video/BV1iUNze3EWc/"
+    },
+    {
+      "title_cn": "使人误解的工房主",
+      "title_jp": "勘違いの工房主～英雄パーティの元雑用係が、実は戦闘以外がSSSランクだったというよくある話～",
+      "type": "小说改编动画",
+      "tag": "奇幻/误解/喜剧",
+      "staff": {
+        "原作": "时野洋辅 (AlphaPolis)",
+        "音乐": "渡边峻冶",
+        "动画制作": "EMT Squared"
+      },
+      "broadcast": "3/30周日晚间 (全12话)",
+      "anime_official_link": "https://kanchigai-pr.com/",
+      "PV_link": "https://www.bilibili.com/video/BV15nFceEE6L/"
+    },
+    {
+      "title_cn": "受到猩猩之神庇护的大小姐在皇家骑士团受到宠爱",
+      "title_jp": "ゴリラの神から加護された令嬢は王立騎士団で可愛がられる",
+      "type": "小说改编动画",
+      "tag": "奇幻/恋爱/乙女",
+      "staff": {
+        "原作": "SHIROHI",
+        "音乐": "岩桥星实",
+        "动画制作": "鹊"
+      },
+      "broadcast": "4/6周日深夜 (全12话)",
+      "anime_official_link": "https://gorillalady-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1JX9XYdEWY/"
+    },
+    {
+      "title_cn": "圣女因太过完美不够可爱而被废除婚约并卖到邻国",
+      "title_jp": "完璧すぎて可愛げがないと婚約破棄された聖女は隣国に売られる",
+      "type": "小说改编动画",
+      "tag": "奇幻/误解/姐妹",
+      "staff": {
+        "原作": "冬月光辉 (Overlap)",
+        "音乐": "中桥孝晃",
+        "动画制作": "TROYCA"
+      },
+      "broadcast": "4/2周三深夜 (全12话)",
+      "anime_official_link": "https://kanpekiseijo-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV18KXaYCEKu/"
+    },
+    {
+      "title_cn": "觉醒前世记忆的白豚贵族决定培养弟弟",
+      "title_jp": "白豚貴族ですが前世の記憶が生えたのでひよこな弟育てます",
+      "type": "小说改编动画",
+      "tag": "转生/奇幻/兄弟",
+      "staff": {
+        "原作": "Yashiro(TOBOOKS)",
+        "音乐": "桶狭间有沙",
+        "动画制作": "Studio COMET"
+      },
+      "broadcast": "4/20先行放送 (全12话)",
+      "anime_official_link": "https://shirohiyo.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1zBRzYQEF7/"
+    },
+    {
+      "title_cn": "夏日口袋",
+      "title_jp": "Summer Pockets",
+      "type": "游戏改编动画",
+      "tag": "日常/恋爱/情感",
+      "staff": {
+        "原作": "Key/VISUAL ARTS",
+        "音乐": "折户伸治·麻枝准/Donmaru·竹下智博/水月陵·大桥柊平",
+        "动画制作": ""
+      },
+      "broadcast": "4/7周一深夜 (全26话)",
+      "anime_official_link": "https://summerpockets-anime.jp/",
+      "PV_link": "https://www.bilibili.com/video/BV1cN4meFE6d/"
+    },
+    {
+      "title_cn": "罪恶装备 奋战：两位裁决者",
+      "title_jp": "GULTY GEAR STRIVE: DUAL RULERS",
+      "type": "游戏改编动画",
+      "tag": "奇科幻/战斗",
+      "staff": {
+        "原作": "ARC System Works/森田纮吏/重信康/八森优香/Joseph Shin",
+        "音乐": "",
+        "动画制作": "SANZIGEN"
+      },
+      "broadcast": "4/5周六晚间 (全8话)",
+      "anime_official_link": "https://www.guiltygear.com/ggstdr/jp/index.html",
+      "PV_link": "https://www.bilibili.com/video/BV1r4ftYNEdu/"
+    },
+    {
+      "title_cn": "#COMPASS 2.0 战斗天赋解析系统",
+      "title_jp": "#コンパス2.0 戦闘摂理解析システム",
+      "type": "游戏改编动画",
+      "tag": "",
+      "staff": {
+        "原作": "NHN PlayArt/Dwango/大川目光/平岩栞",
+        "音乐": "八王子P/康宽/ゆうゆ/无力P/雪乃イト/にっけい",
+        "动画制作": "Lay-duce"
+      },
+      "broadcast": "4/7周一深夜 (全12话)",
+      "anime_official_link": "https://www.compass-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1QsoqY6E8Q/"
+    },
+    {
+      "title_cn": "华Doll*",
+      "title_jp": "華Doll* -Reinterpretation of Flowering-",
+      "type": "音乐企划衍生动画",
+      "tag": "偶像/音乐/成长",
+      "staff": {
+        "原作": "R/0",
+        "音乐": "",
+        "动画制作": "A-Real"
+      },
+      "broadcast": "4/9周三晚间 (全12话)",
+      "anime_official_link": "https://hanadoll-anime.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1PfF3eAECd/"
+    },
+    {
+      "title_cn": "新 小浣熊",
+      "title_jp": "あらいぐま カルカル団",
+      "type": "名作小说衍生动画",
+      "tag": "职场/衍生作",
+      "staff": {
+        "原作": "",
+        "音乐": "桶狭间有沙",
+        "动画制作": ""
+      },
+      "broadcast": "4/3周四深夜 [泡面番]",
+      "anime_official_link": "https://calcaldan.com/",
+      "PV_link": "https://www.bilibili.com/video/BV1AVQGY5EZE/"
+    },
+    {
+      "title_cn": "正能量企鹅",
+      "title_jp": "コウペンちゃん",
+      "type": "绘本改编动画",
+      "tag": "奇妙日常/治愈",
+      "staff": {
+        "原作": "RURUTEA",
+        "音乐": "立山秋航",
+        "动画制作": "Lesprit"
+      },
+      "broadcast": "4/6周日早间 [泡面番]",
+      "anime_official_link": "https://www.koupenchan-anime.jp/",
+      "PV_link": "https://www.bilibili.com/video/BV1CG9oYzEeS/"
+    },
+    {
+      "title_cn": "呜莓猫猫",
+      "title_jp": "ンめねこ",
+      "type": "猫猫形象衍生动画",
+      "tag": "奇妙日常/喜剧",
+      "staff": {
+        "原作": "SHIRIMOTO",
+        "音乐": "",
+        "动画制作": "Kumarba"
+      },
+      "broadcast": "4/3周四深夜 [泡面番]",
+      "anime_official_link": "https://nmeneko-anime.jp/",
+      "PV_link": "https://www.bilibili.com/video/BV1Ns9HYyEd9/"
+    },
+    {
+      "title_cn": "涩谷♥八公 第3期",
+      "title_jp": "SHIBUYA♡HACHI 第3クール",
+      "type": "狗狗形象衍生动画",
+      "tag": "奇妙日常/都市",
+      "staff": {
+        "原作": "",
+        "音乐": "",
+        "动画制作": "日本Animation"
+      },
+      "broadcast": "4/5周六早间 [泡面番]",
+      "anime_official_link": "https://www.tv-tokyo.co.jp/anime/shibuya-hachi/",
+      "PV_link": ""
+    },
+    {
+      "title_cn": "正义使者 我的英雄学院之非法英雄",
+      "title_jp": "ヴィジランテ -僕のヒーローアカデミア ILLEGALS-",
+      "type": "漫画改编动画",
+      "tag": "英雄剧/外传",
+      "staff": {
+        "原作": "古桥秀之·別天荒人",
+        "音乐": "林友树/山城翔吾/古桥勇纪",
+        "动画制作": "BONES FILM"
+      },
+      "broadcast": "4/7周一深夜 (全13话)",
+      "anime_official_link": "https://vigilante-anime.com/",
+      "PV_link": ""
+    }
+  ]
+}

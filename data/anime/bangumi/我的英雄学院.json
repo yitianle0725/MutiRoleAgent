@@ -1,0 +1,199 @@
+{
+  "title_cn": "我的英雄学院",
+  "title_jp": "僕のヒーローアカデミア",
+  "url": "https://bangumi.lol/subject/150955",
+  "stats": {
+    "rating": "6.4",
+    "rank": "#5927",
+    "rating_desc": "还行"
+  },
+  "tags": [
+    {
+      "name": "BONES",
+      "count": 1573
+    },
+    {
+      "name": "热血",
+      "count": 1317
+    },
+    {
+      "name": "2016年4月",
+      "count": 965
+    },
+    {
+      "name": "漫画改",
+      "count": 945
+    },
+    {
+      "name": "TV",
+      "count": 808
+    }
+  ],
+  "summary_jp": "大部分的人类，在这个时代里都拥有名为“个性”的力量，但有力量之人却不一定都属于正义的一方。\n\r\n只要邪恶出现的地方，必定会有英雄挺身而出拯救众人。\n\r\n一名天生没有力量的少年——绿谷出久从小就憧憬一位顶尖英雄，而他的梦想就是成为伟大的英雄，可是，没有力量的他能实现自己的梦想吗？\n\r\n虽然困难重重，少年却依旧不放弃，朝着自己的目标勇往前进！",
+  "episodes": [
+    {
+      "ep": 1,
+      "title_cn": "绿谷出久：原点",
+      "title_jp": "緑谷出久：オリジン",
+      "air_date": "2016-04-03"
+    },
+    {
+      "ep": 2,
+      "title_cn": "英雄的条件",
+      "title_jp": "ヒーローの条件",
+      "air_date": "2016-04-10"
+    },
+    {
+      "ep": 3,
+      "title_cn": "呻吟吧 肌肉",
+      "title_jp": "うなれ筋肉",
+      "air_date": "2016-04-17"
+    },
+    {
+      "ep": 4,
+      "title_cn": "起跑线",
+      "title_jp": "スタートライン",
+      "air_date": "2016-04-24"
+    },
+    {
+      "ep": 5,
+      "title_cn": "做我现在力所能及的事",
+      "title_jp": "今 僕に出来ることを",
+      "air_date": "2016-05-01"
+    },
+    {
+      "ep": 6,
+      "title_cn": "奋起吧 书呆子",
+      "title_jp": "猛れクソナード",
+      "air_date": "2016-05-08"
+    },
+    {
+      "ep": 7,
+      "title_cn": "臭久VS小胜",
+      "title_jp": "デクVSかっちゃん",
+      "air_date": "2016-05-15"
+    },
+    {
+      "ep": 8,
+      "title_cn": "爆豪的起跑线",
+      "title_jp": "スタートライン、爆豪の。",
+      "air_date": "2016-05-22"
+    },
+    {
+      "ep": 9,
+      "title_cn": "做得不错加油吧饭田君！",
+      "title_jp": "いいぞガンバレ飯田くん！",
+      "air_date": "2016-05-29"
+    },
+    {
+      "ep": 10,
+      "title_cn": "遭遇未知",
+      "title_jp": "未知との遭遇",
+      "air_date": "2016-06-05"
+    },
+    {
+      "ep": 11,
+      "title_cn": "游戏结束",
+      "title_jp": "ゲームオーバー",
+      "air_date": "2016-06-12"
+    },
+    {
+      "ep": 12,
+      "title_cn": "欧尔麦特",
+      "title_jp": "オールマイト",
+      "air_date": "2016-06-19"
+    },
+    {
+      "ep": 13,
+      "title_cn": "各自的心中",
+      "title_jp": "各々の胸に",
+      "air_date": "2016-06-26"
+    }
+  ],
+  "characters": [
+    {
+      "name_cn": "绿谷出久",
+      "name_jp": "緑谷出久",
+      "role": "主角",
+      "cv": "山下大輝",
+      "url": "https://bangumi.lol/character/36543"
+    },
+    {
+      "name_cn": "爆豪胜己",
+      "name_jp": "爆豪勝己",
+      "role": "主角",
+      "cv": "岡本信彦",
+      "url": "https://bangumi.lol/character/36546"
+    },
+    {
+      "name_cn": "欧尔麦特",
+      "name_jp": "オール・マイト",
+      "role": "主角",
+      "cv": "三宅健太",
+      "url": "https://bangumi.lol/character/36786"
+    },
+    {
+      "name_cn": "丽日御茶子",
+      "name_jp": "麗日お茶子",
+      "role": "配角",
+      "cv": "佐倉綾音",
+      "url": "https://bangumi.lol/character/36544"
+    },
+    {
+      "name_cn": "饭田天哉",
+      "name_jp": "飯田天哉",
+      "role": "配角",
+      "cv": "石川界人",
+      "url": "https://bangumi.lol/character/36545"
+    },
+    {
+      "name_cn": "轰焦冻",
+      "name_jp": "轟焦凍",
+      "role": "配角",
+      "cv": "梶裕貴",
+      "url": "https://bangumi.lol/character/36547"
+    },
+    {
+      "name_cn": "蛙吹梅雨",
+      "name_jp": "蛙吹梅雨",
+      "role": "配角",
+      "cv": "悠木碧",
+      "url": "https://bangumi.lol/character/38500"
+    },
+    {
+      "name_cn": "峰田实",
+      "name_jp": "峰田実",
+      "role": "配角",
+      "cv": "広橋涼",
+      "url": "https://bangumi.lol/character/38501"
+    },
+    {
+      "name_cn": "八百万百",
+      "name_jp": "八百万百",
+      "role": "配角",
+      "cv": "井上麻里奈",
+      "url": "https://bangumi.lol/character/38933"
+    },
+    {
+      "name_cn": "常暗踏阴",
+      "name_jp": "常闇踏陰",
+      "role": "配角",
+      "cv": "細谷佳正",
+      "url": "https://bangumi.lol/character/38934"
+    },
+    {
+      "name_cn": "切岛锐儿郎",
+      "name_jp": "切島鋭児郎",
+      "role": "配角",
+      "cv": "増田俊樹",
+      "url": "https://bangumi.lol/character/38935"
+    },
+    {
+      "name_cn": "上鸣电气",
+      "name_jp": "上鳴電気",
+      "role": "配角",
+      "cv": "畠中祐",
+      "url": "https://bangumi.lol/character/38936"
+    }
+  ]
+}

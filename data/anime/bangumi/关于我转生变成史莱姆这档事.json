@@ -1,0 +1,271 @@
+{
+  "title_cn": "关于我转生变成史莱姆这档事",
+  "title_jp": "転生したらスライムだった件",
+  "url": "https://bangumi.lol/subject/239816",
+  "stats": {
+    "rating": "6.7",
+    "rank": "#4398",
+    "rating_desc": "推荐"
+  },
+  "tags": [
+    {
+      "name": "轻小说改",
+      "count": 2830
+    },
+    {
+      "name": "异世界",
+      "count": 2772
+    },
+    {
+      "name": "穿越",
+      "count": 2320
+    },
+    {
+      "name": "2018年10月",
+      "count": 1932
+    },
+    {
+      "name": "奇幻",
+      "count": 1885
+    }
+  ],
+  "summary_jp": "史莱姆生活，开始了。\n\r\n上班族的三上悟在道路上被歹徒给刺杀身亡后，回过神来发现自己转生到了异世界。\n\r\n不过，自己居然是“史莱姆”！\n\r\n他在得到利姆露这个名字后开始了自己的史莱姆人生，随着与各个种族相处交流的过程中，他定下了一个目标——那就是“建立一个任何种族都能愉快地一起生活的国家”！",
+  "episodes": [
+    {
+      "ep": 1,
+      "title_cn": "暴风龙维鲁多拉",
+      "title_jp": "暴風竜ヴェルドラ",
+      "air_date": "2018-10-01"
+    },
+    {
+      "ep": 2,
+      "title_cn": "与哥布林们的邂逅",
+      "title_jp": "ゴブリンたちとの出会い",
+      "air_date": "2018-10-08"
+    },
+    {
+      "ep": 3,
+      "title_cn": "哥布林村的战斗",
+      "title_jp": "ゴブリン村での戦い",
+      "air_date": "2018-10-15"
+    },
+    {
+      "ep": 4,
+      "title_cn": "在矮人王国",
+      "title_jp": "ドワーフの王国にて",
+      "air_date": "2018-10-22"
+    },
+    {
+      "ep": 5,
+      "title_cn": "英雄王加泽尔·多瓦格",
+      "title_jp": "英雄王ガゼルドワルゴ",
+      "air_date": "2018-10-29"
+    },
+    {
+      "ep": 6,
+      "title_cn": "静",
+      "title_jp": "シズ",
+      "air_date": "2018-11-05"
+    },
+    {
+      "ep": 7,
+      "title_cn": "爆炎支配者",
+      "title_jp": "爆炎の支配者",
+      "air_date": "2018-11-12"
+    },
+    {
+      "ep": 8,
+      "title_cn": "继承的愿望",
+      "title_jp": "受け継がれる想い",
+      "air_date": "2018-11-19"
+    },
+    {
+      "ep": 9,
+      "title_cn": "大鬼族的袭击",
+      "title_jp": "大鬼族の襲撃",
+      "air_date": "2018-11-26"
+    },
+    {
+      "ep": 10,
+      "title_cn": "猪头帝",
+      "title_jp": "オークロード",
+      "air_date": "2018-12-03"
+    },
+    {
+      "ep": 11,
+      "title_cn": "加维尔前来拜见！",
+      "title_jp": "ガビル参上！",
+      "air_date": "2018-12-10"
+    },
+    {
+      "ep": 12,
+      "title_cn": "错乱的齿轮",
+      "title_jp": "狂いゆく歯車",
+      "air_date": "2018-12-17"
+    },
+    {
+      "ep": 13,
+      "title_cn": "大激战",
+      "title_jp": "大激突",
+      "air_date": "2018-12-24"
+    },
+    {
+      "ep": 14,
+      "title_cn": "吞噬一切之人",
+      "title_jp": "全てを喰らう者",
+      "air_date": "2019-01-07"
+    },
+    {
+      "ep": 15,
+      "title_cn": "鸠拉森林大同盟",
+      "title_jp": "ジュラの森大同盟",
+      "air_date": "2019-01-14"
+    },
+    {
+      "ep": 16,
+      "title_cn": "魔王米莉姆来袭",
+      "title_jp": "魔王ミリム来襲",
+      "air_date": "2019-01-21"
+    },
+    {
+      "ep": 17,
+      "title_cn": "集结的人们",
+      "title_jp": "集う物達",
+      "air_date": "2019-01-28"
+    },
+    {
+      "ep": 18,
+      "title_cn": "悄悄逼近的恶意",
+      "title_jp": "忍び寄る悪意",
+      "air_date": "2019-02-04"
+    },
+    {
+      "ep": 19,
+      "title_cn": "暴风大妖涡",
+      "title_jp": "暴風大妖渦（カリュブディス）",
+      "air_date": "2019-02-11"
+    },
+    {
+      "ep": 20,
+      "title_cn": "优树・神乐坂",
+      "title_jp": "ユウキ・カグラザカ",
+      "air_date": "2019-02-18"
+    },
+    {
+      "ep": 21,
+      "title_cn": "静小姐的学生们",
+      "title_jp": "シズさんの教え子達",
+      "air_date": "2019-02-25"
+    },
+    {
+      "ep": 22,
+      "title_cn": "迷宫攻略",
+      "title_jp": "迷宮攻略",
+      "air_date": "2019-03-04"
+    },
+    {
+      "ep": 23,
+      "title_cn": "灵魂的救赎",
+      "title_jp": "救われる魂",
+      "air_date": "2019-03-11"
+    },
+    {
+      "ep": 24,
+      "title_cn": "外传：黑与假面",
+      "title_jp": "外伝：黒と仮面",
+      "air_date": "2019-03-18"
+    },
+    {
+      "ep": "24.5",
+      "title_cn": "闲话：维鲁德拉日记",
+      "title_jp": ".5 閑話：ヴェルドラ日記",
+      "air_date": "2019-03-25"
+    }
+  ],
+  "characters": [
+    {
+      "name_cn": "利姆路·坦派斯特",
+      "name_jp": "リムル＝テンペスト",
+      "role": "主角",
+      "cv": "岡咲美保",
+      "url": "https://bangumi.lol/character/33119"
+    },
+    {
+      "name_cn": "贾鲁德·缪鲁麦尔",
+      "name_jp": "ガルド・ミョルマイル",
+      "role": "配角",
+      "cv": "青山穣",
+      "url": "https://bangumi.lol/character/66282"
+    },
+    {
+      "name_cn": "大贤者",
+      "name_jp": "大賢者",
+      "role": "配角",
+      "cv": "豊口めぐみ",
+      "url": "https://bangumi.lol/character/7908"
+    },
+    {
+      "name_cn": "维鲁多拉·坦派斯特",
+      "name_jp": "ヴェルドラ＝テンペスト",
+      "role": "配角",
+      "cv": "前野智昭",
+      "url": "https://bangumi.lol/character/63520"
+    },
+    {
+      "name_cn": "井泽静江",
+      "name_jp": "井沢静江",
+      "role": "配角",
+      "cv": "花守ゆみり",
+      "url": "https://bangumi.lol/character/63521"
+    },
+    {
+      "name_cn": "红丸",
+      "name_jp": "ベニマル",
+      "role": "配角",
+      "cv": "古川慎",
+      "url": "https://bangumi.lol/character/63814"
+    },
+    {
+      "name_cn": "朱菜",
+      "name_jp": "シュナ",
+      "role": "配角",
+      "cv": "千本木彩花",
+      "url": "https://bangumi.lol/character/63815"
+    },
+    {
+      "name_cn": "紫苑",
+      "name_jp": "シオン",
+      "role": "配角",
+      "cv": "M・A・O",
+      "url": "https://bangumi.lol/character/63816"
+    },
+    {
+      "name_cn": "苍影",
+      "name_jp": "ソウエイ",
+      "role": "配角",
+      "cv": "江口拓也",
+      "url": "https://bangumi.lol/character/63817"
+    },
+    {
+      "name_cn": "白老",
+      "name_jp": "ハクロウ",
+      "role": "配角",
+      "cv": "大塚芳忠",
+      "url": "https://bangumi.lol/character/63818"
+    },
+    {
+      "name_cn": "黑兵卫",
+      "name_jp": "クロベエ",
+      "role": "配角",
+      "cv": "柳田淳一",
+      "url": "https://bangumi.lol/character/65042"
+    },
+    {
+      "name_cn": "利古路多",
+      "name_jp": "リグルド",
+      "role": "配角",
+      "cv": "山本兼平",
+      "url": "https://bangumi.lol/character/65860"
+    }
+  ]
+}

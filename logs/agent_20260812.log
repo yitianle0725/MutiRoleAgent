@@ -1,0 +1,1532 @@
+2026-08-12 13:26:26,850 - agent - DEBUG - validator.py:166 - [StructuredOutput] 校验失败: schema=, errors=1
+2026-08-12 13:26:26,850 - agent - DEBUG - validator.py:166 - [StructuredOutput] 校验失败: schema=, errors=1
+2026-08-12 13:26:26,850 - agent - INFO - injector.py:186 - [StructuredOutput] 注入 JSON 指令: skill=recommend-anime, schema=anime_recommendation, len=258
+2026-08-12 13:26:26,853 - agent - DEBUG - injector.py:182 - [StructuredOutput] Skill 'unknown-skill' 无 output_schema，跳过注入
+2026-08-12 13:26:26,853 - agent - INFO - pipeline.py:152 - [Pipeline] 结构化输出成功: skill=recommend-anime, schema=anime_recommendation, formatted_len=47
+2026-08-12 13:26:26,853 - agent - DEBUG - pipeline.py:119 - [Pipeline] 未找到 JSON: skill=recommend-anime, response_len=5
+2026-08-12 13:26:26,853 - agent - DEBUG - pipeline.py:110 - [Pipeline] Skill 'unknown-skill' 无 output_schema
+2026-08-12 13:26:26,853 - agent - INFO - pipeline.py:152 - [Pipeline] 结构化输出成功: skill=recommend-anime, schema=anime_recommendation, formatted_len=47
+2026-08-12 13:35:17,425 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 13:35:17,427 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 13:35:21,112 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 13:35:21,124 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 13:35:21,124 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 13:35:21,124 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 13:35:21,147 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 13:35:21,161 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 13:35:21,166 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 13:35:21,166 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 13:35:21,166 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 13:35:21,172 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 13:35:21,178 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 13:35:21,190 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 13:35:21,190 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 13:35:21,196 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 13:35:21,196 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 13:35:21,208 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 13:35:21,208 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 13:35:21,214 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 13:35:21,220 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4610 字符
+2026-08-12 13:35:21,275 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=1
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=2
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=3
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=4
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=5
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=6
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=7
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=8
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=9
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=10
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=11
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=12
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=13
+2026-08-12 13:35:21,275 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=14
+2026-08-12 13:35:21,275 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=882c0974… 共 14 条消息
+2026-08-12 13:35:21,911 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 14 条消息: session=882c0974-c51d-47…
+2026-08-12 13:36:41,095 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 13:36:41,095 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 13:36:41,135 - agent - INFO - react_agent.py:467 - [trace=5d267558] 开始处理: 下午好
+2026-08-12 13:36:41,135 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 14 条消息, token 估算=1634, 轮数=7
+2026-08-12 13:36:41,141 - agent - INFO - react_agent.py:483 - [trace=5d267558] Decision: route=agent conf=0.30 reason=fallback_default
+2026-08-12 13:36:41,147 - agent - INFO - unified_middleware.py:185 - [middleware] 模型调用前: 16→16 条消息, 已注入日期: 2026-08-12 13:36
+2026-08-12 13:36:44,670 - agent - INFO - react_agent.py:549 - [trace=5d267558] 完成: tokens={'input_tokens': 5359, 'output_tokens': 132, 'total_tokens': 5491}, 响应长度=98
+2026-08-12 13:36:44,670 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=15
+2026-08-12 13:36:44,670 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=16
+2026-08-12 13:36:44,670 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=882c0974…
+2026-08-12 14:18:18,476 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 14:18:18,476 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:13:52,871 - agent - ERROR - agent_tools.py:359 - [maps_weather] Open-Meteo 也失败: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-08-12 15:13:57,887 - agent - WARNING - agent_tools.py:333 - [maps_ip_location] ip-api.com 也失败: HTTPConnectionPool(host='127.0.0.1', port=7897): Read timed out. (read timeout=5)
+2026-08-12 15:16:37,141 - agent - WARNING - agent_tools.py:333 - [maps_ip_location] ip-api.com 也失败: HTTPConnectionPool(host='ip-api.com', port=80): Max retries exceeded with url: /json/8.8.8.8?fields=city%2CregionName%2Ccountry%2Clat%2Clon&lang=zh-CN (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001F1C556F620>, 'Connection to ip-api.com timed out. (connect timeout=5)'))
+2026-08-12 15:18:14,925 - agent - WARNING - agent_tools.py:336 - [maps_ip_location] ip-api.com 失败: HTTPConnectionPool(host='ip-api.com', port=80): Max retries exceeded with url: /json/8.8.8.8?fields=city,regionName,country&lang=zh-CN (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000023EAEB9F4D0>, 'Connection to ip-api.com timed out. (connect timeout=5)'))
+2026-08-12 15:18:21,325 - agent - WARNING - agent_tools.py:336 - [maps_ip_location] ip-api.com 失败: HTTPConnectionPool(host='ip-api.com', port=80): Max retries exceeded with url: /json/114.114.114.114?fields=city,regionName,country&lang=zh-CN (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000023EAEBC46B0>, 'Connection to ip-api.com timed out. (connect timeout=5)'))
+2026-08-12 15:21:46,346 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:21:46,346 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:21:48,866 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:21:48,874 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:21:50,543 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 15:21:50,543 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:21:50,543 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:21:50,543 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:21:50,568 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:21:50,585 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:21:50,591 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:21:50,592 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:21:50,592 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:21:50,598 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:21:50,610 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:21:50,610 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:21:50,616 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:21:50,616 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:21:50,622 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:21:50,634 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:21:50,634 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:21:50,634 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:21:50,640 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:21:50,655 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=1
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=2
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=3
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=4
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=5
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=6
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=7
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=8
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=9
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=10
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=11
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=12
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=13
+2026-08-12 15:21:50,658 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=14
+2026-08-12 15:21:50,659 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=15
+2026-08-12 15:21:50,659 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=16
+2026-08-12 15:21:50,659 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=882c0974… 共 16 条消息
+2026-08-12 15:21:50,827 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 16 条消息: session=882c0974-c51d-47…
+2026-08-12 15:22:07,024 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:22:07,024 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:22:07,032 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:22:07,032 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:22:07,032 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:22:07,061 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:07,073 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:22:07,078 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:07,079 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:07,082 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:22:07,085 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:22:07,098 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:22:07,100 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:07,101 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:07,106 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:22:07,107 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:07,119 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:22:07,120 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:22:07,120 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:22:07,121 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:22:07,134 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=1
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=2
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=3
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=4
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=5
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=6
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=7
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=8
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=9
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=10
+2026-08-12 15:22:07,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=11
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=12
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=13
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=14
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=15
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=16
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=17
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=18
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=19
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=20
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=21
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=22
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=23
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=24
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (HumanMessage), total=25
+2026-08-12 15:22:07,137 - agent - DEBUG - session_store.py:75 - [SessionStore] session=（无标题） (2条) test_debug2… +1 msg (AIMessage), total=26
+2026-08-12 15:22:07,137 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=（无标题） (2… 共 26 条消息
+2026-08-12 15:22:07,333 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:22:07,333 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:22:07,335 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 26 条消息: session=（无标题） (2条) test_…
+2026-08-12 15:22:11,306 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:22:11,307 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:22:11,316 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:22:11,316 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:22:11,316 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:22:11,336 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:11,347 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:22:11,353 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:11,353 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:11,357 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:22:11,359 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:22:11,372 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:22:11,372 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:11,372 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:11,378 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:22:11,381 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:22:11,390 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:22:11,390 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:22:11,390 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:22:11,390 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:22:11,402 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:22:11,569 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:22:11,570 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:22:14,440 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:22:14,440 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:22:14,463 - agent - INFO - react_agent.py:467 - [trace=ee19d6eb] 开始处理: 你好
+2026-08-12 15:22:14,463 - agent - INFO - react_agent.py:483 - [trace=ee19d6eb] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-12 15:22:14,463 - agent - DEBUG - react_agent.py:255 - [trace=ee19d6eb] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-12 15:22:14,570 - agent - INFO - soul_loader.py:194 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 1536 字符, 6 段落
+2026-08-12 15:22:14,571 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-12 15:22:14,574 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=你好, persona=Cyrene, entries=4
+2026-08-12 15:22:14,574 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=['polite'], stage=None, instructions=4, temp=0.50
+2026-08-12 15:22:14,574 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-12 15:23:30,157 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:23:30,159 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:23:30,162 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:23:30,163 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:23:30,163 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:23:30,213 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:30,231 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:23:30,231 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:30,231 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:30,237 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:23:30,237 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:23:30,256 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:23:30,256 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:30,256 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:30,262 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:23:30,262 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:30,279 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:23:30,279 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:23:30,281 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:23:30,281 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:23:30,293 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:23:43,348 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:23:43,348 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:23:43,358 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:23:43,358 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:23:43,358 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:23:43,384 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:43,398 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:23:43,401 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:43,402 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:43,404 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:23:43,408 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:23:43,422 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:23:43,425 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:43,427 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:43,432 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:23:43,433 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:23:43,447 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:23:43,448 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:23:43,449 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:23:43,449 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:23:43,461 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:23:43,662 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:23:43,662 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:23:47,383 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:23:47,384 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:23:47,412 - agent - INFO - react_agent.py:467 - [trace=490dd66f] 开始处理: 你好
+2026-08-12 15:23:47,412 - agent - INFO - react_agent.py:483 - [trace=490dd66f] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-12 15:23:47,412 - agent - DEBUG - react_agent.py:255 - [trace=490dd66f] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-12 15:23:47,412 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-12 15:23:47,412 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=你好, persona=Cyrene, entries=4
+2026-08-12 15:23:47,412 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=['polite'], stage=None, instructions=4, temp=0.50
+2026-08-12 15:23:47,412 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-12 15:24:13,700 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:24:13,701 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:24:13,712 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:24:13,716 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:24:13,716 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:24:13,737 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:24:13,749 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:24:13,749 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:24:13,754 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:24:13,755 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:24:13,755 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:24:13,767 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:24:13,767 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:24:13,773 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:24:13,777 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:24:13,781 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:24:13,791 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:24:13,791 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:24:13,791 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:24:13,791 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:24:13,804 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:24:13,988 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:24:13,989 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:24:13,990 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 16 条消息: session=882c0974-c51d-47…
+2026-08-12 15:24:17,456 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:24:17,456 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:24:17,500 - agent - INFO - react_agent.py:467 - [trace=1a80126f] 开始处理: 你好
+2026-08-12 15:24:17,500 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 16 条消息, token 估算=1704, 轮数=8
+2026-08-12 15:24:17,500 - agent - INFO - react_agent.py:483 - [trace=1a80126f] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-12 15:24:17,500 - agent - DEBUG - react_agent.py:255 - [trace=1a80126f] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-12 15:24:17,500 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-12 15:24:17,500 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=你好, persona=Cyrene, entries=4
+2026-08-12 15:24:17,500 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=['polite'], stage=None, instructions=4, temp=0.50
+2026-08-12 15:24:17,500 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-12 15:27:58,431 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:27:58,431 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:28:00,015 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 15:28:00,017 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:28:00,017 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:28:00,017 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:28:00,045 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:00,057 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:28:00,063 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:00,063 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:00,068 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:28:00,069 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:28:00,087 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:28:00,089 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:00,089 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:00,092 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:28:00,096 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:00,111 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:28:00,111 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:28:00,111 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:28:00,117 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:28:00,130 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:28:00,134 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=1
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=2
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=3
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=4
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=5
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=6
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=7
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=8
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=9
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=10
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=11
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=12
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=13
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=14
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=15
+2026-08-12 15:28:00,135 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=16
+2026-08-12 15:28:00,135 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=882c0974… 共 16 条消息
+2026-08-12 15:28:00,231 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 16 条消息: session=882c0974-c51d-47…
+2026-08-12 15:28:08,546 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:28:08,546 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:28:08,589 - agent - INFO - react_agent.py:467 - [trace=b8a3cbb9] 开始处理: 你好
+2026-08-12 15:28:08,595 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 16 条消息, token 估算=1704, 轮数=8
+2026-08-12 15:28:08,595 - agent - INFO - react_agent.py:483 - [trace=b8a3cbb9] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-12 15:28:08,595 - agent - DEBUG - react_agent.py:255 - [trace=b8a3cbb9] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-12 15:28:08,695 - agent - INFO - soul_loader.py:194 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 1536 字符, 6 段落
+2026-08-12 15:28:08,696 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-12 15:28:08,696 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=你好, persona=Cyrene, entries=4
+2026-08-12 15:28:08,696 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=['polite'], stage=None, instructions=4, temp=0.50
+2026-08-12 15:28:08,696 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-12 15:28:12,376 - agent - INFO - react_agent.py:373 - [trace=b8a3cbb9] Chat 完成: 响应长度=74
+2026-08-12 15:28:12,380 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (HumanMessage), total=17
+2026-08-12 15:28:12,380 - agent - DEBUG - session_store.py:75 - [SessionStore] session=882c0974-c51d-4712-ad73-4918e82ba100 +1 msg (AIMessage), total=18
+2026-08-12 15:28:12,386 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=882c0974…
+2026-08-12 15:28:20,170 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:28:20,171 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:28:20,181 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:28:20,181 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:28:20,182 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:28:20,206 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:20,218 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:28:20,224 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:20,224 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:20,224 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:28:20,230 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:28:20,244 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:28:20,246 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:20,248 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:20,248 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:28:20,248 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:28:20,261 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:28:20,261 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:28:20,261 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:28:20,266 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:28:20,273 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:28:20,471 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:28:20,471 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:28:23,323 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:28:23,323 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:28:23,357 - agent - INFO - react_agent.py:467 - [trace=e6a2020f] 开始处理: 你好
+2026-08-12 15:28:23,357 - agent - INFO - react_agent.py:483 - [trace=e6a2020f] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-12 15:28:23,363 - agent - DEBUG - react_agent.py:255 - [trace=e6a2020f] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-12 15:28:23,363 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-12 15:28:23,363 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=你好, persona=Cyrene, entries=4
+2026-08-12 15:28:23,363 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=['polite'], stage=None, instructions=4, temp=0.50
+2026-08-12 15:28:23,363 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-12 15:28:27,454 - agent - INFO - react_agent.py:373 - [trace=e6a2020f] Chat 完成: 响应长度=69
+2026-08-12 15:28:27,454 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=1
+2026-08-12 15:28:27,454 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=2
+2026-08-12 15:28:27,459 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=a7deba9d…
+2026-08-12 15:28:29,837 - agent - INFO - react_agent.py:639 - [ReactAgent] 会话标题: 问候
+2026-08-12 15:28:49,313 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:28:49,313 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:28:49,349 - agent - INFO - react_agent.py:467 - [trace=d54d65c7] 开始处理: 告诉我今天的日期，并且帮我看看我所在地区的天气
+2026-08-12 15:28:49,349 - agent - DEBUG - decision_engine.py:158 - [Decision] 话题切换，清除缓存: 告诉我今天的日期，并且帮我看看我所在地区的天气
+2026-08-12 15:28:49,349 - agent - INFO - react_agent.py:483 - [trace=d54d65c7] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-12 15:28:49,349 - agent - INFO - unified_middleware.py:185 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-12 15:28
+2026-08-12 15:29:36,538 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:29:36,539 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:29:50,747 - agent - ERROR - react_agent.py:609 - [ReactAgent] 流式执行异常: APITimeoutError: Request timed out.
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 154, in fail_after
+    yield cancel_scope
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 123, in wait
+    await self._anyio_event.wait()
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_backends\_asyncio.py", line 1840, in wait
+    await self._event.wait()
+  File "D:\develop\Anaconda\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError: Cancelled via cancel scope 1e5ed2f2210; reason: deadline exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 10, in map_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 122, in wait
+    with anyio.fail_after(timeout):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 157, in fail_after
+    raise TimeoutError
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 248, in handle_async_request
+    raise exc
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 239, in handle_async_request
+    connection = await status.wait_for_connection(timeout=timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 36, in wait_for_connection
+    await self._connection_acquired.wait(timeout=timeout)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 121, in wait
+    with map_exceptions(anyio_exc_map):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1709, in request
+    response = await self._send_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1097, in _send_request
+    response = await self._send_with_auth_retry(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1075, in _send_with_auth_retry
+    response = await super()._send_request(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1628, in _send_request
+    return await self._client.send(request, stream=stream, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 507, in execute_stream_async
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 473, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1221, in amodel_node
+    response = await _execute_model_async(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1192, in _execute_model_async
+    output = await model_.ainvoke(messages)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\runnables\base.py", line 6015, in ainvoke
+    return await self.bound.ainvoke(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 2023, in _agenerate
+    _handle_openai_api_error(e)
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 2016, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_legacy_response.py", line 386, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2907, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1992, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1727, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+During task with name 'model' and id 'ac1eb1ff-3758-f000-e3e2-b5c9b29f7bbb'
+2026-08-12 15:33:54,354 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:33:54,354 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:33:55,897 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 15:33:55,897 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:33:55,897 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:33:55,897 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 13 → 11, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:33:55,916 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:33:55,928 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:33:55,928 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:33:55,934 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:33:55,934 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:33:55,934 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:33:55,952 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:33:55,952 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:33:55,952 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:33:55,958 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:33:55,958 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:33:55,970 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:33:55,970 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:33:55,970 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:33:55,977 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:33:55,994 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:33:55,995 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=1
+2026-08-12 15:33:55,995 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=2
+2026-08-12 15:33:55,995 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=a7deba9d… 共 2 条消息
+2026-08-12 15:33:56,073 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 2 条消息: session=a7deba9d-26a4-48…
+2026-08-12 15:34:02,475 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:34:02,475 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:34:02,509 - agent - INFO - react_agent.py:467 - [trace=08fbe7c5] 开始处理: 告诉我今天的日期，并且帮我看看我所在地区的天气
+2026-08-12 15:34:02,509 - agent - INFO - react_agent.py:483 - [trace=08fbe7c5] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-12 15:34:02,509 - agent - INFO - unified_middleware.py:185 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-12 15:34
+2026-08-12 15:34:04,752 - agent - INFO - react_agent.py:515 - [trace=08fbe7c5] 调用工具: get_current_time
+2026-08-12 15:34:04,754 - agent - INFO - react_agent.py:515 - [trace=08fbe7c5] 调用工具: get_public_ip
+2026-08-12 15:34:05,204 - agent - INFO - unified_middleware.py:52 - [middleware] 执行工具: get_current_time, args={}
+2026-08-12 15:34:05,204 - agent - DEBUG - execution_policy.py:214 - [Exec Policy] 未知工具 get_current_time 不在 Schema 注册表中，宽松通过
+2026-08-12 15:34:05,204 - agent - INFO - unified_middleware.py:52 - [middleware] 执行工具: get_public_ip, args={}
+2026-08-12 15:34:05,204 - agent - DEBUG - execution_policy.py:214 - [Exec Policy] 未知工具 get_public_ip 不在 Schema 注册表中，宽松通过
+2026-08-12 15:34:05,208 - agent - INFO - unified_middleware.py:75 - [middleware] 工具完成: get_current_time
+2026-08-12 15:34:05,732 - agent - INFO - unified_middleware.py:75 - [middleware] 工具完成: get_public_ip
+2026-08-12 15:34:05,735 - agent - INFO - unified_middleware.py:185 - [middleware] 模型调用前: 7→7 条消息, 已注入日期: 2026-08-12 15:34
+2026-08-12 15:34:07,261 - agent - INFO - react_agent.py:515 - [trace=08fbe7c5] 调用工具: maps_ip_location
+2026-08-12 15:34:07,638 - agent - INFO - unified_middleware.py:52 - [middleware] 执行工具: maps_ip_location, args={'ip': '221.4.34.161'}
+2026-08-12 15:34:14,652 - agent - WARNING - agent_tools.py:336 - [maps_ip_location] ip-api.com 失败: HTTPConnectionPool(host='ip-api.com', port=80): Max retries exceeded with url: /json/221.4.34.161?fields=city,regionName,country&lang=zh-CN (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001E5ED2D7290>, 'Connection to ip-api.com timed out. (connect timeout=5)'))
+2026-08-12 15:34:14,654 - agent - INFO - unified_middleware.py:75 - [middleware] 工具完成: maps_ip_location
+2026-08-12 15:34:14,656 - agent - INFO - unified_middleware.py:185 - [middleware] 模型调用前: 9→9 条消息, 已注入日期: 2026-08-12 15:34
+2026-08-12 15:34:19,539 - agent - INFO - react_agent.py:549 - [trace=08fbe7c5] 完成: tokens={'input_tokens': 11282, 'output_tokens': 448, 'total_tokens': 11730}, 响应长度=274
+2026-08-12 15:34:19,539 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=3
+2026-08-12 15:34:19,541 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=4
+2026-08-12 15:34:19,547 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=a7deba9d…
+2026-08-12 15:34:30,692 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:34:30,692 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:34:30,731 - agent - INFO - react_agent.py:467 - [trace=fb5e369b] 开始处理: 我在广州欸
+2026-08-12 15:34:30,731 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 4 条消息, token 估算=239, 轮数=2
+2026-08-12 15:34:30,731 - agent - INFO - react_agent.py:483 - [trace=fb5e369b] Decision: route=agent conf=0.80 reason=cita_needs_tool
+2026-08-12 15:34:30,731 - agent - INFO - unified_middleware.py:185 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-12 15:34
+2026-08-12 15:37:32,086 - agent - ERROR - react_agent.py:609 - [ReactAgent] 流式执行异常: APITimeoutError: Request timed out.
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 154, in fail_after
+    yield cancel_scope
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 123, in wait
+    await self._anyio_event.wait()
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_backends\_asyncio.py", line 1840, in wait
+    await self._event.wait()
+  File "D:\develop\Anaconda\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError: Cancelled via cancel scope 1e5ed7eeb70; reason: deadline exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 10, in map_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 122, in wait
+    with anyio.fail_after(timeout):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 157, in fail_after
+    raise TimeoutError
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 248, in handle_async_request
+    raise exc
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 239, in handle_async_request
+    connection = await status.wait_for_connection(timeout=timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 36, in wait_for_connection
+    await self._connection_acquired.wait(timeout=timeout)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 121, in wait
+    with map_exceptions(anyio_exc_map):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1709, in request
+    response = await self._send_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1097, in _send_request
+    response = await self._send_with_auth_retry(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1075, in _send_with_auth_retry
+    response = await super()._send_request(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1628, in _send_request
+    return await self._client.send(request, stream=stream, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 507, in execute_stream_async
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 473, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1221, in amodel_node
+    response = await _execute_model_async(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1192, in _execute_model_async
+    output = await model_.ainvoke(messages)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\runnables\base.py", line 6015, in ainvoke
+    return await self.bound.ainvoke(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 2023, in _agenerate
+    _handle_openai_api_error(e)
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 2016, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_legacy_response.py", line 386, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2907, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1992, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1727, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+During task with name 'model' and id '6ee8e899-77fb-59ee-caf6-9a56c63d20ad'
+2026-08-12 15:38:46,805 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:38:46,805 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:38:46,805 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 12 → 10, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:40:02,265 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: list_skills (匹配关键词: 'kill')
+2026-08-12 15:40:02,265 - agent - WARNING - action_gate.py:153 - [Action Gate] 移除危险工具: invoke_skill (匹配关键词: 'kill')
+2026-08-12 15:40:02,265 - agent - INFO - action_gate.py:182 - [Action Gate] 工具过滤完成: 6 → 4, 移除: ['list_skills(危险关键词:kill)', 'invoke_skill(危险关键词:kill)']
+2026-08-12 15:55:40,746 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 10 个工具，无移除
+2026-08-12 15:56:44,177 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 10 个工具，无移除
+2026-08-12 15:58:54,045 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:58:54,046 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:58:55,644 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 15:58:55,650 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 13 个工具，无移除
+2026-08-12 15:58:55,669 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 15:58:55,681 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 15:58:55,681 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 15:58:55,687 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 15:58:55,690 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 15:58:55,693 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 15:58:55,705 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 15:58:55,705 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 15:58:55,705 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 15:58:55,711 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 15:58:55,711 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 15:58:55,723 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 15:58:55,723 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 15:58:55,729 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 15:58:55,735 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 15:58:55,748 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 15:58:55,748 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=1
+2026-08-12 15:58:55,748 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=2
+2026-08-12 15:58:55,748 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=3
+2026-08-12 15:58:55,748 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=4
+2026-08-12 15:58:55,748 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=a7deba9d… 共 4 条消息
+2026-08-12 15:58:55,929 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 4 条消息: session=a7deba9d-26a4-48…
+2026-08-12 15:59:04,705 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 15:59:04,706 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 15:59:04,734 - agent - INFO - react_agent.py:467 - [trace=756a1f4f] 开始处理: 我在广州
+2026-08-12 15:59:04,734 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 4 条消息, token 估算=239, 轮数=2
+2026-08-12 15:59:04,734 - agent - INFO - react_agent.py:483 - [trace=756a1f4f] Decision: route=agent conf=0.80 reason=cita_needs_tool
+2026-08-12 15:59:04,734 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-12 15:59
+2026-08-12 15:59:04,740 - agent - ERROR - react_agent.py:609 - [ReactAgent] 流式执行异常: AttributeError: 'NoneType' object has no attribute 'get'
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 507, in execute_stream_async
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 473, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1224, in amodel_node
+    response = await awrap_model_call_handler(request, _execute_model_async)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 257, in normalized_single
+    result = await single_handler(request, handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\unified_middleware.py", line 291, in awrap_model_call
+    filtered = self._filter_tools_by_intent(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\unified_middleware.py", line 334, in _filter_tools_by_intent
+    analysis = ctx.get("cita_analysis")
+               ^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+During task with name 'model' and id '07f465ca-43f9-8ebd-7369-10b9039769e9'
+2026-08-12 16:01:06,099 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 10 个工具，无移除
+2026-08-12 16:01:48,362 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 12 个工具，无移除
+2026-08-12 16:02:28,625 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 16:02:51,739 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 12 个工具，无移除
+2026-08-12 16:03:35,522 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:03:35,522 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:03:37,039 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 16:03:37,044 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 13 个工具，无移除
+2026-08-12 16:03:37,061 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 16:03:37,074 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 16:03:37,074 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 16:03:37,074 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 16:03:37,074 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 16:03:37,074 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 16:03:37,098 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 16:03:37,098 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 16:03:37,098 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 16:03:37,104 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 16:03:37,104 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 16:03:37,116 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 16:03:37,116 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 16:03:37,116 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 16:03:37,116 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 16:03:37,136 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 16:03:37,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=1
+2026-08-12 16:03:37,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=2
+2026-08-12 16:03:37,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=3
+2026-08-12 16:03:37,136 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=4
+2026-08-12 16:03:37,136 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=a7deba9d… 共 4 条消息
+2026-08-12 16:03:37,230 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 4 条消息: session=a7deba9d-26a4-48…
+2026-08-12 16:03:43,419 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:03:43,419 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:03:43,457 - agent - INFO - react_agent.py:467 - [trace=3a50a524] 开始处理: 我在广州
+2026-08-12 16:03:43,457 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 4 条消息, token 估算=239, 轮数=2
+2026-08-12 16:03:43,457 - agent - INFO - react_agent.py:483 - [trace=3a50a524] Decision: route=agent conf=0.80 reason=cita_needs_tool
+2026-08-12 16:03:43,457 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-12 16:03
+2026-08-12 16:03:47,262 - agent - INFO - react_agent.py:515 - [trace=3a50a524] 调用工具: invoke_skill
+2026-08-12 16:03:47,263 - agent - INFO - react_agent.py:515 - [trace=3a50a524] 调用工具: maps_weather
+2026-08-12 16:03:47,983 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: invoke_skill, args={'skill_name': 'weather-lifestyle', 'task': '查询广州今天的实时天气'}
+2026-08-12 16:03:47,983 - agent - DEBUG - execution_policy.py:214 - [Exec Policy] 未知工具 invoke_skill 不在 Schema 注册表中，宽松通过
+2026-08-12 16:03:47,983 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: maps_weather, args={'city': '广州'}
+2026-08-12 16:03:47,986 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: invoke_skill
+2026-08-12 16:03:48,591 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: maps_weather
+2026-08-12 16:03:48,593 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 9→9 条消息, 已注入日期: 2026-08-12 16:03
+2026-08-12 16:03:50,884 - agent - INFO - react_agent.py:515 - [trace=3a50a524] 调用工具: maps_weather
+2026-08-12 16:03:51,298 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: maps_weather, args={'city': '广州'}
+2026-08-12 16:03:51,840 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: maps_weather
+2026-08-12 16:03:51,842 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 11→11 条消息, 已注入日期: 2026-08-12 16:03
+2026-08-12 16:03:54,771 - agent - INFO - react_agent.py:515 - [trace=3a50a524] 调用工具: bailian_web_search
+2026-08-12 16:03:55,286 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: bailian_web_search, args={'query': '广州今天实时天气 气温 2026年8月12日', 'count': 5}
+2026-08-12 16:03:55,287 - agent - DEBUG - execution_policy.py:214 - [Exec Policy] 未知工具 bailian_web_search 不在 Schema 注册表中，宽松通过
+2026-08-12 16:03:57,238 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: bailian_web_search
+2026-08-12 16:03:57,240 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 13→13 条消息, 已注入日期: 2026-08-12 16:03
+2026-08-12 16:04:16,337 - agent - INFO - react_agent.py:549 - [trace=3a50a524] 完成: tokens={'input_tokens': 22547, 'output_tokens': 2103, 'total_tokens': 24650}, 响应长度=977
+2026-08-12 16:04:16,337 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=5
+2026-08-12 16:04:16,337 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=6
+2026-08-12 16:04:16,343 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=a7deba9d…
+2026-08-12 16:39:48,314 - agent - INFO - dimension_guard.py:112 - [DimensionGuard] 新建 'faq' 元数据: provider=dashscope, dims=1024
+2026-08-12 16:39:49,659 - agent - INFO - bm25.py:130 - [ChineseBM25] 索引构建完成: 3 篇文档, vocab=18, avgdl=9.3
+2026-08-12 16:40:43,929 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:40:43,929 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:40:45,568 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 16:40:45,574 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 13 个工具，无移除
+2026-08-12 16:40:45,593 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 16:40:45,611 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 16:40:45,611 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 16:40:45,611 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 16:40:45,617 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 16:40:45,617 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 16:40:45,635 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 16:40:45,635 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 16:40:45,635 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 16:40:45,641 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 16:40:45,641 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 16:40:45,654 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 16:40:45,654 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 16:40:45,659 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 16:40:45,666 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 16:40:45,691 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 16:40:45,691 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=1
+2026-08-12 16:40:45,691 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=2
+2026-08-12 16:40:45,691 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=3
+2026-08-12 16:40:45,691 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=4
+2026-08-12 16:40:45,691 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=5
+2026-08-12 16:40:45,691 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=6
+2026-08-12 16:40:45,691 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=a7deba9d… 共 6 条消息
+2026-08-12 16:40:45,700 - agent - INFO - dimension_guard.py:112 - [DimensionGuard] 新建 'faq' 元数据: provider=dashscope, dims=1024
+2026-08-12 16:40:45,829 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 6 条消息: session=a7deba9d-26a4-48…
+2026-08-12 16:41:23,220 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:41:23,221 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:41:23,256 - agent - INFO - react_agent.py:467 - [trace=0628b27a] 开始处理: 我想知道无职转生3的番剧信息，请帮我上bangumi查询
+2026-08-12 16:41:23,256 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 6 条消息, token 估算=768, 轮数=3
+2026-08-12 16:41:23,256 - agent - INFO - react_agent.py:483 - [trace=0628b27a] Decision: route=agent conf=0.95 reason=agent_keyword:anime
+2026-08-12 16:41:23,256 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 8→8 条消息, 已注入日期: 2026-08-12 16:41
+2026-08-12 16:41:25,575 - agent - INFO - react_agent.py:515 - [trace=0628b27a] 调用工具: search_anime
+2026-08-12 16:41:26,134 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '无职转生'}
+2026-08-12 16:41:29,432 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 16:41:29,434 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 10→10 条消息, 已注入日期: 2026-08-12 16:41
+2026-08-12 16:41:33,307 - agent - INFO - react_agent.py:515 - [trace=0628b27a] 调用工具: fetch_anime
+2026-08-12 16:41:33,308 - agent - INFO - react_agent.py:515 - [trace=0628b27a] 调用工具: invoke_skill
+2026-08-12 16:41:34,183 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: fetch_anime, args={'url': 'https://bangumi.lol/subject/501963'}
+2026-08-12 16:41:34,183 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: invoke_skill, args={'skill_name': 'anime-deep-dive', 'task': '查询无职转生第三季的详细番剧信息'}
+2026-08-12 16:41:34,183 - agent - DEBUG - execution_policy.py:214 - [Exec Policy] 未知工具 invoke_skill 不在 Schema 注册表中，宽松通过
+2026-08-12 16:41:34,183 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: invoke_skill
+2026-08-12 16:41:36,418 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: fetch_anime
+2026-08-12 16:41:36,420 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 13→13 条消息, 已注入日期: 2026-08-12 16:41
+2026-08-12 16:41:38,513 - agent - INFO - react_agent.py:515 - [trace=0628b27a] 调用工具: rag_summarize
+2026-08-12 16:41:39,025 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: rag_summarize, args={'query': '无职转生 第三季 评价 分析 StudioBind'}
+2026-08-12 16:41:39,025 - agent - DEBUG - rag_service.py:57 - [RAG route] Anime 匹配 → anime + faq
+2026-08-12 16:41:39,025 - agent - INFO - dimension_guard.py:112 - [DimensionGuard] 新建 'anime' 元数据: provider=dashscope, dims=1024
+2026-08-12 16:41:40,710 - agent - INFO - bm25.py:130 - [ChineseBM25] 索引构建完成: 423 篇文档, vocab=2984, avgdl=75.0
+2026-08-12 16:41:40,721 - agent - DEBUG - bm25.py:226 - [ChineseBM25] 索引已保存: D:\develop\PythonStudy\MutiRoleAgent\chroma_db\bm25_anime.pkl (423 docs)
+2026-08-12 16:41:40,721 - agent - INFO - vector_store.py:178 - [VectorStore] BM25 索引已重建: anime (423 docs)
+2026-08-12 16:41:41,687 - agent - DEBUG - hybrid_retriever.py:147 - [HybridRetriever:anime] 向量检索: 10 条
+2026-08-12 16:41:41,688 - agent - DEBUG - hybrid_retriever.py:169 - [HybridRetriever:anime] BM25 检索: 10 条
+2026-08-12 16:41:41,689 - agent - INFO - dimension_guard.py:112 - [DimensionGuard] 新建 'faq' 元数据: provider=dashscope, dims=1024
+2026-08-12 16:41:42,514 - agent - DEBUG - hybrid_retriever.py:147 - [HybridRetriever:faq] 向量检索: 0 条
+2026-08-12 16:41:42,514 - agent - INFO - rag_service.py:126 - [RAG] 检索完成: query='无职转生 第三季 评价 分析 StudioBind', collections=['anime', 'faq'], docs=3
+2026-08-12 16:41:45,335 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: rag_summarize
+2026-08-12 16:41:45,338 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 15→15 条消息, 已注入日期: 2026-08-12 16:41
+2026-08-12 16:42:27,344 - agent - INFO - react_agent.py:549 - [trace=0628b27a] 完成: tokens={'input_tokens': 29289, 'output_tokens': 3265, 'total_tokens': 32554}, 响应长度=2672
+2026-08-12 16:42:27,345 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=7
+2026-08-12 16:42:27,345 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=8
+2026-08-12 16:42:27,354 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=a7deba9d…
+2026-08-12 16:43:41,536 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:43:41,536 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:43:41,590 - agent - INFO - react_agent.py:467 - [trace=3e240597] 开始处理: 我还想知道《超超超喜欢你的100个女友第三季》的信息
+2026-08-12 16:43:41,590 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 8 条消息, token 估算=1913, 轮数=4
+2026-08-12 16:43:41,596 - agent - INFO - react_agent.py:483 - [trace=3e240597] Decision: route=agent conf=0.80 reason=cita_needs_tool
+2026-08-12 16:43:41,596 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 10→10 条消息, 已注入日期: 2026-08-12 16:43
+2026-08-12 16:43:52,882 - agent - ERROR - react_agent.py:609 - [ReactAgent] 流式执行异常: APITimeoutError: Request timed out.
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 154, in fail_after
+    yield cancel_scope
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 123, in wait
+    await self._anyio_event.wait()
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_backends\_asyncio.py", line 1840, in wait
+    await self._event.wait()
+  File "D:\develop\Anaconda\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError: Cancelled via cancel scope 1e5ed865a90; reason: deadline exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 10, in map_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 122, in wait
+    with anyio.fail_after(timeout):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 157, in fail_after
+    raise TimeoutError
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 248, in handle_async_request
+    raise exc
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 239, in handle_async_request
+    connection = await status.wait_for_connection(timeout=timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 36, in wait_for_connection
+    await self._connection_acquired.wait(timeout=timeout)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 121, in wait
+    with map_exceptions(anyio_exc_map):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1709, in request
+    response = await self._send_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1097, in _send_request
+    response = await self._send_with_auth_retry(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1075, in _send_with_auth_retry
+    response = await super()._send_request(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1628, in _send_request
+    return await self._client.send(request, stream=stream, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 507, in execute_stream_async
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 473, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1224, in amodel_node
+    response = await awrap_model_call_handler(request, _execute_model_async)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 257, in normalized_single
+    result = await single_handler(request, handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\unified_middleware.py", line 302, in awrap_model_call
+    return await handler(request)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1192, in _execute_model_async
+    output = await model_.ainvoke(messages)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\runnables\base.py", line 6015, in ainvoke
+    return await self.bound.ainvoke(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 2023, in _agenerate
+    _handle_openai_api_error(e)
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 2016, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_legacy_response.py", line 386, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2907, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1992, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1727, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+During task with name 'model' and id '260c07ff-aa5f-bb26-cf13-dd979c00c68d'
+2026-08-12 16:45:57,111 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:45:57,111 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:45:57,162 - agent - INFO - react_agent.py:467 - [trace=ff94a617] 开始处理: 我还想知道《超超超喜欢你的100个女友第三季》的信息
+2026-08-12 16:45:57,162 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 8 条消息, token 估算=1913, 轮数=4
+2026-08-12 16:45:57,162 - agent - INFO - react_agent.py:483 - [trace=ff94a617] Decision: route=agent conf=0.80 reason=cita_needs_tool
+2026-08-12 16:45:57,162 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 10→10 条消息, 已注入日期: 2026-08-12 16:45
+2026-08-12 16:46:13,583 - agent - ERROR - react_agent.py:609 - [ReactAgent] 流式执行异常: APITimeoutError: Request timed out.
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 154, in fail_after
+    yield cancel_scope
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 123, in wait
+    await self._anyio_event.wait()
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_backends\_asyncio.py", line 1840, in wait
+    await self._event.wait()
+  File "D:\develop\Anaconda\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError: Cancelled via cancel scope 1e5ed867cf0; reason: deadline exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 10, in map_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 122, in wait
+    with anyio.fail_after(timeout):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 157, in fail_after
+    raise TimeoutError
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 248, in handle_async_request
+    raise exc
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 239, in handle_async_request
+    connection = await status.wait_for_connection(timeout=timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 36, in wait_for_connection
+    await self._connection_acquired.wait(timeout=timeout)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 121, in wait
+    with map_exceptions(anyio_exc_map):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1709, in request
+    response = await self._send_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1097, in _send_request
+    response = await self._send_with_auth_retry(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1075, in _send_with_auth_retry
+    response = await super()._send_request(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1628, in _send_request
+    return await self._client.send(request, stream=stream, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 507, in execute_stream_async
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 473, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1224, in amodel_node
+    response = await awrap_model_call_handler(request, _execute_model_async)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 257, in normalized_single
+    result = await single_handler(request, handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\unified_middleware.py", line 302, in awrap_model_call
+    return await handler(request)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1192, in _execute_model_async
+    output = await model_.ainvoke(messages)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\runnables\base.py", line 6015, in ainvoke
+    return await self.bound.ainvoke(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 2023, in _agenerate
+    _handle_openai_api_error(e)
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 2016, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_legacy_response.py", line 386, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2907, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1992, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1727, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+During task with name 'model' and id '0ca07cf1-98ca-64ab-ca97-365765744fda'
+2026-08-12 16:46:29,723 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:46:29,723 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:46:29,732 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 13 个工具，无移除
+2026-08-12 16:46:29,788 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 16:46:29,806 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 16:46:29,812 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 16:46:29,812 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 16:46:29,817 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 16:46:29,818 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 16:46:29,836 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 16:46:29,836 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 16:46:29,836 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 16:46:29,843 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 16:46:29,844 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 16:46:29,860 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 16:46:29,860 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 16:46:29,860 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 16:46:29,860 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 16:46:29,872 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 16:46:29,886 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-12 16:46:29,987 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 8 条消息: session=a7deba9d-26a4-48…
+2026-08-12 16:46:35,122 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:46:35,122 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:46:35,168 - agent - INFO - react_agent.py:467 - [trace=85b86db2] 开始处理: 我还想知道《超超超喜欢你的100个女友第三季》的信息
+2026-08-12 16:46:35,175 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 8 条消息, token 估算=1913, 轮数=4
+2026-08-12 16:46:35,175 - agent - INFO - decision_engine.py:170 - [Decision] 缓存命中 → chat (streak=3)
+2026-08-12 16:46:35,175 - agent - INFO - react_agent.py:483 - [trace=85b86db2] Decision: route=chat conf=0.70 reason=cache_streak
+2026-08-12 16:46:35,175 - agent - DEBUG - react_agent.py:255 - [trace=85b86db2] CITA 2.0 Chat: entities=[('anime', '超超超喜欢你的100个女友第三季')], emotions=[], intents=['task']
+2026-08-12 16:46:35,296 - agent - INFO - soul_loader.py:194 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 1536 字符, 6 段落
+2026-08-12 16:46:35,296 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-12 16:46:35,305 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=我还想知道《超超超喜欢你的100个女友第三季》的信息, persona=Cyrene, entries=4
+2026-08-12 16:46:35,305 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=None, stage=None, instructions=4, temp=0.50
+2026-08-12 16:46:35,305 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-12 16:46:51,575 - agent - ERROR - react_agent.py:367 - [trace=85b86db2] Chat 路径异常: Request timed out.
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 154, in fail_after
+    yield cancel_scope
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 123, in wait
+    await self._anyio_event.wait()
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_backends\_asyncio.py", line 1840, in wait
+    await self._event.wait()
+  File "D:\develop\Anaconda\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError: Cancelled via cancel scope 1e5ed1ac370; reason: deadline exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 10, in map_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 122, in wait
+    with anyio.fail_after(timeout):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 157, in fail_after
+    raise TimeoutError
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 248, in handle_async_request
+    raise exc
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 239, in handle_async_request
+    connection = await status.wait_for_connection(timeout=timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 36, in wait_for_connection
+    await self._connection_acquired.wait(timeout=timeout)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 121, in wait
+    with map_exceptions(anyio_exc_map):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1709, in request
+    response = await self._send_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1097, in _send_request
+    response = await self._send_with_auth_retry(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1075, in _send_with_auth_retry
+    response = await super()._send_request(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1628, in _send_request
+    return await self._client.send(request, stream=stream, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 361, in _execute_chat
+    async for chunk in chat_model.astream(messages):
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 907, in astream
+    async for chunk in self._astream(
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 3552, in _astream
+    async for chunk in super()._astream(*args, **kwargs):
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 1963, in _astream
+    _handle_openai_api_error(e)
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 1932, in _astream
+    response = await self.async_client.create(**payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2907, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1992, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1727, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+2026-08-12 16:49:19,799 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-12 16:49:19,865 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:49:19,865 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:49:19,918 - agent - INFO - react_agent.py:467 - [trace=e94c50f8] 开始处理: 我还想知道《超超超喜欢你的100个女友第三季》的信息
+2026-08-12 16:49:19,920 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 8 条消息, token 估算=1913, 轮数=4
+2026-08-12 16:49:19,920 - agent - INFO - decision_engine.py:170 - [Decision] 缓存命中 → chat (streak=4)
+2026-08-12 16:49:19,920 - agent - INFO - react_agent.py:483 - [trace=e94c50f8] Decision: route=chat conf=0.70 reason=cache_streak
+2026-08-12 16:49:19,934 - agent - DEBUG - react_agent.py:255 - [trace=e94c50f8] CITA 2.0 Chat: entities=[('anime', '超超超喜欢你的100个女友第三季')], emotions=[], intents=['task']
+2026-08-12 16:49:20,030 - agent - INFO - soul_loader.py:194 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 1536 字符, 6 段落
+2026-08-12 16:49:20,030 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-12 16:49:20,030 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=我还想知道《超超超喜欢你的100个女友第三季》的信息, persona=Cyrene, entries=4
+2026-08-12 16:49:20,030 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=None, stage=None, instructions=4, temp=0.50
+2026-08-12 16:49:20,030 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-12 16:49:34,937 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:49:34,938 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:49:36,415 - agent - ERROR - react_agent.py:367 - [trace=e94c50f8] Chat 路径异常: Request timed out.
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 154, in fail_after
+    yield cancel_scope
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 123, in wait
+    await self._anyio_event.wait()
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_backends\_asyncio.py", line 1840, in wait
+    await self._event.wait()
+  File "D:\develop\Anaconda\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError: Cancelled via cancel scope 1e5eda10370; reason: deadline exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 10, in map_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 122, in wait
+    with anyio.fail_after(timeout):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_core\_tasks.py", line 157, in fail_after
+    raise TimeoutError
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 248, in handle_async_request
+    raise exc
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 239, in handle_async_request
+    connection = await status.wait_for_connection(timeout=timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 36, in wait_for_connection
+    await self._connection_acquired.wait(timeout=timeout)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_synchronization.py", line 121, in wait
+    with map_exceptions(anyio_exc_map):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1709, in request
+    response = await self._send_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1097, in _send_request
+    response = await self._send_with_auth_retry(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_client.py", line 1075, in _send_with_auth_retry
+    response = await super()._send_request(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1628, in _send_request
+    return await self._client.send(request, stream=stream, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.PoolTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\tools\..\..\agent\react_agent.py", line 361, in _execute_chat
+    async for chunk in chat_model.astream(messages):
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 907, in astream
+    async for chunk in self._astream(
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 3552, in _astream
+    async for chunk in super()._astream(*args, **kwargs):
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 1963, in _astream
+    _handle_openai_api_error(e)
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 1932, in _astream
+    response = await self.async_client.create(**payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2907, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1992, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_base_client.py", line 1727, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+2026-08-12 16:49:36,740 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 16:49:36,742 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 13 个工具，无移除
+2026-08-12 16:49:36,759 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: anime-deep-dive (builtin, 0 refs, 0 scripts)
+2026-08-12 16:49:36,772 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: docx (builtin, 0 refs, 59 scripts)
+2026-08-12 16:49:36,774 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: download-novel (builtin, 0 refs, 0 scripts)
+2026-08-12 16:49:36,775 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: file-processor (builtin, 0 refs, 0 scripts)
+2026-08-12 16:49:36,778 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: mcp-builder (builtin, 0 refs, 4 scripts)
+2026-08-12 16:49:36,780 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pdf (builtin, 0 refs, 8 scripts)
+2026-08-12 16:49:36,791 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: pptx (builtin, 0 refs, 54 scripts)
+2026-08-12 16:49:36,794 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: recommend-anime (builtin, 0 refs, 0 scripts)
+2026-08-12 16:49:36,795 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: season-overview (builtin, 0 refs, 0 scripts)
+2026-08-12 16:49:36,799 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: skill-creator (builtin, 1 refs, 11 scripts)
+2026-08-12 16:49:36,800 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: weather-lifestyle (builtin, 0 refs, 0 scripts)
+2026-08-12 16:49:36,811 - agent.skill_loader - DEBUG - loader.py:150 - 加载 Skill: xlsx (builtin, 0 refs, 51 scripts)
+2026-08-12 16:49:36,811 - agent.skill_loader - INFO - loader.py:172 - 共加载 12 个 Skill (内置: 12, 用户: 0)
+2026-08-12 16:49:36,811 - agent.skill_support - INFO - __init__.py:46 - Skill 系统初始化完成: 12 个 Skill 已注册
+2026-08-12 16:49:36,812 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=4746 字符
+2026-08-12 16:49:36,822 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 16:49:36,824 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=1
+2026-08-12 16:49:36,824 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=2
+2026-08-12 16:49:36,824 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=3
+2026-08-12 16:49:36,824 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=4
+2026-08-12 16:49:36,824 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=5
+2026-08-12 16:49:36,824 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=6
+2026-08-12 16:49:36,824 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=7
+2026-08-12 16:49:36,824 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=8
+2026-08-12 16:49:36,824 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=a7deba9d… 共 8 条消息
+2026-08-12 16:49:36,828 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-12 16:49:36,948 - agent - INFO - app.py:102 - [app] 从 SQLite 恢复 8 条消息: session=a7deba9d-26a4-48…
+2026-08-12 16:49:41,619 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 16:49:41,619 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 16:49:41,655 - agent - INFO - react_agent.py:467 - [trace=0272938a] 开始处理: 我还想知道《超超超喜欢你的100个女友第三季》的信息
+2026-08-12 16:49:41,655 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 8 条消息, token 估算=1913, 轮数=4
+2026-08-12 16:49:41,655 - agent - INFO - react_agent.py:483 - [trace=0272938a] Decision: route=agent conf=0.80 reason=cita_needs_tool
+2026-08-12 16:49:41,655 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 10→10 条消息, 已注入日期: 2026-08-12 16:49
+2026-08-12 16:49:44,159 - agent - INFO - react_agent.py:515 - [trace=0272938a] 调用工具: invoke_skill
+2026-08-12 16:49:44,160 - agent - INFO - react_agent.py:515 - [trace=0272938a] 调用工具: search_anime
+2026-08-12 16:49:44,909 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: invoke_skill, args={'skill_name': 'anime-deep-dive', 'task': '查询《超超超喜欢你的100个女友第三季》的完整番剧信息'}
+2026-08-12 16:49:44,909 - agent - DEBUG - execution_policy.py:214 - [Exec Policy] 未知工具 invoke_skill 不在 Schema 注册表中，宽松通过
+2026-08-12 16:49:44,910 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '超超超喜欢你的100个女友'}
+2026-08-12 16:49:44,912 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: invoke_skill
+2026-08-12 16:49:48,694 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 16:49:48,696 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 13→13 条消息, 已注入日期: 2026-08-12 16:49
+2026-08-12 16:49:50,452 - agent - INFO - react_agent.py:515 - [trace=0272938a] 调用工具: fetch_anime
+2026-08-12 16:49:50,453 - agent - INFO - react_agent.py:515 - [trace=0272938a] 调用工具: rag_summarize
+2026-08-12 16:49:51,437 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: fetch_anime, args={'url': 'https://bangumi.lol/subject/598058'}
+2026-08-12 16:49:51,438 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: rag_summarize, args={'query': '超超超喜欢你的100个女朋友 第三季 评价 分析'}
+2026-08-12 16:49:51,440 - agent - DEBUG - rag_service.py:57 - [RAG route] Anime 匹配 → anime + faq
+2026-08-12 16:49:51,538 - agent - INFO - bm25.py:257 - [ChineseBM25] 索引已加载: D:\develop\PythonStudy\MutiRoleAgent\chroma_db\bm25_anime.pkl (423 docs)
+2026-08-12 16:49:52,201 - agent - DEBUG - hybrid_retriever.py:147 - [HybridRetriever:anime] 向量检索: 10 条
+2026-08-12 16:49:52,203 - agent - DEBUG - hybrid_retriever.py:169 - [HybridRetriever:anime] BM25 检索: 10 条
+2026-08-12 16:49:52,993 - agent - DEBUG - hybrid_retriever.py:147 - [HybridRetriever:faq] 向量检索: 0 条
+2026-08-12 16:49:52,993 - agent - INFO - rag_service.py:126 - [RAG] 检索完成: query='超超超喜欢你的100个女朋友 第三季 评价 分析', collections=['anime', 'faq'], docs=3
+2026-08-12 16:49:53,961 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: fetch_anime
+2026-08-12 16:49:55,125 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: rag_summarize
+2026-08-12 16:49:55,128 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 16→16 条消息, 已注入日期: 2026-08-12 16:49
+2026-08-12 16:50:40,273 - agent - INFO - react_agent.py:549 - [trace=0272938a] 完成: tokens={'input_tokens': 24181, 'output_tokens': 2454, 'total_tokens': 26635}, 响应长度=3049
+2026-08-12 16:50:40,273 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (HumanMessage), total=9
+2026-08-12 16:50:40,273 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a7deba9d-26a4-48f3-939a-ce565cd74b16 +1 msg (AIMessage), total=10
+2026-08-12 16:50:40,280 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=a7deba9d…

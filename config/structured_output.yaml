@@ -1,0 +1,32 @@
+# ==================== 结构化输出配置 ====================
+# Phase 6: 将 Skill 名称映射到输出 Schema 和 Formatter
+
+# ---- Schema 映射 ----
+# 每个 Skill 对应一个 schema (SCHEMA_REGISTRY 中的键) 和一个 formatter (FORMATTER_REGISTRY 中的键)
+schemas:
+  recommend-anime:
+    schema: anime_recommendation
+    formatter: anime_card_list
+  season-overview:
+    schema: season_overview
+    formatter: season_table
+  anime-deep-dive:
+    schema: anime_deep_dive
+    formatter: deep_dive_detail
+  weather-lifestyle:
+    schema: weather_report
+    formatter: weather_card
+  file-processor:
+    schema: file_operation
+    formatter: file_result
+
+# ---- 重试配置 ----
+retry:
+  max_retries: 1          # 校验失败时的最大重试次数
+  retry_timeout: 20       # 重试 LLM 调用的超时（秒）
+  enabled: false          # Phase 6b: 设为 true 启用自动重试
+
+# ---- 格式化配置 ----
+formatting:
+  max_items_display: 10   # 列表最多显示条目数
+  table_style: markdown    # 表格样式: markdown | html
