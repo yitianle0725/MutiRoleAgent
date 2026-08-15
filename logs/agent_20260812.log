@@ -2721,3 +2721,281 @@ openai.APITimeoutError: Request timed out.
 2026-08-12 23:33:55,318 - agent - DEBUG - pipeline.py:119 - [Pipeline] 未找到 JSON: skill=recommend-anime, response_len=5
 2026-08-12 23:33:55,318 - agent - DEBUG - pipeline.py:110 - [Pipeline] Skill 'unknown-skill' 无 output_schema
 2026-08-12 23:33:55,318 - agent - INFO - pipeline.py:152 - [Pipeline] 结构化输出成功: skill=recommend-anime, schema=anime_recommendation, formatted_len=47
+2026-08-12 23:35:07,373 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-12 23:35:07,442 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 23:35:07,442 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 23:35:10,488 - agent - INFO - mcp_client.py:108 - [mcp_client] websearch: 1 个工具 — ['bailian_web_search']
+2026-08-12 23:35:10,491 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 13 个工具，无移除
+2026-08-12 23:35:10,494 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-12 23:35:10,514 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-12 23:35:10,527 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-12 23:35:10,527 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=1
+2026-08-12 23:35:10,527 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=2
+2026-08-12 23:35:10,527 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=3
+2026-08-12 23:35:10,530 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=4
+2026-08-12 23:35:10,530 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=verify_t… 共 4 条消息
+2026-08-12 23:35:10,530 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=verify_test…, size=1/32
+2026-08-12 23:35:10,534 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-12 23:35:10,724 - agent - INFO - app.py:117 - [app] 从 SQLite 恢复 4 条消息: session=verify_test…
+2026-08-12 23:35:18,809 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 23:35:18,809 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 23:35:18,842 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|2e0cbc71|verify_t] #1 [ENTER] (0ms) query="在吗" loop=3552
+2026-08-12 23:35:18,843 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|2e0cbc71|verify_t] #2 [LOAD_HISTORY] (1ms) 4条 [AIMessage=2 HumanMessage=2] ~108tok 2轮 loop=3552
+2026-08-12 23:35:18,843 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 4 条消息, token 估算=108, 轮数=2
+2026-08-12 23:35:18,843 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|2e0cbc71|verify_t] #3 [TRIM] (1ms) 无需裁剪: 4条 2轮
+2026-08-12 23:35:18,844 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|2e0cbc71|verify_t] #4 [DECISION] (2ms) → CHAT conf=0.95 "chat_signal:greetings" loop=3552
+2026-08-12 23:35:18,844 - agent - INFO - react_agent.py:524 - [trace=2e0cbc71] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-12 23:35:18,844 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|2e0cbc71|verify_t] #5 [CHAT_START] (2ms) 直接 LLM 调用, 历史=4条 loop=3552
+2026-08-12 23:35:18,845 - agent - DEBUG - react_agent.py:264 - [trace=2e0cbc71] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-12 23:35:18,948 - agent - INFO - soul_loader.py:194 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 1536 字符, 6 段落
+2026-08-12 23:35:18,948 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-12 23:35:18,950 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=在吗, persona=Cyrene, entries=4
+2026-08-12 23:35:18,950 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=None, stage=None, instructions=4, temp=0.50
+2026-08-12 23:35:18,950 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-12 23:35:22,294 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|2e0cbc71|verify_t] #6 [CHAT_DONE] (3452ms) 响应=88字 耗时=3.4s
+2026-08-12 23:35:22,294 - agent - INFO - react_agent.py:384 - [trace=2e0cbc71] Chat 完成: 响应长度=88
+2026-08-12 23:35:22,294 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=5
+2026-08-12 23:35:22,294 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=6
+2026-08-12 23:35:22,299 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=verify_t…
+2026-08-12 23:35:22,303 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|2e0cbc71|verify_t] #7 [PERSIST] (3461ms) session_store=6条 chat_db=6条
+2026-08-12 23:35:22,311 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|2e0cbc71|verify_t] #8 [EXIT_OK] (3469ms) 总耗时=3469ms
+2026-08-12 23:35:27,609 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 23:35:27,609 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 23:35:27,650 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|cfc56984|verify_t] #1 [ENTER] (0ms) query="晚上好" loop=9616
+2026-08-12 23:35:27,650 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|cfc56984|verify_t] #2 [LOAD_HISTORY] (0ms) 6条 [AIMessage=3 HumanMessage=3] ~173tok 3轮 loop=9616
+2026-08-12 23:35:27,650 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 6 条消息, token 估算=173, 轮数=3
+2026-08-12 23:35:27,650 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|cfc56984|verify_t] #3 [TRIM] (0ms) 无需裁剪: 6条 3轮
+2026-08-12 23:35:27,652 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|cfc56984|verify_t] #4 [DECISION] (2ms) → CHAT conf=0.95 "chat_signal:greetings" loop=9616
+2026-08-12 23:35:27,652 - agent - INFO - react_agent.py:524 - [trace=cfc56984] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-12 23:35:27,652 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|cfc56984|verify_t] #5 [CHAT_START] (2ms) 直接 LLM 调用, 历史=6条 loop=9616
+2026-08-12 23:35:27,652 - agent - DEBUG - react_agent.py:264 - [trace=cfc56984] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-12 23:35:27,652 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-12 23:35:27,652 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=晚上好, persona=Cyrene, entries=4
+2026-08-12 23:35:27,652 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=None, stage=None, instructions=4, temp=0.50
+2026-08-12 23:35:27,652 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-12 23:35:30,445 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|cfc56984|verify_t] #6 [CHAT_DONE] (2795ms) 响应=77字 耗时=2.8s
+2026-08-12 23:35:30,445 - agent - INFO - react_agent.py:384 - [trace=cfc56984] Chat 完成: 响应长度=77
+2026-08-12 23:35:30,447 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=7
+2026-08-12 23:35:30,447 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=8
+2026-08-12 23:35:30,458 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=verify_t…
+2026-08-12 23:35:30,461 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|cfc56984|verify_t] #7 [PERSIST] (2810ms) session_store=8条 chat_db=8条
+2026-08-12 23:35:30,467 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|cfc56984|verify_t] #8 [EXIT_OK] (2817ms) 总耗时=2817ms
+2026-08-12 23:35:53,026 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 23:35:53,026 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 23:35:53,058 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #1 [ENTER] (0ms) query="我想看点热血新番有推荐嘛" loop=2768
+2026-08-12 23:35:53,058 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #2 [LOAD_HISTORY] (0ms) 8条 [AIMessage=4 HumanMessage=4] ~232tok 4轮 loop=2768
+2026-08-12 23:35:53,059 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 8 条消息, token 估算=232, 轮数=4
+2026-08-12 23:35:53,059 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #3 [TRIM] (1ms) 无需裁剪: 8条 4轮
+2026-08-12 23:35:53,059 - agent - DEBUG - decision_engine.py:158 - [Decision] 话题切换，清除缓存: 我想看点热血新番有推荐嘛
+2026-08-12 23:35:53,060 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #4 [DECISION] (2ms) → AGENT conf=0.95 "agent_keyword:anime" loop=2768
+2026-08-12 23:35:53,060 - agent - INFO - react_agent.py:524 - [trace=5fbf7053] Decision: route=agent conf=0.95 reason=agent_keyword:anime
+2026-08-12 23:35:53,060 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #5 [AGENT_START] (2ms) ReAct 循环, state消息=9条 loop=2768
+2026-08-12 23:35:53,060 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 10→10 条消息, 已注入日期: 2026-08-12 23:35
+2026-08-12 23:35:55,819 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #6 [AGENT_TOOL] (2761ms) 调用工具: rag_summarize
+2026-08-12 23:35:55,820 - agent - INFO - react_agent.py:560 - [trace=5fbf7053] 调用工具: rag_summarize
+2026-08-12 23:35:55,820 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #7 [AGENT_TOOL] (2762ms) 调用工具: get_season_anime
+2026-08-12 23:35:55,821 - agent - INFO - react_agent.py:560 - [trace=5fbf7053] 调用工具: get_season_anime
+2026-08-12 23:35:55,823 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: rag_summarize, args={'query': '热血动画推荐 2026年新番 燃向 战斗'}
+2026-08-12 23:35:55,826 - agent - DEBUG - rag_service.py:57 - [RAG route] Anime 匹配 → anime + faq
+2026-08-12 23:35:55,823 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: get_season_anime, args={'season_url': 'https://yuc.wiki/202607/'}
+2026-08-12 23:35:55,930 - agent - INFO - bm25.py:257 - [ChineseBM25] 索引已加载: D:\develop\PythonStudy\MutiRoleAgent\chroma_db\bm25_anime.pkl (423 docs)
+2026-08-12 23:35:56,851 - agent - DEBUG - hybrid_retriever.py:147 - [HybridRetriever:anime] 向量检索: 10 条
+2026-08-12 23:35:56,855 - agent - DEBUG - hybrid_retriever.py:169 - [HybridRetriever:anime] BM25 检索: 10 条
+2026-08-12 23:35:57,579 - agent - DEBUG - hybrid_retriever.py:147 - [HybridRetriever:faq] 向量检索: 0 条
+2026-08-12 23:35:57,579 - agent - INFO - rag_service.py:126 - [RAG] 检索完成: query='热血动画推荐 2026年新番 燃向 战斗', collections=['anime', 'faq'], docs=3
+2026-08-12 23:35:58,494 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: get_season_anime
+2026-08-12 23:35:59,917 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: rag_summarize
+2026-08-12 23:35:59,919 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #8 [AGENT_TOOL_DONE] (6861ms) 工具完成: get_season_anime 结果=8111字
+2026-08-12 23:35:59,919 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 13→13 条消息, 已注入日期: 2026-08-12 23:35
+2026-08-12 23:36:04,282 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #9 [AGENT_TOOL] (11224ms) 调用工具: search_anime
+2026-08-12 23:36:04,283 - agent - INFO - react_agent.py:560 - [trace=5fbf7053] 调用工具: search_anime
+2026-08-12 23:36:04,283 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #10 [AGENT_TOOL] (11225ms) 调用工具: search_anime
+2026-08-12 23:36:04,284 - agent - INFO - react_agent.py:560 - [trace=5fbf7053] 调用工具: search_anime
+2026-08-12 23:36:04,286 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #11 [AGENT_TOOL] (11228ms) 调用工具: search_anime
+2026-08-12 23:36:04,286 - agent - INFO - react_agent.py:560 - [trace=5fbf7053] 调用工具: search_anime
+2026-08-12 23:36:04,286 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #12 [AGENT_TOOL] (11228ms) 调用工具: search_anime
+2026-08-12 23:36:04,287 - agent - INFO - react_agent.py:560 - [trace=5fbf7053] 调用工具: search_anime
+2026-08-12 23:36:04,288 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '死神 千年血战篇'}
+2026-08-12 23:36:04,290 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '刃牙道'}
+2026-08-12 23:36:04,290 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '暗黑灯火 BLACK TORCH'}
+2026-08-12 23:36:04,292 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '炎之斗球女 弹子'}
+2026-08-12 23:36:06,834 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:36:06,964 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:36:07,025 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:36:07,197 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:36:07,198 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #13 [AGENT_TOOL_DONE] (14141ms) 工具完成: search_anime 结果=2136字
+2026-08-12 23:36:07,198 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 18→18 条消息, 已注入日期: 2026-08-12 23:36
+2026-08-12 23:36:10,839 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #14 [AGENT_TOOL] (17781ms) 调用工具: search_anime
+2026-08-12 23:36:10,839 - agent - INFO - react_agent.py:560 - [trace=5fbf7053] 调用工具: search_anime
+2026-08-12 23:36:10,839 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #15 [AGENT_TOOL] (17781ms) 调用工具: search_anime
+2026-08-12 23:36:10,840 - agent - INFO - react_agent.py:560 - [trace=5fbf7053] 调用工具: search_anime
+2026-08-12 23:36:10,842 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '新 攻壳机动队 THE GHOST IN THE SHELL'}
+2026-08-12 23:36:10,843 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '魔神坛斗士 铠真传'}
+2026-08-12 23:36:12,558 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:36:12,980 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:36:12,981 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #16 [AGENT_TOOL_DONE] (19923ms) 工具完成: search_anime 结果=2249字
+2026-08-12 23:36:12,981 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 21→21 条消息, 已注入日期: 2026-08-12 23:36
+2026-08-12 23:36:28,664 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #17 [AGENT_DONE] (35606ms) 响应=2436字 tokens={'input_tokens': 37401, 'output_tokens': 3282, 'total_tokens': 40683} 耗时=35.6s
+2026-08-12 23:36:28,664 - agent - INFO - react_agent.py:597 - [trace=5fbf7053] 完成: tokens={'input_tokens': 37401, 'output_tokens': 3282, 'total_tokens': 40683}, 响应长度=2436
+2026-08-12 23:36:28,664 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=9
+2026-08-12 23:36:28,664 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=10
+2026-08-12 23:36:28,664 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=verify_t…
+2026-08-12 23:36:28,664 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #18 [PERSIST] (35606ms) session_store=10条 chat_db=10条
+2026-08-12 23:36:28,682 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|5fbf7053|verify_t] #19 [EXIT_OK] (35624ms) 总耗时=35624ms
+2026-08-12 23:46:10,724 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 23:46:10,727 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 23:46:10,763 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #1 [ENTER] (0ms) query="那有恋爱番推荐嘛" loop=8512
+2026-08-12 23:46:10,769 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #2 [LOAD_HISTORY] (6ms) 10条 [AIMessage=5 HumanMessage=5] ~1326tok 5轮 loop=8512
+2026-08-12 23:46:10,771 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 10 条消息, token 估算=1326, 轮数=5
+2026-08-12 23:46:10,771 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #3 [TRIM] (8ms) 无需裁剪: 10条 5轮
+2026-08-12 23:46:10,771 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #4 [DECISION] (8ms) → AGENT conf=0.95 "agent_keyword:anime" loop=8512
+2026-08-12 23:46:10,771 - agent - INFO - react_agent.py:524 - [trace=72f1035b] Decision: route=agent conf=0.95 reason=agent_keyword:anime
+2026-08-12 23:46:10,771 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #5 [AGENT_START] (8ms) ReAct 循环, state消息=11条 loop=8512
+2026-08-12 23:46:10,776 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 12→12 条消息, 已注入日期: 2026-08-12 23:46
+2026-08-12 23:46:12,911 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #6 [AGENT_TOOL] (2148ms) 调用工具: rag_summarize
+2026-08-12 23:46:12,912 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: rag_summarize
+2026-08-12 23:46:12,912 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #7 [AGENT_TOOL] (2149ms) 调用工具: search_anime
+2026-08-12 23:46:12,913 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: search_anime
+2026-08-12 23:46:12,915 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: rag_summarize, args={'query': '恋爱番推荐 高分恋爱动漫'}
+2026-08-12 23:46:12,917 - agent - DEBUG - rag_service.py:57 - [RAG route] Anime 匹配 → anime + faq
+2026-08-12 23:46:12,916 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '恋爱'}
+2026-08-12 23:46:13,629 - agent - DEBUG - hybrid_retriever.py:147 - [HybridRetriever:anime] 向量检索: 10 条
+2026-08-12 23:46:13,632 - agent - DEBUG - hybrid_retriever.py:169 - [HybridRetriever:anime] BM25 检索: 10 条
+2026-08-12 23:46:14,279 - agent - DEBUG - hybrid_retriever.py:147 - [HybridRetriever:faq] 向量检索: 0 条
+2026-08-12 23:46:14,279 - agent - INFO - rag_service.py:126 - [RAG] 检索完成: query='恋爱番推荐 高分恋爱动漫', collections=['anime', 'faq'], docs=3
+2026-08-12 23:46:16,558 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: rag_summarize
+2026-08-12 23:46:17,149 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:46:17,151 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #8 [AGENT_TOOL_DONE] (6388ms) 工具完成: search_anime 结果=2037字
+2026-08-12 23:46:17,151 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 15→15 条消息, 已注入日期: 2026-08-12 23:46
+2026-08-12 23:46:19,591 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #9 [AGENT_TOOL] (8828ms) 调用工具: search_anime
+2026-08-12 23:46:19,592 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: search_anime
+2026-08-12 23:46:19,592 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #10 [AGENT_TOOL] (8829ms) 调用工具: search_anime
+2026-08-12 23:46:19,593 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: search_anime
+2026-08-12 23:46:19,596 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '恋爱喜剧'}
+2026-08-12 23:46:19,596 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '校园恋爱'}
+2026-08-12 23:46:24,146 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:46:37,801 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:46:37,802 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #11 [AGENT_TOOL_DONE] (27039ms) 工具完成: search_anime 结果=2158字
+2026-08-12 23:46:37,802 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 18→18 条消息, 已注入日期: 2026-08-12 23:46
+2026-08-12 23:46:40,249 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #12 [AGENT_TOOL] (29487ms) 调用工具: search_anime
+2026-08-12 23:46:40,250 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: search_anime
+2026-08-12 23:46:40,250 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #13 [AGENT_TOOL] (29488ms) 调用工具: search_anime
+2026-08-12 23:46:40,250 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: search_anime
+2026-08-12 23:46:40,251 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #14 [AGENT_TOOL] (29489ms) 调用工具: search_anime
+2026-08-12 23:46:40,252 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: search_anime
+2026-08-12 23:46:40,254 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '辉夜大小姐想让我告白'}
+2026-08-12 23:46:40,254 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '堀与宫村'}
+2026-08-12 23:46:40,256 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '好想告诉你'}
+2026-08-12 23:46:42,904 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:46:42,921 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:46:47,156 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:46:47,157 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #15 [AGENT_TOOL_DONE] (36395ms) 工具完成: search_anime 结果=2266字
+2026-08-12 23:46:47,157 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 22→22 条消息, 已注入日期: 2026-08-12 23:46
+2026-08-12 23:46:50,896 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #16 [AGENT_TOOL] (40133ms) 调用工具: search_anime
+2026-08-12 23:46:50,896 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: search_anime
+2026-08-12 23:46:50,897 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #17 [AGENT_TOOL] (40133ms) 调用工具: search_anime
+2026-08-12 23:46:50,897 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: search_anime
+2026-08-12 23:46:50,900 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '龙与虎'}
+2026-08-12 23:46:50,901 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '四月是你的谎言'}
+2026-08-12 23:46:53,345 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:46:53,832 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:46:53,833 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #18 [AGENT_TOOL_DONE] (43071ms) 工具完成: search_anime 结果=2315字
+2026-08-12 23:46:53,833 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 25→25 条消息, 已注入日期: 2026-08-12 23:46
+2026-08-12 23:47:00,617 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #19 [AGENT_TOOL] (49854ms) 调用工具: fetch_anime
+2026-08-12 23:47:00,617 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: fetch_anime
+2026-08-12 23:47:00,617 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #20 [AGENT_TOOL] (49854ms) 调用工具: fetch_anime
+2026-08-12 23:47:00,618 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: fetch_anime
+2026-08-12 23:47:00,618 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #21 [AGENT_TOOL] (49855ms) 调用工具: fetch_anime
+2026-08-12 23:47:00,619 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: fetch_anime
+2026-08-12 23:47:00,619 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #22 [AGENT_TOOL] (49856ms) 调用工具: fetch_anime
+2026-08-12 23:47:00,619 - agent - INFO - react_agent.py:560 - [trace=72f1035b] 调用工具: fetch_anime
+2026-08-12 23:47:00,621 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: fetch_anime, args={'url': 'https://bangumi.lol/subject/565802'}
+2026-08-12 23:47:00,621 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: fetch_anime, args={'url': 'https://bangumi.lol/subject/100444'}
+2026-08-12 23:47:00,622 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: fetch_anime, args={'url': 'https://bangumi.lol/subject/909'}
+2026-08-12 23:47:00,623 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: fetch_anime, args={'url': 'https://bangumi.lol/subject/2790'}
+2026-08-12 23:47:03,199 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: fetch_anime
+2026-08-12 23:47:05,768 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: fetch_anime
+2026-08-12 23:47:07,072 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: fetch_anime
+2026-08-12 23:47:07,471 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: fetch_anime
+2026-08-12 23:47:07,472 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #23 [AGENT_TOOL_DONE] (56709ms) 工具完成: fetch_anime 结果=5343字
+2026-08-12 23:47:07,473 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 30→30 条消息, 已注入日期: 2026-08-12 23:47
+2026-08-12 23:47:23,394 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #24 [AGENT_DONE] (72630ms) 响应=2537字 tokens={'input_tokens': 69354, 'output_tokens': 3729, 'total_tokens': 73083} 耗时=72.6s
+2026-08-12 23:47:23,394 - agent - INFO - react_agent.py:597 - [trace=72f1035b] 完成: tokens={'input_tokens': 69354, 'output_tokens': 3729, 'total_tokens': 73083}, 响应长度=2537
+2026-08-12 23:47:23,394 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=11
+2026-08-12 23:47:23,394 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=12
+2026-08-12 23:47:23,404 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=verify_t…
+2026-08-12 23:47:23,408 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #25 [PERSIST] (72645ms) session_store=12条 chat_db=12条
+2026-08-12 23:47:23,419 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|72f1035b|verify_t] #26 [EXIT_OK] (72656ms) 总耗时=72656ms
+2026-08-12 23:47:58,885 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 23:47:58,885 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 23:47:58,931 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #1 [ENTER] (0ms) query="有今年的嘛？" loop=8864
+2026-08-12 23:47:58,932 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #2 [LOAD_HISTORY] (1ms) 12条 [AIMessage=6 HumanMessage=6] ~2547tok 6轮 loop=8864
+2026-08-12 23:47:58,935 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 12 条消息, token 估算=2547, 轮数=6
+2026-08-12 23:47:58,935 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #3 [TRIM] (4ms) 无需裁剪: 12条 6轮
+2026-08-12 23:47:58,936 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #4 [DECISION] (5ms) → AGENT conf=0.80 "cita_needs_tool" loop=8864
+2026-08-12 23:47:58,936 - agent - INFO - react_agent.py:524 - [trace=ac99f4ce] Decision: route=agent conf=0.80 reason=cita_needs_tool
+2026-08-12 23:47:58,937 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #5 [AGENT_START] (6ms) ReAct 循环, state消息=13条 loop=8864
+2026-08-12 23:47:58,942 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 14→14 条消息, 已注入日期: 2026-08-12 23:47
+2026-08-12 23:48:03,048 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #6 [AGENT_TOOL] (4117ms) 调用工具: get_season_anime
+2026-08-12 23:48:03,049 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: get_season_anime
+2026-08-12 23:48:03,049 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #7 [AGENT_TOOL] (4118ms) 调用工具: get_season_anime
+2026-08-12 23:48:03,050 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: get_season_anime
+2026-08-12 23:48:03,051 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #8 [AGENT_TOOL] (4120ms) 调用工具: get_season_anime
+2026-08-12 23:48:03,051 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: get_season_anime
+2026-08-12 23:48:03,053 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: get_season_anime, args={'season_url': 'https://yuc.wiki/202601/'}
+2026-08-12 23:48:03,055 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: get_season_anime, args={'season_url': 'https://yuc.wiki/202604/'}
+2026-08-12 23:48:03,057 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: get_season_anime, args={'season_url': 'https://yuc.wiki/202607/'}
+2026-08-12 23:48:05,568 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: get_season_anime
+2026-08-12 23:48:06,386 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: get_season_anime
+2026-08-12 23:48:06,607 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: get_season_anime
+2026-08-12 23:48:06,608 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #9 [AGENT_TOOL_DONE] (7677ms) 工具完成: get_season_anime 结果=8111字
+2026-08-12 23:48:06,608 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 18→18 条消息, 已注入日期: 2026-08-12 23:48
+2026-08-12 23:48:17,858 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #10 [AGENT_TOOL] (18927ms) 调用工具: search_anime
+2026-08-12 23:48:17,859 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: search_anime
+2026-08-12 23:48:17,859 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #11 [AGENT_TOOL] (18928ms) 调用工具: search_anime
+2026-08-12 23:48:17,860 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: search_anime
+2026-08-12 23:48:17,860 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #12 [AGENT_TOOL] (18929ms) 调用工具: search_anime
+2026-08-12 23:48:17,861 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: search_anime
+2026-08-12 23:48:17,861 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #13 [AGENT_TOOL] (18930ms) 调用工具: search_anime
+2026-08-12 23:48:17,863 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: search_anime
+2026-08-12 23:48:17,863 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #14 [AGENT_TOOL] (18932ms) 调用工具: search_anime
+2026-08-12 23:48:17,864 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: search_anime
+2026-08-12 23:48:17,865 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #15 [AGENT_TOOL] (18934ms) 调用工具: search_anime
+2026-08-12 23:48:17,865 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: search_anime
+2026-08-12 23:48:17,865 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #16 [AGENT_TOOL] (18934ms) 调用工具: search_anime
+2026-08-12 23:48:17,866 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: search_anime
+2026-08-12 23:48:17,866 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #17 [AGENT_TOOL] (18935ms) 调用工具: search_anime
+2026-08-12 23:48:17,866 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: search_anime
+2026-08-12 23:48:17,866 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #18 [AGENT_TOOL] (18935ms) 调用工具: search_anime
+2026-08-12 23:48:17,867 - agent - INFO - react_agent.py:560 - [trace=ac99f4ce] 调用工具: search_anime
+2026-08-12 23:48:17,868 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '终究、与你相恋'}
+2026-08-12 23:48:17,870 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '相反的你和我'}
+2026-08-12 23:48:17,871 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '皎洁深宵之月'}
+2026-08-12 23:48:17,872 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '租借女友'}
+2026-08-12 23:48:17,875 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '花样少年少女'}
+2026-08-12 23:48:17,875 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '超超超超喜欢你的100个女孩子'}
+2026-08-12 23:48:17,875 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '天是红河岸'}
+2026-08-12 23:48:17,894 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '摩绪 MAO'}
+2026-08-12 23:48:17,900 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: search_anime, args={'keyword': '再见 拉拉'}
+2026-08-12 23:48:21,590 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:48:21,681 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:48:21,984 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:48:22,065 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:48:22,558 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:48:22,599 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:48:24,019 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:48:24,374 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:48:27,371 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: search_anime
+2026-08-12 23:48:27,372 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #19 [AGENT_TOOL_DONE] (28441ms) 工具完成: search_anime 结果=2300字
+2026-08-12 23:48:27,372 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 28→28 条消息, 已注入日期: 2026-08-12 23:48
+2026-08-12 23:48:50,077 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #20 [AGENT_DONE] (51146ms) 响应=2887字 tokens={'input_tokens': 51022, 'output_tokens': 4938, 'total_tokens': 55960} 耗时=51.1s
+2026-08-12 23:48:50,078 - agent - INFO - react_agent.py:597 - [trace=ac99f4ce] 完成: tokens={'input_tokens': 51022, 'output_tokens': 4938, 'total_tokens': 55960}, 响应长度=2887
+2026-08-12 23:48:50,078 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=13
+2026-08-12 23:48:50,079 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=14
+2026-08-12 23:48:50,084 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=verify_t…
+2026-08-12 23:48:50,086 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #21 [PERSIST] (51155ms) session_store=14条 chat_db=14条
+2026-08-12 23:48:50,096 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ac99f4ce|verify_t] #22 [EXIT_OK] (51165ms) 总耗时=51165ms
+2026-08-12 23:49:29,540 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-12 23:49:29,544 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-12 23:49:29,550 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-12 23:49:29,650 - agent - INFO - app.py:117 - [app] 从 SQLite 恢复 14 条消息: session=verify_test…

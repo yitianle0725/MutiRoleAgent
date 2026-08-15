@@ -25,6 +25,7 @@ _WEBSEARCH_MCP_URL = os.getenv(
     "https://dashscope.aliyuncs.com/api/v1/mcps/WebSearch/mcp",
 )
 _WEBSEARCH_MCP_KEY = os.getenv("WEBSEARCH_MCP_KEY") or _API_KEY
+_AMAP_MCP_URL = os.getenv("AMAP_MCP_URL", "https://dashscope.aliyuncs.com/api/v1/mcps/amap-maps/mcp")
 
 
 class McpManager:
@@ -49,7 +50,7 @@ class McpManager:
         self._server_tools: dict[str, list[BaseTool]] = {}
         self._initialized = True
 
-        # MCP 服务器配置（通过环境变量可切换为自建服务）
+# MCP 服务器配置（通过环境变量可切换为自建服务）
         if _WEBSEARCH_MCP_KEY:
             self.mcp_config = {
                 "websearch": {
@@ -66,6 +67,13 @@ class McpManager:
             )
 
     # ==================== 连接与加载 ====================
+
+        if _API_KEY:
+            self.mcp_config["amap"] = {
+                "transport": "streamable-http",
+                "url": _AMAP_MCP_URL,
+                "headers": {"Authorization": f"Bearer {_API_KEY}"},
+            }
 
     async def _build_client(self) -> MultiServerMCPClient:
         if self._client is None:

@@ -21,6 +21,7 @@ ReAct Agent 主控制器
 """
 
 import asyncio
+import os
 import threading
 import uuid
 from langchain.agents import create_agent
@@ -96,6 +97,14 @@ class ReactAgent:
         """
         # 拉取 MCP 工具（天气/定位已改用高德 Web API 本地工具，仅 websearch 走 MCP）
         weather_mcp_tools = [maps_weather]
+        if os.getenv("DASHSCOPE_API_KEY"):
+            try:
+                amap_tools = await mcp_manager.get_domain_tools("amap")
+                if amap_tools:
+                    weather_mcp_tools = amap_tools
+                    print(f"[init_agent] DashScope AMap MCP tools loaded: {len(amap_tools)}")
+            except Exception as e:
+                print(f"[init_agent] AMap MCP failed, using local weather fallback: {e}")
         location_mcp_tools = [maps_ip_location]
         websearch_mcp_tools: list = []
         try:

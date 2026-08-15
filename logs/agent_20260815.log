@@ -1,0 +1,6 @@
+2026-08-15 13:22:15,627 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-15 13:22:16,341 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 13:22:16,342 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 13:24:30,530 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-15 13:24:30,577 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 13:24:30,578 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
