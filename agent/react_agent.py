@@ -23,6 +23,7 @@ ReAct Agent 主控制器
 import asyncio
 import os
 import threading
+import time
 import uuid
 from langchain.agents import create_agent
 from langchain_core.messages import AIMessage, ToolMessage, HumanMessage, SystemMessage
@@ -32,8 +33,9 @@ from utils.config_handler import agent_config
 from utils.logger_handler import logger
 from utils.prompt_loader import load_system_prompts
 from utils.session_store import session_store
-from utils.context_trimmer import trim_history, history_stats
+from utils.context_trimmer import trim_history, history_stats, estimate_tokens
 from utils.conversation_tracer import ConversationTracer
+from utils.performance_monitor import PerformanceMonitor
 from db.chat_db import chat_db
 from agent.agent_state import create_agent_state
 from agent.stream_events import TextChunk, ToolEvent, StructuredData
@@ -57,6 +59,27 @@ TRIM_MAX_TOKENS = _TRIM_CFG.get("trim_max_tokens", 6000)
 TRIM_MAX_ROUNDS = _TRIM_CFG.get("trim_max_rounds", 15)
 LLM_TURN_TIMEOUT = float(_TRIM_CFG.get("llm_turn_timeout", 90))
 TURN_QUEUE_TIMEOUT = float(_TRIM_CFG.get("turn_queue_timeout", 5))
+
+
+def _usage_value(usage: dict, names: set[str]) -> int:
+    """Read provider-specific cache fields from nested usage metadata."""
+    if not isinstance(usage, dict):
+        return 0
+    total = 0
+    for key, value in usage.items():
+        if key in names and isinstance(value, (int, float)):
+            total += int(value)
+        elif isinstance(value, dict):
+            total += _usage_value(value, names)
+    return total
+
+
+def _cache_read_tokens(usage: dict) -> int:
+    return _usage_value(usage, {"cache_read", "cache_read_input_tokens", "cached_tokens"})
+
+
+def _cache_input_tokens(usage: dict) -> int:
+    return _usage_value(usage, {"input_tokens", "prompt_tokens"})
 
 
 class ReactAgent:
@@ -85,6 +108,7 @@ class ReactAgent:
         self.user_id = user_id
         self.default_persona = default_persona
         self._turn_lock = threading.Lock()
+        self.performance_monitor = PerformanceMonitor()
         self.agent = None            # LangGraph 编译后的图
         self._initialized = False    # 是否已完成异步初始化
 
@@ -375,12 +399,25 @@ class ReactAgent:
 
         # 直接 LLM 流式调用（无工具）
         response_chunks: list[str] = []
+        llm_started_at = time.perf_counter()
         try:
             async for chunk in chat_model.astream(messages):
                 content = self._extract_content(chunk)
+                usage = getattr(chunk, "usage_metadata", None)
+                if usage:
+                    self.performance_monitor.record_llm_call(
+                        0.0,
+                        usage.get("input_tokens", 0),
+                        usage.get("output_tokens", 0),
+                        _cache_read_tokens(usage),
+                        _cache_input_tokens(usage),
+                    )
                 if content:
                     response_chunks.append(content)
                     yield TextChunk(content=content)
+            self.performance_monitor.record_llm_call(
+                time.perf_counter() - llm_started_at
+            )
         except Exception as e:
             logger.error(f"[trace={trace_id}] Chat 路径异常: {e}", exc_info=True)
             yield TextChunk(content=f"\n\n⚠️ 处理请求时发生错误（{type(e).__name__}），请重试。")
@@ -467,6 +504,7 @@ class ReactAgent:
             "decision_chat_count": decision_stats.get("chat", 0),
             "decision_agent_count": decision_stats.get("agent", 0),
             "decision_chat_ratio": decision_stats.get("chat_ratio", 0),
+            "performance": self.performance_monitor.snapshot(),
         }
 
     # ==================== 核心执行 ====================
@@ -482,13 +520,19 @@ class ReactAgent:
             return
 
         try:
+            self.performance_monitor.start_turn()
             async with asyncio.timeout(LLM_TURN_TIMEOUT):
                 async for event in self._execute_stream_locked(query):
+                    if isinstance(event, TextChunk):
+                        self.performance_monitor.record_visible_text(
+                            estimate_tokens(event.content)
+                        )
                     yield event
         except TimeoutError:
             logger.warning("[ReactAgent] Turn timed out after %.0f seconds", LLM_TURN_TIMEOUT)
             yield TextChunk(content="\n\n请求超时，请稍后重试。")
         finally:
+            self.performance_monitor.finish_turn()
             self._turn_lock.release()
 
     async def _execute_stream_locked(self, query: str):
@@ -556,14 +600,20 @@ class ReactAgent:
         # ---- 3) 流式执行 + 事件分类 ----
         response_chunks: list[str] = []
         token_stats = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}
+        last_graph_event_at = time.perf_counter()
         try:
             async for chunk in self.agent.astream(state, stream_mode="values"):
+                now = time.perf_counter()
                 latest_msg = chunk["messages"][-1]
 
                 # —— AI 消息：可能含 tool_calls 和/或 文本 ——
                 if isinstance(latest_msg, AIMessage):
+                    self.performance_monitor.record_llm_call(
+                        now - last_graph_event_at
+                    )
                     # 3a) 工具调用事件
                     if latest_msg.tool_calls:
+                        self.performance_monitor.record_step(len(latest_msg.tool_calls))
                         for tc in latest_msg.tool_calls:
                             tracer.agent_tool_call(tc["name"])
                             logger.info(f"[trace={trace_id}] 调用工具: {tc['name']}")
@@ -579,6 +629,13 @@ class ReactAgent:
                         token_stats["input_tokens"] += usage.get("input_tokens", 0)
                         token_stats["output_tokens"] += usage.get("output_tokens", 0)
                         token_stats["total_tokens"] += usage.get("total_tokens", 0)
+                        self.performance_monitor.record_llm_call(
+                            0.0,
+                            usage.get("input_tokens", 0),
+                            usage.get("output_tokens", 0),
+                            _cache_read_tokens(usage),
+                            _cache_input_tokens(usage),
+                        )
 
                     # 3c) 文字内容
                     content = self._extract_content(latest_msg)
@@ -588,6 +645,9 @@ class ReactAgent:
 
                 # —— Tool 消息：工具返回结果 ——
                 elif isinstance(latest_msg, ToolMessage):
+                    self.performance_monitor.record_tool_call(
+                        now - last_graph_event_at
+                    )
                     result_text = self._extract_content(latest_msg)
                     tool_name = getattr(latest_msg, "name", "unknown")
                     tracer.agent_tool_done(tool_name, len(result_text))
@@ -599,6 +659,8 @@ class ReactAgent:
                             else result_text
                         ),
                     )
+
+                last_graph_event_at = now
 
             # ---- 4) 持久化本轮对话（内存 + SQLite 双写） ----
             full_response = "".join(response_chunks)

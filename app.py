@@ -186,6 +186,29 @@ with st.sidebar:
         st.metric("LLM 消耗 Token", info["llm_total_tokens"])
     if info.get("last_turn_tokens", 0) > 0:
         st.caption(f"上轮消耗: {info['last_turn_tokens']} tokens")
+    performance = info.get("performance")
+    if performance is not None:
+        cache_text = (
+            f"{performance.cache_hit_rate:.0%}"
+            if performance.cache_hit_rate is not None
+            else "N/A"
+        )
+        ttft_text = (
+            f"{performance.ttft_seconds:.2f}s"
+            if performance.ttft_seconds is not None
+            else "N/A"
+        )
+        st.caption(
+            "Agent 性能\n"
+            f"{performance.task_rounds} 轮 · {performance.execution_steps} 步 | "
+            f"LLM {performance.llm_duration_seconds:.1f}s · "
+            f"工具调用 {performance.tool_duration_seconds:.1f}s |\n"
+            f"首 token 平均 {ttft_text} · "
+            f"输出 {performance.output_tokens_per_second:.1f} tok/s |\n"
+            f"缓存命中 {cache_text} |\n"
+            f"输入 {performance.input_tokens:,} tok · "
+            f"输出 {performance.output_tokens:,} tok"
+        )
 
     st.divider()
 

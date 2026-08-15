@@ -4,3 +4,131 @@
 2026-08-15 13:24:30,530 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
 2026-08-15 13:24:30,577 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
 2026-08-15 13:24:30,578 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 13:25:29,400 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-15 13:25:29,926 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 13:25:29,926 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 13:26:37,470 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-15 13:26:37,518 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 13:26:37,519 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 13:26:39,654 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-15 13:26:41,649 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-15 13:26:41,652 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 43 个工具，无移除
+2026-08-15 13:26:41,653 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-15 13:26:41,702 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-15 13:26:41,764 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-15 13:26:41,765 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=1
+2026-08-15 13:26:41,765 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=2
+2026-08-15 13:26:41,765 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=3
+2026-08-15 13:26:41,765 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=4
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=5
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=6
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=7
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=8
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=9
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=10
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=11
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=12
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=13
+2026-08-15 13:26:41,766 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=14
+2026-08-15 13:26:41,767 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=verify_t… 共 14 条消息
+2026-08-15 13:26:41,767 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=verify_test…, size=1/32
+2026-08-15 13:26:41,770 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-15 13:26:42,535 - agent - INFO - app.py:117 - [app] 从 SQLite 恢复 14 条消息: session=verify_test…
+2026-08-15 13:26:51,346 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 13:26:51,346 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 13:26:51,356 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 43 个工具，无移除
+2026-08-15 13:26:51,358 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-15 13:26:51,358 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-15 13:26:51,371 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-15 13:26:51,379 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=21a4a482-f08…, size=2/32
+2026-08-15 13:26:51,663 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 13:26:51,664 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 13:26:56,957 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 13:26:56,957 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 13:26:56,991 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|835c5022|21a4a482] #1 [ENTER] (0ms) query="你好" loop=5728
+2026-08-15 13:26:56,991 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|835c5022|21a4a482] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=5728
+2026-08-15 13:26:56,991 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|835c5022|21a4a482] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-15 13:26:56,992 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|835c5022|21a4a482] #4 [DECISION] (1ms) → CHAT conf=0.95 "chat_signal:greetings" loop=5728
+2026-08-15 13:26:56,992 - agent - INFO - react_agent.py:533 - [trace=835c5022] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-15 13:26:56,992 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|835c5022|21a4a482] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=5728
+2026-08-15 13:26:56,994 - agent - DEBUG - react_agent.py:273 - [trace=835c5022] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-15 13:26:57,115 - agent - INFO - soul_loader.py:194 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 1536 字符, 6 段落
+2026-08-15 13:26:57,118 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-15 13:26:57,146 - agent - DEBUG - worldbook_retriever.py:170 - [WorldbookRetriever] 检索: query=你好, persona=Cyrene, entries=4
+2026-08-15 13:26:57,147 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=['polite'], stage=None, instructions=4, temp=0.50
+2026-08-15 13:26:57,147 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=4条, tone=4条指令, prompt_len=3342字符
+2026-08-15 13:26:59,412 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|835c5022|21a4a482] #6 [CHAT_DONE] (2421ms) 响应=95字 耗时=2.4s
+2026-08-15 13:26:59,412 - agent - INFO - react_agent.py:393 - [trace=835c5022] Chat 完成: 响应长度=95
+2026-08-15 13:26:59,412 - agent - DEBUG - session_store.py:75 - [SessionStore] session=21a4a482-f089-46d0-8d4e-c33cb4247917 +1 msg (HumanMessage), total=1
+2026-08-15 13:26:59,413 - agent - DEBUG - session_store.py:75 - [SessionStore] session=21a4a482-f089-46d0-8d4e-c33cb4247917 +1 msg (AIMessage), total=2
+2026-08-15 13:26:59,421 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=21a4a482…
+2026-08-15 13:26:59,424 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|835c5022|21a4a482] #7 [PERSIST] (2432ms) session_store=2条 chat_db=2条
+2026-08-15 13:26:59,440 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|835c5022|21a4a482] #8 [EXIT_OK] (2449ms) 总耗时=2449ms
+2026-08-15 13:27:06,910 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 13:27:06,910 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 13:27:06,945 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #1 [ENTER] (0ms) query="能告诉我今天的天气如何嘛" loop=3184
+2026-08-15 13:27:06,946 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #2 [LOAD_HISTORY] (1ms) 2条 [AIMessage=1 HumanMessage=1] ~61tok 1轮 loop=3184
+2026-08-15 13:27:06,946 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #3 [TRIM] (1ms) 无需裁剪: 2条 1轮
+2026-08-15 13:27:06,947 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #4 [DECISION] (2ms) → AGENT conf=0.95 "agent_keyword:weather" loop=3184
+2026-08-15 13:27:06,947 - agent - INFO - react_agent.py:533 - [trace=a5419cb8] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-15 13:27:06,947 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #5 [AGENT_START] (2ms) ReAct 循环, state消息=3条 loop=3184
+2026-08-15 13:27:06,950 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-15 13:27
+2026-08-15 13:27:08,562 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #6 [AGENT_TOOL] (1617ms) 调用工具: get_public_ip
+2026-08-15 13:27:08,562 - agent - INFO - react_agent.py:569 - [trace=a5419cb8] 调用工具: get_public_ip
+2026-08-15 13:27:08,564 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: get_public_ip, args={}
+2026-08-15 13:27:08,564 - agent - DEBUG - execution_policy.py:214 - [Exec Policy] 未知工具 get_public_ip 不在 Schema 注册表中，宽松通过
+2026-08-15 13:27:09,162 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: get_public_ip
+2026-08-15 13:27:09,163 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #7 [AGENT_TOOL_DONE] (2218ms) 工具完成: get_public_ip 结果=11字
+2026-08-15 13:27:09,164 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-15 13:27
+2026-08-15 13:27:10,473 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #8 [AGENT_TOOL] (3528ms) 调用工具: maps_ip_location
+2026-08-15 13:27:10,474 - agent - INFO - react_agent.py:569 - [trace=a5419cb8] 调用工具: maps_ip_location
+2026-08-15 13:27:10,475 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: maps_ip_location, args={'ip': '221.4.34.92'}
+2026-08-15 13:27:11,528 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: maps_ip_location
+2026-08-15 13:27:11,529 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #9 [AGENT_TOOL_DONE] (4584ms) 工具完成: maps_ip_location 结果=110字
+2026-08-15 13:27:11,530 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 8→8 条消息, 已注入日期: 2026-08-15 13:27
+2026-08-15 13:27:12,732 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #10 [AGENT_TOOL] (5787ms) 调用工具: maps_weather
+2026-08-15 13:27:12,733 - agent - INFO - react_agent.py:569 - [trace=a5419cb8] 调用工具: maps_weather
+2026-08-15 13:27:12,735 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: maps_weather, args={'city': '广州市'}
+2026-08-15 13:27:13,870 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: maps_weather
+2026-08-15 13:27:13,872 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #11 [AGENT_TOOL_DONE] (6927ms) 工具完成: maps_weather 结果=901字
+2026-08-15 13:27:13,873 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 10→10 条消息, 已注入日期: 2026-08-15 13:27
+2026-08-15 13:27:17,282 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #12 [AGENT_DONE] (10337ms) 响应=304字 tokens={'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0} 耗时=10.3s
+2026-08-15 13:27:17,282 - agent - INFO - react_agent.py:606 - [trace=a5419cb8] 完成: tokens={'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0}, 响应长度=304
+2026-08-15 13:27:17,283 - agent - DEBUG - session_store.py:75 - [SessionStore] session=21a4a482-f089-46d0-8d4e-c33cb4247917 +1 msg (HumanMessage), total=3
+2026-08-15 13:27:17,283 - agent - DEBUG - session_store.py:75 - [SessionStore] session=21a4a482-f089-46d0-8d4e-c33cb4247917 +1 msg (AIMessage), total=4
+2026-08-15 13:27:17,348 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=21a4a482…
+2026-08-15 13:27:17,354 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #13 [PERSIST] (10409ms) session_store=4条 chat_db=4条
+2026-08-15 13:27:17,425 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|a5419cb8|21a4a482] #14 [EXIT_OK] (10480ms) 总耗时=10480ms
+2026-08-15 13:28:01,988 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 13:28:01,989 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 13:28:02,040 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #1 [ENTER] (0ms) query="这一周内，有什么新番更新嘛" loop=8976
+2026-08-15 13:28:02,040 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #2 [LOAD_HISTORY] (0ms) 4条 [AIMessage=2 HumanMessage=2] ~200tok 2轮 loop=8976
+2026-08-15 13:28:02,040 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 4 条消息, token 估算=200, 轮数=2
+2026-08-15 13:28:02,041 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #3 [TRIM] (1ms) 无需裁剪: 4条 2轮
+2026-08-15 13:28:02,041 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #4 [DECISION] (1ms) → AGENT conf=0.95 "agent_keyword:anime" loop=8976
+2026-08-15 13:28:02,041 - agent - INFO - react_agent.py:533 - [trace=ad6f8de7] Decision: route=agent conf=0.95 reason=agent_keyword:anime
+2026-08-15 13:28:02,042 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #5 [AGENT_START] (2ms) ReAct 循环, state消息=5条 loop=8976
+2026-08-15 13:28:02,045 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-15 13:28
+2026-08-15 13:28:04,256 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #6 [AGENT_TOOL] (2216ms) 调用工具: get_season_anime
+2026-08-15 13:28:04,256 - agent - INFO - react_agent.py:569 - [trace=ad6f8de7] 调用工具: get_season_anime
+2026-08-15 13:28:04,258 - agent - INFO - unified_middleware.py:71 - [middleware] 执行工具: get_season_anime, args={'season_url': 'https://yuc.wiki/202607/'}
+2026-08-15 13:28:06,549 - agent - INFO - unified_middleware.py:94 - [middleware] 工具完成: get_season_anime
+2026-08-15 13:28:06,550 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #7 [AGENT_TOOL_DONE] (4510ms) 工具完成: get_season_anime 结果=8111字
+2026-08-15 13:28:06,551 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 8→8 条消息, 已注入日期: 2026-08-15 13:28
+2026-08-15 13:28:27,661 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #8 [AGENT_DONE] (25621ms) 响应=2362字 tokens={'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0} 耗时=25.6s
+2026-08-15 13:28:27,663 - agent - INFO - react_agent.py:606 - [trace=ad6f8de7] 完成: tokens={'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0}, 响应长度=2362
+2026-08-15 13:28:27,664 - agent - DEBUG - session_store.py:75 - [SessionStore] session=21a4a482-f089-46d0-8d4e-c33cb4247917 +1 msg (HumanMessage), total=5
+2026-08-15 13:28:27,664 - agent - DEBUG - session_store.py:75 - [SessionStore] session=21a4a482-f089-46d0-8d4e-c33cb4247917 +1 msg (AIMessage), total=6
+2026-08-15 13:28:27,680 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=21a4a482…
+2026-08-15 13:28:27,731 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #9 [PERSIST] (25691ms) session_store=6条 chat_db=6条
+2026-08-15 13:28:27,747 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|ad6f8de7|21a4a482] #10 [EXIT_OK] (25707ms) 总耗时=25707ms
+2026-08-15 14:19:04,095 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 14:19:04,097 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 14:49:46,275 - agent - DEBUG - validator.py:166 - [StructuredOutput] 校验失败: schema=, errors=1
+2026-08-15 14:49:46,275 - agent - DEBUG - validator.py:166 - [StructuredOutput] 校验失败: schema=, errors=1
+2026-08-15 14:49:46,275 - agent - INFO - injector.py:186 - [StructuredOutput] 注入 JSON 指令: skill=recommend-anime, schema=anime_recommendation, len=258
+2026-08-15 14:49:46,276 - agent - DEBUG - injector.py:182 - [StructuredOutput] Skill 'unknown-skill' 无 output_schema，跳过注入
+2026-08-15 14:49:46,276 - agent - INFO - pipeline.py:152 - [Pipeline] 结构化输出成功: skill=recommend-anime, schema=anime_recommendation, formatted_len=47
+2026-08-15 14:49:46,276 - agent - DEBUG - pipeline.py:119 - [Pipeline] 未找到 JSON: skill=recommend-anime, response_len=5
+2026-08-15 14:49:46,276 - agent - DEBUG - pipeline.py:110 - [Pipeline] Skill 'unknown-skill' 无 output_schema
+2026-08-15 14:49:46,276 - agent - INFO - pipeline.py:152 - [Pipeline] 结构化输出成功: skill=recommend-anime, schema=anime_recommendation, formatted_len=47
