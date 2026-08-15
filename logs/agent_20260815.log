@@ -132,3 +132,193 @@
 2026-08-15 14:49:46,276 - agent - DEBUG - pipeline.py:119 - [Pipeline] 未找到 JSON: skill=recommend-anime, response_len=5
 2026-08-15 14:49:46,276 - agent - DEBUG - pipeline.py:110 - [Pipeline] Skill 'unknown-skill' 无 output_schema
 2026-08-15 14:49:46,276 - agent - INFO - pipeline.py:152 - [Pipeline] 结构化输出成功: skill=recommend-anime, schema=anime_recommendation, formatted_len=47
+2026-08-15 14:53:22,582 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-15 14:53:23,235 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 14:53:23,236 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 14:53:25,471 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-15 14:53:27,548 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-15 14:53:27,549 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 43 个工具，无移除
+2026-08-15 14:53:27,550 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-15 14:53:27,557 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-15 14:53:27,572 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-15 14:53:27,574 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=1
+2026-08-15 14:53:27,574 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=2
+2026-08-15 14:53:27,574 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=3
+2026-08-15 14:53:27,574 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=4
+2026-08-15 14:53:27,574 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=5
+2026-08-15 14:53:27,574 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=6
+2026-08-15 14:53:27,574 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=7
+2026-08-15 14:53:27,575 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=8
+2026-08-15 14:53:27,575 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=9
+2026-08-15 14:53:27,575 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=10
+2026-08-15 14:53:27,575 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=11
+2026-08-15 14:53:27,575 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=12
+2026-08-15 14:53:27,575 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=13
+2026-08-15 14:53:27,575 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=14
+2026-08-15 14:53:27,575 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=verify_t… 共 14 条消息
+2026-08-15 14:53:27,575 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=verify_test…, size=1/32
+2026-08-15 14:53:27,578 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-15 14:53:27,786 - agent - INFO - app.py:117 - [app] 从 SQLite 恢复 14 条消息: session=verify_test…
+2026-08-15 15:02:32,799 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-15 15:02:32,853 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 15:02:32,854 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 15:02:34,994 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-15 15:02:37,088 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-15 15:02:37,090 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 43 个工具，无移除
+2026-08-15 15:02:37,090 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-15 15:02:37,096 - agent - INFO - composer.py:210 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-15 15:02:37,112 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=1
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=2
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=3
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=4
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=5
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=6
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=7
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=8
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=9
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=10
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=11
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=12
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=13
+2026-08-15 15:02:37,113 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=14
+2026-08-15 15:02:37,113 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=verify_t… 共 14 条消息
+2026-08-15 15:02:37,113 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=verify_test…, size=1/32
+2026-08-15 15:02:37,117 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 2 个 collection
+2026-08-15 15:02:37,278 - agent - INFO - app.py:117 - [app] 从 SQLite 恢复 14 条消息: session=verify_test…
+2026-08-15 15:04:35,142 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 15:04:35,142 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 15:04:35,150 - agent - INFO - session_store.py:96 - [SessionStore] 已清空 session=verify_test
+2026-08-15 15:04:35,163 - agent - INFO - chat_db.py:241 - [ChatDB] 已清空 session=verify_t…
+2026-08-15 15:04:35,164 - agent - DEBUG - manager.py:87 - [AgentCache] evict: session=verify_test…
+2026-08-15 15:04:35,469 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 15:04:35,469 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 15:04:43,261 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 15:04:43,261 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 15:04:43,292 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|10a97eb6|verify_t] #1 [ENTER] (0ms) query="下午好" loop=4592
+2026-08-15 15:04:43,292 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|10a97eb6|verify_t] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=4592
+2026-08-15 15:04:43,292 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|10a97eb6|verify_t] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-15 15:04:43,293 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|10a97eb6|verify_t] #4 [DECISION] (1ms) → AGENT conf=0.30 "fallback_default" loop=4592
+2026-08-15 15:04:43,293 - agent - INFO - react_agent.py:577 - [trace=10a97eb6] Decision: route=agent conf=0.30 reason=fallback_default
+2026-08-15 15:04:43,293 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|10a97eb6|verify_t] #5 [AGENT_START] (1ms) ReAct 循环, state消息=1条 loop=4592
+2026-08-15 15:04:43,294 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 2→2 条消息, 已注入日期: 2026-08-15 15:04
+2026-08-15 15:04:45,016 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|10a97eb6|verify_t] #6 [AGENT_DONE] (1724ms) 响应=59字 tokens={'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0} 耗时=1.7s
+2026-08-15 15:04:45,016 - agent - INFO - react_agent.py:668 - [trace=10a97eb6] 完成: tokens={'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0}, 响应长度=59
+2026-08-15 15:04:45,017 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=1
+2026-08-15 15:04:45,017 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=2
+2026-08-15 15:04:45,028 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=verify_t…
+2026-08-15 15:04:45,032 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|10a97eb6|verify_t] #7 [PERSIST] (1739ms) session_store=2条 chat_db=2条
+2026-08-15 15:04:45,043 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|10a97eb6|verify_t] #8 [EXIT_OK] (1751ms) 总耗时=1751ms
+2026-08-15 15:04:54,501 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 15:04:54,501 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 15:04:54,535 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|920f520b|verify_t] #1 [ENTER] (0ms) query="我想看小说了" loop=5104
+2026-08-15 15:04:54,535 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|920f520b|verify_t] #2 [LOAD_HISTORY] (0ms) 2条 [AIMessage=1 HumanMessage=1] ~42tok 1轮 loop=5104
+2026-08-15 15:04:54,535 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|920f520b|verify_t] #3 [TRIM] (0ms) 无需裁剪: 2条 1轮
+2026-08-15 15:04:54,535 - agent - DEBUG - decision_engine.py:158 - [Decision] 话题切换，清除缓存: 我想看小说了
+2026-08-15 15:04:54,535 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|920f520b|verify_t] #4 [DECISION] (0ms) → AGENT conf=0.95 "agent_keyword:anime" loop=5104
+2026-08-15 15:04:54,535 - agent - INFO - react_agent.py:577 - [trace=920f520b] Decision: route=agent conf=0.95 reason=agent_keyword:anime
+2026-08-15 15:04:54,536 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|920f520b|verify_t] #5 [AGENT_START] (1ms) ReAct 循环, state消息=3条 loop=5104
+2026-08-15 15:04:54,537 - agent - INFO - unified_middleware.py:204 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-15 15:04
+2026-08-15 15:04:56,534 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|920f520b|verify_t] #6 [AGENT_DONE] (1999ms) 响应=114字 tokens={'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0} 耗时=2.0s
+2026-08-15 15:04:56,534 - agent - INFO - react_agent.py:668 - [trace=920f520b] 完成: tokens={'input_tokens': 0, 'output_tokens': 0, 'total_tokens': 0}, 响应长度=114
+2026-08-15 15:04:56,535 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=3
+2026-08-15 15:04:56,535 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=4
+2026-08-15 15:04:56,549 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=verify_t…
+2026-08-15 15:04:56,553 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|920f520b|verify_t] #7 [PERSIST] (2018ms) session_store=4条 chat_db=4条
+2026-08-15 15:04:56,560 - agent - INFO - conversation_tracer.py:104 - [ConvTrace|920f520b|verify_t] #8 [EXIT_OK] (2025ms) 总耗时=2025ms
+2026-08-15 23:08:21,268 - agent - INFO - composer.py:327 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3453 字符
+2026-08-15 23:08:21,275 - agent - INFO - composer.py:327 - [Composer] Prompt 组装完成: persona=✓, style=lively, 总长=15375 字符
+2026-08-15 23:08:21,278 - agent - INFO - composer.py:327 - [Composer] Prompt 组装完成: persona=✓, style=healing, 总长=15706 字符
+2026-08-15 23:08:23,348 - agent - INFO - soul_loader.py:224 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-15 23:08:33,810 - agent - INFO - soul_loader.py:224 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-15 23:08:33,817 - agent - INFO - soul_loader.py:224 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-15 23:08:33,818 - agent - INFO - soul_loader.py:224 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-15 23:08:33,819 - agent - INFO - soul_loader.py:224 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-15 23:08:36,048 - agent - DEBUG - worldbook_retriever.py:397 - [WorldbookRetriever] 已加载角色 worldbook: ye-shunguang (38 条)
+2026-08-15 23:08:36,049 - agent - DEBUG - worldbook_retriever.py:195 - [WorldbookRetriever] 检索: query=推荐几部热血番, persona=Ye Shunguang, entries=2
+2026-08-15 23:08:36,053 - agent - DEBUG - worldbook_retriever.py:397 - [WorldbookRetriever] 已加载角色 worldbook: cyrene (61 条)
+2026-08-15 23:08:36,053 - agent - DEBUG - worldbook_retriever.py:195 - [WorldbookRetriever] 检索: query=Cyrene 是什么角色？, persona=Cyrene, entries=5
+2026-08-15 23:08:36,053 - agent - DEBUG - worldbook_retriever.py:195 - [WorldbookRetriever] 检索: query=什么是新番？怎么看评分？, persona=None, entries=1
+2026-08-15 23:08:36,056 - agent - DEBUG - worldbook_retriever.py:397 - [WorldbookRetriever] 已加载角色 worldbook: columbina (42 条)
+2026-08-15 23:08:36,056 - agent - DEBUG - worldbook_retriever.py:195 - [WorldbookRetriever] 检索: query=心情不好想看点治愈的, persona=Columbina, entries=1
+2026-08-15 23:08:36,056 - agent - DEBUG - worldbook_retriever.py:195 - [WorldbookRetriever] 检索: query=介绍一下世界观, persona=None, entries=1
+2026-08-15 23:08:36,056 - agent - DEBUG - worldbook_retriever.py:195 - [WorldbookRetriever] 检索: query=推荐几部热血番, persona=Ye Shunguang, entries=2
+2026-08-15 23:09:31,914 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: ye-shunguang (38 条)
+2026-08-15 23:09:31,915 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=推荐几部热血番, persona=Ye Shunguang, entries=2
+2026-08-15 23:09:31,918 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: cyrene (61 条)
+2026-08-15 23:09:31,918 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=Cyrene 是什么角色？, persona=Cyrene, entries=5
+2026-08-15 23:09:31,919 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=什么是新番？怎么看评分？, persona=None, entries=1
+2026-08-15 23:09:31,922 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: columbina (42 条)
+2026-08-15 23:09:31,922 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=心情不好想看点治愈的, persona=Columbina, entries=1
+2026-08-15 23:09:31,922 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=介绍一下世界观, persona=None, entries=1
+2026-08-15 23:09:31,922 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=推荐几部热血番, persona=Ye Shunguang, entries=2
+2026-08-15 23:09:41,474 - agent - INFO - soul_loader.py:224 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-15 23:09:41,474 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=healing (source=emotion, reason=悲伤时先治愈安抚，再尝试用活泼转换心情)
+2026-08-15 23:09:41,478 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: cyrene (61 条)
+2026-08-15 23:09:41,480 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=我今天心情不太好, persona=Cyrene, entries=5
+2026-08-15 23:09:41,480 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=healing, emotions=['sad'], stage=None, instructions=6, temp=0.30
+2026-08-15 23:09:41,480 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=healing, worldbook=5条, tone=6条指令, prompt_len=3805字符
+2026-08-15 23:09:41,481 - agent - INFO - soul_loader.py:224 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-15 23:09:41,482 - agent - INFO - soul_loader.py:224 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-15 23:09:41,482 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Ye Shunguang, 风格=lively (source=emotion, reason=开心时一起分享热情)
+2026-08-15 23:09:41,485 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: ye-shunguang (38 条)
+2026-08-15 23:09:41,485 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=推荐几部热血番给我！, persona=Ye Shunguang, entries=3
+2026-08-15 23:09:41,485 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Ye Shunguang, style=lively, emotions=['happy'], stage=None, instructions=6, temp=0.90
+2026-08-15 23:09:41,485 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Ye Shunguang, style=lively, worldbook=3条, tone=6条指令, prompt_len=3080字符
+2026-08-15 23:09:41,486 - agent - INFO - soul_loader.py:224 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-15 23:09:41,487 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Zhuang Fangyi, 风格=focused (source=topic, reason=深度分析需要严谨专业)
+2026-08-15 23:09:41,490 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: zhuang-fangyi (43 条)
+2026-08-15 23:09:41,490 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=帮我分析一下进击的巨人的制作水准, persona=Zhuang Fangyi, entries=2
+2026-08-15 23:09:41,490 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Zhuang Fangyi, style=focused, emotions=[], stage=None, instructions=5, temp=0.30
+2026-08-15 23:09:41,490 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Zhuang Fangyi, style=focused, worldbook=2条, tone=5条指令, prompt_len=2481字符
+2026-08-15 23:09:41,491 - agent - DEBUG - engine.py:170 - [PersonaEngine] 无角色模式，跳过处理
+2026-08-15 23:10:10,523 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-15 23:10:10,523 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=healing (source=emotion, reason=悲伤时先治愈安抚，再尝试用活泼转换心情)
+2026-08-15 23:10:10,527 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: cyrene (61 条)
+2026-08-15 23:10:10,528 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=我今天心情不太好, persona=Cyrene, entries=5
+2026-08-15 23:10:10,528 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=healing, emotions=['sad'], stage=None, instructions=6, temp=0.30
+2026-08-15 23:10:10,529 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=healing, worldbook=5条, tone=6条指令, prompt_len=11932字符
+2026-08-15 23:10:10,530 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-15 23:10:10,531 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-15 23:10:10,531 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Ye Shunguang, 风格=lively (source=emotion, reason=开心时一起分享热情)
+2026-08-15 23:10:10,534 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: ye-shunguang (38 条)
+2026-08-15 23:10:10,534 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=推荐几部热血番给我！, persona=Ye Shunguang, entries=3
+2026-08-15 23:10:10,534 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Ye Shunguang, style=lively, emotions=['happy'], stage=None, instructions=6, temp=0.90
+2026-08-15 23:10:10,534 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Ye Shunguang, style=lively, worldbook=3条, tone=6条指令, prompt_len=10911字符
+2026-08-15 23:10:10,536 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-15 23:10:10,536 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Zhuang Fangyi, 风格=focused (source=topic, reason=深度分析需要严谨专业)
+2026-08-15 23:10:10,538 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: zhuang-fangyi (43 条)
+2026-08-15 23:10:10,539 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=帮我分析一下进击的巨人的制作水准, persona=Zhuang Fangyi, entries=2
+2026-08-15 23:10:10,539 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Zhuang Fangyi, style=focused, emotions=[], stage=None, instructions=5, temp=0.30
+2026-08-15 23:10:10,539 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Zhuang Fangyi, style=focused, worldbook=2条, tone=5条指令, prompt_len=9655字符
+2026-08-15 23:10:10,539 - agent - DEBUG - engine.py:170 - [PersonaEngine] 无角色模式，跳过处理
+2026-08-15 23:10:17,778 - agent - INFO - persona_loader.py:234 - [PersonaLoader] 已加载角色卡: Cyrene (sections=['_preamble', '1. Profile & Identity', '2. Appearance', '3. Personality', '4. Intimacy & Sexual Behavior', '5. Background Story', '6. Dialogue & Speech Patterns', '7. Roleplay Guidelines (System Prompt for AI)'])
+2026-08-15 23:10:17,778 - agent - INFO - persona_loader.py:330 - [init_default_personas] 已加载 1 张角色卡: ['Cyrene']
+2026-08-15 23:10:17,785 - agent - INFO - persona_loader.py:167 - [PersonaLoader] 从 roles/Cyrene 加载角色灵魂 (V2)
+2026-08-15 23:10:17,785 - agent - INFO - persona_loader.py:167 - [PersonaLoader] 从 roles/Columbina 加载角色灵魂 (V2)
+2026-08-15 23:10:17,786 - agent - INFO - persona_loader.py:167 - [PersonaLoader] 从 roles/Ye Shunguang 加载角色灵魂 (V2)
+2026-08-15 23:10:17,786 - agent - INFO - persona_loader.py:167 - [PersonaLoader] 从 roles/Zhuang Fangyi 加载角色灵魂 (V2)
+2026-08-15 23:10:37,671 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3453 字符
+2026-08-15 23:10:37,685 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✓, style=lively, 总长=15375 字符
+2026-08-15 23:10:37,690 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✓, style=healing, 总长=15706 字符
+2026-08-15 23:10:38,106 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-15 23:10:38,106 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=healing (source=emotion, reason=悲伤时先治愈安抚，再尝试用活泼转换心情)
+2026-08-15 23:10:38,111 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: cyrene (61 条)
+2026-08-15 23:10:38,113 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=我今天心情不太好, persona=Cyrene, entries=5
+2026-08-15 23:10:38,113 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=healing, emotions=['sad'], stage=None, instructions=6, temp=0.30
+2026-08-15 23:10:38,113 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=healing, worldbook=5条, tone=6条指令, prompt_len=11932字符
+2026-08-15 23:10:38,114 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-15 23:10:38,117 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-15 23:10:38,117 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Ye Shunguang, 风格=lively (source=emotion, reason=开心时一起分享热情)
+2026-08-15 23:10:38,121 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: ye-shunguang (38 条)
+2026-08-15 23:10:38,122 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=推荐几部热血番给我！, persona=Ye Shunguang, entries=3
+2026-08-15 23:10:38,122 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Ye Shunguang, style=lively, emotions=['happy'], stage=None, instructions=6, temp=0.90
+2026-08-15 23:10:38,123 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Ye Shunguang, style=lively, worldbook=3条, tone=6条指令, prompt_len=10911字符
+2026-08-15 23:10:38,125 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-15 23:10:38,125 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Zhuang Fangyi, 风格=focused (source=topic, reason=深度分析需要严谨专业)
+2026-08-15 23:10:38,134 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: zhuang-fangyi (43 条)
+2026-08-15 23:10:38,135 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=帮我分析一下进击的巨人的制作水准, persona=Zhuang Fangyi, entries=2
+2026-08-15 23:10:38,135 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Zhuang Fangyi, style=focused, emotions=[], stage=None, instructions=5, temp=0.30
+2026-08-15 23:10:38,135 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Zhuang Fangyi, style=focused, worldbook=2条, tone=5条指令, prompt_len=9655字符
+2026-08-15 23:10:38,135 - agent - DEBUG - engine.py:170 - [PersonaEngine] 无角色模式，跳过处理
+2026-08-15 23:10:38,519 - agent - INFO - persona_loader.py:167 - [PersonaLoader] 从 roles/Cyrene 加载角色灵魂 (V2)

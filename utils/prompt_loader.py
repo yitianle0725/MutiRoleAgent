@@ -94,7 +94,7 @@ def compose_persona_prompt(
 
     Args:
         persona_name: 角色名（如 "Cyrene"）。
-        style: 语气风格（default / lively / healing / serious）。
+        style: 语气风格（default / lively / healing / focused / sweet）。
         skills_summary: Skill 摘要文本。
     """
     try:

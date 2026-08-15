@@ -105,8 +105,19 @@ class StylePicker:
 
     # 可用风格列表
     AVAILABLE_STYLES = list(_STYLES_CFG.keys()) if _STYLES_CFG else [
-        "default", "lively", "healing", "serious",
+        "default", "lively", "healing", "focused", "sweet",
     ]
+
+    # 旧风格名 → 新风格名兼容映射（serious 已更名为 focused）
+    _STYLE_ALIASES: dict[str, str] = {
+        "serious": "focused",
+    }
+
+    def _normalize(self, style: str | None) -> str | None:
+        """将旧风格名映射到新风格名。"""
+        if style:
+            return self._STYLE_ALIASES.get(style, style)
+        return style
 
     def pick(
         self,
@@ -131,6 +142,7 @@ class StylePicker:
             StyleSelection 包含选中的风格及理由。
         """
         # ---- Level 1: 手动指定 ----
+        manual_style = self._normalize(manual_style)
         if manual_style and manual_style in self.AVAILABLE_STYLES:
             return self._make_selection(
                 manual_style, 1.0, f"用户手动选择: {manual_style}", "manual"
@@ -189,7 +201,7 @@ class StylePicker:
         if not mapping:
             return None
 
-        style = mapping.get("primary", "default")
+        style = self._normalize(mapping.get("primary", "default"))
         reason = mapping.get("reason", f"用户情绪 {primary_emotion}")
 
         # 检查角色的最佳风格中是否包含映射风格
@@ -214,7 +226,7 @@ class StylePicker:
         if not mapping:
             return None
 
-        style = mapping.get("primary", "default")
+        style = self._normalize(mapping.get("primary", "default"))
         reason = mapping.get("reason", f"话题 {topic}")
 
         # 检查角色兼容性

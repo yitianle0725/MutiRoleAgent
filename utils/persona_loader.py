@@ -3,7 +3,7 @@
 ==============
 双模式加载角色人设：
 
-- **新模式 (V2)**：从 ``prompts/soul/*.md`` 加载角色灵魂文件（推荐）
+- **新模式 (V2)**：从 ``prompts/roles/{slug}/soul/*.md`` 加载角色灵魂文件（推荐）
 - **旧模式 (V1)**：从 ``prompts/character_*.json`` 加载 Chara Card V2 JSON
 
 设计原则
@@ -149,7 +149,7 @@ class PersonaLoader:
     # ---- 加载 ----
 
     def load_soul_md(self, persona_name: str) -> str | None:
-        """从 ``prompts/soul/`` 加载角色灵魂 .md 文件（V2 新架构）。
+        """从 ``prompts/roles/{slug}/soul/`` 加载角色灵魂 .md 文件（V2 新架构）。
 
         优先使用此方法获取角色人设——.md 文件比 JSON 更易于编辑和维护。
 
@@ -164,7 +164,7 @@ class PersonaLoader:
         # 先尝试 composer 的 soul 加载
         soul_content = _load_soul(persona_name)
         if soul_content:
-            logger.info(f"[PersonaLoader] 从 soul/{persona_name} 加载角色灵魂 (V2)")
+            logger.info(f"[PersonaLoader] 从 roles/{persona_name} 加载角色灵魂 (V2)")
             return soul_content
 
         # fallback: 尝试从旧的 PersonaCard 构建
@@ -284,7 +284,7 @@ def load_persona_overlay(persona_name: str) -> str:
     if not persona_name or persona_name.lower() == "none":
         return ""
 
-    # V2 优先级: soul/*.md
+    # V2 优先级: roles/{slug}/soul/*.md
     soul_md = persona_loader.load_soul_md(persona_name)
     if soul_md:
         return soul_md

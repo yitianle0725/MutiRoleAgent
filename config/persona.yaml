@@ -1,9 +1,11 @@
 # ==================== Persona 角色系统配置 ====================
 # Phase 4: 从 "Prompt 覆盖" 升级为 "角色引擎"
+# 角色包位于 prompts/roles/{slug}/（soul + styles + worldbook）
 
 # ---- 角色定义 ----
 characters:
   Cyrene:
+    slug: "cyrene"
     display_name: "昔涟"
     soul_file: "cyrene.md"
     tags: [温柔, 浪漫, 诗意, 治愈]
@@ -11,24 +13,27 @@ characters:
     emoji: "🌸"
     description: "温柔浪漫的记忆之花，适合推荐恋爱番、治愈番、需要安慰时"
   Columbina:
+    slug: "columbina"
     display_name: "哥伦比娜"
     soul_file: "columbina.md"
     tags: [安静, 纯真, 直率, 倾听]
-    best_styles: [default, healing, serious]
+    best_styles: [default, healing, focused]
     emoji: "🌙"
     description: "纯真安静的三重月神，适合安静陪伴、倾听烦恼"
   Ye Shunguang:
+    slug: "ye-shunguang"
     display_name: "叶瞬光"
     soul_file: "ye-shunguang.md"
     tags: [热血, 自律, 温柔, 鼓励]
-    best_styles: [default, lively, serious]
+    best_styles: [default, lively, focused]
     emoji: "⚔️"
     description: "自律温柔的狐族剑士，适合热血番推荐、需要鼓励时"
   Zhuang Fangyi:
+    slug: "zhuang-fangyi"
     display_name: "庄芳怡"
     soul_file: "zhuang-fangyi.md"
     tags: [冷静, 高效, 专业, 毒舌]
-    best_styles: [default, serious]
+    best_styles: [default, focused]
     emoji: "🦄"
     description: "冷静高效的麒麟行政官，适合深度分析、效率推荐"
 
@@ -49,10 +54,15 @@ styles:
     description: "温柔安抚，适合情绪低落时"
     temperature: 0.4
     verbosity: 0.4
-  serious:
+  focused:
     display_name: "认真"
-    description: "冷静专业，适合深度分析"
+    description: "知性专注，适合深度分析"
     temperature: 0.3
+    verbosity: 0.6
+  sweet:
+    display_name: "撒娇"
+    description: "撒娇黏人，适合亲密互动"
+    temperature: 0.6
     verbosity: 0.6
 
 # ---- 情绪 → 风格自动映射 ----
@@ -63,12 +73,12 @@ emotion_style_map:
     secondary: default
     reason: "用户愤怒时需要温柔安抚"
   urgent:
-    primary: serious
+    primary: focused
     secondary: default
     reason: "紧急情况需要高效回应"
   confused:
     primary: default
-    secondary: serious
+    secondary: focused
     reason: "困惑时需要清晰解释"
   polite:
     primary: lively
@@ -110,13 +120,13 @@ topic_style_map:
     primary: lively
     reason: "动漫推荐适合活泼热情的语气"
   anime_analysis:
-    primary: serious
+    primary: focused
     reason: "深度分析需要严谨专业"
   weather:
     primary: default
     reason: "天气查询保持中性温和"
   tech_support:
-    primary: serious
+    primary: focused
     reason: "技术支持需要清晰准确"
   casual_chat:
     primary: default
@@ -125,7 +135,7 @@ topic_style_map:
     primary: healing
     reason: "情感支持需要温柔治愈"
   file_operation:
-    primary: serious
+    primary: focused
     reason: "文件操作需要专业认真"
 
 # ---- 跨角色切换 ----
@@ -171,18 +181,14 @@ worldbook:
   max_entries: 5
   # 每条条目的最大字符数
   max_entry_chars: 500
-  # 关键词索引（worldbook section → keywords）
-  # 格式: {文件名: {条目标题: [关键词列表]}}
+  # 共享层关键词索引（prompts/roles/_shared/worldbook/ 文件 → 节标题 → 关键词）
+  # 格式: {文件名: {节标题: [关键词列表]}}
   keyword_index:
     world:
-      跨次元助手空间: [世界观, 跨次元, 助手空间, 空间规则, 核心使命]
-      角色来源表: [来源, 作品, 原作, 崩坏, 原神, 绝区零, 明日方舟]
+      助手世界观: [世界观, 跨次元, 助手空间, 空间规则, 核心使命]
+      角色来源: [来源, 作品, 原作, 崩坏, 原神, 绝区零, 明日方舟]
     characters:
-      Cyrene: [Cyrene, 昔涟, 粉红, 妖精, 记忆之花, 浪漫, 治愈番]
-      Columbina: [Columbina, 哥伦比娜, 月神, 少女, 安静, 倾听]
-      叶瞬光: [叶瞬光, 瞬光, 狐族, 剑士, 热血, 鼓励]
-      庄方宜: [庄芳怡, 庄方宜, 方宜, 麒麟, 行政官, 冷静, 高效, 毒舌]
-      角色关系: [关系, 亲近, 同事, 互动]
+      四位助手: [Cyrene, 昔涟, Columbina, 哥伦比娜, 叶瞬光, 庄方宜, 角色介绍]
+      角色间关系: [关系, 亲近, 同事, 互动]
     glossary:
-      番剧术语: [番剧, 新番, 季番, 年番, 剧场版, OVA, 声优, bangumi]
-      推荐术语: [评分, 排名, 制作公司, 轻改, 漫改, 原创]
+      动漫相关: [番剧, 新番, 季番, 年番, 剧场版, OVA, 声优, bangumi, 评分, 排名]

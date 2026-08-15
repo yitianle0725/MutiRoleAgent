@@ -1,17 +1,24 @@
 """
 世界观知识检索器
 ================
-从 worldbook/*.md 中按需检索相关世界观知识，避免全量注入浪费 Token。
+从 worldbook 中按需检索相关世界观知识，避免全量注入浪费 Token。
+
+数据源
+------
+- **共享层**: ``prompts/roles/_shared/worldbook/{world,characters,glossary}.md``
+  跨角色知识（助手世界观、四位助手、动漫术语），按 ## 标题分节。
+- **角色层**: ``prompts/roles/{slug}/worldbook/*.md``
+  角色专属条目，每条含元数据（触发词/常驻/内在价值/优先级/连带触发词）。
 
 检索策略
 --------
-- **关键词匹配**：对用户查询和上下文进行关键词匹配，找到相关 worldbook 条目
-- **角色关联**：当前角色相关的条目自动包含
+- **角色关联**：当前角色的「常驻」条目自动包含
+- **关键词匹配**：对用户查询匹配共享层索引与角色条目「触发词」
 - **实体触发**：CITA 提取的实体触发相关条目
 
 与 composer.py 的 _load_worldbook() 区别：
-- composer 始终加载**全部** 3 个 worldbook 文件（~3000+ 字符）
-- retriever 仅返回**相关的片段**（通常 < 500 字符）
+- composer 始终加载共享层 3 个文件 + 角色常驻条目
+- retriever 仅返回**相关的片段**（通常 < 500 字符/条）
 
 使用方式::
 
@@ -23,11 +30,12 @@
         persona="Cyrene",
         entities=[Entity(type="character", value="昔涟")],
     )
-    # → 返回 characters.md 中 Cyrene 的条目
+    # → 返回角色常驻条目 + 匹配触发词/关键词的条目
 """
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -47,10 +55,31 @@ def _load_persona_cfg() -> dict:
 
 _PERSONA_CFG = _load_persona_cfg()
 _WB_CFG = _PERSONA_CFG.get("worldbook", {})
+_CHAR_CFG = _PERSONA_CFG.get("characters", {})
 
 # 路径
 _PROMPTS_DIR = Path(__file__).resolve().parent.parent.parent / "prompts"
-_WORLDBOOK_DIR = _PROMPTS_DIR / "worldbook"
+_ROLES_DIR = _PROMPTS_DIR / "roles"
+_SHARED_WB_DIR = _ROLES_DIR / "_shared" / "worldbook"
+
+# 角色 worldbook 条目的元数据行
+_RE_ENTRY_META = {
+    "triggers": re.compile(r"^-\s*触发词[:：]\s*(.*)$"),
+    "resident": re.compile(r"^-\s*常驻[:：]\s*(.*)$"),
+    "value":    re.compile(r"^-\s*内在价值[:：]\s*(.*)$"),
+    "priority": re.compile(r"^-\s*优先级[:：]\s*(.*)$"),
+    "chain":    re.compile(r"^-\s*连带触发词[:：]\s*(.*)$"),
+}
+
+
+def _slug_of(persona: str) -> str:
+    """解析角色包目录名。"""
+    char_cfg = _CHAR_CFG.get(persona, {})
+    slug = char_cfg.get("slug", "")
+    if slug:
+        return slug
+    from prompts.composer import _PERSONA_TO_SLUG
+    return _PERSONA_TO_SLUG.get(persona, "")
 
 
 # ==================== 数据结构 ====================
@@ -58,16 +87,16 @@ _WORLDBOOK_DIR = _PROMPTS_DIR / "worldbook"
 @dataclass
 class WorldbookEntry:
     """世界观知识条目。"""
-    source: str                     # 来源文件（world / characters / glossary）
+    source: str                     # 来源（共享文件名或 "{slug}:{文件名}"）
     title: str                      # 条目标题
     content: str                    # 条目内容
     relevance_score: float = 0.0    # 相关性评分
     match_keywords: list[str] = field(default_factory=list)
 
 
-# ==================== 关键词索引 ====================
+# ==================== 共享层关键词索引 ====================
 
-# 内置关键词索引（worldbook section → keywords）
+# 共享 worldbook 索引（文件名 → {节标题: 关键词}）
 _DEFAULT_KEYWORD_INDEX: dict[str, dict[str, list[str]]] = {
     "world": {
         "项目定位": ["项目", "定位", "MutiRoleAgent", "多角色"],
@@ -80,10 +109,6 @@ _DEFAULT_KEYWORD_INDEX: dict[str, dict[str, list[str]]] = {
     },
     "glossary": {
         "动漫相关": ["新番", "番剧", "季度", "bangumi", "评分", "排名", "季番", "年番", "剧场版", "OVA", "声优", "制作公司", "轻改", "漫改", "原创"],
-        "Cyrene 相关": ["Chrysos", "黄金裔", "Amphoreus", "永恒之地", "Aedes Elysiae", "记忆星神", "Irontomb", "Okhema"],
-        "Columbina 相关": ["Kuuvahki", "月神", "Trilune", "Fatui", "愚人众", "Frost Moon", "Teyvat"],
-        "叶瞬光 相关": ["Thiren", "兽人", "Void Hunter", "虚空猎人", "青冥剑", "Qingming", "云魁峰", "Hollow", "空洞", "New Eridu", "新艾利都"],
-        "庄方宜 相关": ["麒麟", "Kylin", "Viceroy", "天师", "Tianshi", "Originium", "源石", "Blight", "武陵", "Wuling", "Xiranite"],
     },
 }
 
@@ -91,7 +116,7 @@ _DEFAULT_KEYWORD_INDEX: dict[str, dict[str, list[str]]] = {
 class WorldbookRetriever:
     """世界观知识检索器。
 
-    按相关性从 worldbook 中检索相关条目，
+    按相关性从共享层 + 角色层 worldbook 中检索相关条目，
     仅注入相关的知识片段而非全量 worldbook。
 
     使用示例::
@@ -101,16 +126,17 @@ class WorldbookRetriever:
             query="推荐几部热血番",
             persona="Ye Shunguang",
         )
-        # → 自动包含叶瞬光条目（角色关联）+ 番剧术语条目
+        # → 自动包含叶瞬光常驻条目（角色关联）+ 番剧术语条目
     """
 
     def __init__(self):
-        self._worldbook_dir = _WORLDBOOK_DIR
+        self._shared_wb_dir = _SHARED_WB_DIR
         self._max_entries = _WB_CFG.get("max_entries", 5)
         self._max_entry_chars = _WB_CFG.get("max_entry_chars", 500)
         self._keyword_index = _DEFAULT_KEYWORD_INDEX  # 使用内置索引
-        # 缓存已解析的 worldbook 文件
+        # 缓存：共享 worldbook 文件分节 & 角色 worldbook 条目
         self._parsed_cache: dict[str, dict[str, str]] = {}
+        self._persona_cache: dict[str, list[dict]] = {}
 
     # ==================== 检索主入口 ====================
 
@@ -144,12 +170,12 @@ class WorldbookRetriever:
 
         # 2) 实体匹配
         if entities:
-            entity_entries = self._retrieve_by_entities(entities)
+            entity_entries = self._retrieve_by_entities(entities, persona)
             entries.extend(entity_entries)
 
         # 3) 查询关键词匹配
         if query:
-            query_entries = self._retrieve_by_query(query)
+            query_entries = self._retrieve_by_query(query, persona)
             entries.extend(query_entries)
 
         # 4) 话题匹配
@@ -176,22 +202,37 @@ class WorldbookRetriever:
     # ==================== 各检索方法 ====================
 
     def _retrieve_by_character(self, persona: str) -> list[WorldbookEntry]:
-        """检索角色关联的世界观条目。"""
+        """检索角色关联的世界观条目（常驻条目 + 触发词含角色名的条目）。"""
         entries: list[WorldbookEntry] = []
+        slug = _slug_of(persona)
+        if not slug:
+            return entries
 
-        # 从 characters.md 中提取该角色的条目
-        char_sections = self._load_file_sections("characters")
-        for title, content in char_sections.items():
-            if persona.lower() in title.lower() or persona.lower() in content.lower():
+        name_tokens = {persona.lower(), slug.lower()}
+        display = _CHAR_CFG.get(persona, {}).get("display_name", "")
+        if display:
+            name_tokens.add(display.lower())
+
+        for raw in self._load_persona_entries(slug):
+            if raw["resident"]:
                 entries.append(WorldbookEntry(
-                    source="characters",
-                    title=title,
-                    content=content,
+                    source=raw["source"],
+                    title=raw["title"],
+                    content=raw["content"],
                     relevance_score=0.9,
+                    match_keywords=["常驻"],
+                ))
+            elif any(tok in " ".join(raw["triggers"]).lower() for tok in name_tokens):
+                entries.append(WorldbookEntry(
+                    source=raw["source"],
+                    title=raw["title"],
+                    content=raw["content"],
+                    relevance_score=0.5,
                     match_keywords=[persona],
                 ))
 
-        # 自动包含"角色间关系"条目
+        # 自动包含共享层"角色间关系"条目
+        char_sections = self._load_file_sections("characters")
         if "角色间关系" in char_sections:
             entries.append(WorldbookEntry(
                 source="characters",
@@ -203,7 +244,9 @@ class WorldbookRetriever:
 
         return entries
 
-    def _retrieve_by_entities(self, entities: list) -> list[WorldbookEntry]:
+    def _retrieve_by_entities(
+        self, entities: list, persona: str | None = None
+    ) -> list[WorldbookEntry]:
         """检索实体关联的世界观条目。"""
         entries: list[WorldbookEntry] = []
         entity_values = [
@@ -211,13 +254,11 @@ class WorldbookRetriever:
             for e in entities
         ]
 
+        # 共享层
         for source_name in ["characters", "glossary", "world"]:
             sections = self._load_file_sections(source_name)
             for title, content in sections.items():
-                matched = [
-                    ev for ev in entity_values
-                    if ev in title or ev in content
-                ]
+                matched = [ev for ev in entity_values if ev in title or ev in content]
                 if matched:
                     entries.append(WorldbookEntry(
                         source=source_name,
@@ -227,16 +268,34 @@ class WorldbookRetriever:
                         match_keywords=matched,
                     ))
 
+        # 角色层
+        if persona:
+            slug = _slug_of(persona)
+            if slug:
+                for raw in self._load_persona_entries(slug):
+                    haystack = raw["title"] + raw["content"] + " ".join(raw["triggers"])
+                    matched = [ev for ev in entity_values if ev in haystack]
+                    if matched:
+                        entries.append(WorldbookEntry(
+                            source=raw["source"],
+                            title=raw["title"],
+                            content=raw["content"],
+                            relevance_score=0.7,
+                            match_keywords=matched,
+                        ))
+
         return entries
 
-    def _retrieve_by_query(self, query: str) -> list[WorldbookEntry]:
-        """通过查询关键词匹配检索条目。"""
+    def _retrieve_by_query(
+        self, query: str, persona: str | None = None
+    ) -> list[WorldbookEntry]:
+        """通过查询关键词匹配检索条目（共享层索引 + 角色条目触发词）。"""
         entries: list[WorldbookEntry] = []
 
+        # 共享层关键词索引
         for source_name, sections_idx in self._keyword_index.items():
             sections = self._load_file_sections(source_name)
             for section_title, keywords in sections_idx.items():
-                # 检查是否有任何关键词匹配
                 matched = [kw for kw in keywords if kw in query]
                 if matched:
                     content = sections.get(section_title, "")
@@ -249,10 +308,25 @@ class WorldbookRetriever:
                             match_keywords=matched,
                         ))
 
+        # 角色层触发词匹配
+        if persona:
+            slug = _slug_of(persona)
+            if slug:
+                for raw in self._load_persona_entries(slug):
+                    matched = [kw for kw in raw["triggers"] if kw and kw in query]
+                    if matched:
+                        entries.append(WorldbookEntry(
+                            source=raw["source"],
+                            title=raw["title"],
+                            content=raw["content"],
+                            relevance_score=0.55 + 0.1 * len(matched),
+                            match_keywords=matched,
+                        ))
+
         return entries
 
     def _retrieve_by_topic(self, topic: str) -> list[WorldbookEntry]:
-        """通过话题标签检索条目。"""
+        """通过话题标签检索共享层条目。"""
         entries: list[WorldbookEntry] = []
 
         # 话题 → worldbook 映射
@@ -282,12 +356,11 @@ class WorldbookRetriever:
     # ==================== 文件加载 ====================
 
     def _load_file_sections(self, name: str) -> dict[str, str]:
-        """加载 worldbook 文件并按 ## 标题拆分为段落。"""
+        """加载共享层 worldbook 文件并按 ## 标题拆分为段落。"""
         if name in self._parsed_cache:
             return self._parsed_cache[name]
 
-        import re
-        filepath = self._worldbook_dir / f"{name}.md"
+        filepath = self._shared_wb_dir / f"{name}.md"
         if not filepath.exists():
             logger.debug(f"[WorldbookRetriever] 文件不存在: {filepath}")
             return {}
@@ -298,7 +371,86 @@ class WorldbookRetriever:
             logger.warning(f"[WorldbookRetriever] 读取失败: {filepath} — {e}")
             return {}
 
-        # 按 ## 标题拆分
+        sections = self._split_sections(text)
+        self._parsed_cache[name] = sections
+        return sections
+
+    def _load_persona_entries(self, slug: str) -> list[dict]:
+        """加载角色 worldbook 全部条目（解析元数据，带缓存）。"""
+        if slug in self._persona_cache:
+            return self._persona_cache[slug]
+
+        wb_dir = _ROLES_DIR / slug / "worldbook"
+        entries: list[dict] = []
+        if not wb_dir.is_dir():
+            logger.debug(f"[WorldbookRetriever] 角色 worldbook 目录不存在: {wb_dir}")
+            self._persona_cache[slug] = entries
+            return entries
+
+        for path in sorted(wb_dir.glob("*.md")):
+            try:
+                text = path.read_text(encoding="utf-8")
+            except OSError as e:
+                logger.warning(f"[WorldbookRetriever] 读取失败: {path} — {e}")
+                continue
+            entries.extend(self._parse_entries(text, f"{slug}:{path.stem}"))
+
+        logger.debug(
+            f"[WorldbookRetriever] 已加载角色 worldbook: {slug} "
+            f"({len(entries)} 条)"
+        )
+        self._persona_cache[slug] = entries
+        return entries
+
+    def _parse_entries(self, text: str, source: str) -> list[dict]:
+        """按 ``## 标题`` 切分文件，解析条目元数据（触发词/常驻/优先级等）。"""
+        chunks = re.split(r"^##\s+(.*?)$", text, flags=re.MULTILINE)
+        entries: list[dict] = []
+        # chunks[0] 为文件前言，之后每两段为 [标题, 正文]
+        for i in range(1, len(chunks), 2):
+            title = chunks[i].strip()
+            body = chunks[i + 1] if (i + 1) < len(chunks) else ""
+            triggers: list[str] = []
+            resident = False
+            priority = 0
+            content_lines: list[str] = []
+            for line in body.splitlines():
+                stripped = line.strip()
+                m = _RE_ENTRY_META["triggers"].match(stripped)
+                if m:
+                    triggers = [t.strip() for t in re.split(r"[,，、]", m.group(1)) if t.strip()]
+                    continue
+                m = _RE_ENTRY_META["resident"].match(stripped)
+                if m:
+                    resident = m.group(1).strip() in ("是", "true", "True", "1", "常驻")
+                    continue
+                m = _RE_ENTRY_META["value"].match(stripped)
+                if m:
+                    continue  # 内在价值仅作标注，不参与检索评分
+                m = _RE_ENTRY_META["priority"].match(stripped)
+                if m:
+                    try:
+                        priority = int(m.group(1).strip())
+                    except ValueError:
+                        pass
+                    continue
+                m = _RE_ENTRY_META["chain"].match(stripped)
+                if m:
+                    continue  # 连带触发词暂不参与检索
+                content_lines.append(line)
+            entries.append({
+                "source": source,
+                "title": title,
+                "triggers": triggers,
+                "resident": resident,
+                "priority": priority,
+                "content": "\n".join(content_lines).strip(),
+            })
+        return entries
+
+    @staticmethod
+    def _split_sections(text: str) -> dict[str, str]:
+        """按 ## 标题拆分 Markdown 文本为段落字典。"""
         sections: dict[str, str] = {}
         pattern = re.compile(r'^##\s+(.*?)$', re.MULTILINE)
         splits = pattern.split(text)
@@ -315,7 +467,6 @@ class WorldbookRetriever:
                 sections[title] = body
             sections["_full"] = text
 
-        self._parsed_cache[name] = sections
         return sections
 
     # ==================== 格式化 ====================
@@ -366,6 +517,7 @@ class WorldbookRetriever:
     def clear_cache(self):
         """清除已解析的文件缓存。"""
         self._parsed_cache.clear()
+        self._persona_cache.clear()
         logger.info("[WorldbookRetriever] 缓存已清除")
 
 

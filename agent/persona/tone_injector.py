@@ -286,7 +286,7 @@ if __name__ == "__main__":
     test_cases = [
         ("Cyrene", "healing", ["sad"], "deep_talk", "emotional_support"),
         ("Ye Shunguang", "lively", ["happy"], "greeting", "anime_recommend"),
-        ("Zhuang Fangyi", "serious", ["urgent"], None, "tech_support"),
+        ("Zhuang Fangyi", "focused", ["urgent"], None, "tech_support"),
         ("Columbina", "default", [], None, "casual_chat"),
     ]
 
