@@ -30,17 +30,12 @@ from langgraph.types import Command
 
 from utils.logger_handler import logger
 from utils.prompt_loader import load_report_prompts, load_system_prompts
-from utils.persona_loader import persona_loader, init_default_personas, load_persona_overlay
+from utils.persona_loader import load_persona_overlay
 from agent.action_gate import action_gate
 from agent.execution_policy import validate_tool_args
 from agent.cita_classifier import classify_intent, build_cita_overlay
 from agent.tool_wrapper import execute_with_safety
 from agent.user_profile_extractor import build_profile_context
-
-
-# ==================== 启动时预加载角色卡 ====================
-
-init_default_personas()
 
 
 # ==================== 工具调用中间件 ====================

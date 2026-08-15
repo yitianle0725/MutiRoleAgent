@@ -19,7 +19,7 @@ from db.chat_db import chat_db
 from agent.knowledge_base import KnowledgeBaseService
 from utils.path_tool import get_abs_path
 from utils.file_handler import txt_loader, pdf_loader, json_loader
-from utils.persona_loader import persona_loader, init_default_personas, ensure_persona_loaded
+from utils.persona_loader import persona_loader
 from utils.logger_handler import logger
 
 # ==================== 页面配置 ====================
@@ -77,7 +77,6 @@ elif "session_id" not in st.session_state:
         st.query_params["session_id"] = new_id
 
 # 预加载角色卡列表
-init_default_personas()
 PERSONA_NAMES = ["（无）"] + persona_loader.available_names
 
 if "user_id" not in st.session_state:
@@ -166,8 +165,6 @@ with st.sidebar:
     if selected_persona != current_persona:
         new_persona = selected_persona if selected_persona != "（无）" else None
         st.session_state["persona"] = new_persona
-        if new_persona:
-            ensure_persona_loaded(new_persona)  # 懒加载
         st.session_state["agent"] = _init_agent_sync(
             current_sid, current_uid,
             default_persona=new_persona,
