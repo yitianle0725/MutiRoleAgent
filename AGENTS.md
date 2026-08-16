@@ -31,3 +31,14 @@
 - 不要在 `async def` 中运行阻塞式 I/O 或 CPU 密集型任务。
 - 使用 `asyncio.to_thread(...)`（必要时使用 executor）将阻塞任务转移出去。
 - 在可能的情况下，保持异步 API 从端到端的一致性。
+
+## Git 与提交规范 (Git & Commit conventions)
+- 每次代码改动后，必须提供建议的 commit 信息。
+- Commit 信息应简洁、准确地描述本次修改内容。
+- 优先使用 Conventional Commits 格式，例如：
+  - `feat: add xxx functionality`（新增功能）
+  - `fix: resolve xxx issue`（修复问题）
+  - `refactor: simplify xxx logic`（重构代码）
+  - `docs: update documentation`（文档修改）
+  - `test: add tests for xxx`（测试相关）
+  - `perf: improve xxx performance`（性能优化）
