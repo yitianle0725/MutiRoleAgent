@@ -18,7 +18,7 @@ SQLite 聊天记录持久化模块
 
 使用方式::
 
-    from db.chat_db import chat_db
+    from memory.chat_db import chat_db
 
     chat_db.init_db()                              # 启动时建表
     chat_db.save_message("abc", "user", "你好")     # 保存用户消息

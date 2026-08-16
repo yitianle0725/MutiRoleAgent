@@ -24,7 +24,7 @@ from agent.cita_classifier import classify_intent, build_cita_overlay
 from agent.cita.semantic import SemanticEngine, SemanticAnalysis
 from agent.cita.budget import TokenBudget, BudgetStatus, estimate_tokens
 from agent.tool_wrapper import execute_with_safety
-from agent.user_profile_extractor import build_profile_context
+from memory.user_profile_extractor import build_profile_context
 
 
 # ==================== 工具分组：按领域动态裁剪 ====================

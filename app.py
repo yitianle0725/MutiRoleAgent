@@ -15,7 +15,7 @@ import streamlit as st
 from agent.react_agent import ReactAgent
 from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_display_name
 from channels.manager import agent_cache
-from db.chat_db import chat_db
+from memory.chat_db import chat_db
 from agent.knowledge_base import KnowledgeBaseService
 from utils.path_tool import get_abs_path
 from utils.file_handler import txt_loader, pdf_loader, json_loader

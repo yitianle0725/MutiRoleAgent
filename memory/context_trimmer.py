@@ -19,7 +19,7 @@
 
 使用方式::
 
-    from utils.context_trimmer import trim_history
+    from memory.context_trimmer import trim_history
 
     trimmed = trim_history(messages, max_tokens=6000, max_rounds=15)
 """

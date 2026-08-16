@@ -5,7 +5,7 @@ Channel 抽象基类
 
 每个 Channel 代表一种用户与 Agent 交互的方式（Streamlit Web UI、FastAPI REST/SSE/WS 等）。
 不同 channel 共享同一套 Agent 实例（通过 ``channels.manager.agent_cache``）、
-数据库（``db.chat_db.chat_db``）和会话存储（``utils.session_store.session_store``）。
+数据库（``memory.chat_db.chat_db``）和会话存储（``memory.session_store.session_store``）。
 
 用法::
 

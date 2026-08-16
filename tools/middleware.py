@@ -35,7 +35,7 @@ from agent.action_gate import action_gate
 from agent.execution_policy import validate_tool_args
 from agent.cita_classifier import classify_intent, build_cita_overlay
 from agent.tool_wrapper import execute_with_safety
-from agent.user_profile_extractor import build_profile_context
+from memory.user_profile_extractor import build_profile_context
 
 
 # ==================== 工具调用中间件 ====================

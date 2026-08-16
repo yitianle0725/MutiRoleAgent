@@ -62,7 +62,7 @@ from agent.react_agent import ReactAgent
 from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_display_name
 from channels.base import Channel
 from channels.manager import agent_cache
-from db.chat_db import chat_db
+from memory.chat_db import chat_db
 from utils.logger_handler import logger
 
 # ==================== Pydantic 模型 ====================
@@ -390,7 +390,7 @@ def _create_app() -> FastAPI:
         agent_cache.evict(session_id)
         # 清理 session_store
         try:
-            from utils.session_store import session_store
+            from memory.session_store import session_store
             session_store.clear(session_id)
         except Exception:
             pass

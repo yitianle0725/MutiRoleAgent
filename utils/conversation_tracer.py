@@ -57,7 +57,7 @@ def _msg_summary(messages: Sequence[BaseMessage]) -> str:
     if not messages:
         return "0条"
 
-    from utils.context_trimmer import estimate_message_tokens
+    from memory.context_trimmer import estimate_message_tokens
 
     types: dict[str, int] = {}
     for m in messages:

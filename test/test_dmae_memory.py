@@ -65,7 +65,7 @@ print("✅ 无关键词默认 → faq")
 # ==================== L0 用户画像测试 ====================
 print("\n=== L0 用户画像测试 ===")
 
-from db.chat_db import chat_db
+from memory.chat_db import chat_db
 chat_db.init_db()
 
 # 写入画像
@@ -93,7 +93,7 @@ assert "强力" in profile2["preferences"]
 print(f"✅ 增量更新: prefs={profile2['preferences']}")
 
 # build_profile_context
-from agent.user_profile_extractor import build_profile_context, _extract_device_model
+from memory.user_profile_extractor import build_profile_context, _extract_device_model
 ctx = build_profile_context("test_user_001")
 assert "石头P10" in ctx
 assert "静音" in ctx

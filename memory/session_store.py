@@ -14,7 +14,7 @@
 
 使用方式::
 
-    from utils.session_store import session_store
+    from memory.session_store import session_store
 
     history = session_store.get_history("session_abc")
     session_store.append("session_abc", msg)

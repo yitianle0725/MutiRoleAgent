@@ -32,16 +32,16 @@ from model.factory import chat_model
 from utils.config_handler import agent_config
 from utils.logger_handler import logger
 from utils.prompt_loader import load_system_prompts
-from utils.session_store import session_store
-from utils.context_trimmer import trim_history, history_stats, estimate_tokens
+from memory.session_store import session_store
+from memory.context_trimmer import trim_history, history_stats, estimate_tokens
 from utils.conversation_tracer import ConversationTracer
 from utils.performance_monitor import PerformanceMonitor
-from db.chat_db import chat_db
+from memory.chat_db import chat_db
 from agent.agent_state import create_agent_state
 from agent.stream_events import TextChunk, ToolEvent, StructuredData
 from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
-from agent.user_profile_extractor import extract_and_save_profile, build_profile_context
+from memory.user_profile_extractor import extract_and_save_profile, build_profile_context
 from agent.cita.semantic import SemanticEngine, SemanticAnalysis
 from tools.agent_tools import (
     search_anime, fetch_anime, get_season_anime,

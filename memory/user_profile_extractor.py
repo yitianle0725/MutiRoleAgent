@@ -12,7 +12,7 @@
 
 使用方式::
 
-    from agent.user_profile_extractor import extract_and_save_profile
+    from memory.user_profile_extractor import extract_and_save_profile
 
     # 在每轮对话后调用（不阻塞主流程）
     await extract_and_save_profile(user_id, user_msg, assistant_msg)
@@ -21,7 +21,7 @@
 import json
 import re
 
-from db.chat_db import chat_db
+from memory.chat_db import chat_db
 from model.factory import chat_model
 from utils.logger_handler import logger
 
