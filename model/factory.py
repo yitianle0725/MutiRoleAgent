@@ -71,6 +71,7 @@ def _create_chat_model() -> ChatOpenAI:
         timeout=_LLM_TIMEOUT,
         max_retries=1,
         streaming=True,
+        stream_usage=True,
     )
 
 

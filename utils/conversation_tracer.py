@@ -82,9 +82,11 @@ class ConversationTracer:
     def __init__(self, session_id: str, trace_id: str):
         self.session_id = session_id
         self.trace_id = trace_id
-        self._t0 = time.time()
+        self._t0 = time.perf_counter()
         self._step_times: dict[str, float] = {}
         self._step_idx = 0
+        self._events: list[dict] = []
+        self._error = ""
 
     # ---- 内部 ----
 
@@ -93,8 +95,16 @@ class ConversationTracer:
         return f"[ConvTrace|{self.trace_id}|{self.session_id[:8]}]"
 
     def _log(self, step: str, detail: str = "", level: str = "info"):
-        elapsed = (time.time() - self._t0) * 1000
+        elapsed = (time.perf_counter() - self._t0) * 1000
         self._step_idx += 1
+        self._events.append(
+            {
+                "index": self._step_idx,
+                "step": step,
+                "elapsed_ms": round(elapsed, 2),
+                "detail": detail,
+            }
+        )
         msg = f"{self._prefix} #{self._step_idx} [{step}] ({elapsed:.0f}ms) {detail}"
         if level == "warn":
             logger.warning(msg)
@@ -104,7 +114,7 @@ class ConversationTracer:
             logger.info(msg)
 
     def _mark(self, name: str):
-        self._step_times[name] = time.time()
+        self._step_times[name] = time.perf_counter()
 
     # ---- 追踪点 ----
 
@@ -195,6 +205,11 @@ class ConversationTracer:
             f"发送 {msg_count} 条消息给 LLM",
         )
 
+    def fail(self, error: str) -> None:
+        """记录已处理异常，供统一出口标记本轮失败。"""
+        self._error = error
+        self._log("FAIL", error, level="error")
+
     def agent_tool_call(self, tool_name: str):
         """Agent 路径：工具调用。"""
         self._log(
@@ -227,7 +242,8 @@ class ConversationTracer:
 
     def exit(self, error: str = ""):
         """出口：记录总耗时或异常。"""
-        total = (time.time() - self._t0) * 1000
+        total = (time.perf_counter() - self._t0) * 1000
+        error = error or self._error
         if error:
             self._log(
                 "EXIT_ERROR",
@@ -251,4 +267,8 @@ class ConversationTracer:
     def _elapsed_since(self, step_name: str) -> float:
         """从某个步骤到现在的耗时（秒）。"""
         t0 = self._step_times.get(step_name, self._t0)
-        return time.time() - t0
+        return time.perf_counter() - t0
+
+    def export_events(self) -> list[dict]:
+        """返回当前轮的结构化事件副本，供监控存储使用。"""
+        return list(self._events)

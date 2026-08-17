@@ -10,12 +10,15 @@ import json
 import asyncio
 import time
 import random
+from pathlib import Path
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from agent.react_agent import ReactAgent
 from agent.stream_events import TextChunk, ToolEvent
 from rag.rag_service import _route_query
+from eval.agent_metrics import evaluate_agent_behavior
+from eval.regression import check_baseline_cases, check_thresholds, combine_regression_checks
 
 
 def load_test_cases(path: str = None) -> list[dict]:
@@ -27,30 +30,40 @@ def load_test_cases(path: str = None) -> list[dict]:
 
 
 async def run_single_case(agent: ReactAgent, case: dict) -> dict:
-    """对单个测试用例跑一次 agent，收集结果。"""
-    query = case["query"]
+    """对单个测试用例跑 agent，支持 ``turns`` 多轮场景。"""
+    queries = case.get("turns") or [case["query"]]
     tools_called = []
     tool_outputs = []
-    answer_parts = []
+    answer_parts: list[str] = []
+    started_at = time.perf_counter()
 
-    try:
-        async for event in agent.execute_stream_async(query):
-            if isinstance(event, TextChunk):
-                answer_parts.append(event.content)
-            elif isinstance(event, ToolEvent):
-                if event.phase == "start":
-                    tools_called.append(event.tool_name)
-                elif event.phase == "end":
-                    tool_outputs.append(event.result_preview)
-    except Exception as e:
-        answer_parts.append(f"[ERROR: {e}]")
+    for query in queries:
+        turn_answer: list[str] = []
+        try:
+            async for event in agent.execute_stream_async(query):
+                if isinstance(event, TextChunk):
+                    turn_answer.append(event.content)
+                elif isinstance(event, ToolEvent):
+                    if event.phase == "start":
+                        tools_called.append(event.tool_name)
+                    elif event.phase == "end":
+                        tool_outputs.append(event.result_preview)
+        except Exception as error:
+            turn_answer.append(f"[ERROR: {error}]")
+        answer_parts = turn_answer
+
+    observation = agent.get_last_turn_observation()
 
     return {
         "id": case["id"],
-        "query": query,
+        "query": queries[-1],
         "answer": "".join(answer_parts),
         "tools_called": tools_called,
         "tool_outputs": tool_outputs,
+        "agent_route": observation["route"],
+        "trace_id": observation["trace_id"],
+        "outcome": observation["outcome"],
+        "duration_ms": round((time.perf_counter() - started_at) * 1000, 2),
     }
 
 
@@ -78,7 +91,7 @@ async def run_all(session_prefix: str = "eval") -> list[dict]:
         # 间隔避免限流
         if i < len(cases) - 1:
             delay = random.uniform(2.0, 4.0)
-            time.sleep(delay)
+            await asyncio.sleep(delay)
 
     return results
 
@@ -96,6 +109,30 @@ def run_and_evaluate():
 
     from eval.metrics import evaluate_all
     report = evaluate_all(cases, _route_query, retriever_fn, results, k=3)
+    report["agent"] = evaluate_agent_behavior(cases, results)
+    threshold_path = Path(__file__).with_name("thresholds.json")
+    baseline_path = Path(__file__).with_name("baseline.json")
+    baseline = check_baseline_cases(cases, baseline_path)
+    thresholds = check_thresholds(report, threshold_path)
+    performance = report["agent"]["performance_constraints"]
+    performance_check = {
+        "passed": performance["passed"],
+        "checks": [
+            {
+                "name": "performance_constraints",
+                "expected": "all performance cases within their limits",
+                "actual": performance["total"] - sum(
+                    item["hit"] for item in performance["details"]
+                ),
+                "passed": performance["passed"],
+            }
+        ],
+    }
+    report["regression"] = combine_regression_checks(
+        baseline,
+        thresholds,
+        performance_check,
+    )
 
     # 保存报告
     output_path = os.path.join(os.path.dirname(__file__), "eval_report.json")
@@ -113,10 +150,14 @@ def run_and_evaluate():
     print(f"Citation Validity:     {s['citation_validity']:.2%}")
     print(f"Abstention Accuracy:   {s['abstention_accuracy']:.2%}")
     print(f"E2E Success Rate:      {s['e2e_success_rate']:.2%}")
+    latency = report["agent"]["latency"]
+    print(f"Agent P95 Latency:     {latency['p95_ms']} ms")
+    print(f"Regression Check:      {'PASS' if report['regression']['passed'] else 'FAIL'}")
     print(f"{'=' * 50}")
 
     return report
 
 
 if __name__ == "__main__":
-    run_and_evaluate()
+    evaluation_report = run_and_evaluate()
+    raise SystemExit(0 if evaluation_report["regression"]["passed"] else 1)

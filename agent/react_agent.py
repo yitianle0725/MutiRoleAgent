@@ -36,6 +36,7 @@ from memory.session_store import session_store
 from memory.context_trimmer import trim_history, history_stats, estimate_tokens
 from utils.conversation_tracer import ConversationTracer
 from utils.performance_monitor import PerformanceMonitor
+from observability.store import monitor_store
 from memory.chat_db import chat_db
 from agent.agent_state import create_agent_state
 from agent.stream_events import TextChunk, ToolEvent, StructuredData
@@ -82,6 +83,46 @@ def _cache_input_tokens(usage: dict) -> int:
     return _usage_value(usage, {"input_tokens", "prompt_tokens"})
 
 
+def _has_usage_field(usage: dict, names: set[str]) -> bool:
+    """Return whether a provider supplied any field from ``names``."""
+    if not isinstance(usage, dict):
+        return False
+    for key, value in usage.items():
+        if key in names and isinstance(value, (int, float)):
+            return True
+        if isinstance(value, dict) and _has_usage_field(value, names):
+            return True
+    return False
+
+
+def _token_usage(message) -> dict[str, int | bool]:
+    """Normalize token usage from LangChain and OpenAI-compatible messages."""
+    usage = getattr(message, "usage_metadata", None)
+    if not isinstance(usage, dict) or not usage:
+        response_metadata = getattr(message, "response_metadata", {})
+        if isinstance(response_metadata, dict):
+            usage = response_metadata.get("token_usage") or response_metadata.get("usage")
+    if not isinstance(usage, dict):
+        usage = {}
+
+    cache_fields = {"cache_read", "cache_read_input_tokens", "cached_tokens"}
+    input_tokens = _usage_value(
+        usage,
+        {"input_tokens", "prompt_tokens", "prompt_token_count"},
+    )
+    return {
+        "input_tokens": input_tokens,
+        "output_tokens": _usage_value(
+            usage,
+            {"output_tokens", "completion_tokens", "completion_token_count"},
+        ),
+        "total_tokens": _usage_value(usage, {"total_tokens", "total_token_count"}),
+        "cache_read_tokens": _cache_read_tokens(usage),
+        "cache_input_tokens": input_tokens,
+        "cache_metrics_available": _has_usage_field(usage, cache_fields),
+    }
+
+
 class ReactAgent:
     """ReAct Agent，封装 LangGraph Agent 图的生命周期。
 
@@ -111,6 +152,11 @@ class ReactAgent:
         self.performance_monitor = PerformanceMonitor()
         self.agent = None            # LangGraph 编译后的图
         self._initialized = False    # 是否已完成异步初始化
+        self._turn_started_at = 0.0
+        self._turn_snapshot_start = None
+        self._current_tracer: ConversationTracer | None = None
+        self._current_route = "unknown"
+        self._current_outcome = "success"
 
     # ==================== 初始化 ====================
 
@@ -400,25 +446,37 @@ class ReactAgent:
         # 直接 LLM 流式调用（无工具）
         response_chunks: list[str] = []
         llm_started_at = time.perf_counter()
+        usage_totals = {
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cache_read_tokens": 0,
+            "cache_input_tokens": 0,
+            "cache_metrics_available": False,
+        }
         try:
             async for chunk in chat_model.astream(messages):
                 content = self._extract_content(chunk)
-                usage = getattr(chunk, "usage_metadata", None)
-                if usage:
-                    self.performance_monitor.record_llm_call(
-                        0.0,
-                        usage.get("input_tokens", 0),
-                        usage.get("output_tokens", 0),
-                        _cache_read_tokens(usage),
-                        _cache_input_tokens(usage),
-                    )
+                usage = _token_usage(chunk)
+                usage_totals["input_tokens"] += usage["input_tokens"]
+                usage_totals["output_tokens"] += usage["output_tokens"]
+                usage_totals["cache_read_tokens"] += usage["cache_read_tokens"]
+                usage_totals["cache_input_tokens"] += usage["cache_input_tokens"]
+                usage_totals["cache_metrics_available"] = (
+                    usage_totals["cache_metrics_available"] or usage["cache_metrics_available"]
+                )
                 if content:
                     response_chunks.append(content)
                     yield TextChunk(content=content)
             self.performance_monitor.record_llm_call(
-                time.perf_counter() - llm_started_at
+                time.perf_counter() - llm_started_at,
+                **usage_totals,
             )
         except Exception as e:
+            self._current_outcome = "error"
+            if tracer:
+                error_text = f"{type(e).__name__}: {e}"
+                tracer.fail(error_text)
+                tracer.exit(error=error_text)
             logger.error(f"[trace={trace_id}] Chat 路径异常: {e}", exc_info=True)
             yield TextChunk(content=f"\n\n⚠️ 处理请求时发生错误（{type(e).__name__}），请重试。")
             return
@@ -507,6 +565,43 @@ class ReactAgent:
             "performance": self.performance_monitor.snapshot(),
         }
 
+    def get_last_turn_observation(self) -> dict:
+        """返回最近一轮的路由和追踪标识，供评测或接口使用。"""
+        return {
+            "trace_id": self._current_tracer.trace_id if self._current_tracer else "",
+            "route": self._current_route,
+            "outcome": self._current_outcome,
+        }
+
+    def _enqueue_turn_observation(self) -> None:
+        """将本轮追踪与增量指标交给后台监控存储。"""
+        tracer = self._current_tracer
+        baseline = self._turn_snapshot_start
+        if tracer is None or baseline is None:
+            return
+
+        current = self.performance_monitor.snapshot()
+        visible_tokens = current.visible_output_tokens - baseline.visible_output_tokens
+        monitor_store.enqueue_turn(
+            {
+                "trace_id": tracer.trace_id,
+                "session_id": self.session_id,
+                "route": self._current_route,
+                "outcome": self._current_outcome,
+                "duration_ms": round((time.perf_counter() - self._turn_started_at) * 1000, 2),
+                "ttft_ms": (
+                    round(current.ttft_seconds * 1000, 2)
+                    if visible_tokens > 0 and current.ttft_seconds is not None
+                    else None
+                ),
+                "input_tokens": current.input_tokens - baseline.input_tokens,
+                "output_tokens": current.output_tokens - baseline.output_tokens,
+                "tool_calls": current.tool_calls - baseline.tool_calls,
+                "error_type": "" if self._current_outcome == "success" else self._current_outcome,
+                "events": tracer.export_events(),
+            }
+        )
+
     # ==================== 核心执行 ====================
 
     async def execute_stream_async(self, query: str):
@@ -516,10 +611,16 @@ class ReactAgent:
         )
         if not acquired:
             logger.warning("[ReactAgent] Overlapping request rejected")
+            self.performance_monitor.record_rejection()
             yield TextChunk(content="\n\n正在处理上一条消息，请等待其完成后再发送。")
             return
 
         try:
+            self._turn_started_at = time.perf_counter()
+            self._turn_snapshot_start = self.performance_monitor.snapshot()
+            self._current_tracer = None
+            self._current_route = "unknown"
+            self._current_outcome = "success"
             self.performance_monitor.start_turn()
             async with asyncio.timeout(LLM_TURN_TIMEOUT):
                 async for event in self._execute_stream_locked(query):
@@ -529,10 +630,22 @@ class ReactAgent:
                         )
                     yield event
         except TimeoutError:
+            self._current_outcome = "timeout"
+            if self._current_tracer:
+                self._current_tracer.fail("TimeoutError: turn timeout")
+                self._current_tracer.exit()
             logger.warning("[ReactAgent] Turn timed out after %.0f seconds", LLM_TURN_TIMEOUT)
             yield TextChunk(content="\n\n请求超时，请稍后重试。")
+        except Exception as error:
+            self._current_outcome = "error"
+            if self._current_tracer:
+                self._current_tracer.fail(f"{type(error).__name__}: {error}")
+                self._current_tracer.exit()
+            logger.error("[ReactAgent] Turn failed: %s", error, exc_info=True)
+            yield TextChunk(content="\n\n⚠️ 处理请求时发生错误，请重试。")
         finally:
-            self.performance_monitor.finish_turn()
+            self.performance_monitor.finish_turn(self._current_outcome)
+            self._enqueue_turn_observation()
             self._turn_lock.release()
 
     async def _execute_stream_locked(self, query: str):
@@ -554,6 +667,7 @@ class ReactAgent:
         # ---- trace_id: 本轮对话唯一标识 ----
         trace_id = str(uuid.uuid4())[:8]
         tracer = ConversationTracer(session_id=self.session_id, trace_id=trace_id)
+        self._current_tracer = tracer
         tracer.enter(query)
 
         # ---- 1) 加载并裁剪历史消息 ----
@@ -574,6 +688,7 @@ class ReactAgent:
             history=trimmed_history,
         )
         tracer.decision(decision.route, decision.confidence, decision.reason)
+        self._current_route = decision.route
         logger.info(
             f"[trace={trace_id}] Decision: route={decision.route} "
             f"conf={decision.confidence:.2f} reason={decision.reason}"
@@ -596,6 +711,7 @@ class ReactAgent:
             history=trimmed_history,
         )
         tracer.agent_path_start(len(state["messages"]))
+        tracer.agent_model_before(len(state["messages"]))
 
         # ---- 3) 流式执行 + 事件分类 ----
         response_chunks: list[str] = []
@@ -608,9 +724,6 @@ class ReactAgent:
 
                 # —— AI 消息：可能含 tool_calls 和/或 文本 ——
                 if isinstance(latest_msg, AIMessage):
-                    self.performance_monitor.record_llm_call(
-                        now - last_graph_event_at
-                    )
                     # 3a) 工具调用事件
                     if latest_msg.tool_calls:
                         self.performance_monitor.record_step(len(latest_msg.tool_calls))
@@ -624,18 +737,18 @@ class ReactAgent:
                             )
 
                     # 3b) Token 统计（从 usage_metadata 提取）
-                    usage = getattr(latest_msg, "usage_metadata", None)
-                    if usage:
-                        token_stats["input_tokens"] += usage.get("input_tokens", 0)
-                        token_stats["output_tokens"] += usage.get("output_tokens", 0)
-                        token_stats["total_tokens"] += usage.get("total_tokens", 0)
-                        self.performance_monitor.record_llm_call(
-                            0.0,
-                            usage.get("input_tokens", 0),
-                            usage.get("output_tokens", 0),
-                            _cache_read_tokens(usage),
-                            _cache_input_tokens(usage),
-                        )
+                    usage = _token_usage(latest_msg)
+                    self.performance_monitor.record_llm_call(
+                        now - last_graph_event_at,
+                        usage["input_tokens"],
+                        usage["output_tokens"],
+                        usage["cache_read_tokens"],
+                        usage["cache_input_tokens"],
+                        usage["cache_metrics_available"],
+                    )
+                    token_stats["input_tokens"] += usage["input_tokens"]
+                    token_stats["output_tokens"] += usage["output_tokens"]
+                    token_stats["total_tokens"] += usage["total_tokens"]
 
                     # 3c) 文字内容
                     content = self._extract_content(latest_msg)
@@ -645,10 +758,11 @@ class ReactAgent:
 
                 # —— Tool 消息：工具返回结果 ——
                 elif isinstance(latest_msg, ToolMessage):
-                    self.performance_monitor.record_tool_call(
-                        now - last_graph_event_at
-                    )
                     result_text = self._extract_content(latest_msg)
+                    self.performance_monitor.record_tool_call(
+                        now - last_graph_event_at,
+                        success=not result_text.startswith("[工具调用被拒绝]"),
+                    )
                     tool_name = getattr(latest_msg, "name", "unknown")
                     tracer.agent_tool_done(tool_name, len(result_text))
                     yield ToolEvent(
@@ -731,6 +845,7 @@ class ReactAgent:
             tracer.exit()  # Agent 路径成功退出
 
         except Exception as e:
+            self._current_outcome = "error"
             tracer.exit(error=f"{type(e).__name__}: {e}")
             logger.error(
                 f"[ReactAgent] 流式执行异常: {type(e).__name__}: {e}",

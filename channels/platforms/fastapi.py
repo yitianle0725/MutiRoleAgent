@@ -63,6 +63,7 @@ from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_d
 from channels.base import Channel
 from channels.manager import agent_cache
 from memory.chat_db import chat_db
+from observability.store import monitor_store
 from utils.logger_handler import logger
 
 # ==================== Pydantic 模型 ====================
@@ -180,6 +181,7 @@ async def _lifespan(app: FastAPI):
     # 关闭
     logger.info("[FastAPI] Channel 关闭中…")
     agent_cache.clear()
+    await asyncio.to_thread(monitor_store.close)
 
 
 def _create_app() -> FastAPI:
@@ -205,6 +207,26 @@ def _create_app() -> FastAPI:
     @app.get("/health", response_model=HealthResponse)
     async def health():
         return HealthResponse(agent_cache_size=agent_cache.size)
+
+    # ---- 运行监控 ----
+
+    @app.get("/api/v1/monitor/summary")
+    async def monitor_summary():
+        """获取最近运行的成功率、延迟和 token 汇总。"""
+        return await asyncio.to_thread(monitor_store.summary)
+
+    @app.get("/api/v1/monitor/turns")
+    async def monitor_turns(limit: int = 50):
+        """获取最近的 Agent 执行轮次摘要。"""
+        return await asyncio.to_thread(monitor_store.list_turns, limit)
+
+    @app.get("/api/v1/monitor/traces/{trace_id}")
+    async def monitor_trace(trace_id: str):
+        """获取单次执行的结构化追踪事件。"""
+        trace = await asyncio.to_thread(monitor_store.get_trace, trace_id)
+        if trace is None:
+            raise HTTPException(status_code=404, detail="trace not found")
+        return trace
 
     # ---- SSE 流式聊天 ----
 

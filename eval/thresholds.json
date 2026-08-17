@@ -1,0 +1,5 @@
+{
+  "min_e2e_success_rate": 0.6,
+  "min_agent_route_accuracy": 0.8,
+  "max_p95_latency_ms": 90000
+}
