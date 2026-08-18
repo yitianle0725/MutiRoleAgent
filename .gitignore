@@ -34,8 +34,4 @@ build/
 Thumbs.db
 
 # 本地文档（不上传仓库）
-架构图-*.md
-任务板清单.md
-三个后台代理解析.md
-学习链接.py
-RAG系统完整评测指南 .md
+local_docs_study/

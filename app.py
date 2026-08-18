@@ -21,6 +21,8 @@ from utils.path_tool import get_abs_path
 from utils.file_handler import txt_loader, pdf_loader, json_loader
 from utils.persona_loader import persona_loader
 from utils.logger_handler import logger
+from tools.voice import VoiceState, VoiceStateMachine
+from tools.voice.service import voice_conversation_service
 
 # ==================== 页面配置 ====================
 st.set_page_config(
@@ -100,6 +102,18 @@ if "message" not in st.session_state:
 
 if "kb_service" not in st.session_state:
     st.session_state["kb_service"] = KnowledgeBaseService()
+
+if "voice_state_machine" not in st.session_state:
+    st.session_state["voice_state_machine"] = VoiceStateMachine()
+
+if "voice_dialog_enabled" not in st.session_state:
+    st.session_state["voice_dialog_enabled"] = False
+
+if "voice_transcript_input" not in st.session_state:
+    st.session_state["voice_transcript_input"] = ""
+
+if "voice_transcript_clear_pending" not in st.session_state:
+    st.session_state["voice_transcript_clear_pending"] = False
 
 # 便捷引用
 agent: ReactAgent = st.session_state["agent"]
@@ -439,6 +453,19 @@ def _format_display_time(time_str: str) -> str:
         return time_str
 
 
+def _run_async(coroutine):
+    """在 Streamlit 同步脚本中运行一项语音协程。"""
+    return asyncio.run(coroutine)
+
+
+def _start_listening(state_machine: VoiceStateMachine) -> None:
+    """从任意可恢复状态进入录音/转写状态。"""
+    if state_machine.state in {VoiceState.ERROR, VoiceState.SPEAKING}:
+        state_machine.reset()
+    if state_machine.state == VoiceState.IDLE:
+        state_machine.move_to(VoiceState.LISTENING)
+
+
 # ---- 渲染历史消息 ----
 for message in st.session_state["message"]:
     with st.chat_message(message["role"]):
@@ -446,10 +473,76 @@ for message in st.session_state["message"]:
         if message.get("time"):
             st.caption(f"🕐 {_format_display_time(message['time'])}")
 
+# ---- 语音对话测试入口 ----
+voice_state_machine: VoiceStateMachine = st.session_state["voice_state_machine"]
+voice_service = voice_conversation_service
+toggle_label = "关闭语音对话" if st.session_state["voice_dialog_enabled"] else "开启语音对话"
+if st.button(toggle_label, key="voice_dialog_toggle"):
+    st.session_state["voice_dialog_enabled"] = not st.session_state["voice_dialog_enabled"]
+    if not st.session_state["voice_dialog_enabled"]:
+        voice_state_machine.reset()
+        st.session_state["voice_transcript_input"] = ""
+    st.rerun()
+
+voice_prompt: str | None = None
+if st.session_state["voice_dialog_enabled"]:
+    if st.session_state["voice_transcript_clear_pending"]:
+        st.session_state["voice_transcript_input"] = ""
+        st.session_state["voice_transcript_clear_pending"] = False
+
+    st.caption(f"语音状态：{voice_state_machine.state}")
+    if not voice_service.configured:
+        st.warning("语音服务未配置。请在 .env 中设置 VOICE_ENABLED=true 和 DASHSCOPE_API_KEY。")
+    elif not hasattr(st, "audio_input"):
+        st.error("当前 Streamlit 版本不支持浏览器录音，请升级到 1.48 或更高版本。")
+    else:
+        try:
+            recorded_audio = st.audio_input(
+                "按住录音后松开",
+                sample_rate=16000,
+                key="voice_audio_input",
+            )
+        except Exception as error:
+            recorded_audio = None
+            logger.warning("[voice] 浏览器录音组件失败: %s", error)
+            st.warning("浏览器录音组件不可用，请改用下方 WAV 文件上传。")
+
+        uploaded_voice_audio = st.file_uploader(
+            "或上传 16 kHz、单声道、16-bit WAV",
+            type=["wav"],
+            key="voice_audio_upload",
+        )
+        audio_source = recorded_audio or uploaded_voice_audio
+        if audio_source and st.button("转写录音", key="transcribe_voice"):
+            _start_listening(voice_state_machine)
+            try:
+                with st.spinner("正在本地检测语音并调用阿里云转写…"):
+                    result, vad_result = _run_async(
+                        voice_service.transcribe_wav(audio_source.getvalue())
+                    )
+                st.session_state["voice_transcript_input"] = result.text
+                st.success(f"转写完成（本地检测到约 {vad_result.speech_duration_ms} ms 语音），请确认后发送。")
+            except Exception as error:
+                logger.warning("[voice] ASR failed: %s", error)
+                voice_state_machine.fail(str(error))
+                st.error(f"语音转写失败：{error}")
+
+        if st.session_state["voice_transcript_input"]:
+            st.text_area("转写文本（可编辑）", key="voice_transcript_input", height=100)
+            if st.button("发送语音文本", key="send_voice_transcript"):
+                voice_prompt = st.session_state["voice_transcript_input"].strip()
+                if not voice_prompt:
+                    st.warning("请先录音或输入转写文本。")
+                else:
+                    voice_state_machine.move_to(VoiceState.THINKING)
+                    # widget 创建后不能在本轮直接修改其 key；下一轮脚本开始时清空。
+                    st.session_state["voice_transcript_clear_pending"] = True
+
 # ---- 用户输入处理 ----
-prompt = st.chat_input(
+text_prompt = st.chat_input(
     placeholder="聊聊动漫、问问天气、或者让我给你推荐一部好番……"
 )
+prompt = voice_prompt or text_prompt
 
 if prompt:
     # 1) 展示用户消息
@@ -504,7 +597,22 @@ if prompt:
         text_placeholder.write(full_response + f"\n\n🕐 {_format_display_time(now)}")
         st.session_state["message"].append({"role": "assistant", "content": full_response, "time": now})
 
+        if voice_prompt and st.session_state["voice_dialog_enabled"] and full_response:
+            try:
+                with st.spinner("正在合成语音回复…"):
+                    speech = _run_async(voice_service.synthesize_reply(full_response))
+                voice_state_machine.move_to(VoiceState.SPEAKING)
+                st.audio(speech.audio_data, format=speech.mime_type, autoplay=True)
+            except Exception as error:
+                logger.warning("[voice] TTS failed: %s", error)
+                voice_state_machine.fail(str(error))
+                st.warning(f"文字回复已完成，但语音合成失败：{error}")
+        elif voice_prompt:
+            voice_state_machine.reset()
+
     except Exception as e:
         logger.error(f"[app] 聊天处理异常: {type(e).__name__}: {e}", exc_info=True)
+        if voice_prompt:
+            voice_state_machine.fail(str(e))
         status_placeholder.error(f"处理请求时出错: {str(e)[:100]}")
         st.rerun()

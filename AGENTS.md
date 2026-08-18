@@ -35,10 +35,16 @@
 ## Git 与提交规范 (Git & Commit conventions)
 - 每次代码改动后，必须提供建议的 commit 信息。
 - Commit 信息应简洁、准确地描述本次修改内容。
-- 优先使用 Conventional Commits 格式，例如：
+- 优先使用 **Conventional Commits** 格式，结构分为：`类型(可选范围): 简短标题` + **空一行** + 多行详细描述。
+
+### 基础类型标签
   - `feat: add xxx functionality`（新增功能）
   - `fix: resolve xxx issue`（修复问题）
-  - `refactor: simplify xxx logic`（重构代码）
+  - `refactor: simplify xxx logic`（重构代码，无行为变更）
   - `docs: update documentation`（文档修改）
   - `test: add tests for xxx`（测试相关）
   - `perf: improve xxx performance`（性能优化）
+  - `chore: build / dependency / tooling change`（工程构建、依赖、工具改动）
+
+### 多行提交消息格式规范
+> 标题行控制在 50 字符以内；标题与详情之间**必须保留一个空行**；详情每条改动以 `- ` 开头，一行一条改动点。
