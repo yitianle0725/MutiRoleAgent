@@ -15,6 +15,14 @@ def check_thresholds(report: dict, threshold_path: Path) -> dict:
     thresholds = json.loads(threshold_path.read_text(encoding="utf-8"))
     values = {
         "min_e2e_success_rate": report["summary"]["e2e_success_rate"],
+        "min_recall_at_k": report["summary"].get("recall_at_k"),
+        "min_precision_at_k": report["summary"].get("precision_at_k"),
+        "min_mrr": report["summary"].get("mrr"),
+        "min_ndcg_at_k": report["summary"].get("ndcg_at_k"),
+        "min_faithfulness": report["summary"].get("faithfulness"),
+        "min_answer_relevancy": report["summary"].get("answer_relevancy"),
+        "min_context_relevancy": report["summary"].get("context_relevancy"),
+        "min_context_recall": report["summary"].get("context_recall"),
         "min_agent_route_accuracy": report["agent"]["agent_route_accuracy"]["accuracy"],
         "max_p95_latency_ms": report["agent"]["latency"]["p95_ms"],
     }

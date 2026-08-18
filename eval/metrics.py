@@ -367,21 +367,158 @@ def evaluate_all(cases: list[dict], route_func, retriever_func,
     citation = citation_validity(cases, run_results)
     abstain = abstention_accuracy(cases, run_results)
     e2e = e2e_success_rate(cases, run_results)
+    precision = precision_at_k(cases, retriever_func, k=k)
+    ndcg_result = ndcg_at_k(cases, retriever_func, k=k)
+    faithfulness = faithfulness_score(cases, run_results)
+    answer_relevancy = answer_relevancy_score(cases, run_results)
+    context_relevancy = context_relevancy_score(cases, run_results)
+    context_recall = context_recall_score(cases, run_results)
 
     return {
         "router_accuracy": router,
         "recall_at_k": recall,
+        "precision_at_k": precision,
         "mrr": mrr_result,
+        "ndcg_at_k": ndcg_result,
+        "faithfulness": faithfulness,
+        "answer_relevancy": answer_relevancy,
+        "context_relevancy": context_relevancy,
+        "context_recall": context_recall,
         "citation_validity": citation,
         "abstention_accuracy": abstain,
         "e2e_success_rate": e2e,
         "summary": {
             "router_accuracy": router["accuracy"],
             "recall_at_k": recall["recall"],
+            "precision_at_k": precision["precision"],
             "mrr": mrr_result["mrr"],
+            "ndcg_at_k": ndcg_result["ndcg"],
+            "faithfulness": faithfulness["score"],
+            "answer_relevancy": answer_relevancy["score"],
+            "context_relevancy": context_relevancy["score"],
+            "context_recall": context_recall["score"],
             "citation_validity": citation["validity_rate"],
             "abstention_accuracy": abstain["accuracy"],
             "e2e_success_rate": e2e["success_rate"],
             "test_cases": len(cases),
         },
     }
+
+
+def _retrieved_documents(cases: list[dict], retriever_func, k: int):
+    """Yield annotated cases and their top-k documents."""
+    for case in cases:
+        relevant = case.get("relevant_texts", [])
+        if not relevant:
+            continue
+        try:
+            route = case.get("expected_route", "faq")
+            collection = {"faq": "faq", "anime": "anime", "worldbook": "worldbook"}.get(route, "faq")
+            docs = retriever_func(collection).invoke(case["query"])[:k]
+        except Exception:
+            docs = []
+        yield case, docs
+
+
+def _relevance_grade(case: dict, text: str) -> int:
+    grades = case.get("relevance_grades", {})
+    for relevant in case.get("relevant_texts", []):
+        if relevant in text:
+            return max(1, int(grades.get(relevant, 1)))
+    return 0
+
+
+def precision_at_k(cases: list[dict], retriever_func, k: int = 3) -> dict:
+    """Calculate binary Precision@K over cases with relevant_texts labels."""
+    scores = []
+    details = []
+    for case, docs in _retrieved_documents(cases, retriever_func, k):
+        hits = sum(_relevance_grade(case, doc.page_content) > 0 for doc in docs)
+        score = hits / k if k > 0 else None
+        scores.append(score)
+        details.append({"id": case["id"], "hits": hits, "retrieved": len(docs), "precision": round(score, 4)})
+    return {"precision": round(sum(scores) / len(scores), 4) if scores else None, "total": len(scores), "k": k, "details": details}
+
+
+def ndcg_at_k(cases: list[dict], retriever_func, k: int = 3) -> dict:
+    """Calculate NDCG@K, honoring optional per-document relevance_grades."""
+    import math
+
+    scores = []
+    details = []
+    for case, docs in _retrieved_documents(cases, retriever_func, k):
+        ranked = [_relevance_grade(case, doc.page_content) for doc in docs]
+        ideal = sorted(
+            [max(1, int(case.get("relevance_grades", {}).get(item, 1))) for item in case.get("relevant_texts", [])],
+            reverse=True,
+        )[:k]
+        dcg = sum((2**grade - 1) / math.log2(index + 2) for index, grade in enumerate(ranked))
+        idcg = sum((2**grade - 1) / math.log2(index + 2) for index, grade in enumerate(ideal))
+        score = dcg / idcg if idcg else None
+        if score is not None:
+            scores.append(score)
+        details.append({"id": case["id"], "ndcg": round(score, 4) if score is not None else None, "grades": ranked})
+    return {"ndcg": round(sum(scores) / len(scores), 4) if scores else None, "total": len(details), "k": k, "details": details}
+
+
+def _context_text(result: dict) -> str:
+    contexts = result.get("contexts") or result.get("tool_outputs") or []
+    return " ".join(str(item) for item in contexts)
+
+
+def _generation_metric(cases: list[dict], results: list[dict], evaluator) -> dict:
+    result_by_id = {result["id"]: result for result in results}
+    scores = []
+    details = []
+    for case in cases:
+        result = result_by_id.get(case["id"])
+        if result is None:
+            continue
+        score = evaluator(case, result)
+        if score is None:
+            continue
+        scores.append(score)
+        details.append({"id": case["id"], "score": round(score, 4)})
+    return {"score": round(sum(scores) / len(scores), 4) if scores else None, "total": len(scores), "details": details}
+
+
+def faithfulness_score(cases: list[dict], results: list[dict]) -> dict:
+    """Measure annotated answer facts that are also present in retrieved context."""
+    def evaluate(case, result):
+        facts = [fact for fact in case.get("key_facts", []) if fact in result.get("answer", "")]
+        context = _context_text(result)
+        return sum(fact in context for fact in facts) / len(facts) if facts and context else None
+    return _generation_metric(cases, results, evaluate)
+
+
+def answer_relevancy_score(cases: list[dict], results: list[dict]) -> dict:
+    """Measure coverage of annotated answer facts, or query-term overlap."""
+    import re
+
+    def evaluate(case, result):
+        answer = result.get("answer", "")
+        facts = case.get("key_facts", [])
+        if facts:
+            return sum(fact in answer for fact in facts) / len(facts)
+        query_terms = set(re.findall(r"[\u4e00-\u9fff]{2,}|[A-Za-z0-9]+", case.get("query", "").lower()))
+        answer_terms = set(re.findall(r"[\u4e00-\u9fff]{2,}|[A-Za-z0-9]+", answer.lower()))
+        return len(query_terms & answer_terms) / len(query_terms) if query_terms else None
+    return _generation_metric(cases, results, evaluate)
+
+
+def context_relevancy_score(cases: list[dict], results: list[dict]) -> dict:
+    """Measure labeled relevant chunks present in the returned context."""
+    def evaluate(case, result):
+        relevant = case.get("relevant_texts", [])
+        context = _context_text(result)
+        return sum(item in context for item in relevant) / len(relevant) if relevant and context else None
+    return _generation_metric(cases, results, evaluate)
+
+
+def context_recall_score(cases: list[dict], results: list[dict]) -> dict:
+    """Measure annotated answer facts available in the returned context."""
+    def evaluate(case, result):
+        facts = case.get("key_facts", [])
+        context = _context_text(result)
+        return sum(fact in context for fact in facts) / len(facts) if facts and context else None
+    return _generation_metric(cases, results, evaluate)

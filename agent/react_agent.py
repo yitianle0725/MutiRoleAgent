@@ -50,6 +50,7 @@ from tools.agent_tools import (
     get_public_ip, get_current_time,
     maps_weather, maps_ip_location,
 )
+from tools.novel_tools import download_novel
 from tools.mcp_client import mcp_manager
 from tools.unified_middleware import UnifiedMiddleware
 from skill_support import init_skills, get_skill_registry, SKILL_TOOLS
@@ -187,6 +188,7 @@ class ReactAgent:
             search_anime, fetch_anime, get_season_anime,
             rag_summarize, switch_persona, reset_persona,
             get_public_ip, get_current_time,
+            download_novel,
         ]
         # ---- Skill 工具 (invoke_skill / list_skills) ----
         skill_tools = list(SKILL_TOOLS)

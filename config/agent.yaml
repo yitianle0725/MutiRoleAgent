@@ -20,6 +20,7 @@ tool_timeouts:
   maps_ip_location: 20
   web_search: 25
   web_search_prime: 25
+  download_novel: 80
   default: 10
 
 # ---- 外部数据 ----

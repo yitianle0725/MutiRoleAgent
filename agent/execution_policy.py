@@ -100,6 +100,11 @@ class WebSearchInput(BaseModel):
     )
 
 
+class NovelDownloadInput(BaseModel):
+    """download_novel 工具的安全输入。"""
+    novel_name: str = Field(min_length=1, max_length=100)
+
+
 class PoiSearchInput(BaseModel):
     """maps_text_search 入参"""
     query: str = Field(
@@ -146,6 +151,7 @@ TOOL_SCHEMAS: dict[str, type[BaseModel]] = {
     # MCP 搜索
     "web_search":             WebSearchInput,
     "web_search_prime":       WebSearchInput,
+    "download_novel":         NovelDownloadInput,
 }
 
 # 无参工具（仅日志记录意外的入参，不拒绝）
@@ -184,7 +190,7 @@ def validate_tool_args(tool_name: str, tool_args: dict | None) -> PolicyResult:
             )
         except ValidationError as e:
             # 如果是因为 extra 字段不匹配，宽松通过；其他错误才拒绝
-            missing_fields = [err for err in e.errors() if err["type"] == "missing"]
+            missing_fields = e.errors()
             if missing_fields:
                 error_parts = []
                 for err in missing_fields:

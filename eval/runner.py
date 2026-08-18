@@ -60,6 +60,7 @@ async def run_single_case(agent: ReactAgent, case: dict) -> dict:
         "answer": "".join(answer_parts),
         "tools_called": tools_called,
         "tool_outputs": tool_outputs,
+        "contexts": tool_outputs,
         "agent_route": observation["route"],
         "trace_id": observation["trace_id"],
         "outcome": observation["outcome"],

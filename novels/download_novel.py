@@ -10,7 +10,10 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from lxml import etree
-from layout_novel import clean_text
+try:
+    from .layout_novel import clean_text
+except ImportError:
+    from layout_novel import clean_text
 
 # ===================== 常量配置 =====================
 BASE_URL = "https://www.qishuxia.com"

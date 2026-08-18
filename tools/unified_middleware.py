@@ -40,6 +40,7 @@ _TOOL_DOMAIN_MAP: dict[str, set[str]] = {
 # 始终携带的轻量工具（schema 小，不影响延迟）
 _ALWAYS_TOOLS: set[str] = {
     "get_current_time",           # 日期时间，轻量且高频
+    "download_novel",
     "switch_persona", "reset_persona",  # 角色切换
     "list_skills", "invoke_skill",      # Skill 系统入口
 }

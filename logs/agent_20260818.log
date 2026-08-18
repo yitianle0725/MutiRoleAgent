@@ -1,0 +1,261 @@
+2026-08-18 12:34:08,215 - agent - WARNING - action_gate.py:223 - [Action Gate] 运行时拦截: 工具 'delete_files' 包含危险关键词 'delete'，已被系统拒绝。
+2026-08-18 12:34:08,217 - agent - WARNING - action_gate.py:232 - [Action Gate] 路径穿越拦截: 工具 'rag_summarize' 的参数包含路径穿越（../ 或 ..\），已被系统拒绝。
+2026-08-18 12:34:08,217 - agent - DEBUG - execution_policy.py:205 - [Exec Policy] rag_summarize 参数不匹配 schema 但非致命，宽松通过
+2026-08-18 12:35:07,983 - agent - WARNING - action_gate.py:223 - [Action Gate] 运行时拦截: 工具 'delete_files' 包含危险关键词 'delete'，已被系统拒绝。
+2026-08-18 12:35:07,988 - agent - WARNING - action_gate.py:232 - [Action Gate] 路径穿越拦截: 工具 'rag_summarize' 的参数包含路径穿越（../ 或 ..\），已被系统拒绝。
+2026-08-18 12:35:07,988 - agent - WARNING - execution_policy.py:200 - [Exec Policy] rag_summarize 参数校验失败: 参数 'query' String should have at least 1 character
+2026-08-18 12:35:07,990 - agent - DEBUG - execution_policy.py:220 - [Exec Policy] 未知工具 fetch_external_data 不在 Schema 注册表中，宽松通过
+2026-08-18 12:35:07,990 - agent - DEBUG - execution_policy.py:220 - [Exec Policy] 未知工具 fetch_external_data 不在 Schema 注册表中，宽松通过
+2026-08-18 12:35:24,739 - agent - WARNING - execution_policy.py:200 - [Exec Policy] download_novel 参数校验失败: 参数 'novel_name' String should have at least 1 character
+2026-08-18 12:36:03,610 - agent - WARNING - execution_policy.py:200 - [Exec Policy] download_novel 参数校验失败: 参数 'novel_name' String should have at least 1 character
+2026-08-18 12:38:13,673 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 12:38:17,256 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-18 12:38:19,449 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-18 12:38:19,449 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-18 12:38:19,449 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-18 12:38:19,493 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-18 12:38:19,540 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=1
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=2
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=3
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=4
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=5
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=6
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=7
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=8
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=9
+2026-08-18 12:38:19,540 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=10
+2026-08-18 12:38:19,540 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=350e8966… 共 10 条消息
+2026-08-18 12:38:19,540 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=350e8966-2e0…, size=1/32
+2026-08-18 12:38:19,544 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 12:38:20,210 - agent - INFO - app.py:116 - [app] 从 SQLite 恢复 10 条消息: session=350e8966-2e0e-4b…
+2026-08-18 12:38:51,627 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|bacc5c2b|350e8966] #1 [ENTER] (0ms) query="能帮我下载斗破苍穹的小说吗？" loop=1568
+2026-08-18 12:38:51,627 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|bacc5c2b|350e8966] #2 [LOAD_HISTORY] (1ms) 10条 [AIMessage=5 HumanMessage=5] ~892tok 5轮 loop=1568
+2026-08-18 12:38:51,627 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 10 条消息, token 估算=892, 轮数=5
+2026-08-18 12:38:51,627 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|bacc5c2b|350e8966] #3 [TRIM] (2ms) 无需裁剪: 10条 5轮
+2026-08-18 12:38:51,627 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|bacc5c2b|350e8966] #4 [DECISION] (2ms) → AGENT conf=0.95 "agent_keyword:file" loop=1568
+2026-08-18 12:38:51,627 - agent - INFO - react_agent.py:694 - [trace=bacc5c2b] Decision: route=agent conf=0.95 reason=agent_keyword:file
+2026-08-18 12:38:51,627 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|bacc5c2b|350e8966] #5 [AGENT_START] (2ms) ReAct 循环, state消息=11条 loop=1568
+2026-08-18 12:38:51,627 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|bacc5c2b|350e8966] #6 [AGENT_MODEL_BEFORE] (3ms) 发送 11 条消息给 LLM
+2026-08-18 12:38:51,642 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 12→12 条消息, 已注入日期: 2026-08-18 12:38
+2026-08-18 12:38:54,659 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|bacc5c2b|350e8966] #7 [AGENT_DONE] (3026ms) 响应=196字 tokens={'input_tokens': 6386, 'output_tokens': 124, 'total_tokens': 6510} 耗时=3.0s
+2026-08-18 12:38:54,662 - agent - INFO - react_agent.py:784 - [trace=bacc5c2b] 完成: tokens={'input_tokens': 6386, 'output_tokens': 124, 'total_tokens': 6510}, 响应长度=196
+2026-08-18 12:38:54,662 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=11
+2026-08-18 12:38:54,663 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=12
+2026-08-18 12:38:54,672 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=350e8966…
+2026-08-18 12:38:54,676 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|bacc5c2b|350e8966] #8 [PERSIST] (3043ms) session_store=12条 chat_db=12条
+2026-08-18 12:38:54,686 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|bacc5c2b|350e8966] #9 [EXIT_OK] (3053ms) 总耗时=3053ms
+2026-08-18 12:42:59,689 - agent - WARNING - execution_policy.py:200 - [Exec Policy] download_novel 参数校验失败: 参数 'novel_name' String should have at least 1 character
+2026-08-18 12:43:31,562 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 12:43:34,052 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-18 12:43:36,373 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-18 12:43:36,378 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-18 12:43:36,378 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-18 12:43:36,378 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-18 12:43:36,411 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-18 12:43:36,411 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=1
+2026-08-18 12:43:36,416 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=2
+2026-08-18 12:43:36,416 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=3
+2026-08-18 12:43:36,416 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=4
+2026-08-18 12:43:36,417 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=5
+2026-08-18 12:43:36,417 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=6
+2026-08-18 12:43:36,417 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=7
+2026-08-18 12:43:36,417 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=8
+2026-08-18 12:43:36,417 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=9
+2026-08-18 12:43:36,417 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=10
+2026-08-18 12:43:36,417 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (HumanMessage), total=11
+2026-08-18 12:43:36,417 - agent - DEBUG - session_store.py:75 - [SessionStore] session=350e8966-2e0e-4b98-ba4a-dfe3fdd1ea7f +1 msg (AIMessage), total=12
+2026-08-18 12:43:36,417 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=350e8966… 共 12 条消息
+2026-08-18 12:43:36,417 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=350e8966-2e0…, size=1/32
+2026-08-18 12:43:36,420 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 12:43:36,519 - agent - INFO - app.py:116 - [app] 从 SQLite 恢复 12 条消息: session=350e8966-2e0e-4b…
+2026-08-18 12:43:48,342 - agent - INFO - chat_db.py:241 - [ChatDB] 已清空 session=350e8966…
+2026-08-18 12:43:48,343 - agent - DEBUG - manager.py:87 - [AgentCache] evict: session=350e8966-2e0…
+2026-08-18 12:43:48,348 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-18 12:43:48,350 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-18 12:43:48,351 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-18 12:43:48,367 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-18 12:43:48,368 - agent - DEBUG - session_store.py:75 - [SessionStore] session=95fb7e42-a2f8-40c3-8552-a3aa48ace3df +1 msg (HumanMessage), total=1
+2026-08-18 12:43:48,368 - agent - DEBUG - session_store.py:75 - [SessionStore] session=95fb7e42-a2f8-40c3-8552-a3aa48ace3df +1 msg (AIMessage), total=2
+2026-08-18 12:43:48,368 - agent - DEBUG - session_store.py:75 - [SessionStore] session=95fb7e42-a2f8-40c3-8552-a3aa48ace3df +1 msg (HumanMessage), total=3
+2026-08-18 12:43:48,368 - agent - DEBUG - session_store.py:75 - [SessionStore] session=95fb7e42-a2f8-40c3-8552-a3aa48ace3df +1 msg (AIMessage), total=4
+2026-08-18 12:43:48,368 - agent - DEBUG - session_store.py:75 - [SessionStore] session=95fb7e42-a2f8-40c3-8552-a3aa48ace3df +1 msg (HumanMessage), total=5
+2026-08-18 12:43:48,368 - agent - DEBUG - session_store.py:75 - [SessionStore] session=95fb7e42-a2f8-40c3-8552-a3aa48ace3df +1 msg (AIMessage), total=6
+2026-08-18 12:43:48,368 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=95fb7e42… 共 6 条消息
+2026-08-18 12:43:48,369 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=95fb7e42-a2f…, size=1/32
+2026-08-18 12:43:48,697 - agent - INFO - app.py:116 - [app] 从 SQLite 恢复 6 条消息: session=95fb7e42-a2f8-40…
+2026-08-18 12:43:49,601 - agent - INFO - chat_db.py:241 - [ChatDB] 已清空 session=95fb7e42…
+2026-08-18 12:43:49,602 - agent - DEBUG - manager.py:87 - [AgentCache] evict: session=95fb7e42-a2f…
+2026-08-18 12:43:49,608 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-18 12:43:49,609 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-18 12:43:49,610 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-18 12:43:49,625 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-18 12:43:49,626 - agent - DEBUG - session_store.py:75 - [SessionStore] session=f4df2728-e354-4311-9756-ec6919fccc5c +1 msg (HumanMessage), total=1
+2026-08-18 12:43:49,626 - agent - DEBUG - session_store.py:75 - [SessionStore] session=f4df2728-e354-4311-9756-ec6919fccc5c +1 msg (AIMessage), total=2
+2026-08-18 12:43:49,627 - agent - DEBUG - session_store.py:75 - [SessionStore] session=f4df2728-e354-4311-9756-ec6919fccc5c +1 msg (HumanMessage), total=3
+2026-08-18 12:43:49,627 - agent - DEBUG - session_store.py:75 - [SessionStore] session=f4df2728-e354-4311-9756-ec6919fccc5c +1 msg (AIMessage), total=4
+2026-08-18 12:43:49,627 - agent - DEBUG - session_store.py:75 - [SessionStore] session=f4df2728-e354-4311-9756-ec6919fccc5c +1 msg (HumanMessage), total=5
+2026-08-18 12:43:49,627 - agent - DEBUG - session_store.py:75 - [SessionStore] session=f4df2728-e354-4311-9756-ec6919fccc5c +1 msg (AIMessage), total=6
+2026-08-18 12:43:49,627 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=f4df2728… 共 6 条消息
+2026-08-18 12:43:49,628 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=f4df2728-e35…, size=1/32
+2026-08-18 12:43:49,927 - agent - INFO - app.py:116 - [app] 从 SQLite 恢复 6 条消息: session=f4df2728-e354-43…
+2026-08-18 12:43:50,411 - agent - INFO - chat_db.py:241 - [ChatDB] 已清空 session=f4df2728…
+2026-08-18 12:43:50,411 - agent - DEBUG - manager.py:87 - [AgentCache] evict: session=f4df2728-e35…
+2026-08-18 12:43:50,417 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-18 12:43:50,418 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-18 12:43:50,419 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-18 12:43:50,437 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-18 12:43:50,438 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=1
+2026-08-18 12:43:50,439 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=2
+2026-08-18 12:43:50,439 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (HumanMessage), total=3
+2026-08-18 12:43:50,439 - agent - DEBUG - session_store.py:75 - [SessionStore] session=verify_test +1 msg (AIMessage), total=4
+2026-08-18 12:43:50,439 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=verify_t… 共 4 条消息
+2026-08-18 12:43:50,439 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=verify_test…, size=1/32
+2026-08-18 12:43:50,759 - agent - INFO - app.py:116 - [app] 从 SQLite 恢复 4 条消息: session=verify_test…
+2026-08-18 12:43:52,563 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-18 12:43:52,564 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-18 12:43:52,565 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3448 字符
+2026-08-18 12:43:52,573 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-18 12:43:52,573 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=a3c942a6-246…, size=2/32
+2026-08-18 12:43:57,844 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|0212a9ef|a3c942a6] #1 [ENTER] (0ms) query="下午好" loop=4160
+2026-08-18 12:43:57,844 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|0212a9ef|a3c942a6] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=4160
+2026-08-18 12:43:57,844 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|0212a9ef|a3c942a6] #3 [TRIM] (1ms) 无需裁剪: 0条 0轮
+2026-08-18 12:43:57,844 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|0212a9ef|a3c942a6] #4 [DECISION] (2ms) → AGENT conf=0.30 "fallback_default" loop=4160
+2026-08-18 12:43:57,844 - agent - INFO - react_agent.py:694 - [trace=0212a9ef] Decision: route=agent conf=0.30 reason=fallback_default
+2026-08-18 12:43:57,844 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|0212a9ef|a3c942a6] #5 [AGENT_START] (2ms) ReAct 循环, state消息=1条 loop=4160
+2026-08-18 12:43:57,844 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|0212a9ef|a3c942a6] #6 [AGENT_MODEL_BEFORE] (3ms) 发送 1 条消息给 LLM
+2026-08-18 12:43:57,844 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 2→2 条消息, 已注入日期: 2026-08-18 12:43
+2026-08-18 12:43:59,452 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|0212a9ef|a3c942a6] #7 [AGENT_DONE] (1605ms) 响应=60字 tokens={'input_tokens': 5314, 'output_tokens': 41, 'total_tokens': 5355} 耗时=1.6s
+2026-08-18 12:43:59,452 - agent - INFO - react_agent.py:784 - [trace=0212a9ef] 完成: tokens={'input_tokens': 5314, 'output_tokens': 41, 'total_tokens': 5355}, 响应长度=60
+2026-08-18 12:43:59,452 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (HumanMessage), total=1
+2026-08-18 12:43:59,452 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (AIMessage), total=2
+2026-08-18 12:43:59,458 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=a3c942a6…
+2026-08-18 12:43:59,460 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|0212a9ef|a3c942a6] #8 [PERSIST] (1613ms) session_store=2条 chat_db=2条
+2026-08-18 12:43:59,475 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|0212a9ef|a3c942a6] #9 [EXIT_OK] (1630ms) 总耗时=1630ms
+2026-08-18 12:44:09,833 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|fe4d5fb4|a3c942a6] #1 [ENTER] (0ms) query="给我推荐几部小说叭" loop=2688
+2026-08-18 12:44:09,833 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|fe4d5fb4|a3c942a6] #2 [LOAD_HISTORY] (0ms) 2条 [AIMessage=1 HumanMessage=1] ~42tok 1轮 loop=2688
+2026-08-18 12:44:09,833 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|fe4d5fb4|a3c942a6] #3 [TRIM] (1ms) 无需裁剪: 2条 1轮
+2026-08-18 12:44:09,833 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|fe4d5fb4|a3c942a6] #4 [DECISION] (1ms) → AGENT conf=0.95 "agent_keyword:anime" loop=2688
+2026-08-18 12:44:09,833 - agent - INFO - react_agent.py:694 - [trace=fe4d5fb4] Decision: route=agent conf=0.95 reason=agent_keyword:anime
+2026-08-18 12:44:09,833 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|fe4d5fb4|a3c942a6] #5 [AGENT_START] (2ms) ReAct 循环, state消息=3条 loop=2688
+2026-08-18 12:44:09,833 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|fe4d5fb4|a3c942a6] #6 [AGENT_MODEL_BEFORE] (2ms) 发送 3 条消息给 LLM
+2026-08-18 12:44:09,833 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-18 12:44
+2026-08-18 12:44:11,781 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|fe4d5fb4|a3c942a6] #7 [AGENT_DONE] (1944ms) 响应=132字 tokens={'input_tokens': 5371, 'output_tokens': 71, 'total_tokens': 5442} 耗时=1.9s
+2026-08-18 12:44:11,782 - agent - INFO - react_agent.py:784 - [trace=fe4d5fb4] 完成: tokens={'input_tokens': 5371, 'output_tokens': 71, 'total_tokens': 5442}, 响应长度=132
+2026-08-18 12:44:11,783 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (HumanMessage), total=3
+2026-08-18 12:44:11,784 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (AIMessage), total=4
+2026-08-18 12:44:11,794 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=a3c942a6…
+2026-08-18 12:44:11,796 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|fe4d5fb4|a3c942a6] #8 [PERSIST] (1959ms) session_store=4条 chat_db=4条
+2026-08-18 12:44:11,803 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|fe4d5fb4|a3c942a6] #9 [EXIT_OK] (1966ms) 总耗时=1966ms
+2026-08-18 12:44:36,254 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #1 [ENTER] (0ms) query="我想下载斗破苍穹这个小说" loop=8000
+2026-08-18 12:44:36,254 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #2 [LOAD_HISTORY] (0ms) 4条 [AIMessage=2 HumanMessage=2] ~147tok 2轮 loop=8000
+2026-08-18 12:44:36,254 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 4 条消息, token 估算=147, 轮数=2
+2026-08-18 12:44:36,254 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #3 [TRIM] (1ms) 无需裁剪: 4条 2轮
+2026-08-18 12:44:36,254 - agent - DEBUG - decision_engine.py:158 - [Decision] 话题切换，清除缓存: 我想下载斗破苍穹这个小说
+2026-08-18 12:44:36,254 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #4 [DECISION] (1ms) → AGENT conf=0.95 "agent_keyword:file" loop=8000
+2026-08-18 12:44:36,254 - agent - INFO - react_agent.py:694 - [trace=69a07004] Decision: route=agent conf=0.95 reason=agent_keyword:file
+2026-08-18 12:44:36,254 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #5 [AGENT_START] (2ms) ReAct 循环, state消息=5条 loop=8000
+2026-08-18 12:44:36,254 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #6 [AGENT_MODEL_BEFORE] (2ms) 发送 5 条消息给 LLM
+2026-08-18 12:44:36,259 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-18 12:44
+2026-08-18 12:44:37,526 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #7 [AGENT_TOOL] (1270ms) 调用工具: download_novel
+2026-08-18 12:44:37,527 - agent - INFO - react_agent.py:734 - [trace=69a07004] 调用工具: download_novel
+2026-08-18 12:44:37,528 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: download_novel, args={'novel_name': '斗破苍穹'}
+2026-08-18 12:44:38,533 - agent - ERROR - unified_middleware.py:97 - [middleware] 工具执行异常: download_novel: 未找到可下载的小说，请提供更准确的书名或作者。
+2026-08-18 12:44:38,534 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #8 [AGENT_TOOL_DONE] (2278ms) 工具完成: download_novel 结果=62字
+2026-08-18 12:44:38,535 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 8→8 条消息, 已注入日期: 2026-08-18 12:44
+2026-08-18 12:44:40,592 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #9 [AGENT_DONE] (4336ms) 响应=118字 tokens={'input_tokens': 10989, 'output_tokens': 101, 'total_tokens': 11090} 耗时=4.3s
+2026-08-18 12:44:40,593 - agent - INFO - react_agent.py:784 - [trace=69a07004] 完成: tokens={'input_tokens': 10989, 'output_tokens': 101, 'total_tokens': 11090}, 响应长度=118
+2026-08-18 12:44:40,593 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (HumanMessage), total=5
+2026-08-18 12:44:40,593 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (AIMessage), total=6
+2026-08-18 12:44:40,600 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=a3c942a6…
+2026-08-18 12:44:40,602 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #10 [PERSIST] (4346ms) session_store=6条 chat_db=6条
+2026-08-18 12:44:40,613 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|69a07004|a3c942a6] #11 [EXIT_OK] (4357ms) 总耗时=4357ms
+2026-08-18 12:48:11,777 - agent - WARNING - execution_policy.py:200 - [Exec Policy] download_novel 参数校验失败: 参数 'novel_name' String should have at least 1 character
+2026-08-18 12:48:52,629 - agent - WARNING - execution_policy.py:200 - [Exec Policy] download_novel 参数校验失败: 参数 'novel_name' String should have at least 1 character
+2026-08-18 12:49:29,648 - agent - WARNING - execution_policy.py:200 - [Exec Policy] download_novel 参数校验失败: 参数 'novel_name' String should have at least 1 character
+2026-08-18 12:51:09,342 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 12:51:13,001 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-18 12:51:15,639 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-18 12:51:15,641 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-18 12:51:15,642 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-18 12:51:15,650 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-18 12:51:15,677 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-18 12:51:15,680 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (HumanMessage), total=1
+2026-08-18 12:51:15,680 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (AIMessage), total=2
+2026-08-18 12:51:15,680 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (HumanMessage), total=3
+2026-08-18 12:51:15,680 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (AIMessage), total=4
+2026-08-18 12:51:15,680 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (HumanMessage), total=5
+2026-08-18 12:51:15,680 - agent - DEBUG - session_store.py:75 - [SessionStore] session=a3c942a6-2464-4bce-80f1-0292590eb7a3 +1 msg (AIMessage), total=6
+2026-08-18 12:51:15,680 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=a3c942a6… 共 6 条消息
+2026-08-18 12:51:15,681 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=a3c942a6-246…, size=1/32
+2026-08-18 12:51:15,684 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 12:51:15,843 - agent - INFO - app.py:116 - [app] 从 SQLite 恢复 6 条消息: session=a3c942a6-2464-4b…
+2026-08-18 12:51:28,955 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-18 12:51:28,958 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-18 12:51:28,959 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-18 12:51:28,993 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-18 12:51:28,997 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=0dbea4e7-f7d…, size=2/32
+2026-08-18 12:51:31,956 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|620e26d9|0dbea4e7] #1 [ENTER] (0ms) query="给我推荐几部小说叭" loop=7248
+2026-08-18 12:51:31,957 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|620e26d9|0dbea4e7] #2 [LOAD_HISTORY] (1ms) 0条 0轮 loop=7248
+2026-08-18 12:51:31,957 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|620e26d9|0dbea4e7] #3 [TRIM] (1ms) 无需裁剪: 0条 0轮
+2026-08-18 12:51:31,958 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|620e26d9|0dbea4e7] #4 [DECISION] (1ms) → AGENT conf=0.95 "agent_keyword:anime" loop=7248
+2026-08-18 12:51:31,958 - agent - INFO - react_agent.py:694 - [trace=620e26d9] Decision: route=agent conf=0.95 reason=agent_keyword:anime
+2026-08-18 12:51:31,959 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|620e26d9|0dbea4e7] #5 [AGENT_START] (2ms) ReAct 循环, state消息=1条 loop=7248
+2026-08-18 12:51:31,959 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|620e26d9|0dbea4e7] #6 [AGENT_MODEL_BEFORE] (3ms) 发送 1 条消息给 LLM
+2026-08-18 12:51:31,965 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 2→2 条消息, 已注入日期: 2026-08-18 12:51
+2026-08-18 12:51:35,314 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|620e26d9|0dbea4e7] #7 [AGENT_DONE] (3357ms) 响应=198字 tokens={'input_tokens': 5388, 'output_tokens': 130, 'total_tokens': 5518} 耗时=3.4s
+2026-08-18 12:51:35,314 - agent - INFO - react_agent.py:784 - [trace=620e26d9] 完成: tokens={'input_tokens': 5388, 'output_tokens': 130, 'total_tokens': 5518}, 响应长度=198
+2026-08-18 12:51:35,315 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=1
+2026-08-18 12:51:35,315 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=2
+2026-08-18 12:51:35,331 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=0dbea4e7…
+2026-08-18 12:51:35,335 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|620e26d9|0dbea4e7] #8 [PERSIST] (3380ms) session_store=2条 chat_db=2条
+2026-08-18 12:51:35,364 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|620e26d9|0dbea4e7] #9 [EXIT_OK] (3408ms) 总耗时=3408ms
+2026-08-18 12:51:42,792 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #1 [ENTER] (0ms) query="玄幻" loop=7824
+2026-08-18 12:51:42,793 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #2 [LOAD_HISTORY] (1ms) 2条 [AIMessage=1 HumanMessage=1] ~139tok 1轮 loop=7824
+2026-08-18 12:51:42,794 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #3 [TRIM] (2ms) 无需裁剪: 2条 1轮
+2026-08-18 12:51:42,795 - agent - INFO - decision_engine.py:200 - [Decision] 追问继续 → agent
+2026-08-18 12:51:42,795 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #4 [DECISION] (3ms) → AGENT conf=0.80 "continuation_in_agent" loop=7824
+2026-08-18 12:51:42,796 - agent - INFO - react_agent.py:694 - [trace=74bd21c9] Decision: route=agent conf=0.80 reason=continuation_in_agent
+2026-08-18 12:51:42,796 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #5 [AGENT_START] (4ms) ReAct 循环, state消息=3条 loop=7824
+2026-08-18 12:51:42,797 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #6 [AGENT_MODEL_BEFORE] (4ms) 发送 3 条消息给 LLM
+2026-08-18 12:51:42,800 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-18 12:51
+2026-08-18 12:51:44,066 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #7 [AGENT_TOOL] (1273ms) 调用工具: download_novel
+2026-08-18 12:51:44,066 - agent - INFO - react_agent.py:734 - [trace=74bd21c9] 调用工具: download_novel
+2026-08-18 12:51:44,068 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: download_novel, args={'novel_name': '斗破苍穹'}
+2026-08-18 12:51:44,071 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: download_novel
+2026-08-18 12:51:44,072 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #8 [AGENT_TOOL_DONE] (1280ms) 工具完成: download_novel 结果=53字
+2026-08-18 12:51:44,073 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-18 12:51
+2026-08-18 12:51:49,265 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #9 [AGENT_DONE] (6472ms) 响应=317字 tokens={'input_tokens': 11137, 'output_tokens': 245, 'total_tokens': 11382} 耗时=6.5s
+2026-08-18 12:51:49,265 - agent - INFO - react_agent.py:784 - [trace=74bd21c9] 完成: tokens={'input_tokens': 11137, 'output_tokens': 245, 'total_tokens': 11382}, 响应长度=317
+2026-08-18 12:51:49,266 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=3
+2026-08-18 12:51:49,266 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=4
+2026-08-18 12:51:49,281 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=0dbea4e7…
+2026-08-18 12:51:49,287 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #10 [PERSIST] (6494ms) session_store=4条 chat_db=4条
+2026-08-18 12:51:49,301 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|74bd21c9|0dbea4e7] #11 [EXIT_OK] (6509ms) 总耗时=6509ms
+2026-08-18 12:52:09,327 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #1 [ENTER] (0ms) query="凡人修仙传可以下载给我吗" loop=6624
+2026-08-18 12:52:09,329 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #2 [LOAD_HISTORY] (1ms) 4条 [AIMessage=2 HumanMessage=2] ~336tok 2轮 loop=6624
+2026-08-18 12:52:09,330 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 4 条消息, token 估算=336, 轮数=2
+2026-08-18 12:52:09,330 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #3 [TRIM] (2ms) 无需裁剪: 4条 2轮
+2026-08-18 12:52:09,330 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #4 [DECISION] (3ms) → AGENT conf=0.95 "agent_keyword:file" loop=6624
+2026-08-18 12:52:09,331 - agent - INFO - react_agent.py:694 - [trace=140c761b] Decision: route=agent conf=0.95 reason=agent_keyword:file
+2026-08-18 12:52:09,332 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #5 [AGENT_START] (4ms) ReAct 循环, state消息=5条 loop=6624
+2026-08-18 12:52:09,332 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #6 [AGENT_MODEL_BEFORE] (4ms) 发送 5 条消息给 LLM
+2026-08-18 12:52:09,335 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-18 12:52
+2026-08-18 12:52:10,586 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #7 [AGENT_TOOL] (1258ms) 调用工具: download_novel
+2026-08-18 12:52:10,586 - agent - INFO - react_agent.py:734 - [trace=140c761b] 调用工具: download_novel
+2026-08-18 12:52:10,588 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: download_novel, args={'novel_name': '凡人修仙传'}
+2026-08-18 12:52:11,990 - agent - ERROR - unified_middleware.py:97 - [middleware] 工具执行异常: download_novel: 未找到可下载的小说，请提供更准确的书名或作者。
+2026-08-18 12:52:11,991 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #8 [AGENT_TOOL_DONE] (2663ms) 工具完成: download_novel 结果=62字
+2026-08-18 12:52:11,991 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 8→8 条消息, 已注入日期: 2026-08-18 12:52
+2026-08-18 12:52:16,195 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #9 [AGENT_DONE] (6867ms) 响应=255字 tokens={'input_tokens': 11604, 'output_tokens': 187, 'total_tokens': 11791} 耗时=6.9s
+2026-08-18 12:52:16,196 - agent - INFO - react_agent.py:784 - [trace=140c761b] 完成: tokens={'input_tokens': 11604, 'output_tokens': 187, 'total_tokens': 11791}, 响应长度=255
+2026-08-18 12:52:16,196 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=5
+2026-08-18 12:52:16,196 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=6
+2026-08-18 12:52:16,208 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=0dbea4e7…
+2026-08-18 12:52:16,213 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #10 [PERSIST] (6885ms) session_store=6条 chat_db=6条
+2026-08-18 12:52:16,224 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|140c761b|0dbea4e7] #11 [EXIT_OK] (6897ms) 总耗时=6897ms
+2026-08-18 13:09:27,987 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 13:09:29,385 - agent - WARNING - execution_policy.py:200 - [Exec Policy] download_novel 参数校验失败: 参数 'novel_name' String should have at least 1 character
+2026-08-18 13:09:29,415 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|trace-test|test-ses] #1 [ENTER] (0ms) query="测试请求" loop=NONE
+2026-08-18 13:09:29,416 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|trace-test|test-ses] #2 [DECISION] (0ms) → CHAT conf=0.90 "test" loop=NONE
+2026-08-18 13:09:29,416 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|trace-test|test-ses] #3 [EXIT_OK] (1ms) 总耗时=1ms
