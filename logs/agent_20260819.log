@@ -1,0 +1,111 @@
+2026-08-19 13:51:07,823 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 13:51:08,990 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 13:51:09,338 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 13:51:09,382 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 13:51:09,412 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 13:51:09,443 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 13:51:09,444 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 13:51:09,455 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 13:51:09,456 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 13:51:12,316 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 13:51:14,677 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 13:51:14,680 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 13:51:14,681 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 13:51:14,723 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 13:51:14,826 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 13:51:14,829 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=1
+2026-08-19 13:51:14,829 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=2
+2026-08-19 13:51:14,829 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=3
+2026-08-19 13:51:14,829 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=4
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=5
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=6
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=7
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=8
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=9
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=10
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=11
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=12
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=13
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=14
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=15
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=16
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=17
+2026-08-19 13:51:14,830 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=18
+2026-08-19 13:51:14,831 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=0dbea4e7… 共 18 条消息
+2026-08-19 13:51:14,831 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=0dbea4e7-f7d…, size=1/32
+2026-08-19 13:51:14,923 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 13:51:15,981 - agent - INFO - app.py:130 - [app] 从 SQLite 恢复 18 条消息: session=0dbea4e7-f7df-47…
+2026-08-19 14:46:41,472 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 14:46:41,836 - agent - INFO - app.py:130 - [app] 从 SQLite 恢复 18 条消息: session=0dbea4e7-f7df-47…
+2026-08-19 14:55:06,679 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|504c8b9a|0dbea4e7] #1 [ENTER] (0ms) query="下午好" loop=5104
+2026-08-19 14:55:06,680 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|504c8b9a|0dbea4e7] #2 [LOAD_HISTORY] (1ms) 18条 [AIMessage=9 HumanMessage=9] ~1690tok 9轮 loop=5104
+2026-08-19 14:55:06,683 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 18 条消息, token 估算=1690, 轮数=9
+2026-08-19 14:55:06,683 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|504c8b9a|0dbea4e7] #3 [TRIM] (5ms) 无需裁剪: 18条 9轮
+2026-08-19 14:55:06,686 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|504c8b9a|0dbea4e7] #4 [DECISION] (7ms) → AGENT conf=0.30 "fallback_default" loop=5104
+2026-08-19 14:55:06,686 - agent - INFO - react_agent.py:698 - [trace=504c8b9a] Decision: route=agent conf=0.30 reason=fallback_default
+2026-08-19 14:55:06,687 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|504c8b9a|0dbea4e7] #5 [AGENT_START] (8ms) ReAct 循环, state消息=19条 loop=5104
+2026-08-19 14:55:06,687 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|504c8b9a|0dbea4e7] #6 [AGENT_MODEL_BEFORE] (9ms) 发送 19 条消息给 LLM
+2026-08-19 14:55:06,732 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 20→20 条消息, 已注入日期: 2026-08-19 14:55
+2026-08-19 14:55:09,539 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|504c8b9a|0dbea4e7] #7 [AGENT_DONE] (2861ms) 响应=141字 tokens={'input_tokens': 7298, 'output_tokens': 100, 'total_tokens': 7398} 耗时=2.9s
+2026-08-19 14:55:09,541 - agent - INFO - react_agent.py:788 - [trace=504c8b9a] 完成: tokens={'input_tokens': 7298, 'output_tokens': 100, 'total_tokens': 7398}, 响应长度=141
+2026-08-19 14:55:09,541 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=19
+2026-08-19 14:55:09,541 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=20
+2026-08-19 14:55:09,550 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=0dbea4e7…
+2026-08-19 14:55:09,555 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|504c8b9a|0dbea4e7] #8 [PERSIST] (2876ms) session_store=20条 chat_db=20条
+2026-08-19 14:55:09,564 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|504c8b9a|0dbea4e7] #9 [EXIT_OK] (2885ms) 总耗时=2885ms
+2026-08-19 14:55:29,728 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 14:55:29,908 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 14:55:30,169 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 14:55:30,175 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 14:55:30,180 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 14:55:30,188 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 14:55:30,188 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 14:55:30,214 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 14:55:30,215 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 14:55:32,855 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 14:55:35,201 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 14:55:35,205 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 14:55:35,207 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 14:55:35,211 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 14:55:35,261 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 14:55:35,273 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bd1816b9-e120-4b16-b6c4-a2cfe6a146c4 +1 msg (HumanMessage), total=1
+2026-08-19 14:55:35,274 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bd1816b9-e120-4b16-b6c4-a2cfe6a146c4 +1 msg (AIMessage), total=2
+2026-08-19 14:55:35,274 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bd1816b9-e120-4b16-b6c4-a2cfe6a146c4 +1 msg (HumanMessage), total=3
+2026-08-19 14:55:35,274 - agent - DEBUG - session_store.py:75 - [SessionStore] session=bd1816b9-e120-4b16-b6c4-a2cfe6a146c4 +1 msg (AIMessage), total=4
+2026-08-19 14:55:35,274 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=bd1816b9… 共 4 条消息
+2026-08-19 14:55:35,277 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=bd1816b9-e12…, size=1/32
+2026-08-19 14:55:35,840 - agent - INFO - app.py:130 - [app] 从 SQLite 恢复 4 条消息: session=bd1816b9-e120-4b…
+2026-08-19 15:11:52,547 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 15:11:52,551 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 15:11:52,555 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 15:11:52,560 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 15:11:52,561 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 15:11:52,561 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 15:11:52,561 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 15:11:52,563 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 15:11:52,566 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 15:11:52,570 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 15:11:52,610 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 15:11:52,618 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=1
+2026-08-19 15:11:52,618 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=2
+2026-08-19 15:11:52,618 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=3
+2026-08-19 15:11:52,618 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=4
+2026-08-19 15:11:52,619 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=5
+2026-08-19 15:11:52,619 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=6
+2026-08-19 15:11:52,619 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=7
+2026-08-19 15:11:52,619 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=8
+2026-08-19 15:11:52,619 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=9
+2026-08-19 15:11:52,619 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=10
+2026-08-19 15:11:52,619 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=11
+2026-08-19 15:11:52,619 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=12
+2026-08-19 15:11:52,620 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=13
+2026-08-19 15:11:52,620 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=14
+2026-08-19 15:11:52,620 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=15
+2026-08-19 15:11:52,620 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=16
+2026-08-19 15:11:52,620 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=17
+2026-08-19 15:11:52,620 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=18
+2026-08-19 15:11:52,621 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=19
+2026-08-19 15:11:52,621 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=20
+2026-08-19 15:11:52,621 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=0dbea4e7… 共 20 条消息
+2026-08-19 15:11:52,622 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=0dbea4e7-f7d…, size=2/32
+2026-08-19 15:11:53,080 - agent - INFO - app.py:130 - [app] 从 SQLite 恢复 20 条消息: session=0dbea4e7-f7df-47…
