@@ -276,6 +276,13 @@ class SoulLoader:
             self.load(name)
         logger.info(f"[SoulLoader] 已重载全部 {len(names)} 个角色")
 
+    def reload_all_from_disk(self) -> list[LoadedSoul]:
+        """清空缓存并从磁盘重新读取全部角色人设文件。"""
+        self._cache.clear()
+        loaded = self.list_all()
+        logger.info("[SoulLoader] 已从磁盘重新读取全部角色: %d", len(loaded))
+        return loaded
+
     def clear_cache(self):
         """清除所有缓存。"""
         self._cache.clear()

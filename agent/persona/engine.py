@@ -370,6 +370,13 @@ class PersonaEngine:
 
     # ==================== 缓存管理 ====================
 
+    def reload_personas_from_disk(self) -> None:
+        """Agent 启动时刷新全部角色文件，避免沿用旧的人设缓存。"""
+        self.soul_loader.reload_all_from_disk()
+        from prompts.composer import clear_cache
+        clear_cache()
+        logger.info("[PersonaEngine] 已重新读取磁盘上的全部角色人设")
+
     def clear_cache(self):
         """清除所有组件缓存（用于热重载）。"""
         self.soul_loader.clear_cache()

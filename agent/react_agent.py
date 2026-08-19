@@ -167,6 +167,10 @@ class ReactAgent:
         MCP 连接失败时自动降级为仅本地工具，不阻塞 Agent 启动。
         """
         # 拉取 MCP 工具（天气/定位已改用高德 Web API 本地工具，仅 websearch 走 MCP）
+        # 每次创建 Agent 都从磁盘刷新全部角色人设，不使用上一次会话缓存。
+        from agent.persona.engine import persona_engine
+        persona_engine.reload_personas_from_disk()
+
         weather_mcp_tools = [maps_weather]
         if os.getenv("DASHSCOPE_API_KEY"):
             try:

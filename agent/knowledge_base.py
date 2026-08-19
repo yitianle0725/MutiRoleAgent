@@ -8,6 +8,7 @@ v2: 增加维度校验 + BM25 索引同步。
 
 import os
 import hashlib
+import sqlite3
 from datetime import datetime
 
 from langchain_chroma import Chroma
@@ -62,24 +63,27 @@ class KnowledgeBaseService(object):
         )
 
         # MD5 去重路径
-        self._md5_path = get_abs_path(faq_config["md5_hex_store"])
+        self._file_index_path = get_abs_path("db/knowledge_files.sqlite3")
+        os.makedirs(os.path.dirname(self._file_index_path), exist_ok=True)
+        with sqlite3.connect(self._file_index_path) as connection:
+            connection.execute("""
+                CREATE TABLE IF NOT EXISTS knowledge_files (
+                    file_path TEXT NOT NULL,
+                    collection_name TEXT NOT NULL,
+                    last_modified_ts INTEGER NOT NULL,
+                    md5_hex TEXT NOT NULL,
+                    PRIMARY KEY (file_path, collection_name)
+                )
+            """)
 
         # BM25 索引路径
         self._bm25_dir = persist_dir
 
     def _check_md5(self, md5_str: str) -> bool:
-        if not os.path.exists(self._md5_path):
-            open(self._md5_path, 'w', encoding='utf-8').close()
-            return False
-        with open(self._md5_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                if line.strip() == md5_str:
-                    return True
         return False
 
     def _save_md5(self, md5_str: str):
-        with open(self._md5_path, 'a', encoding='utf-8') as f:
-            f.write(md5_str + '\n')
+        return None
 
     def _sync_bm25(self):
         """上传文档后同步 BM25 索引。"""
@@ -111,8 +115,17 @@ class KnowledgeBaseService(object):
         except Exception as e:
             logger.warning(f"[KB] BM25 索引同步失败: {e}")
 
-    def upload_by_str(self, data: str, filename):
+    def upload_by_str(self, data: str, filename, file_path: str | None = None):
         md5_hex = get_string2md5(data)
+        source_path = os.path.normcase(os.path.abspath(file_path or filename))
+        mtime_ns = os.stat(file_path).st_mtime_ns if file_path and os.path.exists(file_path) else 0
+        with sqlite3.connect(self._file_index_path) as connection:
+            record = connection.execute(
+                "SELECT last_modified_ts, md5_hex FROM knowledge_files WHERE file_path = ? AND collection_name = 'faq'",
+                (source_path,),
+            ).fetchone()
+        if record and (record[0] == mtime_ns or record[1] == md5_hex):
+            return "[跳过]内容已存在知识库中"
         if self._check_md5(md5_hex):
             logger.info(f"[KB] {filename} 已存在，跳过")
             return "[跳过]内容已存在知识库中"
@@ -123,8 +136,11 @@ class KnowledgeBaseService(object):
             else:
                 knowledge_chunks = [data]
 
+            if record:
+                self.chroma.delete(where={"source": source_path})
             metadata = {
-                "source": filename,
+                "source": source_path,
+                "display_name": filename,
                 "create_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 "operator": "ytl"
             }
@@ -133,7 +149,17 @@ class KnowledgeBaseService(object):
                 metadatas=[metadata for _ in knowledge_chunks],
             )
 
-            self._save_md5(md5_hex)
+            with sqlite3.connect(self._file_index_path) as connection:
+                connection.execute(
+                    """
+                    INSERT INTO knowledge_files(file_path, collection_name, last_modified_ts, md5_hex)
+                    VALUES (?, 'faq', ?, ?)
+                    ON CONFLICT(file_path, collection_name) DO UPDATE SET
+                        last_modified_ts = excluded.last_modified_ts,
+                        md5_hex = excluded.md5_hex
+                    """,
+                    (source_path, mtime_ns, md5_hex),
+                )
             logger.info(f"[KB] {filename} 上传成功 ({len(knowledge_chunks)} chunks)")
 
             # 同步 BM25 索引

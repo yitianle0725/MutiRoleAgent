@@ -623,3 +623,63 @@
 2026-08-18 20:57:35,605 - agent - WARNING - app.py:607 - [voice] TTS failed: Model not found (cosyvoice-v1)!
 2026-08-18 21:00:34,482 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
 2026-08-18 21:00:34,494 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-18 21:13:22,065 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 21:13:22,868 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-18 21:13:25,075 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-18 21:13:27,091 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-18 21:13:27,095 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-18 21:13:27,095 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-18 21:13:27,097 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-18 21:13:27,146 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-18 21:13:27,146 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=1
+2026-08-18 21:13:27,146 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=2
+2026-08-18 21:13:27,146 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=3
+2026-08-18 21:13:27,146 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=4
+2026-08-18 21:13:27,146 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=5
+2026-08-18 21:13:27,146 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=6
+2026-08-18 21:13:27,146 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=7
+2026-08-18 21:13:27,146 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=8
+2026-08-18 21:13:27,150 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=9
+2026-08-18 21:13:27,150 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=10
+2026-08-18 21:13:27,150 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=11
+2026-08-18 21:13:27,150 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=12
+2026-08-18 21:13:27,150 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=13
+2026-08-18 21:13:27,150 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=14
+2026-08-18 21:13:27,150 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=15
+2026-08-18 21:13:27,150 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=16
+2026-08-18 21:13:27,150 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=0dbea4e7… 共 16 条消息
+2026-08-18 21:13:27,150 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=0dbea4e7-f7d…, size=1/32
+2026-08-18 21:13:27,159 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 21:13:27,330 - agent - INFO - app.py:130 - [app] 从 SQLite 恢复 16 条消息: session=0dbea4e7-f7df-47…
+2026-08-18 21:14:04,793 - agent - INFO - service.py:67 - [voice] ASR input: wav_bytes=291884 pcm_bytes=291840 sample_rate=16000
+2026-08-18 21:14:05,162 - agent - INFO - service.py:78 - [voice] VAD passed: speech_duration_ms=5040
+2026-08-18 21:14:27,134 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|8b6e08e6|0dbea4e7] #1 [ENTER] (0ms) query="你能访问吗？" loop=2224
+2026-08-18 21:14:27,135 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|8b6e08e6|0dbea4e7] #2 [LOAD_HISTORY] (1ms) 16条 [AIMessage=8 HumanMessage=8] ~1482tok 8轮 loop=2224
+2026-08-18 21:14:27,136 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 16 条消息, token 估算=1482, 轮数=8
+2026-08-18 21:14:27,136 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|8b6e08e6|0dbea4e7] #3 [TRIM] (2ms) 无需裁剪: 16条 8轮
+2026-08-18 21:14:27,138 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|8b6e08e6|0dbea4e7] #4 [DECISION] (3ms) → AGENT conf=0.30 "fallback_default" loop=2224
+2026-08-18 21:14:27,138 - agent - INFO - react_agent.py:694 - [trace=8b6e08e6] Decision: route=agent conf=0.30 reason=fallback_default
+2026-08-18 21:14:27,138 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|8b6e08e6|0dbea4e7] #5 [AGENT_START] (4ms) ReAct 循环, state消息=17条 loop=2224
+2026-08-18 21:14:27,139 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|8b6e08e6|0dbea4e7] #6 [AGENT_MODEL_BEFORE] (4ms) 发送 17 条消息给 LLM
+2026-08-18 21:14:27,148 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 18→18 条消息, 已注入日期: 2026-08-18 21:14
+2026-08-18 21:14:31,382 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|8b6e08e6|0dbea4e7] #7 [AGENT_DONE] (4247ms) 响应=308字 tokens={'input_tokens': 7105, 'output_tokens': 181, 'total_tokens': 7286} 耗时=4.2s
+2026-08-18 21:14:31,384 - agent - INFO - react_agent.py:784 - [trace=8b6e08e6] 完成: tokens={'input_tokens': 7105, 'output_tokens': 181, 'total_tokens': 7286}, 响应长度=308
+2026-08-18 21:14:31,384 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (HumanMessage), total=17
+2026-08-18 21:14:31,384 - agent - DEBUG - session_store.py:75 - [SessionStore] session=0dbea4e7-f7df-471a-8dda-c91f55c822a0 +1 msg (AIMessage), total=18
+2026-08-18 21:14:31,398 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=0dbea4e7…
+2026-08-18 21:14:31,406 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|8b6e08e6|0dbea4e7] #8 [PERSIST] (4271ms) session_store=18条 chat_db=18条
+2026-08-18 21:14:31,429 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|8b6e08e6|0dbea4e7] #9 [EXIT_OK] (4294ms) 总耗时=4294ms
+2026-08-18 21:40:46,657 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-18 21:40:46,667 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-18 21:41:58,947 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-18 21:41:58,984 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-18 21:42:53,048 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-18 21:45:14,757 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-18 21:45:14,762 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-18 21:45:14,766 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-18 21:45:14,769 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-18 21:45:14,769 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-18 21:45:14,779 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-18 21:45:14,779 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-18 21:45:18,028 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-18 21:45:18,043 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6

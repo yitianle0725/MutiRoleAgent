@@ -19,6 +19,7 @@ Collection 划分
 """
 
 import os
+import sqlite3
 
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -62,6 +63,7 @@ def _build_spliter() -> RecursiveCharacterTextSplitter:
 # ==================== MD5 去重辅助 ====================
 
 def _check_md5(md5_store_path: str, md5_hex: str) -> bool:
+    return False
     """检查 MD5 是否已处理过。"""
     if not os.path.exists(md5_store_path):
         open(md5_store_path, "w", encoding="utf-8").close()
@@ -74,6 +76,7 @@ def _check_md5(md5_store_path: str, md5_hex: str) -> bool:
 
 
 def _save_md5(md5_store_path: str, md5_hex: str):
+    return None
     """记录 MD5 到去重文件。"""
     with open(md5_store_path, "a", encoding="utf-8") as f:
         f.write(md5_hex + "\n")
@@ -93,6 +96,64 @@ class VectorStore:
         self._bm25_indexes: dict[str, "ChineseBM25"] = {}
         self._spliter = _build_spliter()
         self._dim_guard = DimensionGuard(_PERSIST_DIR)
+        self._file_index_path = get_abs_path("db/knowledge_files.sqlite3")
+        os.makedirs(os.path.dirname(self._file_index_path), exist_ok=True)
+        self._init_file_index()
+
+    def _init_file_index(self) -> None:
+        """创建文档索引表，记录路径、mtime 和内容 MD5。"""
+        with sqlite3.connect(self._file_index_path) as connection:
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS knowledge_files (
+                    file_path TEXT NOT NULL,
+                    collection_name TEXT NOT NULL,
+                    last_modified_ts INTEGER NOT NULL,
+                    md5_hex TEXT NOT NULL,
+                    PRIMARY KEY (file_path, collection_name)
+                )
+                """
+            )
+
+    @staticmethod
+    def _normalize_path(path: str) -> str:
+        return os.path.normcase(os.path.abspath(path))
+
+    def _get_file_record(self, file_path: str, collection_name: str):
+        with sqlite3.connect(self._file_index_path) as connection:
+            return connection.execute(
+                "SELECT last_modified_ts, md5_hex FROM knowledge_files "
+                "WHERE file_path = ? AND collection_name = ?",
+                (file_path, collection_name),
+            ).fetchone()
+
+    def _save_file_record(self, file_path: str, collection_name: str, mtime_ns: int, md5_hex: str) -> None:
+        with sqlite3.connect(self._file_index_path) as connection:
+            connection.execute(
+                """
+                INSERT INTO knowledge_files(file_path, collection_name, last_modified_ts, md5_hex)
+                VALUES (?, ?, ?, ?)
+                ON CONFLICT(file_path, collection_name) DO UPDATE SET
+                    last_modified_ts = excluded.last_modified_ts,
+                    md5_hex = excluded.md5_hex
+                """,
+                (file_path, collection_name, mtime_ns, md5_hex),
+            )
+
+    def _list_file_records(self, collection_name: str) -> list[str]:
+        with sqlite3.connect(self._file_index_path) as connection:
+            rows = connection.execute(
+                "SELECT file_path FROM knowledge_files WHERE collection_name = ?",
+                (collection_name,),
+            ).fetchall()
+        return [row[0] for row in rows]
+
+    def _delete_file_record(self, file_path: str, collection_name: str) -> None:
+        with sqlite3.connect(self._file_index_path) as connection:
+            connection.execute(
+                "DELETE FROM knowledge_files WHERE file_path = ? AND collection_name = ?",
+                (file_path, collection_name),
+            )
 
     # ---- 内部：获取/懒加载 collection ----
 
@@ -239,7 +300,6 @@ class VectorStore:
 
             coll_cfg = chroma_config[coll_name]
             data_path = get_abs_path(coll_cfg["data_path"])
-            md5_path = get_abs_path(coll_cfg["md5_hex_store"])
             allowed_types = tuple(coll_cfg["allow_knowledge_file_type"])
 
             if not os.path.exists(data_path):
@@ -247,18 +307,70 @@ class VectorStore:
                 logger.info(f"[VectorStore] 创建目录: {data_path}")
 
             store = self._get_store(coll_name)
-            new_docs_count = self._load_files(store, data_path, md5_path, allowed_types)
+            new_docs_count = self._load_files_with_index(store, coll_name, data_path, allowed_types)
 
             # 有新文档 → 重建 BM25 索引
             if new_docs_count > 0:
                 bm25 = self._rebuild_bm25(coll_name)
                 self._bm25_indexes[coll_name] = bm25
 
+    def _load_files_with_index(
+        self,
+        store: Chroma,
+        collection_name: str,
+        data_path: str,
+        allowed_types: tuple[str, ...],
+    ) -> int:
+        """按 mtime 快筛、MD5 精确校验，同步文档向量和删除记录。"""
+        allowed_files = listdir_with_allowed_type(data_path, allowed_types)
+        current_files = {self._normalize_path(path) for path in allowed_files}
+        changed_count = 0
+
+        for path in allowed_files:
+            normalized_path = self._normalize_path(path)
+            mtime_ns = os.stat(path).st_mtime_ns
+            record = self._get_file_record(normalized_path, collection_name)
+            if record and record[0] == mtime_ns:
+                continue
+
+            md5_hex = get_file_md5_hex(path)
+            if not md5_hex:
+                continue
+            if record and record[1] == md5_hex:
+                self._save_file_record(normalized_path, collection_name, mtime_ns, md5_hex)
+                continue
+
+            try:
+                # 首次迁移也先删除同 source 的旧切片，避免旧 MD5 索引造成重复。
+                store.delete(where={"source": normalized_path})
+                documents = self._load_file_documents(path)
+                split_docs = self._spliter.split_documents(documents)
+                if not split_docs:
+                    continue
+                for document in split_docs:
+                    document.metadata["source"] = normalized_path
+                store.add_documents(split_docs)
+                self._save_file_record(normalized_path, collection_name, mtime_ns, md5_hex)
+                changed_count += 1
+                logger.info("[VectorStore] 文档已同步: %s (%d chunks)", path, len(split_docs))
+            except Exception as error:
+                logger.error("[VectorStore] 文档同步失败: %s (%s)", path, error, exc_info=True)
+
+        for stale_path in set(self._list_file_records(collection_name)) - current_files:
+            try:
+                store.delete(where={"source": stale_path})
+                self._delete_file_record(stale_path, collection_name)
+                changed_count += 1
+                logger.info("[VectorStore] 已删除文档索引: %s", stale_path)
+            except Exception as error:
+                logger.warning("[VectorStore] 清理已删除文档失败: %s (%s)", stale_path, error)
+        return changed_count
+
     def _load_files(
         self,
         store: Chroma,
+        collection_name: str,
         data_path: str,
-        md5_path: str,
         allowed_types: tuple[str, ...],
     ) -> int:
         """加载单个目录下的所有文件到指定 store。

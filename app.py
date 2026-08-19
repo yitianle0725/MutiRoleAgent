@@ -388,7 +388,7 @@ with st.sidebar:
 
         # 3) 向量入库
         with st.spinner("载入知识库中…"):
-            result = st.session_state["kb_service"].upload_by_str(text, file_name)
+            result = st.session_state["kb_service"].upload_by_str(text, file_name, save_path)
             if "[成功]" in result:
                 st.success(result)
             elif "[跳过]" in result:
