@@ -1,0 +1,60 @@
+.settings-panel {
+  position: relative;
+}
+
+.settings-toggle {
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+}
+
+.settings-toggle:hover {
+  border-color: #4096ff;
+  color: #0958d9;
+}
+
+.settings-body {
+  position: absolute;
+  right: 0;
+  top: 34px;
+  width: 320px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  z-index: 20;
+}
+
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 4px;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 13px;
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-label {
+  color: #888;
+  flex-shrink: 0;
+}
+
+.settings-value {
+  color: #333;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

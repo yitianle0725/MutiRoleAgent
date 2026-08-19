@@ -109,3 +109,750 @@
 2026-08-19 15:11:52,621 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=0dbea4e7… 共 20 条消息
 2026-08-19 15:11:52,622 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=0dbea4e7-f7d…, size=2/32
 2026-08-19 15:11:53,080 - agent - INFO - app.py:130 - [app] 从 SQLite 恢复 20 条消息: session=0dbea4e7-f7df-47…
+2026-08-19 20:08:49,539 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:09:40,966 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:10:31,053 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:10:58,927 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:12:25,689 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:14:03,367 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:15:02,127 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:15:02,659 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 20:15:02,678 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 20:15:02,697 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 20:15:02,715 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 20:15:02,715 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 20:15:02,720 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 20:15:02,720 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 20:15:04,982 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 20:15:06,987 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 20:15:06,989 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 20:15:06,989 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 20:15:07,021 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 20:15:07,100 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 20:15:07,101 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=sse-test…, size=1/32
+2026-08-19 20:15:07,102 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c784fb44|sse-test] #1 [ENTER] (0ms) query="你好，请用一句话回复我" loop=4800
+2026-08-19 20:15:07,102 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c784fb44|sse-test] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=4800
+2026-08-19 20:15:07,102 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c784fb44|sse-test] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 20:15:07,102 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c784fb44|sse-test] #4 [DECISION] (1ms) → CHAT conf=0.95 "chat_signal:greetings" loop=4800
+2026-08-19 20:15:07,103 - agent - INFO - react_agent.py:698 - [trace=c784fb44] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 20:15:07,103 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c784fb44|sse-test] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=4800
+2026-08-19 20:15:07,105 - agent - DEBUG - react_agent.py:349 - [trace=c784fb44] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-19 20:15:07,105 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3542 字符
+2026-08-19 20:15:08,033 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c784fb44|sse-test] #6 [CHAT_DONE] (932ms) 响应=13字 耗时=0.9s
+2026-08-19 20:15:08,033 - agent - INFO - react_agent.py:494 - [trace=c784fb44] Chat 完成: 响应长度=13
+2026-08-19 20:15:08,035 - agent - DEBUG - session_store.py:75 - [SessionStore] session=sse-test +1 msg (HumanMessage), total=1
+2026-08-19 20:15:08,035 - agent - DEBUG - session_store.py:75 - [SessionStore] session=sse-test +1 msg (AIMessage), total=2
+2026-08-19 20:15:08,038 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=sse-test…
+2026-08-19 20:15:08,042 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c784fb44|sse-test] #7 [PERSIST] (940ms) session_store=2条 chat_db=2条
+2026-08-19 20:15:08,055 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c784fb44|sse-test] #8 [EXIT_OK] (953ms) 总耗时=953ms
+2026-08-19 20:16:16,023 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:17:51,133 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:18:30,779 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 20:18:30,781 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 20:18:30,782 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 20:18:30,784 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 20:18:30,784 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 20:18:30,789 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 20:18:30,789 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 20:18:33,037 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 20:18:35,055 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 20:18:35,057 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 20:18:35,057 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 20:18:35,059 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 20:18:35,097 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 20:18:35,098 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=default…, size=1/32
+2026-08-19 20:18:35,099 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3cf4aa61|default] #1 [ENTER] (0ms) query="hi" loop=5488
+2026-08-19 20:18:35,099 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3cf4aa61|default] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=5488
+2026-08-19 20:18:35,099 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3cf4aa61|default] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 20:18:35,099 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3cf4aa61|default] #4 [DECISION] (1ms) → CHAT conf=0.95 "chat_signal:greetings" loop=5488
+2026-08-19 20:18:35,099 - agent - INFO - react_agent.py:698 - [trace=3cf4aa61] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 20:18:35,100 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3cf4aa61|default] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=5488
+2026-08-19 20:18:35,101 - agent - DEBUG - react_agent.py:349 - [trace=3cf4aa61] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-19 20:18:35,101 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3505 字符
+2026-08-19 20:18:35,996 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3cf4aa61|default] #6 [CHAT_DONE] (897ms) 响应=13字 耗时=0.9s
+2026-08-19 20:18:35,996 - agent - INFO - react_agent.py:494 - [trace=3cf4aa61] Chat 完成: 响应长度=13
+2026-08-19 20:18:35,996 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (HumanMessage), total=1
+2026-08-19 20:18:35,996 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (AIMessage), total=2
+2026-08-19 20:18:36,006 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=default…
+2026-08-19 20:18:36,009 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3cf4aa61|default] #7 [PERSIST] (910ms) session_store=2条 chat_db=2条
+2026-08-19 20:18:36,020 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3cf4aa61|default] #8 [EXIT_OK] (921ms) 总耗时=921ms
+2026-08-19 20:18:36,169 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|2a4e4504|default] #1 [ENTER] (0ms) query="bye" loop=5488
+2026-08-19 20:18:36,169 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|2a4e4504|default] #2 [LOAD_HISTORY] (0ms) 2条 [AIMessage=1 HumanMessage=1] ~10tok 1轮 loop=5488
+2026-08-19 20:18:36,169 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|2a4e4504|default] #3 [TRIM] (0ms) 无需裁剪: 2条 1轮
+2026-08-19 20:18:36,169 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|2a4e4504|default] #4 [DECISION] (0ms) → CHAT conf=0.95 "chat_signal:farewell" loop=5488
+2026-08-19 20:18:36,169 - agent - INFO - react_agent.py:698 - [trace=2a4e4504] Decision: route=chat conf=0.95 reason=chat_signal:farewell
+2026-08-19 20:18:36,169 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|2a4e4504|default] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=2条 loop=5488
+2026-08-19 20:18:36,170 - agent - DEBUG - react_agent.py:349 - [trace=2a4e4504] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-19 20:18:36,170 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3505 字符
+2026-08-19 20:18:37,062 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|2a4e4504|default] #6 [CHAT_DONE] (893ms) 响应=22字 耗时=0.9s
+2026-08-19 20:18:37,062 - agent - INFO - react_agent.py:494 - [trace=2a4e4504] Chat 完成: 响应长度=22
+2026-08-19 20:18:37,062 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (HumanMessage), total=3
+2026-08-19 20:18:37,062 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (AIMessage), total=4
+2026-08-19 20:18:37,073 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=default…
+2026-08-19 20:18:37,076 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|2a4e4504|default] #7 [PERSIST] (907ms) session_store=4条 chat_db=4条
+2026-08-19 20:18:37,082 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|2a4e4504|default] #8 [EXIT_OK] (913ms) 总耗时=913ms
+2026-08-19 20:41:30,494 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:43:15,766 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 20:44:52,461 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 20:50:21,625 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:50:22,027 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 20:59:18,555 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 20:59:19,204 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 21:03:56,224 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 21:03:56,242 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 21:03:56,260 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 21:03:56,278 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 21:03:56,278 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 21:03:56,283 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 21:03:56,284 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 21:03:58,682 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 21:04:00,869 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 21:04:00,871 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 21:04:00,872 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 21:04:00,903 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 21:04:00,961 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 21:04:00,961 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=t2-final…, size=1/32
+2026-08-19 21:04:00,963 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|903d47ef|t2-final] #1 [ENTER] (0ms) query="说句你好" loop=2592
+2026-08-19 21:04:00,963 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|903d47ef|t2-final] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=2592
+2026-08-19 21:04:00,963 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|903d47ef|t2-final] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 21:04:00,963 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|903d47ef|t2-final] #4 [DECISION] (1ms) → CHAT conf=0.95 "chat_signal:greetings" loop=2592
+2026-08-19 21:04:00,963 - agent - INFO - react_agent.py:698 - [trace=903d47ef] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 21:04:00,963 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|903d47ef|t2-final] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=2592
+2026-08-19 21:04:00,965 - agent - DEBUG - react_agent.py:349 - [trace=903d47ef] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-19 21:04:00,965 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3542 字符
+2026-08-19 21:09:12,924 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 21:09:13,397 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 21:11:54,863 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 21:11:54,870 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 21:11:54,870 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 21:11:54,875 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 21:11:54,875 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 21:11:54,881 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 21:11:54,881 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 21:11:57,335 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 21:11:59,577 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 21:11:59,577 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 21:11:59,577 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 21:11:59,577 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 21:11:59,613 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 21:11:59,613 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=final-e2e…, size=1/32
+2026-08-19 21:11:59,613 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|d026a1cc|final-e2] #1 [ENTER] (0ms) query="你好呀，做个自我介绍" loop=6176
+2026-08-19 21:11:59,613 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|d026a1cc|final-e2] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=6176
+2026-08-19 21:11:59,613 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|d026a1cc|final-e2] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 21:11:59,613 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|d026a1cc|final-e2] #4 [DECISION] (0ms) → CHAT conf=0.95 "chat_signal:greetings" loop=6176
+2026-08-19 21:11:59,613 - agent - INFO - react_agent.py:698 - [trace=d026a1cc] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 21:11:59,613 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|d026a1cc|final-e2] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=6176
+2026-08-19 21:11:59,613 - agent - DEBUG - react_agent.py:349 - [trace=d026a1cc] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat', 'task']
+2026-08-19 21:11:59,613 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3542 字符
+2026-08-19 21:12:02,208 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|d026a1cc|final-e2] #6 [CHAT_DONE] (2596ms) 响应=139字 耗时=2.6s
+2026-08-19 21:12:02,208 - agent - INFO - react_agent.py:494 - [trace=d026a1cc] Chat 完成: 响应长度=139
+2026-08-19 21:12:02,208 - agent - DEBUG - session_store.py:75 - [SessionStore] session=final-e2e +1 msg (HumanMessage), total=1
+2026-08-19 21:12:02,208 - agent - DEBUG - session_store.py:75 - [SessionStore] session=final-e2e +1 msg (AIMessage), total=2
+2026-08-19 21:12:02,216 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=final-e2…
+2026-08-19 21:12:02,221 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|d026a1cc|final-e2] #7 [PERSIST] (2606ms) session_store=2条 chat_db=2条
+2026-08-19 21:12:02,232 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|d026a1cc|final-e2] #8 [EXIT_OK] (2616ms) 总耗时=2616ms
+2026-08-19 21:13:04,523 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|58e7632e|final-e2] #1 [ENTER] (0ms) query="你好呀，做个自我介绍" loop=6176
+2026-08-19 21:13:04,523 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|58e7632e|final-e2] #2 [LOAD_HISTORY] (0ms) 2条 [AIMessage=1 HumanMessage=1] ~98tok 1轮 loop=6176
+2026-08-19 21:13:04,523 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|58e7632e|final-e2] #3 [TRIM] (1ms) 无需裁剪: 2条 1轮
+2026-08-19 21:13:04,523 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|58e7632e|final-e2] #4 [DECISION] (1ms) → CHAT conf=0.95 "chat_signal:greetings" loop=6176
+2026-08-19 21:13:04,523 - agent - INFO - react_agent.py:698 - [trace=58e7632e] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 21:13:04,523 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|58e7632e|final-e2] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=2条 loop=6176
+2026-08-19 21:13:04,523 - agent - DEBUG - react_agent.py:349 - [trace=58e7632e] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat', 'task']
+2026-08-19 21:13:04,523 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3542 字符
+2026-08-19 21:13:06,390 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|58e7632e|final-e2] #6 [CHAT_DONE] (1869ms) 响应=139字 耗时=1.9s
+2026-08-19 21:13:06,390 - agent - INFO - react_agent.py:494 - [trace=58e7632e] Chat 完成: 响应长度=139
+2026-08-19 21:13:06,390 - agent - DEBUG - session_store.py:75 - [SessionStore] session=final-e2e +1 msg (HumanMessage), total=3
+2026-08-19 21:13:06,390 - agent - DEBUG - session_store.py:75 - [SessionStore] session=final-e2e +1 msg (AIMessage), total=4
+2026-08-19 21:13:06,407 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=final-e2…
+2026-08-19 21:13:06,408 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|58e7632e|final-e2] #7 [PERSIST] (1886ms) session_store=4条 chat_db=4条
+2026-08-19 21:13:06,414 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|58e7632e|final-e2] #8 [EXIT_OK] (1891ms) 总耗时=1891ms
+2026-08-19 21:15:05,052 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 21:15:05,052 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 21:23:21,112 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 21:23:21,594 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 21:24:09,784 - agent - INFO - service.py:67 - [voice] ASR input: wav_bytes=64044 pcm_bytes=64000 sample_rate=16000
+2026-08-19 21:30:44,924 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 21:30:45,496 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 21:30:46,084 - agent - INFO - service.py:67 - [voice] ASR input: wav_bytes=64044 pcm_bytes=64000 sample_rate=16000
+2026-08-19 23:03:47,454 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:03:47,481 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:03:47,495 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:03:47,509 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:03:47,509 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:03:47,529 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:03:47,529 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:03:50,386 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 23:03:52,926 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 23:03:52,928 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:03:52,936 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:03:52,968 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:03:53,072 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:03:53,073 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=t3-reg…, size=1/32
+2026-08-19 23:03:53,076 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7af48d64|t3-reg] #1 [ENTER] (0ms) query="说句你好" loop=6480
+2026-08-19 23:03:53,076 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7af48d64|t3-reg] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=6480
+2026-08-19 23:03:53,076 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7af48d64|t3-reg] #3 [TRIM] (1ms) 无需裁剪: 0条 0轮
+2026-08-19 23:03:53,077 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7af48d64|t3-reg] #4 [DECISION] (1ms) → CHAT conf=0.95 "chat_signal:greetings" loop=6480
+2026-08-19 23:03:53,077 - agent - INFO - react_agent.py:698 - [trace=7af48d64] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 23:03:53,077 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7af48d64|t3-reg] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=6480
+2026-08-19 23:03:53,080 - agent - DEBUG - react_agent.py:349 - [trace=7af48d64] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-19 23:03:53,080 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3542 字符
+2026-08-19 23:03:53,767 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7af48d64|t3-reg] #6 [CHAT_DONE] (691ms) 响应=13字 耗时=0.7s
+2026-08-19 23:03:53,767 - agent - INFO - react_agent.py:494 - [trace=7af48d64] Chat 完成: 响应长度=13
+2026-08-19 23:03:53,767 - agent - DEBUG - session_store.py:75 - [SessionStore] session=t3-reg +1 msg (HumanMessage), total=1
+2026-08-19 23:03:53,767 - agent - DEBUG - session_store.py:75 - [SessionStore] session=t3-reg +1 msg (AIMessage), total=2
+2026-08-19 23:03:53,771 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=t3-reg…
+2026-08-19 23:03:53,775 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7af48d64|t3-reg] #7 [PERSIST] (699ms) session_store=2条 chat_db=2条
+2026-08-19 23:03:53,787 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7af48d64|t3-reg] #8 [EXIT_OK] (711ms) 总耗时=711ms
+2026-08-19 23:20:11,390 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 23:20:12,028 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 23:20:13,727 - agent - INFO - chat_db.py:241 - [ChatDB] 已清空 session=19ee5aa2…
+2026-08-19 23:28:17,266 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 23:28:17,798 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 23:28:18,671 - agent - INFO - chat_db.py:241 - [ChatDB] 已清空 session=024ebb2e…
+2026-08-19 23:29:03,675 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:29:03,678 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:29:03,680 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:29:03,683 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:29:03,683 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:29:03,690 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:29:03,690 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:29:06,118 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 23:29:08,378 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 23:29:08,388 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:29:08,388 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:29:08,391 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:29:08,445 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:29:08,446 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=t4-reg…, size=1/32
+2026-08-19 23:29:08,449 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|91ece6ad|t4-reg] #1 [ENTER] (0ms) query="你好" loop=3648
+2026-08-19 23:29:08,450 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|91ece6ad|t4-reg] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=3648
+2026-08-19 23:29:08,450 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|91ece6ad|t4-reg] #3 [TRIM] (1ms) 无需裁剪: 0条 0轮
+2026-08-19 23:29:08,450 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|91ece6ad|t4-reg] #4 [DECISION] (1ms) → CHAT conf=0.95 "chat_signal:greetings" loop=3648
+2026-08-19 23:29:08,450 - agent - INFO - react_agent.py:698 - [trace=91ece6ad] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 23:29:08,450 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|91ece6ad|t4-reg] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=3648
+2026-08-19 23:29:08,454 - agent - DEBUG - react_agent.py:349 - [trace=91ece6ad] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-19 23:29:08,454 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-19 23:29:08,511 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: cyrene (61 条)
+2026-08-19 23:29:08,537 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=你好, persona=Cyrene, entries=5
+2026-08-19 23:29:08,538 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=['polite'], stage=None, instructions=4, temp=0.50
+2026-08-19 23:29:08,538 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=5条, tone=4条指令, prompt_len=11871字符
+2026-08-19 23:29:09,742 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|91ece6ad|t4-reg] #6 [CHAT_DONE] (1293ms) 响应=27字 耗时=1.3s
+2026-08-19 23:29:09,743 - agent - INFO - react_agent.py:494 - [trace=91ece6ad] Chat 完成: 响应长度=27
+2026-08-19 23:29:09,743 - agent - DEBUG - session_store.py:75 - [SessionStore] session=t4-reg +1 msg (HumanMessage), total=1
+2026-08-19 23:29:09,743 - agent - DEBUG - session_store.py:75 - [SessionStore] session=t4-reg +1 msg (AIMessage), total=2
+2026-08-19 23:29:09,748 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=t4-reg…
+2026-08-19 23:29:09,750 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|91ece6ad|t4-reg] #7 [PERSIST] (1301ms) session_store=2条 chat_db=2条
+2026-08-19 23:29:09,761 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|91ece6ad|t4-reg] #8 [EXIT_OK] (1311ms) 总耗时=1311ms
+2026-08-19 23:32:08,841 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 23:32:09,317 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 23:37:16,858 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:37:16,860 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:37:16,862 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:37:16,865 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:37:16,865 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:37:16,872 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:37:16,873 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:37:19,059 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 23:37:21,051 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 23:37:21,054 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:37:21,055 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:37:21,058 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:37:21,103 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:37:21,104 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (HumanMessage), total=1
+2026-08-19 23:37:21,104 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (AIMessage), total=2
+2026-08-19 23:37:21,104 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (HumanMessage), total=3
+2026-08-19 23:37:21,104 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (AIMessage), total=4
+2026-08-19 23:37:21,104 - agent - INFO - chat_db.py:299 - [ChatDB→SessionStore] 恢复 session=default… 共 4 条消息
+2026-08-19 23:37:21,104 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=default…, size=1/32
+2026-08-19 23:37:21,106 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|dc89da70|default] #1 [ENTER] (0ms) query="晚上好" loop=4272
+2026-08-19 23:37:21,107 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|dc89da70|default] #2 [LOAD_HISTORY] (1ms) 4条 [AIMessage=2 HumanMessage=2] ~26tok 2轮 loop=4272
+2026-08-19 23:37:21,108 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 4 条消息, token 估算=26, 轮数=2
+2026-08-19 23:37:21,108 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|dc89da70|default] #3 [TRIM] (2ms) 无需裁剪: 4条 2轮
+2026-08-19 23:37:21,109 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|dc89da70|default] #4 [DECISION] (3ms) → CHAT conf=0.95 "chat_signal:greetings" loop=4272
+2026-08-19 23:37:21,109 - agent - INFO - react_agent.py:698 - [trace=dc89da70] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 23:37:21,110 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|dc89da70|default] #5 [CHAT_START] (3ms) 直接 LLM 调用, 历史=4条 loop=4272
+2026-08-19 23:37:21,113 - agent - DEBUG - react_agent.py:349 - [trace=dc89da70] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-19 23:37:21,113 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-19 23:37:21,117 - agent - DEBUG - worldbook_retriever.py:398 - [WorldbookRetriever] 已加载角色 worldbook: cyrene (61 条)
+2026-08-19 23:37:21,119 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=晚上好, persona=Cyrene, entries=5
+2026-08-19 23:37:21,120 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=None, stage=None, instructions=4, temp=0.50
+2026-08-19 23:37:21,120 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=5条, tone=4条指令, prompt_len=11871字符
+2026-08-19 23:37:22,293 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|dc89da70|default] #6 [CHAT_DONE] (1187ms) 响应=26字 耗时=1.2s
+2026-08-19 23:37:22,293 - agent - INFO - react_agent.py:494 - [trace=dc89da70] Chat 完成: 响应长度=26
+2026-08-19 23:37:22,293 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (HumanMessage), total=5
+2026-08-19 23:37:22,293 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (AIMessage), total=6
+2026-08-19 23:37:22,304 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=default…
+2026-08-19 23:37:22,307 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|dc89da70|default] #7 [PERSIST] (1202ms) session_store=6条 chat_db=6条
+2026-08-19 23:37:22,313 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|dc89da70|default] #8 [EXIT_OK] (1207ms) 总耗时=1207ms
+2026-08-19 23:39:18,311 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c8543988|default] #1 [ENTER] (0ms) query="晚上好" loop=4272
+2026-08-19 23:39:18,311 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c8543988|default] #2 [LOAD_HISTORY] (1ms) 6条 [AIMessage=3 HumanMessage=3] ~48tok 3轮 loop=4272
+2026-08-19 23:39:18,312 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 6 条消息, token 估算=48, 轮数=3
+2026-08-19 23:39:18,312 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c8543988|default] #3 [TRIM] (1ms) 无需裁剪: 6条 3轮
+2026-08-19 23:39:18,312 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c8543988|default] #4 [DECISION] (1ms) → CHAT conf=0.95 "chat_signal:greetings" loop=4272
+2026-08-19 23:39:18,312 - agent - INFO - react_agent.py:698 - [trace=c8543988] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 23:39:18,313 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c8543988|default] #5 [CHAT_START] (2ms) 直接 LLM 调用, 历史=6条 loop=4272
+2026-08-19 23:39:18,313 - agent - DEBUG - react_agent.py:349 - [trace=c8543988] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-19 23:39:18,313 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-19 23:39:18,313 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=晚上好, persona=Cyrene, entries=5
+2026-08-19 23:39:18,314 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=None, stage=None, instructions=4, temp=0.50
+2026-08-19 23:39:18,314 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=5条, tone=4条指令, prompt_len=11871字符
+2026-08-19 23:39:19,837 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c8543988|default] #6 [CHAT_DONE] (1526ms) 响应=34字 耗时=1.5s
+2026-08-19 23:39:19,837 - agent - INFO - react_agent.py:494 - [trace=c8543988] Chat 完成: 响应长度=34
+2026-08-19 23:39:19,837 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (HumanMessage), total=7
+2026-08-19 23:39:19,837 - agent - DEBUG - session_store.py:75 - [SessionStore] session=default +1 msg (AIMessage), total=8
+2026-08-19 23:39:19,841 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=default…
+2026-08-19 23:39:19,844 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c8543988|default] #7 [PERSIST] (1533ms) session_store=8条 chat_db=8条
+2026-08-19 23:39:19,849 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c8543988|default] #8 [EXIT_OK] (1538ms) 总耗时=1538ms
+2026-08-19 23:40:43,368 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:40:43,370 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:40:43,372 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:40:43,375 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:40:43,375 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:40:43,375 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:40:43,375 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:40:43,376 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:40:43,377 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:40:43,380 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:40:43,396 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:40:43,397 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=8321b4a3-180…, size=2/32
+2026-08-19 23:40:43,398 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|856c16e8|8321b4a3] #1 [ENTER] (0ms) query="hello" loop=4272
+2026-08-19 23:40:43,398 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|856c16e8|8321b4a3] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=4272
+2026-08-19 23:40:43,399 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|856c16e8|8321b4a3] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 23:40:43,399 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|856c16e8|8321b4a3] #4 [DECISION] (1ms) → CHAT conf=0.95 "chat_signal:greetings" loop=4272
+2026-08-19 23:40:43,399 - agent - INFO - react_agent.py:698 - [trace=856c16e8] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 23:40:43,399 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|856c16e8|8321b4a3] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=4272
+2026-08-19 23:40:43,399 - agent - DEBUG - react_agent.py:349 - [trace=856c16e8] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-19 23:40:43,399 - agent - INFO - engine.py:195 - [PersonaEngine] 角色=Cyrene, 风格=default (source=manual, reason=用户手动选择: default)
+2026-08-19 23:40:43,400 - agent - DEBUG - worldbook_retriever.py:196 - [WorldbookRetriever] 检索: query=hello, persona=Cyrene, entries=5
+2026-08-19 23:40:43,400 - agent - DEBUG - tone_injector.py:191 - [ToneInjector] 生成: persona=Cyrene, style=default, emotions=None, stage=None, instructions=4, temp=0.50
+2026-08-19 23:40:43,400 - agent - INFO - engine.py:241 - [PersonaEngine] 处理完成: persona=Cyrene, style=default, worldbook=5条, tone=4条指令, prompt_len=11871字符
+2026-08-19 23:40:44,663 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|856c16e8|8321b4a3] #6 [CHAT_DONE] (1264ms) 响应=27字 耗时=1.3s
+2026-08-19 23:40:44,663 - agent - INFO - react_agent.py:494 - [trace=856c16e8] Chat 完成: 响应长度=27
+2026-08-19 23:40:44,664 - agent - DEBUG - session_store.py:75 - [SessionStore] session=8321b4a3-1807-4cf3-8b0f-98db53744ce8 +1 msg (HumanMessage), total=1
+2026-08-19 23:40:44,664 - agent - DEBUG - session_store.py:75 - [SessionStore] session=8321b4a3-1807-4cf3-8b0f-98db53744ce8 +1 msg (AIMessage), total=2
+2026-08-19 23:40:44,669 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=8321b4a3…
+2026-08-19 23:40:44,671 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|856c16e8|8321b4a3] #7 [PERSIST] (1272ms) session_store=2条 chat_db=2条
+2026-08-19 23:40:44,676 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|856c16e8|8321b4a3] #8 [EXIT_OK] (1277ms) 总耗时=1277ms
+2026-08-19 23:42:54,007 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #1 [ENTER] (0ms) query="明天天气如何" loop=4272
+2026-08-19 23:42:54,007 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #2 [LOAD_HISTORY] (0ms) 2条 [AIMessage=1 HumanMessage=1] ~20tok 1轮 loop=4272
+2026-08-19 23:42:54,007 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #3 [TRIM] (1ms) 无需裁剪: 2条 1轮
+2026-08-19 23:42:54,007 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #4 [DECISION] (1ms) → AGENT conf=0.95 "agent_keyword:weather" loop=4272
+2026-08-19 23:42:54,008 - agent - INFO - react_agent.py:698 - [trace=7d64b352] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-19 23:42:54,008 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #5 [AGENT_START] (1ms) ReAct 循环, state消息=3条 loop=4272
+2026-08-19 23:42:54,008 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #6 [AGENT_MODEL_BEFORE] (1ms) 发送 3 条消息给 LLM
+2026-08-19 23:42:54,019 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-19 23:42
+2026-08-19 23:42:55,404 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #7 [AGENT_TOOL] (1397ms) 调用工具: get_public_ip
+2026-08-19 23:42:55,404 - agent - INFO - react_agent.py:738 - [trace=7d64b352] 调用工具: get_public_ip
+2026-08-19 23:42:55,405 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: get_public_ip, args={}
+2026-08-19 23:42:55,405 - agent - DEBUG - execution_policy.py:220 - [Exec Policy] 未知工具 get_public_ip 不在 Schema 注册表中，宽松通过
+2026-08-19 23:42:55,950 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: get_public_ip
+2026-08-19 23:42:55,951 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #8 [AGENT_TOOL_DONE] (1945ms) 工具完成: get_public_ip 结果=11字
+2026-08-19 23:42:55,952 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-19 23:42
+2026-08-19 23:42:57,495 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #9 [AGENT_TOOL] (3487ms) 调用工具: maps_ip_location
+2026-08-19 23:42:57,495 - agent - INFO - react_agent.py:738 - [trace=7d64b352] 调用工具: maps_ip_location
+2026-08-19 23:42:57,497 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: maps_ip_location, args={'ip': '221.4.34.48'}
+2026-08-19 23:42:58,485 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: maps_ip_location
+2026-08-19 23:42:58,486 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #10 [AGENT_TOOL_DONE] (4479ms) 工具完成: maps_ip_location 结果=110字
+2026-08-19 23:42:58,487 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 8→8 条消息, 已注入日期: 2026-08-19 23:42
+2026-08-19 23:42:59,966 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #11 [AGENT_TOOL] (5959ms) 调用工具: maps_weather
+2026-08-19 23:42:59,966 - agent - INFO - react_agent.py:738 - [trace=7d64b352] 调用工具: maps_weather
+2026-08-19 23:42:59,968 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: maps_weather, args={'city': '广州市'}
+2026-08-19 23:43:00,989 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: maps_weather
+2026-08-19 23:43:00,990 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #12 [AGENT_TOOL_DONE] (6983ms) 工具完成: maps_weather 结果=898字
+2026-08-19 23:43:00,998 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 10→10 条消息, 已注入日期: 2026-08-19 23:43
+2026-08-19 23:43:03,561 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #13 [AGENT_DONE] (9555ms) 响应=239字 tokens={'input_tokens': 22506, 'output_tokens': 221, 'total_tokens': 22727} 耗时=9.6s
+2026-08-19 23:43:03,562 - agent - INFO - react_agent.py:788 - [trace=7d64b352] 完成: tokens={'input_tokens': 22506, 'output_tokens': 221, 'total_tokens': 22727}, 响应长度=239
+2026-08-19 23:43:03,562 - agent - DEBUG - session_store.py:75 - [SessionStore] session=8321b4a3-1807-4cf3-8b0f-98db53744ce8 +1 msg (HumanMessage), total=3
+2026-08-19 23:43:03,562 - agent - DEBUG - session_store.py:75 - [SessionStore] session=8321b4a3-1807-4cf3-8b0f-98db53744ce8 +1 msg (AIMessage), total=4
+2026-08-19 23:43:03,573 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=8321b4a3…
+2026-08-19 23:43:03,575 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #14 [PERSIST] (9568ms) session_store=4条 chat_db=4条
+2026-08-19 23:43:03,583 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7d64b352|8321b4a3] #15 [EXIT_OK] (9576ms) 总耗时=9576ms
+2026-08-19 23:47:16,244 - agent - DEBUG - dimension_guard.py:57 - [DimensionGuard] 已加载元数据: 3 个 collection
+2026-08-19 23:47:16,745 - agent - INFO - ali_qwen_tts.py:22 - [voice] TTS initialized: model=qwen-audio-3.0-tts-plus voice=longanhuan_v3.6
+2026-08-19 23:47:17,549 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:47:17,557 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:47:17,558 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:47:17,559 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:47:17,560 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:47:17,564 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:47:17,564 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:47:20,006 - agent - INFO - mcp_client.py:116 - [mcp_client] amap: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 23:47:22,272 - agent - INFO - mcp_client.py:116 - [mcp_client] websearch: 16 个工具 — ['bailian_web_search', 'maps_direction_bicycling', 'maps_direction_driving', 'maps_direction_transit_integrated', 'maps_direction_walking', 'maps_distance', 'maps_geo', 'maps_regeocode', 'maps_ip_location', 'maps_schema_personal_map', 'maps_around_search', 'maps_search_detail', 'maps_text_search', 'maps_schema_navi', 'maps_schema_take_taxi', 'maps_weather']
+2026-08-19 23:47:22,274 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:47:22,275 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:47:22,277 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:47:22,307 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:47:22,308 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=dbg-wire…, size=1/32
+2026-08-19 23:47:22,309 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9e2589ce|dbg-wire] #1 [ENTER] (0ms) query="hi" loop=1296
+2026-08-19 23:47:22,309 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9e2589ce|dbg-wire] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=1296
+2026-08-19 23:47:22,309 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9e2589ce|dbg-wire] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 23:47:22,309 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9e2589ce|dbg-wire] #4 [DECISION] (0ms) → CHAT conf=0.95 "chat_signal:greetings" loop=1296
+2026-08-19 23:47:22,309 - agent - INFO - react_agent.py:698 - [trace=9e2589ce] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 23:47:22,309 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9e2589ce|dbg-wire] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=1296
+2026-08-19 23:47:22,310 - agent - DEBUG - react_agent.py:349 - [trace=9e2589ce] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-19 23:47:22,311 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3505 字符
+2026-08-19 23:48:10,479 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:48:10,481 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:48:10,482 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:48:10,483 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:48:10,483 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:48:10,484 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:48:10,484 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:48:10,484 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:48:10,484 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:48:10,486 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:48:10,497 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:48:10,498 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=dbg-wire2…, size=2/32
+2026-08-19 23:48:10,499 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e3fa19ea|dbg-wire] #1 [ENTER] (0ms) query="hi" loop=1296
+2026-08-19 23:48:10,499 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e3fa19ea|dbg-wire] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=1296
+2026-08-19 23:48:10,499 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e3fa19ea|dbg-wire] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 23:48:10,499 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e3fa19ea|dbg-wire] #4 [DECISION] (0ms) → CHAT conf=0.95 "chat_signal:greetings" loop=1296
+2026-08-19 23:48:10,500 - agent - INFO - react_agent.py:698 - [trace=e3fa19ea] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 23:48:10,500 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e3fa19ea|dbg-wire] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=1296
+2026-08-19 23:48:10,500 - agent - DEBUG - react_agent.py:349 - [trace=e3fa19ea] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-19 23:48:10,500 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3505 字符
+2026-08-19 23:48:53,216 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:48:53,217 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:48:53,219 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:48:53,221 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:48:53,221 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:48:53,221 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:48:53,221 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:48:53,221 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:48:53,222 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:48:53,223 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:48:53,235 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:48:53,235 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=dbg-wire3…, size=3/32
+2026-08-19 23:48:53,237 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7dc30406|dbg-wire] #1 [ENTER] (0ms) query="hi" loop=1296
+2026-08-19 23:48:53,237 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7dc30406|dbg-wire] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=1296
+2026-08-19 23:48:53,237 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7dc30406|dbg-wire] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 23:48:53,237 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7dc30406|dbg-wire] #4 [DECISION] (0ms) → CHAT conf=0.95 "chat_signal:greetings" loop=1296
+2026-08-19 23:48:53,237 - agent - INFO - react_agent.py:698 - [trace=7dc30406] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 23:48:53,237 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7dc30406|dbg-wire] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=1296
+2026-08-19 23:48:53,237 - agent - DEBUG - react_agent.py:349 - [trace=7dc30406] CITA 2.0 Chat: entities=[], emotions=[], intents=['chitchat']
+2026-08-19 23:48:53,238 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3505 字符
+2026-08-19 23:48:54,115 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7dc30406|dbg-wire] #6 [CHAT_DONE] (879ms) 响应=22字 耗时=0.9s
+2026-08-19 23:48:54,115 - agent - INFO - react_agent.py:494 - [trace=7dc30406] Chat 完成: 响应长度=22
+2026-08-19 23:48:54,116 - agent - DEBUG - session_store.py:75 - [SessionStore] session=dbg-wire3 +1 msg (HumanMessage), total=1
+2026-08-19 23:48:54,116 - agent - DEBUG - session_store.py:75 - [SessionStore] session=dbg-wire3 +1 msg (AIMessage), total=2
+2026-08-19 23:48:54,123 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=dbg-wire…
+2026-08-19 23:48:54,126 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7dc30406|dbg-wire] #7 [PERSIST] (890ms) session_store=2条 chat_db=2条
+2026-08-19 23:48:54,138 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|7dc30406|dbg-wire] #8 [EXIT_OK] (901ms) 总耗时=901ms
+2026-08-19 23:51:06,406 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:51:06,407 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:51:06,409 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:51:06,410 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:51:06,410 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:51:06,410 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:51:06,410 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:51:06,410 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:51:06,411 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:51:06,412 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:51:06,432 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:51:06,433 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=dbg-timing…, size=4/32
+2026-08-19 23:51:06,434 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #1 [ENTER] (0ms) query="请写一段关于今天天气的三句话介绍" loop=1296
+2026-08-19 23:51:06,434 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=1296
+2026-08-19 23:51:06,435 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 23:51:06,435 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #4 [DECISION] (0ms) → AGENT conf=0.95 "agent_keyword:weather" loop=1296
+2026-08-19 23:51:06,435 - agent - INFO - react_agent.py:698 - [trace=3c41c830] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-19 23:51:06,435 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #5 [AGENT_START] (1ms) ReAct 循环, state消息=1条 loop=1296
+2026-08-19 23:51:06,435 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #6 [AGENT_MODEL_BEFORE] (1ms) 发送 1 条消息给 LLM
+2026-08-19 23:51:06,436 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 2→2 条消息, 已注入日期: 2026-08-19 23:51
+2026-08-19 23:51:07,740 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #7 [AGENT_TOOL] (1306ms) 调用工具: get_public_ip
+2026-08-19 23:51:07,740 - agent - INFO - react_agent.py:738 - [trace=3c41c830] 调用工具: get_public_ip
+2026-08-19 23:51:07,742 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: get_public_ip, args={}
+2026-08-19 23:51:07,742 - agent - DEBUG - execution_policy.py:220 - [Exec Policy] 未知工具 get_public_ip 不在 Schema 注册表中，宽松通过
+2026-08-19 23:51:08,267 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: get_public_ip
+2026-08-19 23:51:08,268 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #8 [AGENT_TOOL_DONE] (1834ms) 工具完成: get_public_ip 结果=11字
+2026-08-19 23:51:08,269 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-19 23:51
+2026-08-19 23:51:09,461 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #9 [AGENT_TOOL] (3027ms) 调用工具: maps_ip_location
+2026-08-19 23:51:09,461 - agent - INFO - react_agent.py:738 - [trace=3c41c830] 调用工具: maps_ip_location
+2026-08-19 23:51:09,463 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: maps_ip_location, args={'ip': '221.4.34.48'}
+2026-08-19 23:51:10,481 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: maps_ip_location
+2026-08-19 23:51:10,481 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #10 [AGENT_TOOL_DONE] (4047ms) 工具完成: maps_ip_location 结果=110字
+2026-08-19 23:51:10,482 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-19 23:51
+2026-08-19 23:51:11,453 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #11 [AGENT_TOOL] (5018ms) 调用工具: maps_weather
+2026-08-19 23:51:11,453 - agent - INFO - react_agent.py:738 - [trace=3c41c830] 调用工具: maps_weather
+2026-08-19 23:51:11,454 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: maps_weather, args={'city': '广州市'}
+2026-08-19 23:51:12,488 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: maps_weather
+2026-08-19 23:51:12,489 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #12 [AGENT_TOOL_DONE] (6055ms) 工具完成: maps_weather 结果=898字
+2026-08-19 23:51:12,490 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 8→8 条消息, 已注入日期: 2026-08-19 23:51
+2026-08-19 23:51:14,968 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #13 [AGENT_DONE] (8534ms) 响应=128字 tokens={'input_tokens': 22339, 'output_tokens': 152, 'total_tokens': 22491} 耗时=8.5s
+2026-08-19 23:51:14,968 - agent - INFO - react_agent.py:788 - [trace=3c41c830] 完成: tokens={'input_tokens': 22339, 'output_tokens': 152, 'total_tokens': 22491}, 响应长度=128
+2026-08-19 23:51:14,969 - agent - DEBUG - session_store.py:75 - [SessionStore] session=dbg-timing +1 msg (HumanMessage), total=1
+2026-08-19 23:51:14,969 - agent - DEBUG - session_store.py:75 - [SessionStore] session=dbg-timing +1 msg (AIMessage), total=2
+2026-08-19 23:51:14,978 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=dbg-timi…
+2026-08-19 23:51:14,981 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #14 [PERSIST] (8547ms) session_store=2条 chat_db=2条
+2026-08-19 23:51:14,990 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|3c41c830|dbg-timi] #15 [EXIT_OK] (8556ms) 总耗时=8556ms
+2026-08-19 23:54:04,265 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:54:04,266 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:54:04,268 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:54:04,269 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:54:04,269 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:54:04,269 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:54:04,269 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:54:04,270 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:54:04,270 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:54:04,271 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:54:04,283 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:54:04,284 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=node-repro…, size=5/32
+2026-08-19 23:54:04,285 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #1 [ENTER] (0ms) query="帮我查一下广州的天气" loop=1296
+2026-08-19 23:54:04,285 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=1296
+2026-08-19 23:54:04,285 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 23:54:04,285 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #4 [DECISION] (0ms) → AGENT conf=0.95 "agent_keyword:weather" loop=1296
+2026-08-19 23:54:04,285 - agent - INFO - react_agent.py:698 - [trace=c94a90b9] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-19 23:54:04,285 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #5 [AGENT_START] (1ms) ReAct 循环, state消息=1条 loop=1296
+2026-08-19 23:54:04,285 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #6 [AGENT_MODEL_BEFORE] (1ms) 发送 1 条消息给 LLM
+2026-08-19 23:54:04,286 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 2→2 条消息, 已注入日期: 2026-08-19 23:54
+2026-08-19 23:54:05,620 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #7 [AGENT_TOOL] (1335ms) 调用工具: maps_weather
+2026-08-19 23:54:05,621 - agent - INFO - react_agent.py:738 - [trace=c94a90b9] 调用工具: maps_weather
+2026-08-19 23:54:05,622 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: maps_weather, args={'city': '广州'}
+2026-08-19 23:54:07,100 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: maps_weather
+2026-08-19 23:54:07,100 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #8 [AGENT_TOOL_DONE] (2816ms) 工具完成: maps_weather 结果=898字
+2026-08-19 23:54:07,101 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-19 23:54
+2026-08-19 23:54:13,068 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #9 [AGENT_DONE] (8783ms) 响应=832字 tokens={'input_tokens': 11164, 'output_tokens': 399, 'total_tokens': 11563} 耗时=8.8s
+2026-08-19 23:54:13,068 - agent - INFO - react_agent.py:788 - [trace=c94a90b9] 完成: tokens={'input_tokens': 11164, 'output_tokens': 399, 'total_tokens': 11563}, 响应长度=832
+2026-08-19 23:54:13,068 - agent - DEBUG - session_store.py:75 - [SessionStore] session=node-repro +1 msg (HumanMessage), total=1
+2026-08-19 23:54:13,068 - agent - DEBUG - session_store.py:75 - [SessionStore] session=node-repro +1 msg (AIMessage), total=2
+2026-08-19 23:54:13,074 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=node-rep…
+2026-08-19 23:54:13,077 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #10 [PERSIST] (8792ms) session_store=2条 chat_db=2条
+2026-08-19 23:54:13,088 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|c94a90b9|node-rep] #11 [EXIT_OK] (8803ms) 总耗时=8803ms
+2026-08-19 23:56:57,359 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-19 23:56:57,361 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-19 23:56:57,363 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-19 23:56:57,364 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-19 23:56:57,364 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-19 23:56:57,364 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-19 23:56:57,365 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-19 23:56:57,365 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-19 23:56:57,365 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-19 23:56:57,366 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-19 23:56:57,378 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-19 23:56:57,379 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=dbg-crlf2…, size=6/32
+2026-08-19 23:56:57,380 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|eaca0dd6|dbg-crlf] #1 [ENTER] (0ms) query="你好" loop=1296
+2026-08-19 23:56:57,380 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|eaca0dd6|dbg-crlf] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=1296
+2026-08-19 23:56:57,380 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|eaca0dd6|dbg-crlf] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-19 23:56:57,380 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|eaca0dd6|dbg-crlf] #4 [DECISION] (0ms) → CHAT conf=0.95 "chat_signal:greetings" loop=1296
+2026-08-19 23:56:57,380 - agent - INFO - react_agent.py:698 - [trace=eaca0dd6] Decision: route=chat conf=0.95 reason=chat_signal:greetings
+2026-08-19 23:56:57,380 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|eaca0dd6|dbg-crlf] #5 [CHAT_START] (1ms) 直接 LLM 调用, 历史=0条 loop=1296
+2026-08-19 23:56:57,381 - agent - DEBUG - react_agent.py:349 - [trace=eaca0dd6] CITA 2.0 Chat: entities=[], emotions=[('polite', '0.3')], intents=['chitchat']
+2026-08-19 23:56:57,381 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3542 字符
+2026-08-20 00:00:45,466 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|b5a74542|node-rep] #1 [ENTER] (0ms) query="帮我查一下广州的天气" loop=1296
+2026-08-20 00:00:45,466 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|b5a74542|node-rep] #2 [LOAD_HISTORY] (1ms) 2条 [AIMessage=1 HumanMessage=1] ~292tok 1轮 loop=1296
+2026-08-20 00:00:45,466 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|b5a74542|node-rep] #3 [TRIM] (1ms) 无需裁剪: 2条 1轮
+2026-08-20 00:00:45,467 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|b5a74542|node-rep] #4 [DECISION] (1ms) → AGENT conf=0.95 "agent_keyword:weather" loop=1296
+2026-08-20 00:00:45,467 - agent - INFO - react_agent.py:698 - [trace=b5a74542] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-20 00:00:45,467 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|b5a74542|node-rep] #5 [AGENT_START] (1ms) ReAct 循环, state消息=3条 loop=1296
+2026-08-20 00:00:45,467 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|b5a74542|node-rep] #6 [AGENT_MODEL_BEFORE] (1ms) 发送 3 条消息给 LLM
+2026-08-20 00:00:45,468 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-20 00:00
+2026-08-20 00:00:46,677 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|b5a74542|node-rep] #7 [AGENT_TOOL] (1212ms) 调用工具: maps_weather
+2026-08-20 00:00:46,677 - agent - INFO - react_agent.py:738 - [trace=b5a74542] 调用工具: maps_weather
+2026-08-20 00:00:46,678 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: maps_weather, args={'city': '广州'}
+2026-08-20 00:00:47,737 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: maps_weather
+2026-08-20 00:00:47,738 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|b5a74542|node-rep] #8 [AGENT_TOOL_DONE] (2272ms) 工具完成: maps_weather 结果=898字
+2026-08-20 00:00:47,738 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-20 00:00
+2026-08-20 00:00:53,391 - agent - ERROR - conversation_tracer.py:112 - [ConvTrace|b5a74542|node-rep] #9 [EXIT_ERROR] (8020ms) 总耗时=8020ms 错误=ReadError: 
+2026-08-20 00:00:53,391 - agent - ERROR - react_agent.py:856 - [ReactAgent] 流式执行异常: ReadError: 
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+             ^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\asyncio\windows_events.py", line 803, in _poll
+    value = callback(transferred, key, ov)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+    return ov.getresult()
+           ^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 1236] 由本地系统中止网络连接。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 10, in map_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_backends\anyio.py", line 34, in read
+    return await self._stream.receive(max_bytes=max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\streams\tls.py", line 239, in receive
+    data = await self._call_sslobject_method(self._ssl_object.read, max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\streams\tls.py", line 182, in _call_sslobject_method
+    data = await self.transport_stream.receive()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\anyio\_backends\_asyncio.py", line 1325, in receive
+    raise BrokenResourceError from self._protocol.exception
+anyio.BrokenResourceError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 271, in __aiter__
+    async for part in self._httpcore_stream:
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\connection_pool.py", line 361, in __aiter__
+    async for part in self._stream:
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\http11.py", line 337, in __aiter__
+    raise exc
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\http11.py", line 329, in __aiter__
+    async for chunk in self._connection._receive_response_body(**kwargs):
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\http11.py", line 198, in _receive_response_body
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_async\http11.py", line 212, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_backends\anyio.py", line 31, in read
+    with map_exceptions(exc_map):
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\develop\PythonStudy\MutiRoleAgent\agent\react_agent.py", line 727, in _execute_stream_locked
+    async for chunk in self.agent.astream(state, stream_mode="values"):
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\main.py", line 2974, in astream
+    async for _ in runner.atick(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_runner.py", line 304, in atick
+    await arun_with_retry(
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\pregel\_retry.py", line 138, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 705, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langgraph\_internal\_runnable.py", line 473, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1224, in amodel_node
+    response = await awrap_model_call_handler(request, _execute_model_async)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 257, in normalized_single
+    result = await single_handler(request, handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\PythonStudy\MutiRoleAgent\tools\unified_middleware.py", line 303, in awrap_model_call
+    return await handler(request)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain\agents\factory.py", line 1192, in _execute_model_async
+    output = await model_.ainvoke(messages)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\runnables\base.py", line 6015, in ainvoke
+    return await self.bound.ainvoke(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2108, in _agenerate_with_cache
+    async for chunk in self._astream(messages, stop=stop, **kwargs):
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 3552, in _astream
+    async for chunk in super()._astream(*args, **kwargs):
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\base.py", line 1936, in _astream
+    async for chunk in _astream_with_chunk_timeout(
+  File "D:\develop\Anaconda\Lib\site-packages\langchain_openai\chat_models\_client_utils.py", line 650, in _astream_with_chunk_timeout
+    chunk = await asyncio.wait_for(it.__anext__(), timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\asyncio\tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_streaming.py", line 158, in __aiter__
+    async for item in self._iterator:
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_streaming.py", line 172, in __stream__
+    async for sse in iterator:
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_streaming.py", line 162, in _iter_events
+    async for sse in self._decoder.aiter_bytes(self.response.aiter_bytes()):
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_streaming.py", line 319, in aiter_bytes
+    async for chunk in self._aiter_chunks(iterator):
+  File "D:\develop\Anaconda\Lib\site-packages\openai\_streaming.py", line 330, in _aiter_chunks
+    async for chunk in iterator:
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_models.py", line 997, in aiter_bytes
+    async for raw_bytes in self.aiter_raw():
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_models.py", line 1055, in aiter_raw
+    async for raw_stream_bytes in self.stream:
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_client.py", line 176, in __aiter__
+    async for chunk in self._stream:
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 270, in __aiter__
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\develop\Anaconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\develop\Anaconda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadError
+During task with name 'model' and id '1a412b81-4cc5-c405-7cd4-75297976ce62'
+2026-08-20 00:03:51,283 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #1 [ENTER] (0ms) query="帮我查一下广州的天气" loop=1296
+2026-08-20 00:03:51,284 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #2 [LOAD_HISTORY] (1ms) 2条 [AIMessage=1 HumanMessage=1] ~292tok 1轮 loop=1296
+2026-08-20 00:03:51,284 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #3 [TRIM] (1ms) 无需裁剪: 2条 1轮
+2026-08-20 00:03:51,284 - agent - DEBUG - decision_engine.py:158 - [Decision] 话题切换，清除缓存: 帮我查一下广州的天气
+2026-08-20 00:03:51,285 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #4 [DECISION] (2ms) → AGENT conf=0.95 "agent_keyword:weather" loop=1296
+2026-08-20 00:03:51,285 - agent - INFO - react_agent.py:698 - [trace=9665e1e0] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-20 00:03:51,285 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #5 [AGENT_START] (2ms) ReAct 循环, state消息=3条 loop=1296
+2026-08-20 00:03:51,285 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #6 [AGENT_MODEL_BEFORE] (2ms) 发送 3 条消息给 LLM
+2026-08-20 00:03:51,289 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 4→4 条消息, 已注入日期: 2026-08-20 00:03
+2026-08-20 00:03:52,470 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #7 [AGENT_TOOL] (1187ms) 调用工具: maps_weather
+2026-08-20 00:03:52,470 - agent - INFO - react_agent.py:738 - [trace=9665e1e0] 调用工具: maps_weather
+2026-08-20 00:03:52,471 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: maps_weather, args={'city': '广州'}
+2026-08-20 00:03:53,554 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: maps_weather
+2026-08-20 00:03:53,555 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #8 [AGENT_TOOL_DONE] (2272ms) 工具完成: maps_weather 结果=898字
+2026-08-20 00:03:53,555 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-20 00:03
+2026-08-20 00:04:00,937 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #9 [AGENT_DONE] (9654ms) 响应=950字 tokens={'input_tokens': 11950, 'output_tokens': 483, 'total_tokens': 12433} 耗时=9.7s
+2026-08-20 00:04:00,938 - agent - INFO - react_agent.py:788 - [trace=9665e1e0] 完成: tokens={'input_tokens': 11950, 'output_tokens': 483, 'total_tokens': 12433}, 响应长度=950
+2026-08-20 00:04:00,938 - agent - DEBUG - session_store.py:75 - [SessionStore] session=node-repro +1 msg (HumanMessage), total=3
+2026-08-20 00:04:00,938 - agent - DEBUG - session_store.py:75 - [SessionStore] session=node-repro +1 msg (AIMessage), total=4
+2026-08-20 00:04:00,946 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=node-rep…
+2026-08-20 00:04:00,950 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #10 [PERSIST] (9667ms) session_store=4条 chat_db=4条
+2026-08-20 00:04:00,955 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|9665e1e0|node-rep] #11 [EXIT_OK] (9672ms) 总耗时=9672ms
+2026-08-20 00:07:06,305 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #1 [ENTER] (0ms) query="帮我查一下广州的天气" loop=1296
+2026-08-20 00:07:06,305 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #2 [LOAD_HISTORY] (0ms) 4条 [AIMessage=2 HumanMessage=2] ~630tok 2轮 loop=1296
+2026-08-20 00:07:06,307 - agent - DEBUG - context_trimmer.py:198 - [trim_history] 无需裁剪: 4 条消息, token 估算=630, 轮数=2
+2026-08-20 00:07:06,307 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #3 [TRIM] (1ms) 无需裁剪: 4条 2轮
+2026-08-20 00:07:06,307 - agent - DEBUG - decision_engine.py:158 - [Decision] 话题切换，清除缓存: 帮我查一下广州的天气
+2026-08-20 00:07:06,307 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #4 [DECISION] (1ms) → AGENT conf=0.95 "agent_keyword:weather" loop=1296
+2026-08-20 00:07:06,307 - agent - INFO - react_agent.py:698 - [trace=a84938fc] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-20 00:07:06,307 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #5 [AGENT_START] (2ms) ReAct 循环, state消息=5条 loop=1296
+2026-08-20 00:07:06,308 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #6 [AGENT_MODEL_BEFORE] (2ms) 发送 5 条消息给 LLM
+2026-08-20 00:07:06,308 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 6→6 条消息, 已注入日期: 2026-08-20 00:07
+2026-08-20 00:07:08,289 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #7 [AGENT_TOOL] (1983ms) 调用工具: maps_weather
+2026-08-20 00:07:08,289 - agent - INFO - react_agent.py:738 - [trace=a84938fc] 调用工具: maps_weather
+2026-08-20 00:07:08,289 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: maps_weather, args={'city': '广州'}
+2026-08-20 00:07:09,347 - agent - INFO - unified_middleware.py:95 - [middleware] 工具完成: maps_weather
+2026-08-20 00:07:09,348 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #8 [AGENT_TOOL_DONE] (3042ms) 工具完成: maps_weather 结果=898字
+2026-08-20 00:07:09,349 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 8→8 条消息, 已注入日期: 2026-08-20 00:07
+2026-08-20 00:07:16,758 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #9 [AGENT_DONE] (10452ms) 响应=962字 tokens={'input_tokens': 12905, 'output_tokens': 490, 'total_tokens': 13395} 耗时=10.5s
+2026-08-20 00:07:16,758 - agent - INFO - react_agent.py:788 - [trace=a84938fc] 完成: tokens={'input_tokens': 12905, 'output_tokens': 490, 'total_tokens': 13395}, 响应长度=962
+2026-08-20 00:07:16,759 - agent - DEBUG - session_store.py:75 - [SessionStore] session=node-repro +1 msg (HumanMessage), total=5
+2026-08-20 00:07:16,759 - agent - DEBUG - session_store.py:75 - [SessionStore] session=node-repro +1 msg (AIMessage), total=6
+2026-08-20 00:07:16,769 - agent - DEBUG - chat_db.py:160 - [ChatDB] 写入 pair: session=node-rep…
+2026-08-20 00:07:16,771 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #10 [PERSIST] (10465ms) session_store=6条 chat_db=6条
+2026-08-20 00:07:16,777 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|a84938fc|node-rep] #11 [EXIT_OK] (10471ms) 总耗时=10471ms
+2026-08-20 00:07:45,000 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Cyrene (昔涟) — 9865 字符, 21 段落
+2026-08-20 00:07:45,002 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Columbina (哥伦比娜) — 9435 字符, 21 段落
+2026-08-20 00:07:45,003 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Ye Shunguang (叶瞬光) — 10107 字符, 21 段落
+2026-08-20 00:07:45,005 - agent - INFO - soul_loader.py:220 - [SoulLoader] 已加载角色: Zhuang Fangyi (庄芳怡) — 9023 字符, 21 段落
+2026-08-20 00:07:45,005 - agent - INFO - soul_loader.py:283 - [SoulLoader] 已从磁盘重新读取全部角色: 4
+2026-08-20 00:07:45,006 - agent - INFO - composer.py:364 - [Composer] 缓存已清除
+2026-08-20 00:07:45,006 - agent - INFO - engine.py:378 - [PersonaEngine] 已重新读取磁盘上的全部角色人设
+2026-08-20 00:07:45,006 - agent - DEBUG - action_gate.py:187 - [Action Gate] 工具过滤完成: 44 个工具，无移除
+2026-08-20 00:07:45,007 - agent.skill_loader - INFO - loader.py:172 - 共加载 0 个 Skill (内置: 0, 用户: 0)
+2026-08-20 00:07:45,009 - agent - INFO - composer.py:331 - [Composer] Prompt 组装完成: persona=✗, style=default, 总长=3567 字符
+2026-08-20 00:07:45,033 - agent - INFO - chat_db.py:114 - [ChatDB] 表初始化完成: D:\develop\PythonStudy\MutiRoleAgent\data/chat_history.db
+2026-08-20 00:07:45,034 - agent - DEBUG - manager.py:77 - [AgentCache] put: session=probe-8030…, size=7/32
+2026-08-20 00:07:45,035 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e095883d|probe-80] #1 [ENTER] (0ms) query="天气" loop=1296
+2026-08-20 00:07:45,035 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e095883d|probe-80] #2 [LOAD_HISTORY] (0ms) 0条 0轮 loop=1296
+2026-08-20 00:07:45,035 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e095883d|probe-80] #3 [TRIM] (0ms) 无需裁剪: 0条 0轮
+2026-08-20 00:07:45,035 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e095883d|probe-80] #4 [DECISION] (0ms) → AGENT conf=0.95 "agent_keyword:weather" loop=1296
+2026-08-20 00:07:45,035 - agent - INFO - react_agent.py:698 - [trace=e095883d] Decision: route=agent conf=0.95 reason=agent_keyword:weather
+2026-08-20 00:07:45,035 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e095883d|probe-80] #5 [AGENT_START] (1ms) ReAct 循环, state消息=1条 loop=1296
+2026-08-20 00:07:45,035 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e095883d|probe-80] #6 [AGENT_MODEL_BEFORE] (1ms) 发送 1 条消息给 LLM
+2026-08-20 00:07:45,036 - agent - INFO - unified_middleware.py:205 - [middleware] 模型调用前: 2→2 条消息, 已注入日期: 2026-08-20 00:07
+2026-08-20 00:07:46,474 - agent - INFO - conversation_tracer.py:114 - [ConvTrace|e095883d|probe-80] #7 [AGENT_TOOL] (1439ms) 调用工具: get_public_ip
+2026-08-20 00:07:46,474 - agent - INFO - react_agent.py:738 - [trace=e095883d] 调用工具: get_public_ip
+2026-08-20 00:07:46,475 - agent - INFO - unified_middleware.py:72 - [middleware] 执行工具: get_public_ip, args={}
+2026-08-20 00:07:46,475 - agent - DEBUG - execution_policy.py:220 - [Exec Policy] 未知工具 get_public_ip 不在 Schema 注册表中，宽松通过

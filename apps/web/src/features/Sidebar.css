@@ -1,0 +1,135 @@
+.sidebar {
+  width: 220px;
+  border-right: 1px solid #ececec;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.sidebar-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.sidebar-new {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  color: #4096ff;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sidebar-new:hover {
+  border-color: #4096ff;
+  background: #e6f4ff;
+}
+
+.session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-empty {
+  color: #aaa;
+  font-size: 12px;
+  padding: 4px 2px;
+}
+
+.session-item {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.session-item.is-active {
+  background: #e6f4ff;
+}
+
+.session-item-main {
+  flex: 1;
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 6px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.session-item-title {
+  font-size: 13px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.session-item-meta {
+  font-size: 11px;
+  color: #999;
+}
+
+.session-item-del {
+  border: none;
+  background: none;
+  color: #bbb;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.session-item-del:hover {
+  color: #ff4d4f;
+  background: #fff1f0;
+}
+
+.persona-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.persona-item {
+  text-align: left;
+  border: 1px solid #ececec;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+}
+
+.persona-item:hover {
+  border-color: #4096ff;
+}
+
+.persona-item.is-active {
+  border-color: #4096ff;
+  background: #e6f4ff;
+  color: #0958d9;
+}
