@@ -39,6 +39,7 @@ _SPARSE_WEIGHT = chroma_config.get("retrieval", {}).get("sparse_weight", 0.3)
 _RERANKER_ENABLED = chroma_config.get("retrieval", {}).get("reranker_enabled", False)
 _RERANKER_TOP_K = chroma_config.get("retrieval", {}).get("reranker_top_k", 10)
 _RERANKER_FINAL_K = chroma_config.get("retrieval", {}).get("reranker_final_k", 5)
+_RERANKER_MODEL = chroma_config.get("retrieval", {}).get("reranker_model", "BAAI/bge-reranker-base")
 
 
 class HybridRetriever:
@@ -80,6 +81,7 @@ class HybridRetriever:
         self._reranker_enabled = cfg.get("reranker_enabled", _RERANKER_ENABLED)
         self._reranker_top_k = cfg.get("reranker_top_k", _RERANKER_TOP_K)
         self._reranker_final_k = cfg.get("reranker_final_k", _RERANKER_FINAL_K)
+        self._reranker_model = cfg.get("reranker_model", _RERANKER_MODEL)
 
         self._reranker = None  # 懒加载
         self.last_trace: dict[str, object] = {}
@@ -142,6 +144,8 @@ class HybridRetriever:
             "sparse": self._serialize_results(sparse_results),
             "final": self._serialize_results(final_results),
             "reranker_enabled": self._reranker_enabled,
+            "dense_weight": self._weights_for_query(query)[0],
+            "sparse_weight": self._weights_for_query(query)[1],
         }
         return [doc for doc, _ in final_results]
 
@@ -221,24 +225,25 @@ class HybridRetriever:
         分数均归一化到 [0, 1]。
         """
         # 仅其中之一有结果 → 直接返回
+        dense_weight, sparse_weight = self._weights_for_query(query)
         if not sparse:
             return self._normalize_dense(dense)
         if not dense:
-            return [(doc, score * self._sparse_w) for doc, score in sparse]
+            return list(sparse)
 
         # 构建文档 ID → 加权分映射
         # 用 page_content + metadata source 作为 key
         score_map: dict[str, tuple[Document, float]] = {}
 
         # Dense 分数归一化
-        max_d = max(s for _, s in dense) if dense else 1.0
-        for doc, s in dense:
+        raw_similarities = [1.0 / (1.0 + max(0.0, s)) for _, s in dense]
+        max_similarity = max(raw_similarities, default=1.0)
+        for (doc, s), raw_similarity in zip(dense, raw_similarities):
             key = self._doc_key(doc)
-            norm_score = (s / max_d) if max_d > 0 else 0.0
             # ChromaDB 返回的是 distance，越小越相关；转为相似度
             # similarity = 1 / (1 + distance)
-            sim = 1.0 / (1.0 + norm_score)
-            score_map[key] = (doc, sim * self._dense_w)
+            sim = raw_similarity / max_similarity if max_similarity else 0.0
+            score_map[key] = (doc, sim * dense_weight)
 
         # Sparse 分数已经归一化 [0,1]
         for doc, s in sparse:
@@ -247,16 +252,27 @@ class HybridRetriever:
                 existing_doc, existing_score = score_map[key]
                 score_map[key] = (
                     existing_doc,
-                    existing_score + s * self._sparse_w,
+                    existing_score + s * sparse_weight,
                 )
             else:
-                score_map[key] = (doc, s * self._sparse_w)
+                score_map[key] = (doc, s * sparse_weight)
 
         # 排序
         merged = sorted(
             score_map.values(), key=lambda x: x[1], reverse=True
         )
         return merged
+
+    def _weights_for_query(self, query: str) -> tuple[float, float]:
+        """精确实体、型号和英文词查询提高 BM25 权重。"""
+        import re
+
+        exact_signal = bool(re.search(r"[A-Za-z]{2,}|\d{2,}|[A-Z][A-Za-z0-9_-]+", query))
+        if exact_signal:
+            sparse = min(0.6, max(self._sparse_w, 0.5))
+            return 1.0 - sparse, sparse
+        total = self._dense_w + self._sparse_w
+        return (self._dense_w / total, self._sparse_w / total) if total else (0.7, 0.3)
 
     @staticmethod
     def _normalize_dense(
@@ -265,12 +281,11 @@ class HybridRetriever:
         """将 ChromaDB distance 转为相似度并归一化。"""
         if not results:
             return []
-        max_d = max(s for _, s in results)
+        similarities = [1.0 / (1.0 + max(0.0, dist)) for _, dist in results]
+        max_similarity = max(similarities, default=1.0)
         out = []
-        for doc, dist in results:
-            norm_dist = dist / max_d if max_d > 0 else 0.0
-            sim = 1.0 / (1.0 + norm_dist)
-            out.append((doc, sim))
+        for (doc, _), similarity in zip(results, similarities):
+            out.append((doc, similarity / max_similarity if max_similarity else 0.0))
         return out
 
     @staticmethod
@@ -352,7 +367,7 @@ class _RerankerWrapper:
         if self._model is None:
             from sentence_transformers import CrossEncoder
 
-            model_name = "BAAI/bge-reranker-base"
+            model_name = self._reranker_model
             logger.info(f"[Reranker] 加载 {model_name}...")
             self._model = CrossEncoder(
                 model_name,

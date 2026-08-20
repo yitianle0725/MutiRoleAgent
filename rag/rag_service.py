@@ -102,6 +102,9 @@ class RagSummarizeService:
         4. 调用 LLM 总结
         """
         collections = _route_query(query)
+        # 保持路由函数的历史契约；真正执行检索时对低置信度默认路由补查 worldbook。
+        if collections == [COLLECTION_FAQ, COLLECTION_ANIME]:
+            collections = [COLLECTION_FAQ, COLLECTION_WORLDBOOK, COLLECTION_ANIME]
         context = ""
         counter = 0
         retrieval_trace: dict[str, object] = {"collections": {}}

@@ -1,0 +1,42 @@
+{
+  "dense_only": {
+    "config": {
+      "dense_weight": 1.0,
+      "sparse_weight": 0.0
+    },
+    "recall_at_3": 0.0833,
+    "precision_at_3": 0.0741,
+    "mrr": 0.1111,
+    "ndcg_at_3": 0.1812
+  },
+  "balanced": {
+    "config": {
+      "dense_weight": 0.5,
+      "sparse_weight": 0.5
+    },
+    "recall_at_3": 0.0833,
+    "precision_at_3": 0.0741,
+    "mrr": 0.1111,
+    "ndcg_at_3": 0.1812
+  },
+  "default": {
+    "config": {
+      "dense_weight": 0.7,
+      "sparse_weight": 0.3
+    },
+    "recall_at_3": 0.0833,
+    "precision_at_3": 0.0741,
+    "mrr": 0.1111,
+    "ndcg_at_3": 0.1812
+  },
+  "sparse_heavy": {
+    "config": {
+      "dense_weight": 0.4,
+      "sparse_weight": 0.6
+    },
+    "recall_at_3": 0.0833,
+    "precision_at_3": 0.0741,
+    "mrr": 0.1111,
+    "ndcg_at_3": 0.1812
+  }
+}
