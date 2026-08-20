@@ -28,6 +28,8 @@ from utils.config_handler import keywords_config
 from utils.logger_handler import logger
 from utils.prompt_loader import load_rag_prompts
 from rag.retrieval_trace import retrieval_trace_store
+from rag.context_builder import build_context
+from utils.config_handler import chroma_config
 
 
 # ==================== 路由关键词（从 keywords.yaml 读取） ====================
@@ -36,6 +38,7 @@ _RK = keywords_config.get("rag_routing", {})
 _WORLDBOOK_KEYWORDS: list[str] = _RK.get("worldbook", [])
 _FAQ_STRONG_KEYWORDS: list[str] = _RK.get("faq_strong", [])
 _ANIME_KEYWORDS: list[str] = _RK.get("anime", [])
+_CONTEXT_MAX_CHARS = int(chroma_config.get("retrieval", {}).get("context_max_chars", 8000))
 
 def _route_query(query: str) -> list[str]:
     """根据查询内容返回应检索的 collection 列表。
@@ -73,6 +76,10 @@ class RagSummarizeService:
 
     def __init__(self):
         self.prompt_text = load_rag_prompts()
+        self.prompt_text += (
+            "\n\n补充要求：只使用参考资料中的证据；关键结论在句末标注对应的[参考资料N]。"
+            "如果资料之间存在冲突，明确说明冲突及来源，不要自行选择未被证据支持的结论。"
+        )
         self.prompt_template = PromptTemplate.from_template(self.prompt_text)
         self.model = chat_model
         self.chain = self.prompt_template | self.model | StrOutputParser()
@@ -106,6 +113,7 @@ class RagSummarizeService:
         if collections == [COLLECTION_FAQ, COLLECTION_ANIME]:
             collections = [COLLECTION_FAQ, COLLECTION_WORLDBOOK, COLLECTION_ANIME]
         context = ""
+        retrieved_documents: list[tuple[str, object]] = []
         counter = 0
         retrieval_trace: dict[str, object] = {"collections": {}}
 
@@ -113,6 +121,7 @@ class RagSummarizeService:
             try:
                 retriever = vector_store.get_retriever(coll_name)
                 docs = retriever.invoke(query)
+                retrieved_documents.extend((coll_name, doc) for doc in docs)
                 retrieval_trace["collections"][coll_name] = retriever.last_trace
             except Exception as e:
                 logger.warning(f"[RAG] {coll_name} 检索失败: {e}")
@@ -127,6 +136,16 @@ class RagSummarizeService:
                     f"内容：{doc.page_content}"
                     f"|元数据：{doc.metadata}\n"
                 )
+
+        context_result = build_context(retrieved_documents, max_chars=_CONTEXT_MAX_CHARS)
+        context = context_result.text
+        counter = len(context_result.evidence)
+        retrieval_trace["context"] = {
+            "evidence": context_result.evidence,
+            "duplicate_count": context_result.duplicate_count,
+            "truncated": context_result.truncated,
+            "max_chars": _CONTEXT_MAX_CHARS,
+        }
 
         try:
             retrieval_trace["returned_document_count"] = counter
