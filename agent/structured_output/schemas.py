@@ -49,6 +49,10 @@ class AnimeItem(BaseModel):
         default="", max_length=500,
         description="作品链接",
     )
+    cover: str | None = Field(
+        default=None, max_length=500,
+        description="封面图片 URL（可选，缺省时前端用占位图）",
+    )
 
 
 class AnimeRecommendationList(BaseModel):

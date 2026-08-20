@@ -90,8 +90,19 @@ async def chat_stream(req: ChatRequest) -> EventSourceResponse:
                         ),
                     }
                 elif isinstance(event, StructuredData):
-                    # 结构化输出（如番剧推荐卡片）以 Markdown 下发
-                    yield {"event": "structured", "data": event.formatted}
+                    # 结构化输出（番剧卡 / 天气卡 等）：把 schema_type、raw_json、formatted
+                    # 一起 JSON 序列化下发，前端按 schema_type 渲染对应卡片（避免展示原始 JSON）
+                    yield {
+                        "event": "structured",
+                        "data": json.dumps(
+                            {
+                                "schema_type": event.schema_type,
+                                "raw_json": event.raw_json,
+                                "formatted": event.formatted,
+                            },
+                            ensure_ascii=False,
+                        ),
+                    }
             yield {"event": "done", "data": ""}
         except Exception as exc:
             # Agent 出错时也发事件而非断开连接，前端能展示给用户

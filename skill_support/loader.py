@@ -18,8 +18,10 @@ from .models import Skill
 
 logger = logging.getLogger("agent.skill_loader")
 
-# 项目根目录（agent/skill_support/loader.py → 上两级）
-_PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+# 项目根目录（agent/skill_support/loader.py → 上两级 = MutiRoleAgent/）
+# ⚠️ 之前用了 .parent.parent.parent，多算了一层，导致 BUILTIN_SKILLS_DIR 指向
+# 项目外的 D:/develop/PythonStudy/skills，整个 skills/ 加载为空。
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 BUILTIN_SKILLS_DIR = _PROJECT_ROOT / "skills"
 USER_SKILLS_DIR = _PROJECT_ROOT / "data" / "skills"

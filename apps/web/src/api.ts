@@ -1,6 +1,8 @@
 // 后端 API 封装：SSE 流式聊天客户端
 // 用 fetch + ReadableStream 手动解析 SSE（比 EventSource 灵活：支持 POST、可选诊断）
 
+import type { StructuredPayload } from './features/StructuredCards'
+
 export interface ChatPayload {
   query: string
   session_id?: string
@@ -18,7 +20,7 @@ export interface ToolEventData {
 export interface StreamHandlers {
   onChunk: (text: string) => void
   onTool?: (tool: ToolEventData) => void
-  onStructured?: (markdown: string) => void
+  onStructured?: (data: StructuredPayload) => void
   onDone: () => void
   onError: (message: string) => void
 }
@@ -98,7 +100,17 @@ function handleSseBlock(block: string, handlers: StreamHandlers): void {
       }
       break
     case 'structured':
-      handlers.onStructured?.(data)
+      try {
+        const parsed = JSON.parse(data) as StructuredPayload
+        handlers.onStructured?.(parsed)
+      } catch {
+        // 兜底：解析失败时把原文当 markdown 渲染
+        handlers.onStructured?.({
+          schema_type: 'unknown',
+          raw_json: {},
+          formatted: data,
+        })
+      }
       break
     case 'done':
       handlers.onDone()

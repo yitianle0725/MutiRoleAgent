@@ -89,6 +89,16 @@
   min-height: 0;
 }
 
+.chat-items {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+}
+
+.chat-item-row {
+  margin: 6px 0;
+}
+
 .chat-empty {
   margin: auto;
   color: #999;
@@ -124,4 +134,83 @@
   padding: 12px 16px;
   border-top: 1px solid #eee;
   background: #fff;
+}
+
+/* 头像占位：圆形小图，之后替换 avatars.tsx 里的图片即可。
+   强制容器尺寸以兼容 @ant-design/cssinjs 样式未注入时的截图/渲染。 */
+.ant-bubble-avatar {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-assistant {
+  border: 2px solid #4096ff;
+}
+
+.avatar-user {
+  border: 2px solid #b7eb8f;
+}
+
+/* 消息时间：气泡内右下角小号灰字 */
+.msg-time {
+  font-size: 11px;
+  color: #999;
+  line-height: 1;
+}
+
+/* 消息操作按钮（hover 气泡时显示）：复制 / 重生成 */
+.msg-actions {
+  display: flex;
+  gap: 4px;
+  padding: 2px 4px;
+  align-items: center;
+}
+
+.msg-action-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid #ececec;
+  background: #fff;
+  color: #666;
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.msg-action-btn:hover {
+  border-color: #4096ff;
+  color: #0958d9;
+  background: #f0f5ff;
+}
+
+/* hover 父气泡时显示操作按钮（默认隐藏） */
+.ant-bubble {
+  position: relative;
+}
+.ant-bubble .msg-actions {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.ant-bubble:hover .msg-actions {
+  opacity: 1;
 }

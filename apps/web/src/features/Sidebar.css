@@ -79,7 +79,7 @@
 }
 
 .session-item-title {
-  font-size: 13px;
+  font-size: 15px;
   color: #333;
   white-space: nowrap;
   overflow: hidden;
@@ -88,7 +88,7 @@
 
 .session-item-meta {
   font-size: 11px;
-  color: #999;
+  color: #aaa;
 }
 
 .session-item-del {
