@@ -187,5 +187,113 @@
     "key_facts": [],
     "min_answer_len": 2,
     "max_duration_ms": 90000
+  },
+  {
+    "id": 19,
+    "query": "扫地机器人找不到充电座应该怎么处理？",
+    "type": "knowledge",
+    "retrieval_eval": true,
+    "expected_route": "faq",
+    "expected_tools": ["rag_summarize"],
+    "key_facts": ["充电座", "障碍物"],
+    "relevant_texts": ["充电座", "障碍物"],
+    "relevance_grades": {"充电座": 3, "障碍物": 2},
+    "min_answer_len": 30
+  },
+  {
+    "id": 20,
+    "query": "扫地机器人吸力下降时先检查什么？",
+    "type": "knowledge",
+    "retrieval_eval": true,
+    "expected_route": "faq",
+    "expected_tools": ["rag_summarize"],
+    "key_facts": ["尘盒", "滤网"],
+    "relevant_texts": ["吸力", "滤网"],
+    "relevance_grades": {"吸力": 3, "滤网": 3},
+    "min_answer_len": 30
+  },
+  {
+    "id": 21,
+    "query": "扫拖一体机器人可以只拖地吗？",
+    "type": "knowledge",
+    "retrieval_eval": true,
+    "expected_route": "faq",
+    "expected_tools": ["rag_summarize"],
+    "key_facts": ["仅拖地", "水箱"],
+    "relevant_texts": ["仅拖地", "水箱"],
+    "relevance_grades": {"仅拖地": 3, "水箱": 2},
+    "min_answer_len": 30
+  },
+  {
+    "id": 22,
+    "query": "尘歌壶是什么？",
+    "type": "knowledge",
+    "retrieval_eval": true,
+    "expected_route": "worldbook",
+    "expected_tools": ["rag_summarize"],
+    "key_facts": ["尘歌壶"],
+    "relevant_texts": ["尘歌壶"],
+    "relevance_grades": {"尘歌壶": 3},
+    "min_answer_len": 20
+  },
+  {
+    "id": 23,
+    "query": "尘歌壶与昔涟有什么关系？",
+    "type": "knowledge",
+    "retrieval_eval": true,
+    "expected_route": "worldbook",
+    "expected_tools": ["rag_summarize"],
+    "key_facts": ["尘歌壶"],
+    "relevant_texts": ["尘歌壶"],
+    "relevance_grades": {"尘歌壶": 3},
+    "min_answer_len": 20
+  },
+  {
+    "id": 24,
+    "query": "介绍一下世界观中的尘歌壶设定。",
+    "type": "knowledge",
+    "retrieval_eval": true,
+    "expected_route": "worldbook",
+    "expected_tools": ["rag_summarize"],
+    "key_facts": ["尘歌壶"],
+    "relevant_texts": ["尘歌壶"],
+    "relevance_grades": {"尘歌壶": 3},
+    "min_answer_len": 20
+  },
+  {
+    "id": 25,
+    "query": "无职转生第三季的资料有哪些？",
+    "type": "knowledge",
+    "retrieval_eval": true,
+    "expected_route": "anime",
+    "expected_tools": ["rag_summarize"],
+    "key_facts": ["无职转生"],
+    "relevant_texts": ["无职转生"],
+    "relevance_grades": {"无职转生": 3},
+    "min_answer_len": 20
+  },
+  {
+    "id": 26,
+    "query": "在超市后门吸烟的二人是什么作品？",
+    "type": "knowledge",
+    "retrieval_eval": true,
+    "expected_route": "anime",
+    "expected_tools": ["rag_summarize"],
+    "key_facts": ["在超市后门吸烟的二人"],
+    "relevant_texts": ["在超市后门吸烟的二人"],
+    "relevance_grades": {"在超市后门吸烟的二人": 3},
+    "min_answer_len": 20
+  },
+  {
+    "id": 27,
+    "query": "进击的巨人有哪些基础资料？",
+    "type": "knowledge",
+    "retrieval_eval": true,
+    "expected_route": "anime",
+    "expected_tools": ["rag_summarize"],
+    "key_facts": ["进击的巨人"],
+    "relevant_texts": ["进击的巨人"],
+    "relevance_grades": {"进击的巨人": 3},
+    "min_answer_len": 20
   }
 ]

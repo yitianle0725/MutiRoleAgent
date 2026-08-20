@@ -31,6 +31,7 @@ from utils.config_handler import chroma_config
 from utils.file_handler import txt_loader, pdf_loader, json_loader, listdir_with_allowed_type, get_file_md5_hex
 from utils.logger_handler import logger
 from utils.path_tool import get_abs_path
+from utils.document_normalizer import normalize_documents
 
 
 # ==================== 配置常量 ====================
@@ -426,12 +427,14 @@ class VectorStore:
         JSON 文件使用 json_loader，将整个 JSON 作为文本块加载。
         """
         if path.endswith(".txt"):
-            return txt_loader(path)
-        if path.endswith(".pdf"):
-            return pdf_loader(path)
-        if path.endswith(".json"):
-            return json_loader(path)
-        return []
+            documents = txt_loader(path)
+        elif path.endswith(".pdf"):
+            documents = pdf_loader(path)
+        elif path.endswith(".json"):
+            documents = json_loader(path)
+        else:
+            return []
+        return normalize_documents(documents, path)
 
     # ---- 一次性加载全部 ----
 

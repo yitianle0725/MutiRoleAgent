@@ -19,6 +19,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from utils.config_handler import chroma_config
 from utils.path_tool import get_abs_path
 from utils.logger_handler import logger
+from utils.document_normalizer import normalize_text
 
 
 def get_string2md5(input_str: str, encoding='utf-8'):
@@ -116,6 +117,9 @@ class KnowledgeBaseService(object):
             logger.warning(f"[KB] BM25 索引同步失败: {e}")
 
     def upload_by_str(self, data: str, filename, file_path: str | None = None):
+        data = normalize_text(data)
+        if not data:
+            return "[失败] 上传内容为空，无法写入知识库"
         md5_hex = get_string2md5(data)
         source_path = os.path.normcase(os.path.abspath(file_path or filename))
         mtime_ns = os.stat(file_path).st_mtime_ns if file_path and os.path.exists(file_path) else 0

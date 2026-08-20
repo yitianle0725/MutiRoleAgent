@@ -27,6 +27,7 @@ from rag.vector_store import vector_store, COLLECTION_FAQ, COLLECTION_WORLDBOOK,
 from utils.config_handler import keywords_config
 from utils.logger_handler import logger
 from utils.prompt_loader import load_rag_prompts
+from rag.retrieval_trace import retrieval_trace_store
 
 
 # ==================== 路由关键词（从 keywords.yaml 读取） ====================
@@ -103,12 +104,16 @@ class RagSummarizeService:
         collections = _route_query(query)
         context = ""
         counter = 0
+        retrieval_trace: dict[str, object] = {"collections": {}}
 
         for coll_name in collections:
             try:
-                docs = self.retrieve_docs(query, coll_name)
+                retriever = vector_store.get_retriever(coll_name)
+                docs = retriever.invoke(query)
+                retrieval_trace["collections"][coll_name] = retriever.last_trace
             except Exception as e:
                 logger.warning(f"[RAG] {coll_name} 检索失败: {e}")
+                retrieval_trace["collections"][coll_name] = {"error": str(e)}
                 continue
 
             source_label = "产品知识库" if coll_name == COLLECTION_FAQ else "世界观资料库"
@@ -119,6 +124,12 @@ class RagSummarizeService:
                     f"内容：{doc.page_content}"
                     f"|元数据：{doc.metadata}\n"
                 )
+
+        try:
+            retrieval_trace["returned_document_count"] = counter
+            retrieval_trace_store.save(query, collections, retrieval_trace)
+        except Exception as error:
+            logger.warning(f"[RAG] 保存检索追踪失败: {error}")
 
         if counter == 0:
             return "未在知识库中找到相关资料。"

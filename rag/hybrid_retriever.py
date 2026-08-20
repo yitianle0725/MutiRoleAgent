@@ -82,6 +82,7 @@ class HybridRetriever:
         self._reranker_final_k = cfg.get("reranker_final_k", _RERANKER_FINAL_K)
 
         self._reranker = None  # 懒加载
+        self.last_trace: dict[str, object] = {}
 
     # ==================== LangChain 兼容接口 ====================
 
@@ -132,7 +133,33 @@ class HybridRetriever:
             merged = self._rerank(query, merged[: self._reranker_top_k])
 
         # Step 5: Return top_k
-        return [doc for doc, _ in merged[:k]]
+        final_results = merged[:k]
+        self.last_trace = {
+            "collection": self._collection,
+            "query": query,
+            "candidate_k": candidate_k,
+            "dense": self._serialize_results(dense_results),
+            "sparse": self._serialize_results(sparse_results),
+            "final": self._serialize_results(final_results),
+            "reranker_enabled": self._reranker_enabled,
+        }
+        return [doc for doc, _ in final_results]
+
+    @staticmethod
+    def _serialize_results(
+        results: list[tuple[Document, float]],
+    ) -> list[dict[str, object]]:
+        """保留评测需要的原始排名，同时限制正文长度避免追踪库膨胀。"""
+        return [
+            {
+                "rank": index,
+                "score": round(float(score), 6),
+                "source": str(document.metadata.get("source", "")),
+                "page": document.metadata.get("page"),
+                "content": document.page_content[:800],
+            }
+            for index, (document, score) in enumerate(results, start=1)
+        ]
 
     # ==================== Dense Search ====================
 

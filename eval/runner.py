@@ -19,6 +19,7 @@ from agent.stream_events import TextChunk, ToolEvent
 from rag.rag_service import _route_query
 from eval.agent_metrics import evaluate_agent_behavior
 from eval.regression import check_baseline_cases, check_thresholds, combine_regression_checks
+from eval.validate_dataset import validate_retrieval_cases
 
 
 def load_test_cases(path: str = None) -> list[dict]:
@@ -102,6 +103,9 @@ def run_and_evaluate():
     results = asyncio.run(run_all())
 
     cases = load_test_cases()
+    annotation_issues = validate_retrieval_cases(cases)
+    if annotation_issues:
+        raise ValueError("评测集标注不完整：\n- " + "\n- ".join(annotation_issues))
 
     # 检索评测用的 retriever 工厂
     from rag.vector_store import vector_store
