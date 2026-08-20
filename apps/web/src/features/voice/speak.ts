@@ -5,7 +5,7 @@ let _current: HTMLAudioElement | null = null
 
 /** 把一段文本合成语音并播放（自动替换正在播放的上一段）。 */
 export async function speak(text: string): Promise<void> {
-  const resp = await fetch('/api/voice/tts', {
+  const resp = await fetch('/api/v1/voice/tts', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text }),

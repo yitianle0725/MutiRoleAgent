@@ -4,7 +4,9 @@ import { Bubble, Sender } from '@ant-design/x'
 import {
   streamChat,
   getSessionHistory,
+  getSessionMonitor,
   listSessions,
+  type SessionMonitor,
   type ToolEventData,
   type HistoryItem,
 } from '../api'
@@ -26,6 +28,20 @@ type ChatItem =
 
 const DEFAULT_SESSION = 'default'
 const DEFAULT_PERSONA = 'Cyrene'
+
+const EMPTY_MONITOR: SessionMonitor = {
+  total_turns: 0,
+  input_tokens: 0,
+  output_tokens: 0,
+  tool_calls: 0,
+  execution_steps: 0,
+  llm_duration_ms: 0,
+  tool_duration_ms: 0,
+  average_duration_ms: null,
+  average_ttft_ms: null,
+  output_tokens_per_second: null,
+  cache_hit_rate: null,
+}
 
 /** 当前时间 → HH:MM。 */
 function nowTime(): string {
@@ -79,6 +95,7 @@ export function Chat() {
   const [autoSpeak, setAutoSpeak] = useState(false)
   const [asrMsg, setAsrMsg] = useState('')
   const [toolElapsed, setToolElapsed] = useState<Record<string, string>>({})
+  const [monitor, setMonitor] = useState<SessionMonitor>(EMPTY_MONITOR)
   const { speaking, speak } = useSpeech()
   const assistantIdRef = useRef<string | null>(null)
   const draftRef = useRef('')
@@ -95,6 +112,15 @@ export function Chat() {
     .filter((it): it is Extract<ChatItem, { kind: 'text' }> => it.kind === 'text')
     .reverse()
     .find((m) => m.role === 'assistant')?.content ?? ''
+
+  const refreshMonitor = async (id: string) => {
+    try {
+      setMonitor(await getSessionMonitor(id))
+    } catch (err) {
+      console.error('[monitor]', err)
+      setMonitor(EMPTY_MONITOR)
+    }
+  }
 
   // 启动时自动恢复最近一个有消息的会话（避免每次打开页面从空白开始）
   useEffect(() => {
@@ -137,6 +163,7 @@ export function Chat() {
     if (busy) return
     setSessionId(id)
     setItems([])
+    void refreshMonitor(id)
     try {
       const history = await getSessionHistory(id)
       const loaded: ChatItem[] = history.map((h: HistoryItem) => ({
@@ -184,7 +211,7 @@ export function Chat() {
     setBusy(true)
 
     void streamChat(
-      { query: text, session_id: sessionId, persona },
+      { message: text, session_id: sessionId, persona },
       {
         onChunk: (c) => {
           draftRef.current += c
@@ -246,6 +273,7 @@ export function Chat() {
           assistantIdRef.current = null
           draftRef.current = ''
           setBusy(false)
+          void refreshMonitor(sessionId)
           if (autoSpeak && finalText) {
             void speak(finalText).catch((err) => console.error('[TTS]', err))
           }
@@ -262,6 +290,7 @@ export function Chat() {
           assistantIdRef.current = null
           draftRef.current = ''
           setBusy(false)
+          void refreshMonitor(sessionId)
         },
       },
     )
@@ -375,6 +404,7 @@ export function Chat() {
 
         <div className="chat-composer">
           <div className="composer-actions">
+            <SessionMonitorPanel monitor={monitor} />
             {asrMsg && <span className="asr-status">{asrMsg}</span>}
             <button
               className={`speak-button ${recording ? 'is-recording' : ''}`}
@@ -404,6 +434,31 @@ export function Chat() {
           />
         </div>
       </div>
+    </div>
+  )
+}
+
+function SessionMonitorPanel({ monitor }: { monitor: SessionMonitor }) {
+  const ttft = monitor.average_ttft_ms === null
+    ? '--'
+    : `${(monitor.average_ttft_ms / 1000).toFixed(1)}s`
+  const outputRate = monitor.output_tokens_per_second === null
+    ? '--'
+    : `${monitor.output_tokens_per_second.toFixed(1)} tok/s`
+  const cacheHitRate = monitor.cache_hit_rate === null
+    ? '--'
+    : `${(monitor.cache_hit_rate * 100).toFixed(0)}%`
+  return (
+    <div className="session-monitor" aria-label="当前会话监控">
+      <span title="当前会话已完成的 Agent 轮次">{monitor.total_turns} 轮</span>
+      <span title="Agent 执行步骤数">{monitor.execution_steps} 步</span>
+      <span title="累计 LLM 调用耗时">LLM {(monitor.llm_duration_ms / 1000).toFixed(1)}s</span>
+      <span title="累计工具调用耗时">工具耗时 {(monitor.tool_duration_ms / 1000).toFixed(1)}s</span>
+      <span title="平均首 Token 延迟">首字 {ttft}</span>
+      <span title="输出 Token 速率">输出速率 {outputRate}</span>
+      <span title="提示词缓存命中率">缓存 {cacheHitRate}</span>
+      <span title="累计输入 Token">输入 {monitor.input_tokens.toLocaleString()}</span>
+      <span title="累计输出 Token">输出 {monitor.output_tokens.toLocaleString()}</span>
     </div>
   )
 }

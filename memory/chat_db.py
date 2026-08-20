@@ -430,9 +430,22 @@ class ChatDB:
         conn = sqlite3.connect(self._db_path)
         try:
             rows = conn.execute(
-                """SELECT s.session_id, s.title, s.user_id, s.message_count, s.updated_at
-                   FROM session_meta s
-                   ORDER BY s.updated_at DESC
+                """SELECT ids.session_id,
+                          COALESCE(NULLIF(s.title, ''), '新会话') AS title,
+                          COALESCE(s.user_id, '') AS user_id,
+                          COALESCE(h.message_count, s.message_count, 0) AS message_count,
+                          COALESCE(s.updated_at, h.updated_at) AS updated_at
+                   FROM (
+                       SELECT session_id FROM session_meta
+                       UNION
+                       SELECT DISTINCT session_id FROM chat_history
+                   ) ids
+                   LEFT JOIN session_meta s ON s.session_id = ids.session_id
+                   LEFT JOIN (
+                       SELECT session_id, COUNT(*) AS message_count, MAX(created_at) AS updated_at
+                       FROM chat_history GROUP BY session_id
+                   ) h ON h.session_id = ids.session_id
+                   ORDER BY COALESCE(s.updated_at, h.updated_at) DESC
                    LIMIT ?""",
                 (limit,),
             ).fetchall()

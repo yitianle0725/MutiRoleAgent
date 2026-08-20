@@ -126,6 +126,62 @@ class MonitorStore:
             "output_tokens": sum(row[4] for row in rows),
         }
 
+    def session_summary(self, session_id: str) -> dict[str, Any]:
+        """汇总单个会话的监控数据，供聊天输入框上方展示。"""
+        self._init_db()
+        conn = sqlite3.connect(self._db_path)
+        try:
+            rows = conn.execute(
+                """SELECT outcome, duration_ms, ttft_ms, input_tokens, output_tokens, tool_calls,
+                          execution_steps, llm_duration_ms, tool_duration_ms,
+                          output_tokens_per_second, cache_read_tokens, cache_input_tokens
+                   FROM agent_turns WHERE session_id = ? ORDER BY id DESC LIMIT 1000""",
+                (session_id,),
+            ).fetchall()
+        finally:
+            conn.close()
+        if not rows:
+            return {
+                "total_turns": 0,
+                "input_tokens": 0,
+                "output_tokens": 0,
+                "tool_calls": 0,
+                "execution_steps": 0,
+                "llm_duration_ms": 0,
+                "tool_duration_ms": 0,
+                "average_duration_ms": None,
+                "average_ttft_ms": None,
+                "output_tokens_per_second": None,
+                "cache_hit_rate": None,
+            }
+        ttft_values = [row[2] for row in rows if row[2] is not None]
+        return {
+            "total_turns": len(rows),
+            "input_tokens": sum(row[3] for row in rows),
+            "output_tokens": sum(row[4] for row in rows),
+            "tool_calls": sum(row[5] for row in rows),
+            "execution_steps": sum(row[6] for row in rows),
+            "llm_duration_ms": round(sum(row[7] for row in rows), 2),
+            "tool_duration_ms": round(sum(row[8] for row in rows), 2),
+            "average_duration_ms": round(sum(row[1] for row in rows) / len(rows), 2),
+            "average_ttft_ms": (
+                round(sum(ttft_values) / len(ttft_values), 2) if ttft_values else None
+            ),
+            "output_tokens_per_second": self._weighted_output_rate(rows),
+            "cache_hit_rate": self._cache_hit_rate(rows),
+        }
+
+    @staticmethod
+    def _weighted_output_rate(rows: list[tuple]) -> float | None:
+        output_tokens = sum(row[4] for row in rows)
+        llm_seconds = sum(row[7] for row in rows) / 1000
+        return round(output_tokens / llm_seconds, 2) if llm_seconds > 0 else None
+
+    @staticmethod
+    def _cache_hit_rate(rows: list[tuple]) -> float | None:
+        cache_input = sum(row[11] for row in rows)
+        return round(min(1.0, sum(row[10] for row in rows) / cache_input), 4) if cache_input else None
+
     def _ensure_worker(self) -> None:
         with self._lock:
             if self._worker and self._worker.is_alive():
@@ -167,10 +223,30 @@ class MonitorStore:
                     input_tokens INTEGER NOT NULL,
                     output_tokens INTEGER NOT NULL,
                     tool_calls INTEGER NOT NULL,
+                    execution_steps INTEGER NOT NULL DEFAULT 0,
+                    llm_duration_ms REAL NOT NULL DEFAULT 0,
+                    tool_duration_ms REAL NOT NULL DEFAULT 0,
+                    output_tokens_per_second REAL,
+                    cache_read_tokens INTEGER NOT NULL DEFAULT 0,
+                    cache_input_tokens INTEGER NOT NULL DEFAULT 0,
+                    cache_metrics_available INTEGER NOT NULL DEFAULT 0,
                     error_type TEXT NOT NULL DEFAULT '',
                     created_at TEXT NOT NULL
                 )"""
             )
+            columns = {row[1] for row in conn.execute("PRAGMA table_info(agent_turns)")}
+            migrations = {
+                "execution_steps": "INTEGER NOT NULL DEFAULT 0",
+                "llm_duration_ms": "REAL NOT NULL DEFAULT 0",
+                "tool_duration_ms": "REAL NOT NULL DEFAULT 0",
+                "output_tokens_per_second": "REAL",
+                "cache_read_tokens": "INTEGER NOT NULL DEFAULT 0",
+                "cache_input_tokens": "INTEGER NOT NULL DEFAULT 0",
+                "cache_metrics_available": "INTEGER NOT NULL DEFAULT 0",
+            }
+            for name, definition in migrations.items():
+                if name not in columns:
+                    conn.execute(f"ALTER TABLE agent_turns ADD COLUMN {name} {definition}")
             conn.execute(
                 """CREATE TABLE IF NOT EXISTS agent_trace_events (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -200,13 +276,20 @@ class MonitorStore:
             conn.execute(
                 """INSERT OR REPLACE INTO agent_turns
                    (trace_id, session_id, route, outcome, duration_ms, ttft_ms,
-                    input_tokens, output_tokens, tool_calls, error_type, created_at)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    input_tokens, output_tokens, tool_calls, execution_steps,
+                    llm_duration_ms, tool_duration_ms, output_tokens_per_second,
+                    cache_read_tokens, cache_input_tokens, cache_metrics_available,
+                    error_type, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     record["trace_id"], record["session_id"], record["route"],
                     record["outcome"], record["duration_ms"], record.get("ttft_ms"),
                     record["input_tokens"], record["output_tokens"],
-                    record["tool_calls"], record.get("error_type", ""), created_at,
+                    record["tool_calls"], record.get("execution_steps", 0),
+                    record.get("llm_duration_ms", 0), record.get("tool_duration_ms", 0),
+                    record.get("output_tokens_per_second"), record.get("cache_read_tokens", 0),
+                    record.get("cache_input_tokens", 0), int(record.get("cache_metrics_available", False)),
+                    record.get("error_type", ""), created_at,
                 ),
             )
             conn.execute(

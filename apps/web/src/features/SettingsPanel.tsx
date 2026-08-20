@@ -28,6 +28,7 @@ export function SettingsPanel() {
           <Row label="TTS 模型" value={config?.voice?.tts_model ?? '—'} />
           <Row label="TTS 音色" value={config?.voice?.tts_voice ?? '—'} />
           <Row label="ASR 模型" value={config?.voice?.asr_model ?? '—'} />
+          <Row label="Realtime 模型" value={config?.voice?.realtime_model ?? '—'} />
           <Row label="会话存储" value={config?.store?.session ?? '—'} />
           <Row label="数据库" value={config?.store?.db ?? '—'} />
         </div>

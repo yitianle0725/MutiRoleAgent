@@ -44,8 +44,32 @@
 
 .composer-actions {
   display: flex;
+  align-items: center;
+  gap: 8px;
   justify-content: flex-end;
   margin-bottom: 8px;
+}
+
+.session-monitor {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  margin-right: auto;
+  overflow-x: auto;
+  color: #667085;
+  font-size: 12px;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.session-monitor::-webkit-scrollbar {
+  display: none;
+}
+
+.session-monitor span + span {
+  border-left: 1px solid #e5e7eb;
+  padding-left: 9px;
 }
 
 .speak-button {
@@ -134,6 +158,18 @@
   padding: 12px 16px;
   border-top: 1px solid #eee;
   background: #fff;
+}
+
+@media (max-width: 720px) {
+  .composer-actions {
+    flex-wrap: wrap;
+  }
+
+  .session-monitor {
+    order: 2;
+    width: 100%;
+    margin-top: 2px;
+  }
 }
 
 /* 头像占位：圆形小图，之后替换 avatars.tsx 里的图片即可。

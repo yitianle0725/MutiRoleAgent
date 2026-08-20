@@ -48,14 +48,15 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import uuid
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
 
 import uvicorn
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, HTTPException, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response, StreamingResponse
 from pydantic import BaseModel, Field
 
 from agent.react_agent import ReactAgent
@@ -64,7 +65,10 @@ from channels.base import Channel
 from channels.manager import agent_cache
 from memory.chat_db import chat_db
 from observability.store import monitor_store
+from utils.persona_loader import persona_loader
 from utils.logger_handler import logger
+from memory.chat_db import DB_PATH
+from tools.voice.service import VoiceInputError, voice_conversation_service
 
 # ==================== Pydantic 模型 ====================
 
@@ -215,6 +219,67 @@ def _create_app() -> FastAPI:
         """获取最近运行的成功率、延迟和 token 汇总。"""
         return await asyncio.to_thread(monitor_store.summary)
 
+    @app.get("/api/v1/monitor/sessions/{session_id}")
+    async def monitor_session_summary(session_id: str):
+        """获取指定会话的 token、耗时和工具调用统计。"""
+        return await asyncio.to_thread(monitor_store.session_summary, session_id)
+
+    @app.get("/api/v1/personas")
+    async def list_personas():
+        """返回当前磁盘配置中可用的角色名称。"""
+        return {"names": persona_loader.available_names}
+
+    @app.get("/api/v1/config")
+    async def get_config():
+        """返回前端设置面板需要的非敏感运行配置。"""
+        return {
+            "llm": {
+                "model": os.getenv("LLM_MODEL", "qwen3-max"),
+                "base_url": os.getenv("LLM_BASE_URL", ""),
+            },
+            "embedding": {"mode": os.getenv("EMBEDDING_MODE", "dashscope")},
+            "voice": {
+                "enabled": os.getenv("VOICE_ENABLED", "false").lower() == "true",
+                "asr_model": os.getenv("ALI_ASR_MODEL", "qwen-audio-3.0-asr-flash-streaming"),
+                "realtime_model": os.getenv("ALI_REALTIME_MODEL", "qwen-audio-3.0-realtime-plus"),
+                "tts_model": os.getenv("ALI_TTS_MODEL", "qwen-audio-3.0-tts-plus"),
+                "tts_voice": os.getenv("ALI_TTS_VOICE", "longanhuan_v3.6"),
+            },
+            "store": {"session": "SQLite", "db": os.path.basename(DB_PATH)},
+        }
+
+    @app.post("/api/v1/voice/asr")
+    async def voice_asr(request: Request):
+        """接收前端生成的 WAV 二进制数据并转写。"""
+        if not voice_conversation_service.configured:
+            raise HTTPException(status_code=503, detail="语音服务未配置")
+        wav_data = await request.body()
+        if not wav_data:
+            raise HTTPException(status_code=400, detail="录音数据为空")
+        try:
+            result, _ = await voice_conversation_service.transcribe_wav(wav_data)
+        except VoiceInputError as error:
+            raise HTTPException(status_code=400, detail=str(error)) from error
+        except Exception as error:
+            logger.warning("[FastAPI Voice] ASR failed: %s", error)
+            raise HTTPException(status_code=502, detail=f"语音转写失败: {error}") from error
+        return {"text": result.text}
+
+    @app.post("/api/v1/voice/tts")
+    async def voice_tts(payload: dict[str, str]):
+        """合成文本并直接返回浏览器可播放的音频字节。"""
+        if not voice_conversation_service.configured:
+            raise HTTPException(status_code=503, detail="语音服务未配置")
+        text = payload.get("text", "").strip()
+        if not text:
+            raise HTTPException(status_code=400, detail="没有可朗读的文本")
+        try:
+            result = await voice_conversation_service.synthesize_reply(text)
+        except Exception as error:
+            logger.warning("[FastAPI Voice] TTS failed: %s", error)
+            raise HTTPException(status_code=502, detail=f"语音合成失败: {error}") from error
+        return Response(content=result.audio_data, media_type=result.mime_type)
+
     @app.get("/api/v1/monitor/turns")
     async def monitor_turns(limit: int = 50):
         """获取最近的 Agent 执行轮次摘要。"""
@@ -266,6 +331,7 @@ def _create_app() -> FastAPI:
                             "schema_type": event.schema_type,
                             "model": event.model,
                             "formatted": event.formatted,
+                            "raw_json": event.raw_json,
                         })
 
                 yield _sse_event("done", {})

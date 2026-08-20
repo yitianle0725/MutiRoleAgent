@@ -155,9 +155,11 @@ async function transcribe(
   onResult: (text: string) => void,
   onError: (msg: string) => void,
 ): Promise<void> {
-  const fd = new FormData()
-  fd.append('file', wav, 'recording.wav')
-  const resp = await fetch('/api/voice/asr', { method: 'POST', body: fd })
+  const resp = await fetch('/api/v1/voice/asr', {
+    method: 'POST',
+    headers: { 'Content-Type': 'audio/wav' },
+    body: wav,
+  })
   if (!resp.ok) {
     let detail = `语音识别失败 (HTTP ${resp.status})`
     try {

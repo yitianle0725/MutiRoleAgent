@@ -22,13 +22,16 @@ export function Sidebar(props: SidebarProps) {
   const [sessions, setSessions] = useState<SessionItem[]>([])
   const [personas, setPersonas] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
+  const [loadError, setLoadError] = useState('')
 
   const loadSessions = async () => {
     setLoading(true)
+    setLoadError('')
     try {
       setSessions(await listSessions())
     } catch (err) {
       console.error('[sessions]', err)
+      setLoadError('会话列表加载失败')
     } finally {
       setLoading(false)
     }
@@ -37,7 +40,7 @@ export function Sidebar(props: SidebarProps) {
   useEffect(() => {
     void loadSessions()
     void listPersonas().then(setPersonas).catch(console.error)
-  }, [])
+  }, [props.sessionId])
 
   const handleNew = async () => {
     try {
@@ -74,7 +77,12 @@ export function Sidebar(props: SidebarProps) {
           </button>
         </div>
         <div className="session-list">
-          {sessions.length === 0 && !loading && (
+          {loadError && (
+            <button className="sidebar-retry" onClick={() => void loadSessions()}>
+              {loadError}，重试
+            </button>
+          )}
+          {sessions.length === 0 && !loading && !loadError && (
             <div className="sidebar-empty">暂无历史会话</div>
           )}
           {sessions.map((s) => (

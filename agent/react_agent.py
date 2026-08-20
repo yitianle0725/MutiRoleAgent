@@ -603,6 +603,17 @@ class ReactAgent:
                 "input_tokens": current.input_tokens - baseline.input_tokens,
                 "output_tokens": current.output_tokens - baseline.output_tokens,
                 "tool_calls": current.tool_calls - baseline.tool_calls,
+                "execution_steps": current.execution_steps - baseline.execution_steps,
+                "llm_duration_ms": round(
+                    (current.llm_duration_seconds - baseline.llm_duration_seconds) * 1000, 2
+                ),
+                "tool_duration_ms": round(
+                    (current.tool_duration_seconds - baseline.tool_duration_seconds) * 1000, 2
+                ),
+                "output_tokens_per_second": current.output_tokens_per_second,
+                "cache_read_tokens": current.cache_read_tokens - baseline.cache_read_tokens,
+                "cache_input_tokens": current.cache_input_tokens - baseline.cache_input_tokens,
+                "cache_metrics_available": current.cache_metrics_available,
                 "error_type": "" if self._current_outcome == "success" else self._current_outcome,
                 "events": tracer.export_events(),
             }

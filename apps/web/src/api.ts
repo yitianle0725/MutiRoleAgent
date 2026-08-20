@@ -4,7 +4,7 @@
 import type { StructuredPayload } from './features/StructuredCards'
 
 export interface ChatPayload {
-  query: string
+  message: string
   session_id?: string
   persona?: string
   user_id?: string
@@ -30,7 +30,7 @@ export async function streamChat(
   payload: ChatPayload,
   handlers: StreamHandlers,
 ): Promise<void> {
-  const resp = await fetch('/api/chat/stream', {
+  const resp = await fetch('/api/v1/chat/stream', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -88,18 +88,28 @@ function handleSseBlock(block: string, handlers: StreamHandlers): void {
   }
 
   switch (event) {
-    case 'chunk':
+    case 'text':
       // 空 chunk 无意义，跳过；但 done/error 即使 data 为空也必须处理
-      if (data) handlers.onChunk(data)
+      if (data) {
+        const payload = parseSseJson<{ content?: string }>(data)
+        handlers.onChunk(payload?.content ?? data)
+      }
       break
-    case 'tool':
+    case 'tool_start':
       try {
-        handlers.onTool?.(JSON.parse(data) as ToolEventData)
+        handlers.onTool?.({ ...(JSON.parse(data) as ToolEventData), phase: 'start' })
       } catch {
         /* 忽略解析失败的工具事件 */
       }
       break
-    case 'structured':
+    case 'tool_end':
+      try {
+        handlers.onTool?.({ ...(JSON.parse(data) as ToolEventData), phase: 'end' })
+      } catch {
+        /* 忽略解析失败的工具事件 */
+      }
+      break
+    case 'structured_data':
       try {
         const parsed = JSON.parse(data) as StructuredPayload
         handlers.onStructured?.(parsed)
@@ -116,7 +126,7 @@ function handleSseBlock(block: string, handlers: StreamHandlers): void {
       handlers.onDone()
       break
     case 'error':
-      handlers.onError(data || '未知错误')
+      handlers.onError((parseSseJson<{ message?: string }>(data)?.message ?? data) || '未知错误')
       break
     default:
       break
@@ -124,6 +134,14 @@ function handleSseBlock(block: string, handlers: StreamHandlers): void {
 }
 
 // ==================== 会话 / 角色 / 配置 ====================
+
+function parseSseJson<T>(data: string): T | null {
+  try {
+    return JSON.parse(data) as T
+  } catch {
+    return null
+  }
+}
 
 export interface SessionItem {
   session_id: string
@@ -140,41 +158,60 @@ export interface HistoryItem {
 }
 
 export async function listSessions(): Promise<SessionItem[]> {
-  const data = await requestJson<{ sessions?: SessionItem[] }>('/api/sessions')
-  return data.sessions ?? []
+  return await requestJson<SessionItem[]>('/api/v1/sessions')
 }
 
 export async function createSession(): Promise<string> {
-  const data = await requestJson<{ session_id: string }>('/api/sessions', { method: 'POST' })
+  const data = await requestJson<{ session_id: string }>('/api/v1/sessions', { method: 'POST' })
   return data.session_id
 }
 
 export async function getSessionHistory(sessionId: string): Promise<HistoryItem[]> {
-  const data = await requestJson<{ history?: HistoryItem[] }>(
-    `/api/sessions/${encodeURIComponent(sessionId)}/history`,
+  const data = await requestJson<{ messages?: HistoryItem[] }>(
+    `/api/v1/sessions/${encodeURIComponent(sessionId)}`,
   )
-  return data.history ?? []
+  return data.messages ?? []
 }
 
 export async function deleteSession(sessionId: string): Promise<void> {
-  await requestJson(`/api/sessions/${encodeURIComponent(sessionId)}`, { method: 'DELETE' })
+  await requestJson(`/api/v1/sessions/${encodeURIComponent(sessionId)}`, { method: 'DELETE' })
 }
 
 export async function listPersonas(): Promise<string[]> {
-  const data = await requestJson<{ names?: string[] }>('/api/personas')
+  const data = await requestJson<{ names?: string[] }>('/api/v1/personas')
   return data.names ?? []
+}
+
+export interface SessionMonitor {
+  total_turns: number
+  input_tokens: number
+  output_tokens: number
+  tool_calls: number
+  execution_steps: number
+  llm_duration_ms: number
+  tool_duration_ms: number
+  average_duration_ms: number | null
+  average_ttft_ms: number | null
+  output_tokens_per_second: number | null
+  cache_hit_rate: number | null
+}
+
+export async function getSessionMonitor(sessionId: string): Promise<SessionMonitor> {
+  return await requestJson<SessionMonitor>(
+    `/api/v1/monitor/sessions/${encodeURIComponent(sessionId)}`,
+  )
 }
 
 export interface AppConfig {
   llm?: { model?: string; base_url?: string }
   embedding?: { mode?: string }
-  voice?: { enabled?: boolean; tts_model?: string; tts_voice?: string; asr_model?: string }
+  voice?: { enabled?: boolean; tts_model?: string; tts_voice?: string; asr_model?: string; realtime_model?: string }
   store?: { session?: string; db?: string }
   agent?: { max_steps?: number | null; personas?: string[] }
 }
 
 export async function getConfig(): Promise<AppConfig> {
-  return await requestJson<AppConfig>('/api/config')
+  return await requestJson<AppConfig>('/api/v1/config')
 }
 
 /** 通用 JSON 请求（GET/POST/PATCH/DELETE），支持泛型返回值。 */
