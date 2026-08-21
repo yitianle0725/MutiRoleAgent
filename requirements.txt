@@ -9,6 +9,7 @@ langgraph>=0.2.0
 python-dotenv>=1.0.0
 pyyaml>=6.0
 requests>=2.31.0
+feedparser>=6.0.11
 urllib3>=2.0.0
 # Optional evaluation integrations. The offline evaluator works without them.
 ranx>=0.3.16
