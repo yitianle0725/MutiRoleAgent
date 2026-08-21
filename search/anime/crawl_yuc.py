@@ -9,7 +9,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
 from typing import List
-from anime.retry_handler import circuit_breaker
+from search.anime.retry_handler import circuit_breaker
 
 # 禁用 SSL 警告（yuc.wiki 证书过期）
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -21,7 +21,7 @@ RETRY_TIMES = 3
 MIN_SLEEP = 0.8
 MAX_SLEEP = 1.5
 
-# 全局 Session 复用，统一重试策略（复用 novels/crawl_novel.py 模式）
+# 全局 Session 复用，统一重试策略（复用 search/novel/crawl_novel.py 模式）
 SESSION = requests.Session()
 SESSION.keep_alive = False
 SESSION.verify = False  # yuc.wiki SSL 证书过期

@@ -2,7 +2,7 @@
 name: download-novel
 description: >
   小说下载。当用户说"下载XX小说"、"帮我下载XX"、"找XX小说的txt"时触发。
-  调用 download_novel 下载指定小说的文本并保存到 novels/ 目录。
+  调用 download_novel 下载指定小说的文本并保存到 search/novel/ 目录。
 metadata:
   emoji: 📖
   category: file
@@ -23,7 +23,7 @@ metadata:
 
 ## 输出格式
 - 下载中：告知用户"正在下载《XX小说》，请稍候..."
-- 完成后：告知"已下载完成！共 XX 章，保存在 `novels/XX.txt`"
+- 完成后：告知"已下载完成！共 XX 章，保存在 `search/novel/XX.txt`"
 - 失败时：说明原因（小说名未找到/网络超时/已存在）
 
 ## 注意事项

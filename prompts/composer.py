@@ -47,6 +47,14 @@ _SHARED_DIR = _ROLES_DIR / "_shared"
 _SHARED_WORLDBOOK_DIR = _SHARED_DIR / "worldbook"
 _SYSTEM_DIR = _PROMPTS_DIR / "system"
 
+_ANIME_SOURCE_POLICY = """
+## 动漫来源优先级
+
+- 对需要联网核实的动漫问题，先调用 `search_anime`。
+- `search_anime` 聚合 Bangumi、AniList、Jikan 和已采集的 YUC 季表缓存；回答时说明实际使用的来源，不要混用不同来源的评分口径。
+- 若工具返回 `websearch_fallback_required: true`，必须继续调用 `web_search`，不得凭模型记忆补全事实。
+""".strip()
+
 # 角色名 → 角色包目录名映射
 _PERSONA_TO_SLUG: dict[str, str] = {
     "Cyrene":          "cyrene",
@@ -105,6 +113,7 @@ def _load_system_base() -> str:
         content = _read_file(_SYSTEM_DIR / f"{name}.md")
         if content:
             parts.append(content)
+    parts.append(_ANIME_SOURCE_POLICY)
     return "\n\n---\n\n".join(parts) if parts else ""
 
 

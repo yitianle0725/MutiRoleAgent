@@ -1,0 +1,373 @@
+{
+  "check_at": "2026-08-21T09:51:02.185480+00:00",
+  "items": {
+    "anime‑anime_list": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "anime‑anime_info": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "anime‑anime_full": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_characters": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "anime‑anime_staff": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_episodes": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_single_episode_1": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_news": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_forum": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_videos": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_video_episodes": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_pictures": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_statistics": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_moreinfo": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_recommendations": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "anime‑anime_userupdates": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_reviews": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_relations": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "anime‑anime_themes": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_external": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "anime‑anime_streaming": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "characters‑list": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "characters‑info": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "characters‑full": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "characters‑anime": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "characters‑manga": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "characters‑voices": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "characters‑pictures": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "clubs‑list": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "clubs‑info": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "clubs‑members": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "clubs‑staff": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "clubs‑relations": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "genres‑anime_all": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "genres‑anime_genres": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "genres‑anime_explicit": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "genres‑anime_themes": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "genres‑anime_demographics": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "genres‑manga_all": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "genres‑manga_genres": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "genres‑manga_explicit": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "genres‑manga_themes": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "genres‑manga_demographics": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "magazines‑page1": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑list": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑info": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑full": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑characters": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑news": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑forum": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑pictures": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑statistics": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑moreinfo": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑recommendations": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑userupdates": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑reviews": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑relations": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "manga‑external": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "people‑list": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "people‑info": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "people‑full": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "people‑anime": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "people‑voices": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "people‑manga": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "people‑pictures": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "producers‑list": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "producers‑info": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "producers‑full": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "producers‑external": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "random‑anime": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "random‑manga": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "random‑characters": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "random‑people": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "random‑users": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "recommendations‑anime": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "recommendations‑manga": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "reviews‑anime": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "reviews‑manga": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "schedules‑main": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "seasons‑now": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "seasons‑upcoming": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "seasons‑list": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "seasons‑2025_winter": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "top‑anime": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "top‑manga": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "top‑people": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "top‑characters": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "top‑reviews": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "watch‑recent_episodes": {
+      "status": "ok",
+      "error_msg": ""
+    },
+    "watch‑popular_episodes": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "watch‑recent_promos": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    },
+    "watch‑popular_promos": {
+      "status": "error",
+      "error_msg": "Jikan HTTP 请求失败 (504): {\"status\":504,\"type\":\"BadResponseException\",\"message\":\"Jikan failed to connect to MyAnimeList. MyAnimeList may be down\\/unavailable or refuses to connect\",\"error\":null}"
+    }
+  }
+}

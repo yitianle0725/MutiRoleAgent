@@ -1,0 +1,22 @@
+{
+  "schema_version": 2,
+  "source": "AniList GraphQL API",
+  "collected_at": "2026-08-21T05:59:53.169034+00:00",
+  "query": {
+    "search": "死神",
+    "genre": "Action",
+    "season": null,
+    "seasonYear": 2026,
+    "status": null,
+    "format": null,
+    "averageScore_greater": 70,
+    "sort": "POPULARITY_DESC"
+  },
+  "page_info": {
+    "total": 0,
+    "currentPage": 1,
+    "lastPage": 1,
+    "hasNextPage": false
+  },
+  "results": []
+}

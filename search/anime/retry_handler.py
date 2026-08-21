@@ -11,7 +11,7 @@
 
 使用方式::
 
-    from anime.retry_handler import retry_with_backoff, circuit_breaker
+    from search.anime.retry_handler import retry_with_backoff, circuit_breaker
 
     @retry_with_backoff(max_retries=3)
     def my_crawler():

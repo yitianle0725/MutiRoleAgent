@@ -15,9 +15,9 @@ from langchain_core.tools import tool
 
 # 跨目录导入 anime 爬虫模块
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
-from anime.crawl_bangumi import search_bangumi, crawl_subject
-from anime.crawl_yuc import crawl_season_anime
-from anime.retry_handler import circuit_breaker
+from search.anime.crawl_bangumi import crawl_subject
+from search.anime.crawl_yuc import crawl_season_anime
+from search.anime.source_search import search_anime_sources
 from rag.rag_service import RagSummarizeService
 from utils.logger_handler import logger
 
@@ -32,32 +32,23 @@ _FALLBACK_KEYWORDS = {
 
 # ==================== 动漫工具 ====================
 
-@tool(description="搜索动漫作品。入参 keyword 为搜索关键词（中/日/英均可），返回前10条匹配结果（JSON格式，含标题/评分/排名/链接）")
+@tool(description="搜索动漫作品。依次查询 Bangumi、AniList、Jikan 与本地 YUC 季表缓存，并在结果中标记来源。若 websearch_fallback_required 为 true，必须继续调用 web_search。")
 def search_anime(keyword: str) -> str:
-    results = search_bangumi(keyword, top_n=10)
-    if not results:
-        # 熔断/网络不可达 → fallback 本地知识库
-        if not circuit_breaker("bangumi").is_available():
-            try:
-                kb_result = rag.rag_summarize(f"搜索动漫: {keyword}")
-                if kb_result and "未在知识库" not in kb_result:
-                    return f"[⚠️ bangumi 暂不可用，以下来自本地知识库]\n{kb_result}"
-            except Exception:
-                pass
-            return f"搜索服务暂不可用（熔断中），请稍后重试。"
-        return f"未找到与 '{keyword}' 相关的动漫作品，请尝试更换关键词。"
-    brief = []
-    for r in results:
-        brief.append({
-            "id": r["id"],
-            "title_cn": r["title_cn"],
-            "title_jp": r["title_jp"],
-            "url": r["url"],
-            "rating": r["rating"],
-            "rank": r["rank"],
-            "info": r["info"][:80] if r.get("info") else "",
-        })
-    return json.dumps(brief, ensure_ascii=False, indent=2)
+    try:
+        result = search_anime_sources(keyword, limit=3)
+        return json.dumps(result, ensure_ascii=False, indent=2)
+    except Exception as exc:
+        logger.warning(f"[search_anime] 四源聚合失败: {exc}")
+        return json.dumps(
+            {
+                "query": keyword,
+                "sources": {},
+                "websearch_fallback_required": True,
+                "next_action": "call_web_search",
+                "error": str(exc),
+            },
+            ensure_ascii=False,
+        )
 
 
 @tool(description="获取动漫作品详情。入参 url 为作品链接（来自 search_anime 返回的 url 字段），返回完整详情JSON（章节/简介/标签/角色/评分）")

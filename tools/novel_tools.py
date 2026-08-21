@@ -1,4 +1,4 @@
-"""Restricted tools for downloading novels into the local novels directory."""
+"""Restricted tools for downloading novels into the local novel directory."""
 
 from __future__ import annotations
 
@@ -8,11 +8,11 @@ from pathlib import Path
 
 from langchain_core.tools import tool
 
-from novels import download_novel as novel_client
+from search.novel import download_novel as novel_client
 from utils.path_tool import get_abs_path
 
 
-NOVELS_DIR = Path(get_abs_path("novels")).resolve()
+NOVELS_DIR = Path(get_abs_path("search/novel")).resolve()
 _INVALID_FILE_CHARS = re.compile(r'[<>:"/\\|?*\x00-\x1f]')
 
 
@@ -73,11 +73,11 @@ def _download_novel_sync(novel_name: str) -> str:
     size_kb = output_path.stat().st_size / 1024
     return (
         f"下载完成：《{title}》 作者：{author}。"
-        f"文件已保存到 novels/{output_path.name}，大小 {size_kb:.1f} KB。"
+        f"文件已保存到 search/novel/{output_path.name}，大小 {size_kb:.1f} KB。"
     )
 
 
 @tool
 async def download_novel(novel_name: str) -> str:
-    """下载已配置来源中的小说文本，保存到本项目的 novels 目录。"""
+    """下载已配置来源中的小说文本，保存到本项目的 search/novel 目录。"""
     return await asyncio.to_thread(_download_novel_sync, novel_name)
