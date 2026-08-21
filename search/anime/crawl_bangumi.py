@@ -10,9 +10,10 @@ from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
 from typing import List
 from search.anime.retry_handler import retry_with_backoff, circuit_breaker
+from utils.path_tool import get_project_path
 
 # 数据保存路径
-_DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "anime", "bangumi"))
+_DATA_DIR = get_project_path("data/anime/bangumi")
 os.makedirs(_DATA_DIR, exist_ok=True)
 
 # 禁用 SSL 警告（证书过期）
@@ -331,8 +332,8 @@ def crawl_subject(subject_url: str, title_cn: str = "", title_jp: str = "") -> d
             safe_name = re.sub(r'[\\/:*?"<>|]', '', result.get("title_cn", "") or "anime")[:50].strip()
             if not safe_name:
                 safe_name = "anime_detail"
-            save_path = os.path.join(_DATA_DIR, f"{safe_name}.json")
-            with open(save_path, "w", encoding="utf-8") as f:
+            save_path = _DATA_DIR / f"{safe_name}.json"
+            with save_path.open("w", encoding="utf-8") as f:
                 json.dump(result, f, ensure_ascii=False, indent=2)
             print(f"[bangumi] 详情已保存: {save_path}")
         except Exception as e:
@@ -402,11 +403,11 @@ def fetch_anime(result_item: dict) -> str:
         return ""
 
     safe_name = re.sub(r'[\\/:*?"<>|]', '', result_item["title_cn"]).strip()
-    output_path = os.path.join(os.path.dirname(__file__), f"{safe_name}.json")
-    with open(output_path, "w", encoding="utf-8") as f:
+    output_path = _DATA_DIR / f"{safe_name}.json"
+    with output_path.open("w", encoding="utf-8") as f:
         json.dump(detail, f, ensure_ascii=False, indent=2)
     print(f"已保存: {output_path}")
-    return output_path
+    return str(output_path)
 
 
 # ==================== 测试入口 ====================

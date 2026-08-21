@@ -15,10 +15,11 @@ from pathlib import Path
 from typing import Any
 
 import requests
+from utils.path_tool import get_project_path
 
 API_ENDPOINT = "https://graphql.anilist.co"
 REQUEST_DELAY = 0.8
-DEFAULT_OUTPUT = Path(__file__).resolve().parents[1] / "data" / "anime" / "anilist" / "anilist_search_dump.json"
+DEFAULT_OUTPUT = get_project_path("data/anime/anilist/anilist_search_dump.json")
 HEADERS = {"User-Agent": "MutiRoleAgent/1.0 (public knowledge collector)"}
 
 GRAPHQL_QUERY = """

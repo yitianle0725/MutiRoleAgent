@@ -18,12 +18,13 @@ from urllib.parse import urlencode
 from urllib.parse import urlparse
 
 import requests
+from utils.path_tool import get_project_path
 
 BASE_URL = "https://api.jikan.moe/v4"
 REQUEST_DELAY = 0.6
-DEFAULT_OUTPUT = Path(__file__).resolve().parents[1] / "data" / "anime" / "jikan" / "jikan_anime_dump.json"
+DEFAULT_OUTPUT = get_project_path("data/anime/jikan/jikan_anime_dump.json")
 HEADERS = {"User-Agent": "MutiRoleAgent/1.0 (public knowledge collector)"}
-SAVE_DIR = Path(r"data/anime/jikan")
+SAVE_DIR = get_project_path("data/anime/jikan")
 SAVE_DIR.mkdir(exist_ok=True, parents=True)
 CACHE_DIR = SAVE_DIR / ".cache"
 CACHE_DIR.mkdir(exist_ok=True)

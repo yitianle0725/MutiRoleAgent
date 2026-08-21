@@ -9,10 +9,10 @@ from pathlib import Path
 from langchain_core.tools import tool
 
 from search.novel import download_novel as novel_client
-from utils.path_tool import get_abs_path
+from utils.path_tool import get_project_path
 
 
-NOVELS_DIR = Path(get_abs_path("search/novel")).resolve()
+NOVELS_DIR = get_project_path("search/novel").resolve()
 _INVALID_FILE_CHARS = re.compile(r'[<>:"/\\|?*\x00-\x1f]')
 
 

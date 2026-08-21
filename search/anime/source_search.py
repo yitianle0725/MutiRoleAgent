@@ -9,8 +9,9 @@ from typing import Any
 from search.anime.crawl_bangumi import search_bangumi
 from search.anime.search_anilist import search_anime as search_anilist
 from search.anime.search_jikan import jikan_anime_search
+from utils.path_tool import get_project_path
 
-YUC_DIR = Path(__file__).resolve().parents[1] / "data" / "anime" / "yuc"
+YUC_DIR = get_project_path("data/anime/yuc")
 
 
 def search_anime_sources(keyword: str, limit: int = 3) -> dict[str, Any]:

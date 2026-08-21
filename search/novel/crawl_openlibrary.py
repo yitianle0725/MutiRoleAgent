@@ -11,11 +11,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
+from utils.path_tool import get_project_path
 
 
 OPEN_LIBRARY_URL = "https://openlibrary.org/search.json"
 GUTENDEX_URL = "https://gutendex.com/books"
-OUTPUT_DIR = Path(__file__).resolve().parents[1] / "data" / "novel"
+OUTPUT_DIR = get_project_path("data/novel")
 HEADERS = {"User-Agent": "MutiRoleAgent/1.0 (public metadata collector)"}
 
 

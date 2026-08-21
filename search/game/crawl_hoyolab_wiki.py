@@ -13,9 +13,10 @@ from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
+from utils.path_tool import get_project_path
 
 
-OUTPUT_DIR = Path(__file__).resolve().parents[1] / "data" / "game"
+OUTPUT_DIR = get_project_path("data/game")
 HEADERS = {"User-Agent": "MutiRoleAgent/1.0 (public wiki collector)"}
 
 

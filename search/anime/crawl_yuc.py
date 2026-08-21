@@ -10,6 +10,7 @@ from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
 from typing import List
 from search.anime.retry_handler import circuit_breaker
+from utils.path_tool import get_project_path
 
 # 禁用 SSL 警告（yuc.wiki 证书过期）
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -188,12 +189,12 @@ def crawl_season_anime(season_url: str) -> dict:
 
         # 自动保存到 data/anime/yuc/
         try:
-            yuc_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "anime", "yuc"))
-            os.makedirs(yuc_dir, exist_ok=True)
+            yuc_dir = get_project_path("data/anime/yuc")
+            yuc_dir.mkdir(parents=True, exist_ok=True)
             season_tag = re.search(r'/(\d{6})/', season_url)
             tag = season_tag.group(1) if season_tag else "unknown"
-            save_path = os.path.join(yuc_dir, f"yuc_{tag}.json")
-            with open(save_path, "w", encoding="utf-8") as f:
+            save_path = yuc_dir / f"yuc_{tag}.json"
+            with save_path.open("w", encoding="utf-8") as f:
                 json.dump(result, f, ensure_ascii=False, indent=2)
             print(f"[yuc] 已保存: {save_path}")
         except Exception as e:
@@ -350,10 +351,11 @@ def save_to_json(result: dict, season_url: str):
     match = re.search(r'/(\d{6})/', season_url)
     season_tag = match.group(1) if match else "unknown"
 
-    output_path = os.path.join(os.path.dirname(__file__), f"yuc_{season_tag}.json")
+    output_path = get_project_path(f"data/anime/yuc/yuc_{season_tag}.json")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     # info 在前，animes 在后
     data = {"info": result.get("info", {}), "animes": anime_list}
-    with open(output_path, "w", encoding="utf-8") as f:
+    with output_path.open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
     print(f"[yuc JSON] 已写入: {output_path} ({len(anime_list)} 条)")
@@ -371,11 +373,12 @@ def fetch_season_links() -> str:
     if not links:
         print("[yuc] 未获取到季度链接")
         return ""
-    output_path = os.path.join(os.path.dirname(__file__), "yuc_wiki.json")
-    with open(output_path, "w", encoding="utf-8") as f:
+    output_path = get_project_path("data/anime/yuc/yuc_wiki.json")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8") as f:
         json.dump(links, f, ensure_ascii=False, indent=2)
     print(f"[yuc] 季度链接已写入: {output_path} ({len(links)} 条)")
-    return output_path
+    return str(output_path)
 
 
 def fetch_season_anime(season_url: str) -> str:
@@ -398,7 +401,7 @@ def fetch_season_anime(season_url: str) -> str:
 
     match = re.search(r'/(\d{6})/', season_url)
     tag = match.group(1) if match else "unknown"
-    return os.path.join(os.path.dirname(__file__), f"yuc_{tag}.json")
+    return str(get_project_path(f"data/anime/yuc/yuc_{tag}.json"))
 
 
 # ==================== 测试入口 ====================
