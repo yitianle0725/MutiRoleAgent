@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "source": "起点中文网",
+  "source_url": "https://www.qidian.com/rank/",
+  "datetime": "2026-08-22 13:37:59",
+  "collected_at": "2026-08-22T05:37:59.291993+00:00",
+  "board_count": 8,
+  "book_count": 80,
+  "boards": [
+    {
+      "name": "月票榜",
+      "url": "https://www.qidian.com/rank/yuepiao/",
+      "count": 10,
+      "books": [
+        {
+          "title": "捞尸人",
+          "url": "https://www.qidian.com/book/1041637443/"
+        },
+        {
+          "title": "玄鉴仙族",
+          "url": "https://www.qidian.com/book/1035420986/"
+        },
+        {
+          "title": "夜无疆",
+          "url": "https://www.qidian.com/book/1040765595/"
+        },
+        {
+          "title": "1984：从破产川菜馆开始",
+          "url": "https://www.qidian.com/book/1044818845/"
+        },
+        {
+          "title": "没钱修什么仙？",
+          "url": "https://www.qidian.com/book/1042256511/"
+        },
+        {
+          "title": "星河之主",
+          "url": "https://www.qidian.com/book/1047654482/"
+        },
+        {
+          "title": "以神通之名",
+          "url": "https://www.qidian.com/book/1044896207/"
+        },
+        {
+          "title": "剑烛大荒",
+          "url": "https://www.qidian.com/book/1048862481/"
+        },
+        {
+          "title": "让仙门再次伟大",
+          "url": "https://www.qidian.com/book/1049107474/"
+        },
+        {
+          "title": "青山",
+          "url": "https://www.qidian.com/book/1033014772/"
+        }
+      ]
+    },
+    {
+      "name": "畅销榜",
+      "url": "https://www.qidian.com/rank/hotsales/",
+      "count": 10,
+      "books": [
+        {
+          "title": "夜无疆",
+          "url": "https://www.qidian.com/book/1040765595/"
+        },
+        {
+          "title": "玄鉴仙族",
+          "url": "https://www.qidian.com/book/1035420986/"
+        },
+        {
+          "title": "捞尸人",
+          "url": "https://www.qidian.com/book/1041637443/"
+        },
+        {
+          "title": "青山",
+          "url": "https://www.qidian.com/book/1033014772/"
+        },
+        {
+          "title": "诡秘之主",
+          "url": "https://www.qidian.com/book/1010868264/"
+        },
+        {
+          "title": "1984：从破产川菜馆开始",
+          "url": "https://www.qidian.com/book/1044818845/"
+        },
+        {
+          "title": "没钱修什么仙？",
+          "url": "https://www.qidian.com/book/1042256511/"
+        },
+        {
+          "title": "星河之主",
+          "url": "https://www.qidian.com/book/1047654482/"
+        },
+        {
+          "title": "以神通之名",
+          "url": "https://www.qidian.com/book/1044896207/"
+        },
+        {
+          "title": "廓晋",
+          "url": "https://www.qidian.com/book/1047881102/"
+        }
+      ]
+    },
+    {
+      "name": "留存榜",
+      "url": "https://www.qidian.com/rank/retention/",
+      "count": 10,
+      "books": [
+        {
+          "title": "是，伟大魔女2077",
+          "url": "https://www.qidian.com/book/1048775987/"
+        },
+        {
+          "title": "白衣卿相",
+          "url": "https://www.qidian.com/book/1047634306/"
+        },
+        {
+          "title": "日本战国：功名十字路",
+          "url": "https://www.qidian.com/book/1049112947/"
+        },
+        {
+          "title": "廓晋",
+          "url": "https://www.qidian.com/book/1047881102/"
+        },
+        {
+          "title": "从大学球探开始",
+          "url": "https://www.qidian.com/book/1049362685/"
+        },
+        {
+          "title": "夺嫡在嘉靖朝",
+          "url": "https://www.qidian.com/book/1039931006/"
+        },
+        {
+          "title": "北望江山",
+          "url": "https://www.qidian.com/book/1044750637/"
+        },
+        {
+          "title": "重生之时尚天王",
+          "url": "https://www.qidian.com/book/1049523951/"
+        },
+        {
+          "title": "东京：崇华的我竟成了日娱之王",
+          "url": "https://www.qidian.com/book/1048777322/"
+        },
+        {
+          "title": "剑烛大荒",
+          "url": "https://www.qidian.com/book/1048862481/"
+        }
+      ]
+    },
+    {
+      "name": "推荐榜",
+      "url": "https://www.qidian.com/rank/recom/",
+      "count": 10,
+      "books": [
+        {
+          "title": "夜无疆",
+          "url": "https://www.qidian.com/book/1040765595/"
+        },
+        {
+          "title": "剑烛大荒",
+          "url": "https://www.qidian.com/book/1048862481/"
+        },
+        {
+          "title": "玄鉴仙族",
+          "url": "https://www.qidian.com/book/1035420986/"
+        },
+        {
+          "title": "诡秘之主",
+          "url": "https://www.qidian.com/book/1010868264/"
+        },
+        {
+          "title": "捞尸人",
+          "url": "https://www.qidian.com/book/1041637443/"
+        },
+        {
+          "title": "异度旅社",
+          "url": "https://www.qidian.com/book/1041604040/"
+        },
+        {
+          "title": "请勿高考时渡劫",
+          "url": "https://www.qidian.com/book/1049898328/"
+        },
+        {
+          "title": "没钱修什么仙？",
+          "url": "https://www.qidian.com/book/1042256511/"
+        },
+        {
+          "title": "廓晋",
+          "url": "https://www.qidian.com/book/1047881102/"
+        },
+        {
+          "title": "青山",
+          "url": "https://www.qidian.com/book/1033014772/"
+        }
+      ]
+    },
+    {
+      "name": "收藏榜",
+      "url": "https://www.qidian.com/rank/collect/",
+      "count": 10,
+      "books": [
+        {
+          "title": "诡秘之主",
+          "url": "https://www.qidian.com/book/1010868264/"
+        },
+        {
+          "title": "灵境行者",
+          "url": "https://www.qidian.com/book/1031940621/"
+        },
+        {
+          "title": "斗破苍穹",
+          "url": "https://www.qidian.com/book/1209977/"
+        },
+        {
+          "title": "圣墟",
+          "url": "https://www.qidian.com/book/1004608738/"
+        },
+        {
+          "title": "绍宋",
+          "url": "https://www.qidian.com/book/1017281778/"
+        },
+        {
+          "title": "玄鉴仙族",
+          "url": "https://www.qidian.com/book/1035420986/"
+        },
+        {
+          "title": "捞尸人",
+          "url": "https://www.qidian.com/book/1041637443/"
+        },
+        {
+          "title": "遮天",
+          "url": "https://www.qidian.com/book/1735921/"
+        },
+        {
+          "title": "大奉打更人",
+          "url": "https://www.qidian.com/book/1019664125/"
+        },
+        {
+          "title": "修真聊天群（聊天群的日常生活）",
+          "url": "https://www.qidian.com/book/3602691/"
+        }
+      ]
+    },
+    {
+      "name": "签约作者新书榜",
+      "url": "https://www.qidian.com/rank/signnewbook/",
+      "count": 10,
+      "books": [
+        {
+          "title": "请勿高考时渡劫",
+          "url": "https://www.qidian.com/book/1049898328/"
+        },
+        {
+          "title": "孤主",
+          "url": "https://www.qidian.com/book/1050102892/"
+        },
+        {
+          "title": "拂晓协议",
+          "url": "https://www.qidian.com/book/1050251241/"
+        },
+        {
+          "title": "玄君",
+          "url": "https://www.qidian.com/book/1050220958/"
+        },
+        {
+          "title": "武圣：功不负我",
+          "url": "https://www.qidian.com/book/1050216371/"
+        },
+        {
+          "title": "斗罗绝世：我，最后的天灾",
+          "url": "https://www.qidian.com/book/1050366123/"
+        },
+        {
+          "title": "同穿恋爱脑，我在女频正得发邪",
+          "url": "https://www.qidian.com/book/1050155344/"
+        },
+        {
+          "title": "我，赊刀人，斗鬼神",
+          "url": "https://www.qidian.com/book/1050267828/"
+        },
+        {
+          "title": "仙旅",
+          "url": "https://www.qidian.com/book/1050117396/"
+        },
+        {
+          "title": "我的女友是收容物",
+          "url": "https://www.qidian.com/book/1050153119/"
+        }
+      ]
+    },
+    {
+      "name": "公众作家新书榜",
+      "url": "https://www.qidian.com/rank/pubnewbook/",
+      "count": 10,
+      "books": [
+        {
+          "title": "新刀剑笑苍天",
+          "url": "https://www.qidian.com/book/1050298778/"
+        },
+        {
+          "title": "玄鉴，穿成玄谙的我一定要活下去",
+          "url": "https://www.qidian.com/book/1050543338/"
+        },
+        {
+          "title": "玄鉴：剑仙之子李火旺",
+          "url": "https://www.qidian.com/book/1050516267/"
+        },
+        {
+          "title": "神通广大从聚兽调禽开始",
+          "url": "https://www.qidian.com/book/1050287900/"
+        },
+        {
+          "title": "半岛：从身无分文的代表开始",
+          "url": "https://www.qidian.com/book/1050497967/"
+        },
+        {
+          "title": "吞噬星空：我用合成器合成源世界",
+          "url": "https://www.qidian.com/book/1048734442/"
+        },
+        {
+          "title": "凡人修仙之开局我有三个分身",
+          "url": "https://www.qidian.com/book/1048974909/"
+        },
+        {
+          "title": "苦境：BOSS是如何炼成的",
+          "url": "https://www.qidian.com/book/1050479338/"
+        },
+        {
+          "title": "玄鉴：玉骨观山",
+          "url": "https://www.qidian.com/book/1050528340/"
+        },
+        {
+          "title": "重生从苟在国企躺平摆烂开始",
+          "url": "https://www.qidian.com/book/1050306592/"
+        }
+      ]
+    },
+    {
+      "name": "月票榜 _·_ VIP新作",
+      "url": "https://www.qidian.com/rank/yuepiao?chn=0",
+      "count": 10,
+      "books": [
+        {
+          "title": "武道！",
+          "url": "https://www.qidian.com/book/1049534879/"
+        },
+        {
+          "title": "急急如律令",
+          "url": "https://www.qidian.com/book/1049745989/"
+        },
+        {
+          "title": "我绑定了夏弥",
+          "url": "https://www.qidian.com/book/1049640386/"
+        },
+        {
+          "title": "拔剑",
+          "url": "https://www.qidian.com/book/1049175528/"
+        },
+        {
+          "title": "还不起学贷的我只好兼职猎魔",
+          "url": "https://www.qidian.com/book/1049836819/"
+        },
+        {
+          "title": "你也是我的未来女友吗？",
+          "url": "https://www.qidian.com/book/1047345167/"
+        },
+        {
+          "title": "升格耀变体",
+          "url": "https://www.qidian.com/book/1049699858/"
+        },
+        {
+          "title": "诸天：一切从拜师石坚开始！",
+          "url": "https://www.qidian.com/book/1049745230/"
+        },
+        {
+          "title": "法爷，冒险者和女人",
+          "url": "https://www.qidian.com/book/1049674923/"
+        },
+        {
+          "title": "我在乱世开无双",
+          "url": "https://www.qidian.com/book/1049683620/"
+        }
+      ]
+    }
+  ]
+}

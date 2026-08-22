@@ -2,6 +2,7 @@ import re
 import time
 import random
 import json
+import sys
 import requests
 import os
 import urllib3
@@ -9,6 +10,10 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
 from typing import List
+
+if __package__ in {None, ""}:
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+
 from search.anime.retry_handler import retry_with_backoff, circuit_breaker
 from utils.path_tool import get_project_path
 

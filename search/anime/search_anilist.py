@@ -9,12 +9,17 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import requests
+
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 from utils.path_tool import get_project_path
 
 API_ENDPOINT = "https://graphql.anilist.co"

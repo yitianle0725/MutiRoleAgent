@@ -11,6 +11,7 @@ import json
 import re
 import time
 import random
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -18,6 +19,10 @@ from urllib.parse import urlencode
 from urllib.parse import urlparse
 
 import requests
+
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 from utils.path_tool import get_project_path
 
 BASE_URL = "https://api.jikan.moe/v4"

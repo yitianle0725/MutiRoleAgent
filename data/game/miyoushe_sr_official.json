@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "game": "崩坏星穹铁道",
+  "source": "miyoushe.com",
+  "source_url": "https://www.miyoushe.com/sr/home/53",
+  "collected_at": "2026-08-22T08:34:55.185670+00:00",
+  "datetime": "2026-08-22 16:34:55",
+  "community_map": [
+    {
+      "title": "候车室",
+      "url": "https://www.miyoushe.com/sr/home/52"
+    },
+    {
+      "title": "攻略",
+      "url": "https://www.miyoushe.com/sr/home/61"
+    },
+    {
+      "title": "官方",
+      "url": "https://www.miyoushe.com/sr/home/53"
+    },
+    {
+      "title": "百科",
+      "url": "https://bbs.mihoyo.com/sr/wiki/?bbs_presentation_style=no_header&utm_source=bbs&utm_medium=mys&utm_campaign=topbar"
+    },
+    {
+      "title": "同人图",
+      "url": "https://www.miyoushe.com/sr/home/56"
+    },
+    {
+      "title": "米游铺",
+      "url": "https://www.mihoyogift.com/xqtd?utm_source=bbs&utm_medium=mys&utm_campaign=navigationBar"
+    },
+    {
+      "title": "COS",
+      "url": "https://www.miyoushe.com/sr/home/62"
+    }
+  ],
+  "articles": {
+    "公告": [
+      {
+        "title": "「亏成首富，从不要钱开始」开拓续闻说明 08-21",
+        "url": "https://www.miyoushe.com/sr/article/77649746"
+      },
+      {
+        "title": "「挥掷千星的筹码」开拓任务说明 08-21",
+        "url": "https://www.miyoushe.com/sr/article/77649744"
+      },
+      {
+        "title": "4.5版本「无名勋礼」更新 08-17",
+        "url": "https://www.miyoushe.com/sr/article/77537092"
+      },
+      {
+        "title": "4.5版本商店上新 08-14",
+        "url": "https://www.miyoushe.com/sr/article/77459475"
+      },
+      {
+        "title": "「花藏繁生」活动：拟造花萼限时双倍掉落 08-13",
+        "url": "https://www.miyoushe.com/sr/article/77414370"
+      }
+    ],
+    "资讯": [
+      {
+        "title": "更新电台 | V4.5 挥掷千星的筹码 5小时前",
+        "url": "https://www.miyoushe.com/sr/article/77670698"
+      },
+      {
+        "title": "千星纪游PV：「众声之外」 08-21",
+        "url": "https://www.miyoushe.com/sr/article/77648600"
+      },
+      {
+        "title": "「差分宇宙•乐园漫记」V4.5 更新说明 08-20",
+        "url": "https://www.miyoushe.com/sr/article/77624815"
+      },
+      {
+        "title": "走近星穹：「知更鸟•晴歌：快乐的小鸟」 08-19",
+        "url": "https://www.miyoushe.com/sr/article/77594679"
+      },
+      {
+        "title": "角色前瞻 | 知更鸟•晴歌 08-19",
+        "url": "https://www.miyoushe.com/sr/article/77592996"
+      }
+    ],
+    "活动": [
+      {
+        "title": "「知更鸟•晴歌」角色绘画征集活动开启！ 进行中 2026.08.19 - 2026.10.09",
+        "url": "https://www.miyoushe.com/sr/article/77595646"
+      },
+      {
+        "title": "【有奖活动】星穹会客厅 | 知更鸟•晴歌：晴空之下的夏日合奏 进行中 2026.08.19 - 2026.08.23",
+        "url": "https://www.miyoushe.com/sr/article/77594674"
+      },
+      {
+        "title": "【米游币兑换中心】崩坏：星穹铁道商品即将上新！ 进行中 2026.07.17 - 2026.08.28",
+        "url": "https://www.miyoushe.com/sr/article/76744609"
+      },
+      {
+        "title": "鸣笛于归寂之时丨4.4版本攻略征集活动 进行中 2026.07.15 - 2026.09.14",
+        "url": "https://www.miyoushe.com/sr/article/76688382"
+      },
+      {
+        "title": "「银河铁道之夜」主题绘画征集活动 评选中 2026.07.09 - 2026.09.15",
+        "url": "https://www.miyoushe.com/sr/article/76553438"
+      }
+    ]
+  }
+}

@@ -3,8 +3,12 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from typing import Any
+
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from search.anime.crawl_bangumi import search_bangumi
 from search.anime.search_anilist import search_anime as search_anilist

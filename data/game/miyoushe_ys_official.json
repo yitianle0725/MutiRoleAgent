@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "game": "原神",
+  "source": "miyoushe.com",
+  "source_url": "https://www.miyoushe.com/ys/home/28",
+  "collected_at": "2026-08-22T08:34:55.074635+00:00",
+  "datetime": "2026-08-22 16:34:55",
+  "community_map": [
+    {
+      "title": "酒馆",
+      "url": "https://www.miyoushe.com/ys/home/26"
+    },
+    {
+      "title": "攻略",
+      "url": "https://www.miyoushe.com/ys/home/43"
+    },
+    {
+      "title": "官方",
+      "url": "https://www.miyoushe.com/ys/home/28"
+    },
+    {
+      "title": "观测枢",
+      "url": "https://baike.mihoyo.com/ys/strategy/?bbs_presentation_style=no_header"
+    },
+    {
+      "title": "米游铺",
+      "url": "https://www.mihoyogift.com/ys?utm_source=bbs&utm_medium=mys&utm_campaign=navigationBar"
+    },
+    {
+      "title": "同人图",
+      "url": "https://www.miyoushe.com/ys/home/29"
+    },
+    {
+      "title": "COS",
+      "url": "https://www.miyoushe.com/ys/home/49"
+    },
+    {
+      "title": "硬核",
+      "url": "https://www.miyoushe.com/ys/home/50"
+    }
+  ],
+  "articles": {
+    "公告": [
+      {
+        "title": "「幽境危战」活动：紊乱地脉挑战 08-17",
+        "url": "https://www.miyoushe.com/ys/article/77537726"
+      },
+      {
+        "title": "「夏日怪谈冒险会」参与获得装扮「幽幽惊吓帽」 08-16",
+        "url": "https://www.miyoushe.com/ys/article/77508640"
+      },
+      {
+        "title": "7.0版本游戏问题集中反馈——8月21日更新 08-12",
+        "url": "https://www.miyoushe.com/ys/article/77368251"
+      },
+      {
+        "title": "7.0版本「编辑器和千星沙箱」更新修复与优化说明 08-12",
+        "url": "https://www.miyoushe.com/ys/article/77364130"
+      },
+      {
+        "title": "「无神怜爱的雪国」7.0版本更新说明 08-12",
+        "url": "https://www.miyoushe.com/ys/article/77363392"
+      }
+    ],
+    "资讯": [
+      {
+        "title": "《原神》过场动画-「『死亡』已在身边」 4小时前",
+        "url": "https://www.miyoushe.com/ys/article/77671799"
+      },
+      {
+        "title": "阿蕾奇诺生日快乐 | 看你的表情…这些贺卡和信件里也有你的？ 4小时前",
+        "url": "https://www.miyoushe.com/ys/article/77671795"
+      },
+      {
+        "title": "《原神》过场动画-「星锋」 08-21",
+        "url": "https://www.miyoushe.com/ys/article/77648601"
+      },
+      {
+        "title": "珐露珊生日快乐 | 我的课堂随时欢迎提问哦。 08-20",
+        "url": "https://www.miyoushe.com/ys/article/77624816"
+      },
+      {
+        "title": "《原神》哥伦比娅印象服登场 至冬周边上架 08-19",
+        "url": "https://www.miyoushe.com/ys/article/77604466"
+      }
+    ],
+    "活动": []
+  }
+}
