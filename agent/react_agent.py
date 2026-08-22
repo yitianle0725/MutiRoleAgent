@@ -46,6 +46,7 @@ from memory.user_profile_extractor import extract_and_save_profile, build_profil
 from agent.cita.semantic import SemanticEngine, SemanticAnalysis
 from tools.agent_tools import (
     search_anime, fetch_anime, get_season_anime,
+    search_novel, fetch_novel, search_game_official,
     rag_summarize, switch_persona, reset_persona,
     get_public_ip, get_current_time,
     maps_weather, maps_ip_location,
@@ -190,6 +191,7 @@ class ReactAgent:
 
         local_tools = [
             search_anime, fetch_anime, get_season_anime,
+            search_novel, fetch_novel, search_game_official,
             rag_summarize, switch_persona, reset_persona,
             get_public_ip, get_current_time,
             download_novel,

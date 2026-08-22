@@ -204,7 +204,7 @@ async def crawl_all_official(keep_markdown: bool = False) -> list[str]:
     return [str(path) for path in paths]
 
 
-async def crawl_official_bundle(limit: int = 5, keep_markdown: bool = False) -> list[str]:
+async def crawl_official_bundle(limit: int = 5, keep_markdown: bool = False, game_key: str | None = None) -> list[str]:
     """每个游戏抓取公告、资讯、活动并合并到一个 JSON。"""
     if limit < 1:
         raise ValueError("limit 必须大于 0")
@@ -239,7 +239,8 @@ async def crawl_official_bundle(limit: int = 5, keep_markdown: bool = False) -> 
         json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         return str(json_path)
 
-    return list(await asyncio.gather(*(one_game(key) for key in GAMES)))
+    keys = [game_key] if game_key else list(GAMES)
+    return list(await asyncio.gather(*(one_game(key) for key in keys)))
 
 
 if __name__ == "__main__":

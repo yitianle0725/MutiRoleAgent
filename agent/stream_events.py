@@ -72,6 +72,9 @@ TOOL_DISPLAY_NAMES: dict[str, str] = {
     # 知识库
     "rag_summarize":          "📚 RAG 知识库检索",
     "download_novel":         "📚 小说下载（RAG）",
+    "search_novel":            "🔍 搜索起点小说",
+    "fetch_novel":             "📖 获取小说详情",
+    "search_game_official":    "🎮 查询游戏官方资讯",
     # 天气工具
     "maps_weather":           "🌤️ 实时天气查询（高德 MCP）",
     "maps_ip_location":       "📍 IP 定位（高德 MCP）",

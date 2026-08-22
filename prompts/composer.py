@@ -55,6 +55,14 @@ _ANIME_SOURCE_POLICY = """
 - 若工具返回 `websearch_fallback_required: true`，必须继续调用 `web_search`，不得凭模型记忆补全事实。
 """.strip()
 
+_SEARCH_SOURCE_POLICY = """
+## 小说与游戏资料来源
+- 具体起点小说问题：先调用 `search_novel(keyword)` 获取前 N 条摘要；确定作品后再调用 `fetch_novel(book_url)` 获取详情。
+- 小说搜索失败、结果为空或需要更广泛资料时，调用 `web_search` 兜底，不要凭记忆编造最新章节。
+- 原神、崩坏：星穹铁道、绝区零的官方公告、资讯和活动：调用 `search_game_official(game, limit)`。
+- 游戏抓取结果为空或提示 `websearch_fallback_required: true` 时，调用 `web_search` 兜底，并说明实际来源。
+""".strip()
+
 # 角色名 → 角色包目录名映射
 _PERSONA_TO_SLUG: dict[str, str] = {
     "Cyrene":          "cyrene",
@@ -114,6 +122,7 @@ def _load_system_base() -> str:
         if content:
             parts.append(content)
     parts.append(_ANIME_SOURCE_POLICY)
+    parts.append(_SEARCH_SOURCE_POLICY)
     return "\n\n---\n\n".join(parts) if parts else ""
 
 

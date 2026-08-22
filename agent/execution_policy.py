@@ -105,6 +105,23 @@ class NovelDownloadInput(BaseModel):
     novel_name: str = Field(min_length=1, max_length=100)
 
 
+class NovelSearchInput(BaseModel):
+    """search_novel 工具的输入。"""
+    keyword: str = Field(min_length=1, max_length=100)
+    limit: int = Field(default=10, ge=1, le=20)
+
+
+class NovelFetchInput(BaseModel):
+    """fetch_novel 工具的输入。"""
+    book_url: str = Field(min_length=1, max_length=500)
+
+
+class GameOfficialInput(BaseModel):
+    """search_game_official 工具的输入。"""
+    game: str = Field(default="", pattern=r"^(|ys|sr|zzz)$")
+    limit: int = Field(default=5, ge=1, le=20)
+
+
 class PoiSearchInput(BaseModel):
     """maps_text_search 入参"""
     query: str = Field(
@@ -152,6 +169,9 @@ TOOL_SCHEMAS: dict[str, type[BaseModel]] = {
     "web_search":             WebSearchInput,
     "web_search_prime":       WebSearchInput,
     "download_novel":         NovelDownloadInput,
+    "search_novel":            NovelSearchInput,
+    "fetch_novel":             NovelFetchInput,
+    "search_game_official":    GameOfficialInput,
 }
 
 # 无参工具（仅日志记录意外的入参，不拒绝）

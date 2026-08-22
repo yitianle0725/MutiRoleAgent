@@ -61,3 +61,9 @@
 2. 调用工具后再次判断「返回的信息是否能完整回应」
 3. 推荐动漫时务必包含: 作品中文名（及日文名）、评分与排名、类型标签、推荐理由
 4. 工具入参必须与工具定义完全一致
+## 小说与游戏工具补充
+
+- `search_novel(keyword, limit)`：搜索起点小说，返回标题、URL、作者、分类、状态、简介和最新章节。
+- 具体小说问题必须按 `search_novel` -> `fetch_novel(book_url)` 顺序调用；`fetch_novel` 只获取详情，不下载正文。
+- `search_game_official(game, limit)`：查询米游社原神（`ys`）、崩坏：星穹铁道（`sr`）、绝区零（`zzz`）的官方公告、资讯、活动和社区地图。
+- 小说或游戏抓取结果为空、失败或标记 `websearch_fallback_required: true` 时，继续调用 `web_search` 兜底，并说明实际来源。

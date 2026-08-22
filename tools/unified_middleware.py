@@ -35,6 +35,8 @@ from memory.user_profile_extractor import build_profile_context
 _TOOL_DOMAIN_MAP: dict[str, set[str]] = {
     "weather":  {"maps_weather", "maps_ip_location", "get_public_ip"},
     "anime":    {"search_anime", "fetch_anime", "get_season_anime"},
+    "novel":    {"search_novel", "fetch_novel", "download_novel"},
+    "game":     {"search_game_official"},
     "knowledge": {"rag_summarize"},
 }
 # 始终携带的轻量工具（schema 小，不影响延迟）

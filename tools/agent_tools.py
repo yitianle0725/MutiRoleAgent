@@ -10,6 +10,7 @@ import os
 import re
 import json
 import requests
+from pathlib import Path
 
 from langchain_core.tools import tool
 
@@ -20,8 +21,52 @@ from search.anime.crawl_yuc import crawl_season_anime
 from search.anime.source_search import search_anime_sources
 from rag.rag_service import RagSummarizeService
 from utils.logger_handler import logger
+from search.novel.crawl_book_info import crawl_search, crawl_book
+from search.game.crawl_hoyolab_wiki import crawl_official_bundle
 
 rag = RagSummarizeService()
+
+
+@tool(description="搜索起点中文网小说，返回前 N 条结果及标题、作者、分类、状态、简介和最新章节。默认返回 10 条，不下载正文。")
+async def search_novel(keyword: str, limit: int = 10) -> str:
+    if not keyword.strip():
+        return "错误：小说搜索关键词不能为空。"
+    try:
+        result = await crawl_search(keyword, limit=limit, keep_markdown=False)
+        return json.dumps(result, ensure_ascii=False, indent=2)
+    except Exception as exc:
+        logger.warning(f"[search_novel] 起点搜索失败: {exc}")
+        return json.dumps({"query": keyword, "results": [], "websearch_fallback_required": True, "error": str(exc)}, ensure_ascii=False)
+
+
+@tool(description="获取指定起点小说详情页元数据。入参必须是 qidian.com/book/<id>/ URL；只读取作者、简介、标签、推荐数和章节信息，不下载正文。")
+async def fetch_novel(book_url: str) -> str:
+    try:
+        result = await crawl_book(book_url, keep_markdown=False)
+        return json.dumps(result, ensure_ascii=False, indent=2)
+    except Exception as exc:
+        return json.dumps({"url": book_url, "error": str(exc)}, ensure_ascii=False)
+
+
+@tool(description="获取米游社三个游戏的官方公告、资讯、活动文章，返回每类前 N 条 title 和 url，以及社区地图。game 可选 ys、sr、zzz；默认抓取全部游戏。")
+async def search_game_official(game: str = "", limit: int = 5) -> str:
+    try:
+        if game and game not in {"ys", "sr", "zzz"}:
+            return "错误：game 只能是 ys、sr 或 zzz。"
+        paths = await crawl_official_bundle(limit=limit, keep_markdown=False, game_key=game or None)
+        payloads = []
+        for path in paths:
+            try:
+                payloads.append(json.loads(Path(path).read_text(encoding="utf-8")))
+            except (OSError, json.JSONDecodeError) as exc:
+                logger.warning(f"[search_game_official] 读取结果文件失败: {path}: {exc}")
+        return json.dumps(
+            {"game": game or "all", "results": payloads, "files": paths},
+            ensure_ascii=False,
+            indent=2,
+        )
+    except Exception as exc:
+        return json.dumps({"game": game or "all", "articles": [], "websearch_fallback_required": True, "error": str(exc)}, ensure_ascii=False)
 
 # 熔断 fallback 关键词映射
 _FALLBACK_KEYWORDS = {
