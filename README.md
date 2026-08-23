@@ -1,274 +1,384 @@
-# MutiRoleAgent —— 多角色 AI Agent 框架
+# MutiRoleAgent
 
-基于 **LangChain + LangGraph ReAct Agent** 构建的多角色智能助手，支持动漫推荐、天气查询、知识库 RAG、角色扮演等场景。
+一个面向动漫、小说和游戏资料场景的多角色 AI Agent。项目同时提供 React Web 前端、FastAPI 后端和 Streamlit 兼容入口，支持本地知识库问答、联网检索、结构化输出、会话记忆、角色人设、语音对话以及 ACGN 数据采集。
 
-## 核心特性
+## 功能概览
 
-### 多角色人设切换
-- 内置 **Persona Engine**，支持动态切换角色（如 Cyrene）
-- 角色卡 YAML 格式，可自由扩展：外观、性格、背景故事、对话风格、扮演指南
-- 切换时自动生成符合角色语气的过渡消息
+### Agent 与对话
 
-### 智能路由决策
-- **Decision Engine** 快/慢路由：闲聊直走 LLM（低延迟），复杂任务走完整 ReAct Agent
-- **CITA 2.0 语义分析**：提取主意图、实体、判断是否需要 RAG 检索
-- **动态工具裁剪**：根据语义分析结果只发送相关工具（减少 30-40% token 消耗）
+- 基于 LangChain / LangGraph 的 ReAct Agent，模型可以根据问题自主调用工具。
+- Decision Engine + CITA 语义分析：区分闲聊、知识库问答、联网查询和复杂任务。
+- 支持多会话隔离，SQLite 持久化会话标题、消息和统计信息。
+- 支持角色人设切换、角色风格、世界观和人物关系文件。
+- 支持流式文本、工具调用事件、结构化结果和性能监控。
 
-### 知识库 RAG（v2 混合检索）
-- **3 个独立 Collection**：FAQ、Worldbook（世界观）、Anime（番剧数据）
-- **混合检索**：Dense Vector (70%) + BM25 稀疏检索 (30%)
-- **多种 Embedding 支持**：DashScope 云端 → OpenAI 兼容 → 本地 bge-m3（降级链）
-- **维度校验**：跨 provider 切换自动检测 mismatch 并清空旧数据
-- **Worker 线程池**：并行分块 + 嵌入，批量入库加速
+### 知识库与 RAG
 
-### 工具系统
-| 类别 | 工具 | 说明 |
-|------|------|------|
-| 动漫 | `search_anime` | bangumi 搜索，熔断 fallback 到本地知识库 |
-| 动漫 | `fetch_anime` | 获取作品详情（章节/简介/标签/角色） |
-| 动漫 | `get_season_anime` | 获取季度新番列表（yuc.wiki） |
-| 天气 | `maps_weather` | Open-Meteo 免费全球天气（高德可选） |
-| 天气 | `maps_ip_location` | IP → 城市名定位 |
-| 知识库 | `rag_summarize` | 本地知识库 RAG 检索 + LLM 总结 |
-| 角色 | `switch_persona` | 动态切换角色人设 |
-| 角色 | `reset_persona` | 重置为默认模式 |
-| 搜索 | `web_search` | MCP 实时网络搜索 |
-| 时间 | `get_current_time` | 当前日期时间 |
-| 网络 | `get_public_ip` | 本机公网 IP |
+- ChromaDB 向量库保存本地文档切片。
+- Vector + BM25 混合检索，可选 reranker 重排序。
+- 文档入库使用 `mtime` 快速判断和 MD5 二次校验，避免重复解析和向量化。
+- 支持 TXT、PDF、JSON、Markdown 等资料格式。
+- 动漫资料单独使用 `anime` collection；角色世界观使用 `worldbook` collection。
 
-### 安全防护
-- **Action Gate**：工具白名单/黑名单/运行时拦截
-- **执行策略**：工具超时控制 + 自动重试 + 熔断降级
-- **上下文裁剪**：自动裁剪超限历史消息（token/轮数双阈值）
+### 联网与数据采集
 
-### Skill 插件系统
-- `weather-lifestyle` — 天气 + 穿衣/运动/护肤建议
-- `anime-deep-dive` — 番剧深度分析
-- `season-overview` — 季度新番总览
-- `recommend-anime` — 个性化番剧推荐
-- 可通过 `skill-creator` 创建自定义 Skill
+- 动漫：Bangumi、AniList、Jikan、YUC，本地聚合后可使用 WebSearch MCP 兜底。
+- 小说：起点搜索、排行榜、分类列表、具体作品详情，不抓取正文。
+- 游戏：使用 Crawl4AI 获取米游社原神、崩坏：星穹铁道、绝区零官方公告、资讯、活动和社区地图。
+- ACGN 日报：从 `search/acgn_daily/feeds.yaml` 配置的 RSS/API 源聚合每日动漫、漫画、游戏和小说资讯。
 
-### 会话管理
-- **多 session 隔离**：URL 参数持久化 session_id
-- **SQLite 持久化**：消息历史自动存储 + 启动恢复
-- **Streamlit 前端**：侧边栏文件上传、角色切换、会话管理
+### 语音
 
-## 技术架构
+- ASR：阿里云 `qwen-audio-3.0-asr-flash-streaming`。
+- TTS：阿里云 `qwen-audio-3.0-tts-plus`。
+- Realtime：阿里云 `qwen-audio-3.0-realtime-plus`。
+- VAD：本地 Silero-VAD。
+- 语音状态机：`IDLE -> LISTENING -> THINKING -> SPEAKING`。
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Streamlit UI (app.py)                 │
-├─────────────────────────────────────────────────────────┤
-│                    ReactAgent                            │
-│  ┌──────────┐  ┌──────────┐  ┌────────────────────┐    │
-│  │ Decision  │  │  CITA    │  │  UnifiedMiddleware │    │
-│  │ Engine    │  │ Semantic │  │  (动态工具裁剪)     │    │
-│  └──────────┘  └──────────┘  └────────────────────┘    │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │  LangGraph ReAct Agent (create_agent)             │   │
-│  │  ┌────────┐  ┌──────────┐  ┌─────────────────┐   │   │
-│  │  │ Tools  │  │ Action   │  │ Persona Engine  │   │   │
-│  │  │ 10+    │  │ Gate     │  │                 │   │   │
-│  │  └────────┘  └──────────┘  └─────────────────┘   │   │
-│  └──────────────────────────────────────────────────┘   │
-├─────────────────────────────────────────────────────────┤
-│  Model Layer          │  RAG Layer (v2)                  │
-│  ┌─────────────────┐  │  ┌──────────────────────────┐   │
-│  │ ChatOpenAI       │  │  │ HybridRetriever          │   │
-│  │ (DeepSeek/百炼)  │  │  │ Vector(70%)+BM25(30%)    │   │
-│  ├─────────────────┤  │  │ + Reranker(bge-reranker)  │   │
-│  │ EmbeddingProvider│  │  ├──────────────────────────┤   │
-│  │ Local→Cloud→Dash │  │  │ ChromaDB (3 collections) │   │
-│  │ DimensionGuard   │  │  │ ChineseBM25 (jieba分词)  │   │
-│  │ EmbeddingWorker  │  │  └──────────────────────────┘   │
-│  └─────────────────┘  │                                  │
-├─────────────────────────────────────────────────────────┤
-│  Storage: SQLite (chat) + ChromaDB (vectors) + YAML (config) │
-└─────────────────────────────────────────────────────────┘
-```
+## 技术栈
+
+| 层次 | 技术 |
+| --- | --- |
+| Python | Python 3.12+ |
+| Agent | LangChain、LangGraph、Pydantic |
+| LLM | OpenAI 兼容接口，默认适配 DashScope / Qwen |
+| Web 后端 | FastAPI、Uvicorn、SSE、WebSocket |
+| Web 前端 | React、TypeScript、Vite、Ant Design X |
+| 旧版 UI | Streamlit |
+| RAG | ChromaDB、BM25、jieba、可选 reranker |
+| 存储 | SQLite、ChromaDB、JSON、Markdown |
+| 抓取 | requests、BeautifulSoup、Crawl4AI、RSS |
+| 语音 | DashScope、websockets、Silero-VAD |
+| 配置 | `.env`、YAML |
 
 ## 快速开始
 
-### 环境要求
-- Python 3.12+
-- Windows / macOS / Linux
+### 环境准备
 
-### 1. 安装依赖
+建议使用独立虚拟环境，不要直接污染 Anaconda `base`：
 
-```bash
-pip install -r requirements.txt
-
-# Embedding 升级所需额外依赖
-pip install fastembed jieba sentence-transformers
+```powershell
+python -m venv .venv
+.venv/Scripts/Activate.ps1
+python -m pip install -r requirements.txt
 ```
 
-### 2. 配置 API Key
+网页采集和本地 Embedding 不是所有环境都必需；需要时再安装：
 
-编辑 `.env`：
+```powershell
+python -m pip install crawl4ai fastembed jieba sentence-transformers
+```
 
-```bash
-# LLM（必填，OpenAI 兼容协议）
-LLM_API_KEY=sk-your-key
+首次使用 Crawl4AI 可能还需要按其提示安装浏览器运行时。前端开发需要 Node.js 18+ 和 npm。
+
+如果 PowerShell 禁止执行脚本，可以直接使用：
+
+```powershell
+.venv/Scripts/python.exe -m pip install -r requirements.txt
+```
+
+复制环境变量模板：
+
+```powershell
+Copy-Item .env.example .env
+```
+
+最少配置一个 LLM：
+
+```dotenv
+LLM_API_KEY=你的模型密钥
 LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
 LLM_MODEL=qwen3-max
-
-# DashScope（兼容旧变量 + Embedding fallback）
-DASHSCOPE_API_KEY=sk-your-key
-
-# 高德天气（可选，不设则用免费 Open-Meteo）
-# AMAP_API_KEY=your_amap_key
+DASHSCOPE_API_KEY=你的DashScope密钥
 ```
 
-支持的 LLM 厂商（修改 `LLM_BASE_URL` 即可切换）：
+### 启动 React + FastAPI
 
-| 厂商 | LLM_BASE_URL |
-|------|-------------|
-| 阿里百炼 | `https://dashscope.aliyuncs.com/compatible-mode/v1` |
-| DeepSeek | `https://api.deepseek.com/v1` |
-| OpenAI | `https://api.openai.com/v1` |
-| Kimi | `https://api.moonshot.cn/v1` |
-| Ollama | `http://localhost:11434/v1` |
+终端一，在项目根目录启动后端：
 
-### 3. 启动
+```powershell
+python -m uvicorn channels.platforms.fastapi:app --reload --port 8000
+```
 
-```bash
+终端二启动前端：
+
+```powershell
+cd apps/web
+npm install
+npm run dev
+```
+
+访问：
+
+- Web 前端：`http://localhost:5173`
+- FastAPI 文档：`http://localhost:8000/docs`
+- 健康检查：`http://localhost:8000/health`
+
+前端 Vite 会把 `/api` 请求代理到 `http://127.0.0.1:8000`。
+
+### 构建并由后端托管前端
+
+```powershell
+cd apps/web
+npm run build
+cd ../..
+python -m uvicorn channels.platforms.fastapi:app --port 8000
+```
+
+然后访问 `http://localhost:8000`。
+
+### 启动 Streamlit 兼容入口
+
+```powershell
 streamlit run app.py
 ```
 
-### 4. 载入知识库
+Streamlit 入口主要用于旧版页面、知识库文件上传和兼容测试；当前 React 页面推荐使用 FastAPI 入口。
 
-将文档放入对应目录：
-- `data/faq/` — FAQ 知识库（`.txt` / `.pdf`）
-- `data/worldbook/` — 世界观/角色设定（`.txt` / `.pdf`）
-- `data/anime/` — 番剧 JSON 数据（`.json`）
+## 环境变量
 
-启动后自动载入，MD5 去重避免重复入库。
+### 模型
+
+```dotenv
+LLM_API_KEY=...
+LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+LLM_MODEL=qwen3-max
+DASHSCOPE_API_KEY=...
+```
+
+可替换为 OpenAI、DeepSeek、Kimi 或 Ollama 的 OpenAI 兼容地址。
+
+### Embedding
+
+```dotenv
+EMBEDDING_MODE=dashscope
+```
+
+支持 `dashscope`、`cloud`、`local` 和自动降级模式。切换 embedding 模型或维度后，可能需要清理并重建对应 Chroma collection。
+
+### 语音
+
+```dotenv
+VOICE_ENABLED=true
+DASHSCOPE_API_KEY=...
+ALI_ASR_MODEL=qwen-audio-3.0-asr-flash-streaming
+ALI_REALTIME_MODEL=qwen-audio-3.0-realtime-plus
+ALI_TTS_MODEL=qwen-audio-3.0-tts-plus
+ALI_TTS_VOICE=longanhuan_v3.6
+```
+
+语音是可选功能。没有配置时，文字对话仍可正常使用。
+
+### WebSearch MCP
+
+默认使用 DashScope WebSearch MCP：
+
+```dotenv
+WEBSEARCH_MCP_URL=https://dashscope.aliyuncs.com/api/v1/mcps/WebSearch/mcp
+WEBSEARCH_MCP_KEY=...
+```
+
+如果使用 `DASHSCOPE_API_KEY`，可以不单独设置 `WEBSEARCH_MCP_KEY`。远程工具还需要在 `config/gate.yaml` 的白名单中。
 
 ## 项目结构
 
-```
+```text
 MutiRoleAgent/
-├── app.py                  # Streamlit 前端入口
-├── requirements.txt        # Python 依赖
-├── .env                    # API Key 配置
-│
-├── agent/                  # Agent 核心
-│   ├── react_agent.py      # ReAct Agent 主控制器
-│   ├── agent_state.py      # Agent 状态管理
-│   ├── decision_engine.py  # 快/慢路由决策
-│   ├── action_gate.py      # 工具白名单/黑名单/拦截
-│   ├── execution_policy.py # 工具超时 + 重试 + 熔断
-│   ├── knowledge_base.py   # 用户上传 → 知识库
-│   ├── stream_events.py    # 流式事件类型
-│   ├── user_profile_extractor.py  # 用户画像提取
-│   ├── cita/               # CITA 2.0 语义分析
-│   │   └── semantic.py     # 意图识别 / 实体提取
-│   ├── persona/            # 角色人设系统
-│   │   └── engine.py       # Persona Engine
-│   ├── skill_support/      # Skill 插件支持
-│   ├── structured_output/  # 结构化输出（天气报告等）
-│   └── tools/              # 工具集
-│       ├── agent_tools.py  # 所有本地工具定义
-│       ├── mcp_client.py   # MCP 远端工具客户端
-│       └── unified_middleware.py  # 动态工具裁剪
-│
-├── model/                  # 模型工厂
-│   ├── factory.py          # LLM + Embedding 单例
-│   ├── embedding_provider.py  # Embedding Provider (v2)
-│   ├── dimension_guard.py  # 维度校验
-│   └── embedding_worker.py # 并行嵌入线程池
-│
-├── rag/                    # RAG 检索层 (v2)
-│   ├── vector_store.py     # 3 Collection ChromaDB 管理
-│   ├── rag_service.py      # 智能路由 RAG 总结
-│   ├── hybrid_retriever.py # 混合检索器 (Vector+BM25+Reranker)
-│   └── bm25.py             # 中文 BM25 稀疏检索 (jieba)
-│
-├── anime/                  # 动漫数据爬虫
-│   ├── crawl_bangumi.py    # bangumi 搜索 + 详情
-│   ├── crawl_yuc.py        # yuc.wiki 季度新番
-│   └── retry_handler.py    # 熔断器
-│
-├── config/                 # YAML 配置
-│   ├── agent.yaml          # Agent 参数（裁剪/超时）
-│   ├── chroma.yaml         # ChromaDB + 检索参数
-│   ├── decision.yaml       # 快/慢路由决策规则
-│   ├── gate.yaml           # 工具白名单/黑名单
-│   ├── keywords.yaml       # RAG 路由关键词
-│   └── rag.yaml            # RAG 模型配置
-│
-├── prompts/                # 提示词模板
-│   ├── system/             # 系统提示词 (tools/output/system)
-│   ├── soul/               # 角色灵魂提示词
-│   ├── styles/             # 风格提示词
-│   └── worldbook/          # 世界观设定
-│
-├── skills/                 # Skill 插件
-│   ├── weather-lifestyle/  # 天气生活建议
-│   ├── anime-deep-dive/    # 番剧深度分析
-│   ├── season-overview/    # 季度新番总览
-│   ├── recommend-anime/    # 个性化推荐
-│   └── skill-creator/      # Skill 创建工具
-│
-├── utils/                  # 工具模块
-│   ├── config_handler.py   # YAML 配置加载
-│   ├── prompt_loader.py    # 提示词加载
-│   ├── session_store.py    # 会话历史（内存）
-│   ├── context_trimmer.py  # 上下文裁剪
-│   ├── file_handler.py     # 文件加载 (txt/pdf/json)
-│   ├── logger_handler.py   # 日志配置
-│   └── path_tool.py        # 路径工具
-│
-├── db/                     # 数据持久化
-│   └── chat_db.py          # SQLite 聊天记录
-│
-├── eval/                   # 评测
-│   └── __init__.py
-│
-├── test/                   # 测试
-│
-├── data/                   # 知识库文档
-│   ├── faq/                # FAQ 文档
-│   ├── worldbook/          # 世界观文档
-│   └── anime/              # 番剧 JSON
-│
-├── chroma_db/              # ChromaDB 持久化目录
-└── logs/                   # 日志文件
+├── agent/                     # Agent 核心、路由、Persona、结构化输出
+│   ├── react_agent.py         # LangGraph ReAct Agent 主循环
+│   ├── decision_engine.py     # chat / agent 路由
+│   ├── action_gate.py         # 工具白名单和危险操作拦截
+│   ├── execution_policy.py    # 工具参数校验
+│   ├── cita/                  # 意图、实体、上下文语义分析
+│   ├── persona/               # 角色人设与世界观运行时
+│   └── structured_output/     # Pydantic 结构化输出和重试
+├── api/                      # 旧版 FastAPI 路由模块
+├── channels/platforms/       # 当前 FastAPI Channel 入口
+├── apps/web/                 # React + TypeScript + Vite 前端
+├── tools/                    # 本地工具、MCP 客户端、统一中间件、语音
+├── model/                    # LLM、Embedding、维度检查、Embedding worker
+├── rag/                      # Chroma、混合检索、BM25、上下文构建
+├── memory/                   # SQLite 会话、内存历史、上下文压缩
+├── search/                   # 动漫、小说、游戏和 ACGN 日报采集器
+│   ├── anime/
+│   ├── novel/
+│   ├── game/
+│   └── acgn_daily/
+├── data/                     # 采集结果、知识库文档和角色世界观资料
+├── prompts/                  # 系统提示词、角色提示词和工具规则
+├── skills/                   # 可自动发现的 SKILL.md 技能
+├── config/                   # YAML 配置
+├── db/                       # 知识库文件索引和 SQLite 文件
+├── chroma_db/                # ChromaDB 持久化数据
+├── eval/                     # RAG、历史会话和回归评测
+├── test/                     # 自动化测试
+├── app.py                    # Streamlit 兼容入口
+└── requirements.txt          # Python 依赖
 ```
 
-## Embedding 配置
+## 工具调用规则
 
-默认使用 DashScope 云端 embedding，零配置可用。
+Agent 并不是每条消息都调用工具。流程如下：
 
-```bash
-# 本地 bge-m3 模型（需先下载，约 2.2GB）
-EMBEDDING_MODE=local
-HF_ENDPOINT=https://hf-mirror.com   # 国内镜像
+1. Decision Engine 判断是闲聊还是 Agent 任务。
+2. Agent 任务进入 LangGraph ReAct 循环。
+3. LLM 根据工具 schema 选择工具。
+4. UnifiedMiddleware 执行 Action Gate、参数校验、超时和错误处理。
+5. 工具结果回传给模型，模型再生成最终回答。
 
-# OpenAI 兼容云端
-EMBEDDING_MODE=cloud
-EMBEDDING_BASE_URL=https://api.openai.com/v1
-EMBEDDING_MODEL=text-embedding-3-small
+典型调用顺序：
+
+- 具体动漫：`search_anime -> fetch_anime`
+- 小说：`search_novel -> fetch_novel`
+- 游戏官方资讯：`search_game_official`
+- 本地知识问答：`rag_summarize`
+- 抓取失败或结果为空：`web_search` 兜底
+
+涉及“最新、今天、当前、实时、公告、资讯、活动、章节、搜索”的问题会强制进入 Agent 路径，避免聊天缓存绕过工具。
+
+## 数据采集命令
+
+命令均从项目根目录执行，并使用正斜杠。
+
+```powershell
+# AniList 通用/定向搜索
+python search/anime/search_anilist.py --search "死神"
+
+# Jikan 数据采集
+python search/anime/search_jikan.py
+
+# 起点小说搜索
+python search/novel/crawl_book_info.py --search "斗破苍穹"
+
+# 起点排行榜
+python search/novel/crawl_book_info.py --rank
+
+# 米游社官方公告、资讯、活动
+python search/game/crawl_hoyolab_wiki.py --official --game ys --limit 5
+
+# ACGN 日报聚合
+python search/acgn_daily/aggregate.py
 ```
 
-## 混合检索配置
+结果默认写入 `data/anime`、`data/novel`、`data/game` 或 `data/acgn_daily`。Markdown 原始抓取结果通常通过 `--keep-md` 显式保留。
 
-`config/chroma.yaml`：
+## RAG 数据准备
 
-```yaml
-retrieval:
-  dense_weight: 0.7       # 向量检索权重
-  sparse_weight: 0.3      # BM25 权重
-  reranker_enabled: false  # bge-reranker-base 重排（~1.1GB）
+- `data/worldbook/`：角色、世界观、人物关系等长期知识。
+- `data/anime/`：动漫 JSON 和采集结果，可被动漫相关检索使用。
+- `data/novel/`、`data/game/`：小说和游戏采集结果，可作为后续知识库导入来源。
+- 用户上传文件：通过 Streamlit 页面上传并写入知识库。
+
+角色人设文件和文档知识库是两套概念：角色人设在 Agent 初始化或会话创建时从磁盘重新读取；知识库文档则经过清洗、切片、Embedding 和索引后持久化。
+
+## 常见问题
+
+### 1. 前端提示“会话列表加载失败，重试”
+
+必须启动当前 FastAPI Channel，而不是旧的 `api.main`：
+
+```powershell
+python -m uvicorn channels.platforms.fastapi:app --reload --port 8000
 ```
 
-## 安全特性
+前端请求路径是 `/api/v1/sessions`。可直接访问 `http://localhost:8000/api/v1/sessions` 验证。
 
-- **工具黑名单**：`delete / remove / exec / shell / sudo / kill` 等危险操作默认拦截
-- **MCP 白名单**：远端工具默认拒绝，需手动加入 `gate.yaml`
-- **路径穿越检测**：参数含 `../` 或 `..\` 自动拦截
-- **鉴权工具检查**：敏感工具需 user_id 方可执行
+### 2. 模型回答没有调用工具、出现幻觉
 
-## License
+检查：
+
+- 后端是否为 `channels.platforms.fastapi:app`。
+- 日志是否出现 `Decision: route=agent`。
+- 日志是否出现 `调用工具:`。
+- WebSearch MCP 是否加载成功。
+- `config/gate.yaml` 是否包含 `web_search` 或 `web_search_prime`。
+
+修改 `config/decision.yaml`、Prompt 或 `.env` 后必须重启后端。
+
+### 3. WebSearch 不可用
+
+确认 `DASHSCOPE_API_KEY` 或 `WEBSEARCH_MCP_KEY` 已配置，并检查启动日志中的 `websearch` 工具加载信息。没有 MCP 时，动漫、小说、游戏工具仍可使用；联网兜底会失败并返回来源不足提示。
+
+### 4. 语音提示未配置
+
+设置：
+
+```dotenv
+VOICE_ENABLED=true
+DASHSCOPE_API_KEY=...
+ALI_ASR_MODEL=qwen-audio-3.0-asr-flash-streaming
+ALI_REALTIME_MODEL=qwen-audio-3.0-realtime-plus
+ALI_TTS_MODEL=qwen-audio-3.0-tts-plus
+```
+
+不要再配置已经废弃的 `cosyvoice-v1`。
+
+### 5. `Model not found (cosyvoice-v1)`
+
+说明旧配置仍被读取。检查 `.env`、`.env.example` 和当前进程环境变量，确保 `ALI_TTS_MODEL=qwen-audio-3.0-tts-plus`，然后完全重启后端。
+
+### 6. `Missing required parameter payload.input`
+
+这是阿里云语音协议参数结构不正确，通常来自旧版 ASR/TTS 代码或音频发送时机错误。确认使用当前 `tools/voice` 下的 Qwen 适配器，并确保音频帧在 Started 回调后发送。
+
+### 7. Crawl4AI 只返回 `Loading...`
+
+米游社是前端 SPA，需要浏览器渲染、隐身配置、等待页面就绪和较长超时。先使用 `--keep-md` 保留原始 Markdown，确认页面确实加载成功，再解析 JSON。
+
+### 8. `ModuleNotFoundError: No module named 'utils'`
+
+从项目根目录执行脚本：
+
+```powershell
+python search/novel/crawl_book_info.py --search "斗破苍穹"
+```
+
+不要把工作目录切换到 `search/novel` 后直接运行。
+
+### 9. pip 报 `rich` 与 `instructor` 冲突
+
+当前 `instructor` 要求 `rich<15`，可以执行：
+
+```powershell
+python -m pip install "rich>=13.7,<15"
+python -m pip check
+```
+
+更推荐使用项目独立虚拟环境，不要长期在 Anaconda `base` 环境中混装依赖。
+
+### 10. Chroma 维度不匹配
+
+这是切换 Embedding 模型或维度后，旧向量库仍然存在。先备份 `chroma_db/`，再按当前 Embedding 配置重建 collection，避免混用不同维度的向量。
+
+### 11. 如何查看工具是否真的执行
+
+查看 `logs/agent_YYYYMMDD.log`，重点搜索：
+
+```text
+Decision: route=agent
+调用工具:
+AGENT_TOOL
+AGENT_TOOL_DONE
+```
+
+如果只有 `route=chat` 或 `chat cache`，说明请求走了无工具聊天路径。
+
+## 测试与检查
+
+```powershell
+# Python 编译检查
+python -m py_compile agent/react_agent.py agent/decision_engine.py api/main.py
+
+# 运行测试
+python -m pytest -q
+
+# 前端类型检查和构建
+cd apps/web
+npm run build
+```
+
+网络爬虫和外部 MCP 测试依赖网络、API Key 和目标站点状态，失败时应结合日志判断，不能只根据单次网络结果判断代码是否正确。
+
+## 许可证
 
 MIT
