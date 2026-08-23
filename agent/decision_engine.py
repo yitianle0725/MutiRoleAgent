@@ -127,6 +127,17 @@ class DecisionEngine:
         self._llm_enabled = _CFG.get("llm_layer", {}).get("enabled", True)
         self._llm_min_confidence = _CFG.get("llm_layer", {}).get("min_rule_confidence", 0.6)
 
+    @staticmethod
+    def _has_explicit_tool_hint(query_lower: str) -> bool:
+        """识别必须使用外部数据的表达，避免聊天缓存绕过工具。"""
+        tool_hints = (
+            "联网", "网上查", "查一下", "查找", "搜索", "查询", "最新",
+            "实时", "今天", "当前", "现在", "公告", "资讯", "活动",
+            "最新章节", "作者", "原神", "崩坏", "星穹铁道", "绝区零",
+            "米游社", "起点", "小说",
+        )
+        return any(hint in query_lower for hint in tool_hints)
+
     # ==================== 主入口 ====================
 
     def evaluate(
@@ -151,6 +162,14 @@ class DecisionEngine:
             return Decision(route="chat", confidence=1.0, reason="empty_query", source="rule")
 
         query_lower = query.lower().strip()
+
+        # 明确要求实时/外部资料时，禁止复用 chat 路由缓存。
+        if self._has_explicit_tool_hint(query_lower):
+            forced = Decision(route="agent", confidence=0.95, reason="explicit_tool_hint", source="rule")
+            self._update_stats(session_id, "agent")
+            self._update_cache(session_id, "agent", query_lower)
+            return forced
+
         cache_entry = self._get_cache(session_id)
 
         # ---- 话题切换检测 ----
