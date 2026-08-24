@@ -20,8 +20,8 @@ class LangGraphAgentCore:
         self.session_id = session_id
         self.thread_id = thread_id or session_id
 
-    def config(self, *, run_id: str | None = None) -> dict[str, Any]:
-        return build_graph_config(session_id=self.session_id, thread_id=self.thread_id, run_id=run_id)
+    def config(self, *, run_id: str | None = None, route: str | None = None, prompt_version: str | None = None) -> dict[str, Any]:
+        return build_graph_config(session_id=self.session_id, thread_id=self.thread_id, run_id=run_id, route=route, prompt_version=prompt_version)
 
     async def astream(
         self,

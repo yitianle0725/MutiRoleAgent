@@ -1,0 +1,5 @@
+[
+  {"id":"anime-search","input":"搜索最新动漫资讯","route":"agent","tools_expected":["search_anime"],"expected_output":""},
+  {"id":"chat-greeting","input":"你好","route":"chat","tools_expected":[],"expected_output":""},
+  {"id":"fact-error","input":"搜索失败时如实返回","route":"agent","tools_expected":["search_anime"],"metadata":{"must_preserve_errors":["网络超时"]},"expected_output":"网络超时"}
+]

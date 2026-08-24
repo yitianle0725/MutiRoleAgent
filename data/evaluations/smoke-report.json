@@ -1,0 +1,44 @@
+{
+  "dataset_version": "local-v1",
+  "total": 3,
+  "passed": 3,
+  "score": 1.0,
+  "results": [
+    {
+      "case_id": "anime-search",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "chat-greeting",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "fact-error",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0
+      },
+      "failures": []
+    }
+  ],
+  "prompt_version": "v1",
+  "model": "unknown",
+  "code_version": "working-tree"
+}

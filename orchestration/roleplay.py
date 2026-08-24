@@ -19,6 +19,16 @@ ROLEPLAY_SYSTEM_PROMPT = """你是一个轻量角色表达层。
 必须保留路径、URL、时间、错误、警告、JSON 和不确定性。
 失败、取消、等待输入必须如实表达，不能改写成成功。"""
 
+try:
+    import os
+    from prompts import prompt_registry
+    _PROMPT_VERSION = os.getenv("PROMPT_ROLEPLAY_VERSION", "v1")
+    _ROLEPLAY_TEMPLATE = prompt_registry.get("roleplay", _PROMPT_VERSION)
+    if _ROLEPLAY_TEMPLATE.strip():
+        ROLEPLAY_SYSTEM_PROMPT += f"\n\nPrompt 版本：{_PROMPT_VERSION}\n{_ROLEPLAY_TEMPLATE}"
+except (OSError, ValueError, ImportError):
+    _PROMPT_VERSION = "inline"
+
 ModelFactory = Callable[[str | None], Any]
 
 

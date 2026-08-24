@@ -18,6 +18,8 @@ def build_graph_config(
     session_id: str,
     thread_id: str | None = None,
     run_id: str | None = None,
+    route: str | None = None,
+    prompt_version: str | None = None,
 ) -> dict[str, Any]:
     """构造 LangGraph RunnableConfig。
 
@@ -31,12 +33,21 @@ def build_graph_config(
     }
     if run_id:
         configurable["run_id"] = run_id
+    try:
+        from observability.langsmith_integration import graph_config_metadata
+        tracing_metadata = graph_config_metadata(
+            run_id=run_id, session_id=session_id, thread_id=resolved_thread_id,
+            route=route, prompt_version=prompt_version,
+        )
+    except Exception:
+        tracing_metadata = {}
     return {
         "configurable": configurable,
         "metadata": {
             "session_id": session_id,
             "thread_id": resolved_thread_id,
             **({"run_id": run_id} if run_id else {}),
+            **tracing_metadata,
         },
     }
 

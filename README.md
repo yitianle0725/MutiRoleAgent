@@ -41,6 +41,7 @@
 | --- | --- |
 | Python | Python 3.12+ |
 | Agent | LangChain、LangGraph、Pydantic |
+| 质量工程 | LangSmith Tracing、离线 Evaluation、Prompt Registry |
 | LLM | OpenAI 兼容接口，默认适配 DashScope / Qwen |
 | Web 后端 | FastAPI、Uvicorn、SSE、WebSocket |
 | Web 前端 | React、TypeScript、Vite、Ant Design X |
@@ -91,6 +92,17 @@ LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
 LLM_MODEL=qwen3-max
 DASHSCOPE_API_KEY=你的DashScope密钥
 ```
+
+启用 LangSmith 追踪（最新版配置只使用 `LANGSMITH_*` 变量）：
+
+```dotenv
+LANGSMITH_API_KEY=lsv2_你的LangSmith密钥
+LANGSMITH_TRACING=true
+LANGSMITH_PROJECT=MutiRoleAgent
+LANGSMITH_SAMPLING_RATE=1.0
+```
+
+修改 `.env` 后需要完全重启后端进程。LangSmith 不可用时，项目仍使用本地 RunStore 和 MonitorStore。
 
 ### 启动 React + FastAPI
 
@@ -179,6 +191,29 @@ WEBSEARCH_MCP_KEY=...
 ```
 
 如果使用 `DASHSCOPE_API_KEY`，可以不单独设置 `WEBSEARCH_MCP_KEY`。远程工具还需要在 `config/gate.yaml` 的白名单中。
+
+### LangSmith 质量闭环
+
+LangSmith 用于观察和评估 Agent，不负责业务编排：
+
+- Tracing：查看模型调用、工具调用、耗时、Token 和失败原因。
+- Dataset：保存动漫、小说、游戏、RAG、工具失败和事实保真样本。
+- Evaluation：评估工具路由、事实保真、错误保留和结构化输出。
+- Prompt Registry：通过 `prompts/versions/` 管理 Prompt 版本。
+
+本地离线评测：
+
+```powershell
+python -m evaluation.langsmith_eval
+```
+
+可选上传脱敏数据集到 LangSmith：
+
+```powershell
+python -m evaluation.langsmith_eval --langsmith
+```
+
+评测低于质量门槛时命令返回非零状态，报告默认写入 `data/evaluations/`。
 
 ## 项目结构
 
@@ -283,7 +318,38 @@ python -m uvicorn channels.platforms.fastapi:app --reload --port 8000
 
 前端请求路径是 `/api/v1/sessions`。可直接访问 `http://localhost:8000/api/v1/sessions` 验证。
 
-### 2. 模型回答没有调用工具、出现幻觉
+### 2. `WinError 10048`：8000 端口已被占用
+
+这表示已有服务正在监听 8000 端口，不是 Agent 或 LangSmith 初始化失败。可以直接换端口：
+
+```powershell
+python -m uvicorn channels.platforms.fastapi:app --reload --port 8001
+```
+
+检查占用进程：
+
+```powershell
+netstat -ano | findstr :8000
+Get-Process -Id <PID>
+```
+
+确认是旧的 Uvicorn 进程后再结束：
+
+```powershell
+taskkill /PID <PID> /F
+```
+
+### 3. LangSmith 中用户输入显示为 `???`
+
+LangSmith 通常不会主动替换中文。可以用 Python 的 UTF-8 JSON 请求测试：
+
+```powershell
+python -c "import requests; r=requests.post('http://127.0.0.1:8000/api/v1/chat/stream', json={'message':'搜索最新动漫资讯','session_id':'encoding-test'}); print(r.status_code); print(r.text[:500])"
+```
+
+如果 Python 请求正常而 PowerShell 请求异常，说明是终端编码问题。修改 `.env` 后必须重启后端。
+
+### 4. 模型回答没有调用工具、出现幻觉
 
 检查：
 
@@ -295,11 +361,11 @@ python -m uvicorn channels.platforms.fastapi:app --reload --port 8000
 
 修改 `config/decision.yaml`、Prompt 或 `.env` 后必须重启后端。
 
-### 3. WebSearch 不可用
+### 5. WebSearch 不可用
 
 确认 `DASHSCOPE_API_KEY` 或 `WEBSEARCH_MCP_KEY` 已配置，并检查启动日志中的 `websearch` 工具加载信息。没有 MCP 时，动漫、小说、游戏工具仍可使用；联网兜底会失败并返回来源不足提示。
 
-### 4. 语音提示未配置
+### 6. 语音提示未配置
 
 设置：
 
@@ -313,19 +379,19 @@ ALI_TTS_MODEL=qwen-audio-3.0-tts-plus
 
 不要再配置已经废弃的 `cosyvoice-v1`。
 
-### 5. `Model not found (cosyvoice-v1)`
+### 7. `Model not found (cosyvoice-v1)`
 
 说明旧配置仍被读取。检查 `.env`、`.env.example` 和当前进程环境变量，确保 `ALI_TTS_MODEL=qwen-audio-3.0-tts-plus`，然后完全重启后端。
 
-### 6. `Missing required parameter payload.input`
+### 8. `Missing required parameter payload.input`
 
 这是阿里云语音协议参数结构不正确，通常来自旧版 ASR/TTS 代码或音频发送时机错误。确认使用当前 `tools/voice` 下的 Qwen 适配器，并确保音频帧在 Started 回调后发送。
 
-### 7. Crawl4AI 只返回 `Loading...`
+### 9. Crawl4AI 只返回 `Loading...`
 
 米游社是前端 SPA，需要浏览器渲染、隐身配置、等待页面就绪和较长超时。先使用 `--keep-md` 保留原始 Markdown，确认页面确实加载成功，再解析 JSON。
 
-### 8. `ModuleNotFoundError: No module named 'utils'`
+### 10. `ModuleNotFoundError: No module named 'utils'`
 
 从项目根目录执行脚本：
 
@@ -335,7 +401,7 @@ python search/novel/crawl_book_info.py --search "斗破苍穹"
 
 不要把工作目录切换到 `search/novel` 后直接运行。
 
-### 9. pip 报 `rich` 与 `instructor` 冲突
+### 11. pip 报 `rich` 与 `instructor` 冲突
 
 当前 `instructor` 要求 `rich<15`，可以执行：
 
@@ -346,11 +412,11 @@ python -m pip check
 
 更推荐使用项目独立虚拟环境，不要长期在 Anaconda `base` 环境中混装依赖。
 
-### 10. Chroma 维度不匹配
+### 12. Chroma 维度不匹配
 
 这是切换 Embedding 模型或维度后，旧向量库仍然存在。先备份 `chroma_db/`，再按当前 Embedding 配置重建 collection，避免混用不同维度的向量。
 
-### 11. 如何查看工具是否真的执行
+### 13. 如何查看工具是否真的执行
 
 查看 `logs/agent_YYYYMMDD.log`，重点搜索：
 
@@ -364,6 +430,35 @@ AGENT_TOOL_DONE
 如果只有 `route=chat` 或 `chat cache`，说明请求走了无工具聊天路径。
 
 ## 测试与检查
+
+### LangSmith 实际验证流程
+
+先确认配置已被当前 Python 环境读取：
+
+```powershell
+python -c "from observability.langsmith_integration import enabled; print('LangSmith enabled:', enabled())"
+```
+
+应输出 `LangSmith enabled: True`。然后运行离线质量门禁：
+
+```powershell
+python -m evaluation.langsmith_eval
+```
+
+启动后端并发送一次普通聊天和一次工具请求：
+
+```powershell
+python -m uvicorn channels.platforms.fastapi:app --reload --port 8000
+```
+
+另开终端：
+
+```powershell
+python -c "import requests; print(requests.post('http://127.0.0.1:8000/api/v1/chat/stream', json={'message':'你好','session_id':'langsmith-test'}).text[:500])"
+python -c "import requests; print(requests.post('http://127.0.0.1:8000/api/v1/chat/stream', json={'message':'搜索最新动漫资讯','session_id':'langsmith-test'}).text[:500])"
+```
+
+随后在 LangSmith 的 `MutiRoleAgent` 项目中查看新的 trace。工具请求应能看到 Agent、模型和工具调用链；metadata 中应包含 `session_id`、`thread_id` 和 `run_id`。
 
 ```powershell
 # Python 编译检查
