@@ -17,7 +17,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from api.routes import chat, persona, sessions, voice, web
+from api.routes import chat, persona, sessions, voice, web, runs
 
 # 前端构建产物目录（cd apps/web && npm run build）
 WEB_DIST = Path(__file__).resolve().parents[1] / "apps" / "web" / "dist"
@@ -51,6 +51,7 @@ def create_app() -> FastAPI:
     app.include_router(sessions.router, prefix="/api")
     app.include_router(persona.router, prefix="/api")
     app.include_router(web.router, prefix="/api")
+    app.include_router(runs.router, prefix="/api/v1")
 
     return app
 

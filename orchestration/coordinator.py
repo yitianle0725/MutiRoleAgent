@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import asyncio
 import uuid
+from datetime import datetime, timezone
 from collections.abc import AsyncIterator, Awaitable, Callable
 from dataclasses import dataclass
 from typing import Any
@@ -193,6 +194,8 @@ class ConversationCoordinator:
         persona: str | None = None,
         attempt: int = 1,
         completion_callback: CompletionCallback | None = None,
+        route_mode: str = "auto",
+        retry_of_run_id: str | None = None,
     ) -> OrchestratedTurnResult:
         """启动后台 Agent 任务，立即返回 ACK 和 run_id。"""
 
@@ -202,6 +205,11 @@ class ConversationCoordinator:
             thread_id=thread_id,
             prompt=prompt,
             attempt=attempt,
+            user_id=user_id,
+            persona=persona,
+            route_mode=route_mode,
+            trace_id=uuid.uuid4().hex,
+            retry_of_run_id=retry_of_run_id,
         )
         ack = await self._roleplay.delegated_ack(prompt, persona=persona)
         task = asyncio.create_task(
@@ -253,6 +261,7 @@ class ConversationCoordinator:
         updated = await self._runs.set_status(
             run_id, "cancelled", steps=run.steps, error="用户取消任务"
         )
+        await self._runs.append_event(run_id, "run.cancelled", {"reason": "用户取消任务", "steps": run.steps})
         if callback and updated:
             fact = AgentFactResult(status="cancelled", text="用户取消任务")
             response = await self._roleplay.present_agent_cancelled(fact.text)
@@ -271,6 +280,8 @@ class ConversationCoordinator:
             user_id=user_id,
             persona=persona,
             attempt=run.attempt + 1,
+            retry_of_run_id=run.run_id,
+            route_mode=run.route_mode,
         )
 
     async def request_user_input(
@@ -303,6 +314,22 @@ class ConversationCoordinator:
             response = await self._roleplay.present_waiting_for_input(question)
             await callback(OrchestratedTurnResult(response_text=response, completed=False, delegated=True, run_id=run_id, status="waiting_for_input", fact_result=fact))
         return updated
+
+    async def resume_agent_run(self, run_id: str, value: Any) -> OrchestratedTurnResult:
+        """恢复等待输入的 LangGraph run；使用原 thread_id，不重放历史。"""
+        run = await self._runs.get(run_id)
+        if run is None:
+            raise ValueError(f"任务不存在：{run_id}")
+        if run.status != "waiting_for_input":
+            raise ValueError("只有 waiting_for_input 任务可以恢复")
+        agent = await self._runner.get_agent(run.session_id, user_id=run.user_id, persona=run.persona)
+        core = getattr(agent, "core", None)
+        if core is None:
+            raise RuntimeError("当前 Agent 未提供 LangGraph Core resume 接口")
+        result = await core.resume(value, run_id=run.run_id)
+        await self._runs.append_event(run_id, "run.resumed", {"value_provided": True})
+        await self._runs.set_status(run_id, "running", steps=run.steps, clear_pending_input=True)
+        return OrchestratedTurnResult(delegated=True, completed=False, run_id=run_id, status="running")
 
     async def _collect_fact(self, prompt: str, *, session_id: str, user_id: str | None, persona: str | None, run_id: str | None = None) -> AgentFactResult:
         chunks: list[str] = []
@@ -341,6 +368,7 @@ class ConversationCoordinator:
             response = await self._present_fact(fact, run.prompt, persona)
             await self._runs.append_event(run.run_id, "run.result", {"response_text": response, "status": fact.status})
             await self._runs.set_status(run.run_id, "completed", steps=fact.steps, summary=fact.text[:1200])
+            await self._runs.append_event(run.run_id, "turn_completed", {"steps": fact.steps})
             if callback:
                 await callback(OrchestratedTurnResult(response_text=response, completed=True, delegated=True, run_id=run.run_id, status="completed", steps=fact.steps, role_name=persona, fact_result=fact))
         except asyncio.CancelledError:
@@ -348,6 +376,7 @@ class ConversationCoordinator:
         except Exception as exc:
             error = f"{type(exc).__name__}: {exc}"
             await self._runs.set_status(run.run_id, "failed", error=error)
+            await self._runs.append_event(run.run_id, "turn_failed", {"error": error})
             response = await self._roleplay.present_agent_failure(error, user_input=run.prompt, persona=persona)
             if callback:
                 fact = AgentFactResult(status="failed", text=error, errors=[error])

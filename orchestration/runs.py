@@ -26,6 +26,11 @@ class AgentRun:
     prompt: str = ""
     steps: int = 0
     attempt: int = 1
+    retry_of_run_id: str | None = None
+    user_id: str | None = None
+    persona: str | None = None
+    route_mode: str = "auto"
+    trace_id: str | None = None
     summary: str = ""
     error: str = ""
     pending_user_input: dict[str, Any] | None = None
@@ -51,6 +56,11 @@ class RunStore:
         prompt: str,
         run_id: str | None = None,
         attempt: int = 1,
+        retry_of_run_id: str | None = None,
+        user_id: str | None = None,
+        persona: str | None = None,
+        route_mode: str = "auto",
+        trace_id: str | None = None,
     ) -> AgentRun:
         run = AgentRun(
             run_id=run_id or self.create_run_id(),
@@ -58,6 +68,11 @@ class RunStore:
             thread_id=thread_id,
             prompt=prompt,
             attempt=max(int(attempt), 1),
+            retry_of_run_id=retry_of_run_id,
+            user_id=user_id,
+            persona=persona,
+            route_mode=route_mode,
+            trace_id=trace_id,
         )
         await self.append_event(run.run_id, "run.created", asdict(run))
         return run
@@ -112,6 +127,7 @@ class RunStore:
         summary: str | None = None,
         error: str | None = None,
         pending_user_input: dict[str, Any] | None = None,
+        clear_pending_input: bool = False,
     ) -> AgentRun | None:
         """追加状态事件并返回重建后的运行记录。"""
 
@@ -129,6 +145,8 @@ class RunStore:
             data["error"] = error
         if pending_user_input is not None:
             data["pending_user_input"] = pending_user_input
+        elif clear_pending_input:
+            data["pending_user_input"] = None
         await self.append_event(run_id, "run.status_changed", data)
         return await self.get(run_id)
 

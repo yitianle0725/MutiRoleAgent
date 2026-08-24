@@ -7,6 +7,7 @@ P1 不复制 Agent 执行循环，runner 只负责按 session 隔离 Agent、统
 from __future__ import annotations
 
 import asyncio
+import os
 from collections.abc import AsyncIterator, Awaitable, Callable
 from typing import Any
 
@@ -87,31 +88,23 @@ class SessionAgentRunner:
             if self._session_store is not None:
                 context = await self.get_context(session_id)
                 agent_history = context["agent_history"]
-            async for event in agent.execute_stream_async(prompt):
-                if self._run_store is not None and run_id is not None:
-                    await self._run_store.append_event(run_id, "agent.event", _event_record(event))
-                if isinstance(event, ToolEvent):
-                    step += 1 if event.phase == "start" else 0
-                    item = _event_record(event)
-                    (tool_calls if event.phase == "start" else tool_results).append(item)
-                    agent_history.append(event)
-                if run_id is not None:
-                    checkpoint = AgentCheckpoint(
-                        run_id=run_id,
-                        session_id=session_id,
-                        thread_id=session_id,
-                        step=step,
-                        tool_calls=tool_calls[-20:],
-                        tool_results=tool_results[-20:],
-                    )
-                    await self._checkpoint_store.save(checkpoint)
-                    if self._run_store is not None:
-                        await self._run_store.append_event(
-                            run_id,
-                            "checkpoint",
-                            {"step": step, "summary": checkpoint.summary},
-                        )
-                yield event
+            timeout = float(os.getenv("AGENT_TURN_TIMEOUT", "0"))
+            event_stream = agent.execute_stream_async(prompt)
+
+            async def consume():
+                nonlocal step
+                async for event in event_stream:
+                    await self._handle_event(event, session_id, run_id, agent_history, tool_calls, tool_results, step)
+                    step = self._step
+                    yield event
+
+            if timeout > 0:
+                async with asyncio.timeout(timeout):
+                    async for event in consume():
+                        yield event
+            else:
+                async for event in consume():
+                    yield event
             if self._session_store is not None and agent_history:
                 # ToolEvent 不是 LangChain BaseMessage，摘要只保存可序列化文本。
                 summary = "\n".join(str(item) for item in agent_history[-20:])
@@ -126,15 +119,19 @@ class SessionAgentRunner:
                         tool_calls=tool_calls[-20:],
                         tool_results=tool_results[-20:],
                     ))
-            elif run_id is not None:
-                await self._checkpoint_store.save(AgentCheckpoint(
-                    run_id=run_id,
-                    session_id=session_id,
-                    thread_id=session_id,
-                    step=step,
-                    tool_calls=tool_calls[-20:],
-                    tool_results=tool_results[-20:],
-                ))
+
+    async def _handle_event(self, event, session_id, run_id, agent_history, tool_calls, tool_results, step):
+        self._step = step
+        if self._run_store is not None and run_id is not None:
+            await self._run_store.append_event(run_id, "agent.event", _event_record(event))
+        if isinstance(event, ToolEvent):
+            self._step += 1 if event.phase == "start" else 0
+            item = _event_record(event)
+            (tool_calls if event.phase == "start" else tool_results).append(item)
+            agent_history.append(event)
+        if run_id is not None:
+            checkpoint = AgentCheckpoint(run_id=run_id, session_id=session_id, thread_id=session_id, step=self._step, tool_calls=tool_calls[-20:], tool_results=tool_results[-20:])
+            await self._checkpoint_store.save(checkpoint)
 
     async def close_session(self, session_id: str) -> None:
         """释放会话锁对象，供会话删除时调用。"""

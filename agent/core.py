@@ -37,3 +37,8 @@ class LangGraphAgentCore:
 
     async def ainvoke(self, state: Any, *, run_id: str | None = None) -> Any:
         return await self.graph.ainvoke(state, config=self.config(run_id=run_id))
+
+    async def resume(self, value: Any, *, run_id: str | None = None) -> Any:
+        """使用 LangGraph Command(resume=...) 恢复 interrupt 节点。"""
+        from langgraph.types import Command
+        return await self.graph.ainvoke(Command(resume=value), config=self.config(run_id=run_id))
