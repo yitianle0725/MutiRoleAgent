@@ -11,6 +11,8 @@ from collections.abc import AsyncIterator, Awaitable, Callable
 from typing import Any
 
 from agent.stream_events import StructuredData, TextChunk, ToolEvent
+from memory.session_store import SessionStore
+from orchestration.runs import RunStore
 
 
 AgentFactory = Callable[[str, str | None, str | None], Awaitable[Any]]
@@ -20,8 +22,16 @@ StreamEvent = TextChunk | ToolEvent | StructuredData
 class SessionAgentRunner:
     """按会话串行调用 Agent，避免入口直接操作 LangGraph 图。"""
 
-    def __init__(self, agent_factory: AgentFactory) -> None:
+    def __init__(
+        self,
+        agent_factory: AgentFactory,
+        *,
+        session_store: SessionStore | None = None,
+        run_store: RunStore | None = None,
+    ) -> None:
         self._agent_factory = agent_factory
+        self._session_store = session_store
+        self._run_store = run_store
         self._locks: dict[str, asyncio.Lock] = {}
         self._locks_guard = asyncio.Lock()
 
@@ -45,6 +55,7 @@ class SessionAgentRunner:
         *,
         user_id: str | None = None,
         persona: str | None = None,
+        run_id: str | None = None,
     ) -> AsyncIterator[StreamEvent]:
         """通过统一 runner 执行一轮流式请求。"""
 
@@ -55,11 +66,38 @@ class SessionAgentRunner:
                 user_id=user_id,
                 persona=persona,
             )
+            # Agent 内部的可见历史由 ReactAgent 维护；Runner 只补充 Agent 专用审计历史。
+            agent_history = []
+            if self._session_store is not None:
+                agent_history = await asyncio.to_thread(self._session_store.get_agent_history, session_id)
             async for event in agent.execute_stream_async(prompt):
+                if self._run_store is not None and run_id is not None:
+                    await self._run_store.append_event(run_id, "agent.event", _event_record(event))
+                if isinstance(event, ToolEvent):
+                    agent_history.append(event)
                 yield event
+            if self._session_store is not None and agent_history:
+                # ToolEvent 不是 LangChain BaseMessage，摘要只保存可序列化文本。
+                summary = "\n".join(str(item) for item in agent_history[-20:])
+                await asyncio.to_thread(self._session_store.set_agent_summary, session_id, summary[:4000])
 
     async def close_session(self, session_id: str) -> None:
         """释放会话锁对象，供会话删除时调用。"""
 
         async with self._locks_guard:
             self._locks.pop(session_id, None)
+
+
+def _event_record(event: StreamEvent) -> dict[str, Any]:
+    """把流式事件转换为 RunStore 可持久化的简单字典。"""
+    if isinstance(event, TextChunk):
+        return {"type": "text", "content": event.content}
+    if isinstance(event, ToolEvent):
+        return {
+            "type": "tool",
+            "phase": event.phase,
+            "tool_name": event.tool_name,
+            "args": event.tool_args,
+            "result_preview": event.result_preview,
+        }
+    return {"type": "structured", "schema_type": event.schema_type, "data": event.raw_json}

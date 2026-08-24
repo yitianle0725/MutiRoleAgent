@@ -37,6 +37,8 @@ class SessionStore:
 
     def __init__(self):
         self._store: dict[str, list[BaseMessage]] = {}
+        self._agent_history: dict[str, list[BaseMessage]] = {}
+        self._agent_summaries: dict[str, str] = {}
         self._lock = threading.Lock()
 
     # ---- 读取 ----
@@ -86,6 +88,23 @@ class SessionStore:
         self.append(session_id, HumanMessage(content=user_msg))
         self.append(session_id, AIMessage(content=assistant_msg))
 
+    # Agent 专用上下文与用户可见历史分开保存，避免 ToolMessage 进入角色层。
+    def get_agent_history(self, session_id: str) -> list[BaseMessage]:
+        with self._lock:
+            return list(self._agent_history.get(session_id, []))
+
+    def append_agent_message(self, session_id: str, message: BaseMessage) -> None:
+        with self._lock:
+            self._agent_history.setdefault(session_id, []).append(message)
+
+    def get_agent_summary(self, session_id: str) -> str:
+        with self._lock:
+            return self._agent_summaries.get(session_id, "")
+
+    def set_agent_summary(self, session_id: str, summary: str) -> None:
+        with self._lock:
+            self._agent_summaries[session_id] = str(summary or "")
+
     # ---- 管理 ----
 
     def clear(self, session_id: str):
@@ -93,7 +112,9 @@ class SessionStore:
         with self._lock:
             if session_id in self._store:
                 del self._store[session_id]
-                logger.info(f"[SessionStore] 已清空 session={session_id}")
+            self._agent_history.pop(session_id, None)
+            self._agent_summaries.pop(session_id, None)
+            logger.info(f"[SessionStore] 已清空 session={session_id}")
 
     def list_sessions(self) -> list[str]:
         """返回所有活跃会话的 ID 列表。"""

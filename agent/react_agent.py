@@ -40,6 +40,7 @@ from observability.store import monitor_store
 from memory.chat_db import chat_db
 from agent.agent_state import create_agent_state
 from agent.langgraph_adapter import build_graph_config, build_checkpointer
+from agent.core import LangGraphAgentCore
 from agent.summary import build_history_summary
 from agent.stream_events import TextChunk, ToolEvent, StructuredData
 from agent.action_gate import action_gate
@@ -251,6 +252,7 @@ class ReactAgent:
         self.agent = create_agent(
             **agent_kwargs,
         )
+        self.core = LangGraphAgentCore(self.agent, session_id=self.session_id, thread_id=self.thread_id)
         print(f"[init_agent] 统一中间件已激活: Gate + Policy + Timeout + CITA + Persona")
 
         # 持久化初始化：建表 + 从 SQLite 恢复历史到内存

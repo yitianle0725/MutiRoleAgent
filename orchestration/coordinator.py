@@ -52,6 +52,10 @@ class ConversationCoordinator:
         self._runs = run_store or RunStore()
         self._decision = decision or default_decision_engine
         self._session_store = session_store or default_session_store
+        if getattr(self._runner, "_session_store", None) is None:
+            self._runner._session_store = self._session_store
+        if getattr(self._runner, "_run_store", None) is None:
+            self._runner._run_store = self._runs
         self._session_locks: dict[str, asyncio.Lock] = {}
         self._session_locks_guard = asyncio.Lock()
         self._tasks: dict[str, asyncio.Task[None]] = {}
@@ -104,6 +108,7 @@ class ConversationCoordinator:
         session_id: str = "default",
         user_id: str | None = None,
         persona: str | None = None,
+        run_id: str | None = None,
     ) -> AsyncIterator[StreamEvent]:
         """流式执行一轮请求，入口无需知道 Agent 如何创建。"""
 
@@ -130,6 +135,7 @@ class ConversationCoordinator:
                 prompt,
                 user_id=user_id,
                 persona=persona,
+                run_id=run_id,
             ):
                 yield event
 
@@ -290,12 +296,12 @@ class ConversationCoordinator:
             await callback(OrchestratedTurnResult(response_text=response, completed=False, delegated=True, run_id=run_id, status="waiting_for_input", fact_result=fact))
         return updated
 
-    async def _collect_fact(self, prompt: str, *, session_id: str, user_id: str | None, persona: str | None) -> AgentFactResult:
+    async def _collect_fact(self, prompt: str, *, session_id: str, user_id: str | None, persona: str | None, run_id: str | None = None) -> AgentFactResult:
         chunks: list[str] = []
         tool_events: list[dict[str, Any]] = []
         content_blocks: list[ContentBlock] = []
         steps = 0
-        async for event in self.stream_user_turn(prompt, session_id=session_id, user_id=user_id, persona=persona):
+        async for event in self.stream_user_turn(prompt, session_id=session_id, user_id=user_id, persona=persona, run_id=run_id):
             content_blocks.append(event_to_content_block(event))
             if isinstance(event, TextChunk):
                 chunks.append(event.content)
@@ -323,7 +329,7 @@ class ConversationCoordinator:
     ) -> None:
         callback = completion_callback
         try:
-            fact = await self._collect_fact(run.prompt, session_id=run.session_id, user_id=user_id, persona=persona)
+            fact = await self._collect_fact(run.prompt, session_id=run.session_id, user_id=user_id, persona=persona, run_id=run.run_id)
             response = await self._present_fact(fact, run.prompt, persona)
             await self._runs.append_event(run.run_id, "run.result", {"response_text": response, "status": fact.status})
             await self._runs.set_status(run.run_id, "completed", steps=fact.steps, summary=fact.text[:1200])
