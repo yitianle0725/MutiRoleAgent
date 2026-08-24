@@ -39,7 +39,8 @@ from utils.performance_monitor import PerformanceMonitor
 from observability.store import monitor_store
 from memory.chat_db import chat_db
 from agent.agent_state import create_agent_state
-from agent.langgraph_adapter import build_graph_config, build_memory_checkpointer
+from agent.langgraph_adapter import build_graph_config, build_checkpointer
+from agent.summary import build_history_summary
 from agent.stream_events import TextChunk, ToolEvent, StructuredData
 from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
@@ -242,7 +243,7 @@ class ReactAgent:
             "system_prompt": system_prompt,
             "middleware": [UnifiedMiddleware()],
         }
-        checkpointer = build_memory_checkpointer()
+        checkpointer = build_checkpointer()
         if checkpointer is not None:
             agent_kwargs["checkpointer"] = checkpointer
             logger.info("[init_agent] LangGraph checkpointer 已启用（开发内存模式）")
@@ -739,6 +740,7 @@ class ReactAgent:
             persona=self.default_persona,
             history=trimmed_history,
             thread_id=self.thread_id,
+            agent_summary=build_history_summary(trimmed_history),
         )
         tracer.agent_path_start(len(state["messages"]))
         tracer.agent_model_before(len(state["messages"]))

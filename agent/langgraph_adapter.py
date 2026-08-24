@@ -7,6 +7,9 @@
 from __future__ import annotations
 
 import os
+import sqlite3
+import threading
+from pathlib import Path
 from typing import Any
 
 
@@ -60,3 +63,39 @@ def build_memory_checkpointer() -> Any | None:
         return MemorySaver()
     except (ImportError, AttributeError):
         return None
+
+
+_CHECKPOINTER_LOCK = threading.Lock()
+_CHECKPOINTER: Any | None = None
+
+
+def build_checkpointer() -> Any | None:
+    """按配置创建进程级共享 checkpointer。
+
+    SQLite saver 是可选依赖；未安装时明确降级为 MemorySaver，避免应用无法启动。
+    """
+
+    global _CHECKPOINTER
+    if not checkpointer_enabled():
+        return None
+    with _CHECKPOINTER_LOCK:
+        if _CHECKPOINTER is not None:
+            return _CHECKPOINTER
+        mode = os.getenv("LANGGRAPH_CHECKPOINT_MODE", "memory").lower()
+        if mode == "sqlite":
+            try:
+                from langgraph.checkpoint.sqlite import SqliteSaver
+
+                path = Path(os.getenv("LANGGRAPH_CHECKPOINT_PATH", "data/langgraph_checkpoints.db"))
+                path.parent.mkdir(parents=True, exist_ok=True)
+                connection = sqlite3.connect(str(path), check_same_thread=False)
+                _CHECKPOINTER = SqliteSaver(connection)
+                setup = getattr(_CHECKPOINTER, "setup", None)
+                if callable(setup):
+                    setup()
+                return _CHECKPOINTER
+            except (ImportError, AttributeError, OSError):
+                # 可选扩展未安装时使用内存实现，保持本地开发可启动。
+                pass
+        _CHECKPOINTER = build_memory_checkpointer()
+        return _CHECKPOINTER

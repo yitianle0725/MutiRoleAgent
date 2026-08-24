@@ -59,6 +59,7 @@ def create_agent_state(
     persona: str | None = None,
     history: Sequence[BaseMessage] | None = None,
     thread_id: str | None = None,
+    agent_summary: str = "",
 ) -> AgentState:
     """构造符合 LangGraph 图运行标准格式的 AgentState。
 
@@ -87,7 +88,7 @@ def create_agent_state(
         report_context=report_context,
         persona=persona,
         thread_id=thread_id or session_id,
-        agent_summary="",
+        agent_summary=agent_summary,
         facts=[],
         errors=[],
     )
