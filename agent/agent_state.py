@@ -10,7 +10,7 @@ LangGraph 的 State 是 TypedDict + Annotated reducer 模式：
 - session_id 为字符串类型，无 reducer 则默认覆盖上一次的值。
 """
 
-from typing import TypedDict, Annotated, Sequence
+from typing import TypedDict, Annotated, Sequence, Any
 import operator
 from langchain_core.messages import BaseMessage
 
@@ -43,6 +43,10 @@ class AgentState(TypedDict):
     user_id: str | None
     report_context: bool
     persona: str | None
+    thread_id: str
+    agent_summary: str
+    facts: list[dict[str, Any]]
+    errors: list[str]
 
 
 # ==================== 工厂函数 ====================
@@ -54,6 +58,7 @@ def create_agent_state(
     report_context: bool = False,
     persona: str | None = None,
     history: Sequence[BaseMessage] | None = None,
+    thread_id: str | None = None,
 ) -> AgentState:
     """构造符合 LangGraph 图运行标准格式的 AgentState。
 
@@ -81,4 +86,8 @@ def create_agent_state(
         user_id=user_id,
         report_context=report_context,
         persona=persona,
+        thread_id=thread_id or session_id,
+        agent_summary="",
+        facts=[],
+        errors=[],
     )

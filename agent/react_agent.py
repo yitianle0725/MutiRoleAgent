@@ -39,6 +39,7 @@ from utils.performance_monitor import PerformanceMonitor
 from observability.store import monitor_store
 from memory.chat_db import chat_db
 from agent.agent_state import create_agent_state
+from agent.langgraph_adapter import build_graph_config, build_memory_checkpointer
 from agent.stream_events import TextChunk, ToolEvent, StructuredData
 from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
@@ -159,6 +160,7 @@ class ReactAgent:
         self._current_tracer: ConversationTracer | None = None
         self._current_route = "unknown"
         self._current_outcome = "success"
+        self.thread_id = session_id
 
     # ==================== 初始化 ====================
 
@@ -234,11 +236,19 @@ class ReactAgent:
             else:
                 system_prompt = base_prompt
 
+        agent_kwargs = {
+            "model": chat_model,
+            "tools": all_tools,
+            "system_prompt": system_prompt,
+            "middleware": [UnifiedMiddleware()],
+        }
+        checkpointer = build_memory_checkpointer()
+        if checkpointer is not None:
+            agent_kwargs["checkpointer"] = checkpointer
+            logger.info("[init_agent] LangGraph checkpointer 已启用（开发内存模式）")
+
         self.agent = create_agent(
-            model=chat_model,
-            tools=all_tools,
-            system_prompt=system_prompt,
-            middleware=[UnifiedMiddleware()],
+            **agent_kwargs,
         )
         print(f"[init_agent] 统一中间件已激活: Gate + Policy + Timeout + CITA + Persona")
 
@@ -728,6 +738,7 @@ class ReactAgent:
             user_id=self.user_id,
             persona=self.default_persona,
             history=trimmed_history,
+            thread_id=self.thread_id,
         )
         tracer.agent_path_start(len(state["messages"]))
         tracer.agent_model_before(len(state["messages"]))
@@ -737,7 +748,16 @@ class ReactAgent:
         token_stats = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}
         last_graph_event_at = time.perf_counter()
         try:
-            async for chunk in self.agent.astream(state, stream_mode="values"):
+            graph_config = build_graph_config(
+                session_id=self.session_id,
+                thread_id=self.thread_id,
+                run_id=trace_id,
+            )
+            async for chunk in self.agent.astream(
+                state,
+                config=graph_config,
+                stream_mode="values",
+            ):
                 now = time.perf_counter()
                 latest_msg = chunk["messages"][-1]
 
