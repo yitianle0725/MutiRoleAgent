@@ -60,7 +60,7 @@ from fastapi.responses import Response, StreamingResponse
 from pydantic import BaseModel, Field
 
 from agent.react_agent import ReactAgent
-from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_display_name
+from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_display_name, event_to_content_block
 from orchestration.coordinator import ConversationCoordinator
 from orchestration.session_runner import SessionAgentRunner
 from channels.base import Channel
@@ -319,18 +319,20 @@ def _create_app() -> FastAPI:
                     persona=req.persona,
                 ):
                     if isinstance(event, TextChunk):
-                        yield _sse_event("text", {"content": event.content})
+                        yield _sse_event("text", {"content": event.content, "content_block": event_to_content_block(event).to_dict()})
 
                     elif isinstance(event, ToolEvent):
                         if event.phase == "start":
                             yield _sse_event("tool_start", {
                                 "tool_name": event.tool_name,
                                 "tool_args": event.tool_args or {},
+                                "content_block": event_to_content_block(event).to_dict(),
                             })
                         elif event.phase == "end":
                             yield _sse_event("tool_end", {
                                 "tool_name": event.tool_name,
                                 "result_preview": event.result_preview or "",
+                                "content_block": event_to_content_block(event).to_dict(),
                             })
 
                     elif isinstance(event, StructuredData):
@@ -339,6 +341,7 @@ def _create_app() -> FastAPI:
                             "model": event.model,
                             "formatted": event.formatted,
                             "raw_json": event.raw_json,
+                            "content_block": event_to_content_block(event).to_dict(),
                         })
 
                 yield _sse_event("done", {})

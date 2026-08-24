@@ -41,6 +41,15 @@ class AgentFactResult:
     def ok(self) -> bool:
         return self.status == "completed" and not self.errors
 
+    def add_error(self, message: str) -> None:
+        """记录工具或执行错误，并同步调整状态。"""
+
+        cleaned = str(message or "").strip()
+        if cleaned and cleaned not in self.errors:
+            self.errors.append(cleaned)
+        if self.status == "completed":
+            self.status = "failed"
+
 
 @dataclass(slots=True)
 class OrchestratedTurnResult:
@@ -54,4 +63,4 @@ class OrchestratedTurnResult:
     steps: int = 0
     role_name: str | None = None
     fact_result: AgentFactResult | None = None
-
+    content_blocks: list[ContentBlock] = field(default_factory=list)

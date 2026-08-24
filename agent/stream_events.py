@@ -19,6 +19,8 @@
 
 from dataclasses import dataclass, field
 
+from agent.content import ContentBlock
+
 
 @dataclass
 class TextChunk:
@@ -61,6 +63,34 @@ class ToolEvent:
     tool_name: str                    # 工具函数名
     tool_args: dict = field(default_factory=dict)   # 调用参数
     result_preview: str = ""          # 返回结果摘要（仅 phase="end"）
+
+    def to_content_block(self) -> ContentBlock:
+        """转换为统一内容块，供日志/API 保留工具事件。"""
+
+        return ContentBlock(
+            type="json",
+            data={
+                "phase": self.phase,
+                "tool_name": self.tool_name,
+                "tool_args": self.tool_args,
+                "result_preview": self.result_preview,
+            },
+            metadata={"kind": "tool_event"},
+        )
+
+
+def event_to_content_block(event: TextChunk | ToolEvent | StructuredData) -> ContentBlock:
+    """将现有流事件转换为 P0 内容块。"""
+
+    if isinstance(event, TextChunk):
+        return ContentBlock(type="text", data=event.content)
+    if isinstance(event, ToolEvent):
+        return event.to_content_block()
+    return ContentBlock(
+        type="json",
+        data=event.raw_json,
+        metadata={"kind": "structured_data", "schema_type": event.schema_type},
+    )
 
 
 # 工具中文名映射（供前端展示用）

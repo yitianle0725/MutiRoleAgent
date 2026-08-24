@@ -13,6 +13,9 @@ from dataclasses import dataclass
 from typing import Any
 
 from agent.results import AgentFactResult, OrchestratedTurnResult
+from agent.request import AgentRequest
+from agent.content import ContentBlock
+from agent.stream_events import event_to_content_block
 from agent.stream_events import StructuredData, TextChunk, ToolEvent
 
 from .session_runner import SessionAgentRunner
@@ -108,6 +111,16 @@ class ConversationCoordinator:
             steps=steps,
             role_name=persona,
             fact_result=fact,
+        )
+
+    async def handle_request(self, request: AgentRequest) -> OrchestratedTurnResult:
+        """消费统一 AgentRequest，避免新入口重复拼接参数。"""
+
+        return await self.handle_user_turn(
+            request.prompt,
+            session_id=request.session_id,
+            user_id=request.user_id,
+            persona=request.persona,
         )
 
     async def start_agent_turn(
@@ -209,14 +222,22 @@ class ConversationCoordinator:
     async def _collect_fact(self, prompt: str, *, session_id: str, user_id: str | None, persona: str | None) -> AgentFactResult:
         chunks: list[str] = []
         tool_events: list[dict[str, Any]] = []
+        content_blocks: list[ContentBlock] = []
         steps = 0
         async for event in self.stream_user_turn(prompt, session_id=session_id, user_id=user_id, persona=persona):
+            content_blocks.append(event_to_content_block(event))
             if isinstance(event, TextChunk):
                 chunks.append(event.content)
-            elif isinstance(event, ToolEvent) and event.phase == "start":
-                steps += 1
-                tool_events.append({"phase": event.phase, "tool_name": event.tool_name, "args": event.tool_args})
-        return AgentFactResult(status="completed", text="".join(chunks), tool_events=tool_events, steps=steps)
+            elif isinstance(event, ToolEvent):
+                if event.phase == "start":
+                    steps += 1
+                tool_events.append({"phase": event.phase, "tool_name": event.tool_name, "args": event.tool_args, "result_preview": event.result_preview})
+        fact = AgentFactResult(status="completed", text="".join(chunks), content=content_blocks, tool_events=tool_events, steps=steps)
+        for event in tool_events:
+            preview = str(event.get("result_preview") or "")
+            if preview.startswith(("[工具调用被拒绝]", "[工具执行失败]", "[参数错误]")):
+                fact.add_error(preview)
+        return fact
 
     async def _present_fact(self, fact: AgentFactResult, prompt: str, persona: str | None) -> str:
         return await self._roleplay.present_agent_result(fact, user_input=prompt, persona=persona)
