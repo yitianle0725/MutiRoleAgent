@@ -53,10 +53,13 @@ load_dotenv()
 _LLM_API_KEY = os.getenv("LLM_API_KEY") or os.getenv("DASHSCOPE_API_KEY")
 _LLM_BASE_URL = os.getenv("LLM_BASE_URL") or "https://dashscope.aliyuncs.com/compatible-mode/v1"
 _LLM_MODEL = os.getenv("LLM_MODEL") or rag_config.get("chat_model_name", "qwen3-max")
+_DECISION_MODEL = os.getenv("DECISION_MODEL") or _LLM_MODEL
+_ROLEPLAY_MODEL = os.getenv("ROLEPLAY_MODEL") or _LLM_MODEL
+_ACK_MODEL = os.getenv("ACK_MODEL") or _ROLEPLAY_MODEL
 _LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "60"))
 
 
-def _create_chat_model() -> ChatOpenAI:
+def _create_chat_model(model_name: str | None = None) -> ChatOpenAI:
     """创建 LLM 聊天模型。
 
     统一使用 OpenAI 兼容协议，通过 ``LLM_BASE_URL`` 区分不同厂商。
@@ -65,7 +68,7 @@ def _create_chat_model() -> ChatOpenAI:
     可通过 ``LLM_TIMEOUT`` 环境变量调整超时（默认 300 秒）。
     """
     return ChatOpenAI(
-        model=_LLM_MODEL,
+        model=model_name or _LLM_MODEL,
         api_key=_LLM_API_KEY,  # type: ignore[arg-type]
         base_url=_LLM_BASE_URL,
         timeout=_LLM_TIMEOUT,
@@ -88,4 +91,7 @@ def _create_embedding_model():
 
 
 chat_model = _create_chat_model()
+decision_model = _create_chat_model(_DECISION_MODEL)
+roleplay_model = _create_chat_model(_ROLEPLAY_MODEL)
+ack_model = _create_chat_model(_ACK_MODEL)
 embedding_model = _create_embedding_model()

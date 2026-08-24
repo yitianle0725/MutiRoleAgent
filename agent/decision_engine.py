@@ -419,12 +419,12 @@ async def llm_classify(query: str) -> str:
         ``"chat"`` 或 ``"agent"``。
     """
     try:
-        from model.factory import chat_model
+        from model.factory import decision_model
         prompt = _CFG.get("llm_layer", {}).get("prompt",
             "判断以下用户消息是否需要调用工具（搜索、天气、文件、推荐等）。"
             "仅回答 chat 或 agent。\n\n"
         )
-        response = await chat_model.ainvoke(prompt + f"用户消息：{query}")
+        response = await decision_model.ainvoke(prompt + f"用户消息：{query}")
         text = response.content if hasattr(response, "content") else str(response)
         text = text.strip().lower()
         if "agent" in text:

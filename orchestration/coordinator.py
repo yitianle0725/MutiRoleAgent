@@ -54,6 +54,9 @@ class ConversationCoordinator:
         self._session_store = session_store or default_session_store
         self._session_locks: dict[str, asyncio.Lock] = {}
         self._session_locks_guard = asyncio.Lock()
+        self._tasks: dict[str, asyncio.Task[None]] = {}
+        self._tasks_lock = asyncio.Lock()
+        self._completion_callbacks: dict[str, CompletionCallback] = {}
 
     @property
     def session_id(self) -> str:
@@ -72,8 +75,6 @@ class ConversationCoordinator:
 
     def bind_session(self, session_id: str) -> None:
         self._runner_session_id = session_id
-        self._tasks: dict[str, asyncio.Task[None]] = {}
-        self._tasks_lock = asyncio.Lock()
 
     async def chat_reply(
         self,
@@ -185,6 +186,7 @@ class ConversationCoordinator:
         user_id: str | None = None,
         persona: str | None = None,
         attempt: int = 1,
+        completion_callback: CompletionCallback | None = None,
     ) -> OrchestratedTurnResult:
         """启动后台 Agent 任务，立即返回 ACK 和 run_id。"""
 
@@ -201,11 +203,14 @@ class ConversationCoordinator:
                 run,
                 user_id=user_id,
                 persona=persona,
+                completion_callback=completion_callback,
             ),
             name=f"agent-run-{run.run_id}",
         )
         async with self._tasks_lock:
             self._tasks[run.run_id] = task
+            if completion_callback is not None:
+                self._completion_callbacks[run.run_id] = completion_callback
         return OrchestratedTurnResult(
             response_text=ack,
             delegated=True,
@@ -225,14 +230,20 @@ class ConversationCoordinator:
         run = await self._runs.get(run_id)
         if run is None or run.status != "running":
             return run
+        callback = self._completion_callbacks.get(run_id)
         async with self._tasks_lock:
             task = self._tasks.get(run_id)
         if task is not None and not task.done():
             task.cancel()
             await asyncio.gather(task, return_exceptions=True)
-        return await self._runs.set_status(
+        updated = await self._runs.set_status(
             run_id, "cancelled", steps=run.steps, error="用户取消任务"
         )
+        if callback and updated:
+            fact = AgentFactResult(status="cancelled", text="用户取消任务")
+            response = await self._roleplay.present_agent_cancelled(fact.text)
+            await callback(OrchestratedTurnResult(response_text=response, completed=True, delegated=True, run_id=run_id, status="cancelled", fact_result=fact))
+        return updated
 
     async def retry_run(self, run_id: str, *, user_id: str | None = None, persona: str | None = None) -> OrchestratedTurnResult:
         run = await self._runs.get(run_id)
@@ -261,7 +272,7 @@ class ConversationCoordinator:
         run = await self._runs.get(run_id)
         if run is None:
             return None
-        return await self._runs.set_status(
+        updated = await self._runs.set_status(
             run_id,
             "waiting_for_input",
             steps=run.steps,
@@ -272,6 +283,12 @@ class ConversationCoordinator:
                 "thread_id": run.thread_id,
             },
         )
+        callback = self._completion_callbacks.get(run_id)
+        if callback and updated:
+            fact = AgentFactResult(status="waiting_for_input", text=question, pending_user_input=updated.pending_user_input)
+            response = await self._roleplay.present_waiting_for_input(question)
+            await callback(OrchestratedTurnResult(response_text=response, completed=False, delegated=True, run_id=run_id, status="waiting_for_input", fact_result=fact))
+        return updated
 
     async def _collect_fact(self, prompt: str, *, session_id: str, user_id: str | None, persona: str | None) -> AgentFactResult:
         chunks: list[str] = []
@@ -296,16 +313,32 @@ class ConversationCoordinator:
     async def _present_fact(self, fact: AgentFactResult, prompt: str, persona: str | None) -> str:
         return await self._roleplay.present_agent_result(fact, user_input=prompt, persona=persona)
 
-    async def _run_background(self, run: AgentRun, *, user_id: str | None, persona: str | None) -> None:
+    async def _run_background(
+        self,
+        run: AgentRun,
+        *,
+        user_id: str | None,
+        persona: str | None,
+        completion_callback: CompletionCallback | None = None,
+    ) -> None:
+        callback = completion_callback
         try:
             fact = await self._collect_fact(run.prompt, session_id=run.session_id, user_id=user_id, persona=persona)
             response = await self._present_fact(fact, run.prompt, persona)
             await self._runs.append_event(run.run_id, "run.result", {"response_text": response, "status": fact.status})
             await self._runs.set_status(run.run_id, "completed", steps=fact.steps, summary=fact.text[:1200])
+            if callback:
+                await callback(OrchestratedTurnResult(response_text=response, completed=True, delegated=True, run_id=run.run_id, status="completed", steps=fact.steps, role_name=persona, fact_result=fact))
         except asyncio.CancelledError:
             raise
         except Exception as exc:
-            await self._runs.set_status(run.run_id, "failed", error=f"{type(exc).__name__}: {exc}")
+            error = f"{type(exc).__name__}: {exc}"
+            await self._runs.set_status(run.run_id, "failed", error=error)
+            response = await self._roleplay.present_agent_failure(error, user_input=run.prompt, persona=persona)
+            if callback:
+                fact = AgentFactResult(status="failed", text=error, errors=[error])
+                await callback(OrchestratedTurnResult(response_text=response, completed=True, delegated=True, run_id=run.run_id, status="failed", role_name=persona, fact_result=fact))
         finally:
             async with self._tasks_lock:
                 self._tasks.pop(run.run_id, None)
+                self._completion_callbacks.pop(run.run_id, None)
