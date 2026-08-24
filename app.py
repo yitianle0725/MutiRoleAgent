@@ -23,6 +23,8 @@ from utils.persona_loader import persona_loader
 from utils.logger_handler import logger
 from tools.voice import VoiceState, VoiceStateMachine
 from tools.voice.service import voice_conversation_service
+from orchestration.coordinator import ConversationCoordinator
+from orchestration.session_runner import SessionAgentRunner
 
 # ==================== 页面配置 ====================
 st.set_page_config(
@@ -33,7 +35,7 @@ st.set_page_config(
 
 # ==================== 会话状态初始化 ====================
 
-def _init_agent_sync(session_id: str, user_id: str | None = None, default_persona: str | None = None) -> ReactAgent:
+def _init_agent_sync(session_id: str, user_id: str | None = None, default_persona: str | None = None) -> ConversationCoordinator:
     """在 Streamlit 启动时同步完成 Agent 异步初始化。
 
     优先从跨 channel 共享的 ``agent_cache`` 获取，缓存未命中时才创建新实例。
@@ -46,7 +48,11 @@ def _init_agent_sync(session_id: str, user_id: str | None = None, default_person
            (default_persona and cached.default_persona != default_persona):
             agent_cache.evict(session_id)
         else:
-            return cached
+            coordinator = ConversationCoordinator(
+                SessionAgentRunner(lambda sid, uid, persona: _resolved_agent(cached))
+            )
+            coordinator.bind_session(session_id)
+            return coordinator
 
     agent = ReactAgent(session_id=session_id, user_id=user_id, default_persona=default_persona)
     loop = asyncio.new_event_loop()
@@ -56,6 +62,14 @@ def _init_agent_sync(session_id: str, user_id: str | None = None, default_person
     finally:
         loop.close()
     agent_cache.put(session_id, agent)
+    coordinator = ConversationCoordinator(
+        SessionAgentRunner(lambda sid, uid, persona: _resolved_agent(agent))
+    )
+    coordinator.bind_session(session_id)
+    return coordinator
+
+
+async def _resolved_agent(agent: ReactAgent) -> ReactAgent:
     return agent
 
 

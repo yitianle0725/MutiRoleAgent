@@ -18,6 +18,8 @@ from sse_starlette.sse import EventSourceResponse
 from agent.react_agent import ReactAgent
 from agent.stream_events import StructuredData, TextChunk, ToolEvent
 from channels.manager import agent_cache
+from orchestration.coordinator import ConversationCoordinator
+from orchestration.session_runner import SessionAgentRunner
 
 router = APIRouter(tags=["chat"])
 
@@ -63,14 +65,26 @@ async def get_or_create_agent(req: ChatRequest) -> ReactAgent:
     return agent
 
 
+async def _agent_factory(session_id: str, user_id: str | None, persona: str | None) -> ReactAgent:
+    return await get_or_create_agent(
+        ChatRequest(query="", session_id=session_id, user_id=user_id, persona=persona)
+    )
+
+
+conversation_coordinator = ConversationCoordinator(SessionAgentRunner(_agent_factory))
+
+
 @router.post("/chat/stream")
 async def chat_stream(req: ChatRequest) -> EventSourceResponse:
     """SSE 流式聊天：Agent 产出一行，前端实时推送一行。"""
-    agent = await get_or_create_agent(req)
-
     async def event_generator():
         try:
-            async for event in agent.execute_stream_async(req.query):
+            async for event in conversation_coordinator.handle_user_turn_stream(
+                req.query,
+                session_id=req.session_id or "default",
+                user_id=req.user_id,
+                persona=req.persona,
+            ):
                 if isinstance(event, TextChunk):
                     # 逐段文字，前端做打字机效果
                     yield {"event": "chunk", "data": event.content}

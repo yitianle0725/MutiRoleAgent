@@ -1,10 +1,19 @@
 """P1 编排边界离线测试。"""
 
 import asyncio
+import tempfile
 
 from agent.stream_events import TextChunk, ToolEvent
 from orchestration.coordinator import ConversationCoordinator
 from orchestration.session_runner import SessionAgentRunner
+from orchestration.runs import RunStore
+
+
+class ForceAgentDecision:
+    def evaluate(self, query, session_id="default", history=None):
+        class Decision:
+            is_chat = False
+        return Decision()
 
 
 class FakeAgent:
@@ -19,7 +28,7 @@ async def _factory(session_id: str, user_id: str | None, persona: str | None):
 
 def test_coordinator_uses_runner_and_returns_result():
     async def run():
-        coordinator = ConversationCoordinator(SessionAgentRunner(_factory))
+        coordinator = ConversationCoordinator(SessionAgentRunner(_factory), decision=ForceAgentDecision())
         result = await coordinator.handle_user_turn(
             "你好", session_id="session-1", persona="Cyrene"
         )
@@ -38,5 +47,20 @@ def test_runner_serializes_same_session():
             if isinstance(event, TextChunk):
                 outputs.append(event.content)
         assert outputs == ["回答：测试"]
+
+    asyncio.run(run())
+
+
+def test_coordinator_accepts_injected_dependencies_and_alias():
+    async def run():
+        with tempfile.TemporaryDirectory() as directory:
+            coordinator = ConversationCoordinator(
+                SessionAgentRunner(_factory), decision=ForceAgentDecision(), run_store=RunStore(directory)
+            )
+            events = []
+            async for event in coordinator.handle_user_turn_stream("测试", session_id="s2"):
+                events.append(event)
+            assert events
+            assert coordinator.session_id == "default"
 
     asyncio.run(run())

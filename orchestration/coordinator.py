@@ -17,6 +17,8 @@ from agent.request import AgentRequest
 from agent.content import ContentBlock
 from agent.stream_events import event_to_content_block
 from agent.stream_events import StructuredData, TextChunk, ToolEvent
+from agent.decision_engine import DecisionEngine, decision_engine as default_decision_engine
+from memory.session_store import SessionStore, session_store as default_session_store
 
 from .session_runner import SessionAgentRunner
 from .roleplay import RoleplayEngine
@@ -42,10 +44,34 @@ class ConversationCoordinator:
         runner: SessionAgentRunner,
         roleplay: RoleplayEngine | None = None,
         run_store: RunStore | None = None,
+        decision: DecisionEngine | None = None,
+        session_store: SessionStore | None = None,
     ) -> None:
         self._runner = runner
         self._roleplay = roleplay or RoleplayEngine()
         self._runs = run_store or RunStore()
+        self._decision = decision or default_decision_engine
+        self._session_store = session_store or default_session_store
+        self._session_locks: dict[str, asyncio.Lock] = {}
+        self._session_locks_guard = asyncio.Lock()
+
+    @property
+    def session_id(self) -> str:
+        return self._runner_session_id if hasattr(self, "_runner_session_id") else "default"
+
+    def execute_stream(self, prompt: str):
+        """同步兼容 facade，供 Streamlit 等同步入口逐步迁移。"""
+
+        async def collect():
+            events = []
+            async for event in self.stream_user_turn(prompt, session_id=self.session_id):
+                events.append(event)
+            return events
+
+        return asyncio.run(collect())
+
+    def bind_session(self, session_id: str) -> None:
+        self._runner_session_id = session_id
         self._tasks: dict[str, asyncio.Task[None]] = {}
         self._tasks_lock = asyncio.Lock()
 
@@ -80,13 +106,41 @@ class ConversationCoordinator:
     ) -> AsyncIterator[StreamEvent]:
         """流式执行一轮请求，入口无需知道 Agent 如何创建。"""
 
-        async for event in self._runner.stream(
-            session_id,
-            prompt,
-            user_id=user_id,
-            persona=persona,
-        ):
+        lock = await self._get_session_lock(session_id)
+        async with lock:
+            history = await asyncio.to_thread(self._session_store.get_history, session_id)
+            decision = self._decision.evaluate(
+                prompt,
+                session_id=session_id,
+                history=history,
+            )
+            if getattr(decision, "is_chat", False):
+                response = await self._roleplay.chat_reply(
+                    prompt, persona=persona, history=history[-8:]
+                )
+                await asyncio.to_thread(
+                    self._session_store.append_pair, session_id, prompt, response
+                )
+                yield TextChunk(content=response)
+                return
+
+            async for event in self._runner.stream(
+                session_id,
+                prompt,
+                user_id=user_id,
+                persona=persona,
+            ):
+                yield event
+
+    async def handle_user_turn_stream(self, *args: Any, **kwargs: Any) -> AsyncIterator[StreamEvent]:
+        """EchoBot 风格命名的统一流式入口。"""
+
+        async for event in self.stream_user_turn(*args, **kwargs):
             yield event
+
+    async def _get_session_lock(self, session_id: str) -> asyncio.Lock:
+        async with self._session_locks_guard:
+            return self._session_locks.setdefault(session_id, asyncio.Lock())
 
     async def handle_user_turn(
         self,
@@ -108,7 +162,7 @@ class ConversationCoordinator:
             completed=True,
             delegated=False,
             status="completed",
-            steps=steps,
+            steps=fact.steps,
             role_name=persona,
             fact_result=fact,
         )
