@@ -41,7 +41,7 @@ from memory.chat_db import chat_db
 from agent.agent_state import create_agent_state
 from agent.langgraph_adapter import build_graph_config, build_checkpointer
 from agent.core import LangGraphAgentCore
-from agent.summary import build_history_summary
+from agent.summary import build_history_summary, build_agent_summary, should_build_summary
 from agent.stream_events import TextChunk, ToolEvent, StructuredData
 from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
@@ -742,7 +742,7 @@ class ReactAgent:
             persona=self.default_persona,
             history=trimmed_history,
             thread_id=self.thread_id,
-            agent_summary=build_history_summary(trimmed_history),
+            agent_summary=(session_store.get_agent_summary(self.session_id) or build_history_summary(trimmed_history)),
         )
         tracer.agent_path_start(len(state["messages"]))
         tracer.agent_model_before(len(state["messages"]))
@@ -841,6 +841,12 @@ class ReactAgent:
 
             if full_response:
                 session_store.append_pair(self.session_id, query, full_response)
+                updated_history = session_store.get_history(self.session_id)
+                if should_build_summary(updated_history):
+                    session_store.set_agent_summary(
+                        self.session_id,
+                        build_agent_summary(updated_history),
+                    )
                 chat_db.save_pair(self.session_id, query, full_response)
                 tracer.persist(
                     session_store.history_length(self.session_id),

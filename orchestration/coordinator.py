@@ -232,6 +232,14 @@ class ConversationCoordinator:
     async def get_run_events(self, run_id: str) -> list[dict[str, Any]]:
         return await self._runs.read_events(run_id)
 
+    async def get_agent_context(self, session_id: str) -> dict[str, Any]:
+        """调试/管理入口：查看 Agent 专用历史摘要，不暴露给角色层。"""
+        return await self._runner.get_context(session_id)
+
+    async def recover_interrupted_runs(self) -> int:
+        """服务启动时将遗留 running 任务标记为失败。"""
+        return await self._runs.recover_interrupted()
+
     async def cancel_run(self, run_id: str) -> AgentRun | None:
         run = await self._runs.get(run_id)
         if run is None or run.status != "running":

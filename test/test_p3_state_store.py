@@ -8,6 +8,7 @@ from agent.agent_state import create_agent_state
 from agent.langgraph_adapter import build_graph_config
 from agent.summary import build_history_summary
 from orchestration.runs import RunStore
+from agent.checkpoint import AgentCheckpoint, CheckpointStore
 
 
 def test_summary_and_state_are_available():
@@ -31,5 +32,22 @@ def test_run_store_rebuilds_events():
             assert restored.steps == 2
             assert restored.summary == "已完成"
             assert len(await store.read_events(run.run_id)) == 2
+
+    asyncio.run(run())
+
+
+def test_checkpoint_store_persists_lightweight_metadata():
+    async def run():
+        with tempfile.TemporaryDirectory() as directory:
+            store = CheckpointStore(Path(directory))
+            await store.save(AgentCheckpoint(
+                run_id="r1", session_id="s1", thread_id="s1", step=2,
+                summary="已完成搜索", tool_calls=[{"tool_name": "search"}],
+            ))
+            restored = await store.latest("r1")
+            assert restored is not None
+            assert restored.step == 2
+            assert restored.summary == "已完成搜索"
+            assert restored.tool_calls[0]["tool_name"] == "search"
 
     asyncio.run(run())
