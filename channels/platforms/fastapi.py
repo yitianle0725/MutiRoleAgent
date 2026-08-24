@@ -61,6 +61,8 @@ from pydantic import BaseModel, Field
 
 from agent.react_agent import ReactAgent
 from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_display_name
+from orchestration.coordinator import ConversationCoordinator
+from orchestration.session_runner import SessionAgentRunner
 from channels.base import Channel
 from channels.manager import agent_cache
 from memory.chat_db import chat_db
@@ -166,6 +168,12 @@ async def _get_or_create_agent(
         await agent.init_agent()
         agent_cache.put(session_id, agent)
         return agent
+
+
+# FastAPI 的主聊天入口统一经过 Coordinator；旧的 ReactAgent 仍作为底层兼容实现。
+conversation_coordinator = ConversationCoordinator(
+    SessionAgentRunner(_get_or_create_agent)
+)
 
 
 # ==================== FastAPI 应用 ====================
@@ -302,15 +310,14 @@ def _create_app() -> FastAPI:
         遍历 Agent 的异步流式输出，将 ``TextChunk`` / ``ToolEvent`` / ``StructuredData``
         格式化为 SSE 事件流，浏览器原生 ``EventSource`` 可直接消费。
         """
-        agent = await _get_or_create_agent(
-            session_id=req.session_id,
-            user_id=req.user_id,
-            persona=req.persona,
-        )
-
         async def event_stream() -> AsyncIterator[str]:
             try:
-                async for event in agent.execute_stream_async(req.message):
+                async for event in conversation_coordinator.stream_user_turn(
+                    req.message,
+                    session_id=req.session_id,
+                    user_id=req.user_id,
+                    persona=req.persona,
+                ):
                     if isinstance(event, TextChunk):
                         yield _sse_event("text", {"content": event.content})
 
@@ -390,13 +397,12 @@ def _create_app() -> FastAPI:
                 persona = data.get("persona")
                 user_id = data.get("user_id")
 
-                agent = await _get_or_create_agent(
+                async for event in conversation_coordinator.stream_user_turn(
+                    message,
                     session_id=session_id,
                     user_id=user_id,
                     persona=persona,
-                )
-
-                async for event in agent.execute_stream_async(message):
+                ):
                     if isinstance(event, TextChunk):
                         await ws.send_json({"event": "text", "data": {"content": event.content}})
 
