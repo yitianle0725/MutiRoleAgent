@@ -77,18 +77,24 @@ class RoleplayEngine:
         persona: str | None = None,
         history: Sequence[Any] = (),
     ) -> str:
-        result = await self._generate(
-            f"请直接回复用户，保持简洁自然。\n用户：{user_input}",
-            persona=persona,
-            history=history,
-        )
+        try:
+            result = await self._generate(
+                f"请直接回复用户，保持简洁自然。\n用户：{user_input}",
+                persona=persona,
+                history=history,
+            )
+        except Exception:
+            result = ""
         return result or user_input
 
     async def delegated_ack(self, user_input: str, *, persona: str | None = None) -> str:
-        result = await self._generate(
-            f"任务即将交给后台 Agent 处理。只回复一句简短确认，不要声称任务已完成。\n用户：{user_input}",
-            persona=persona,
-        )
+        try:
+            result = await self._generate(
+                f"任务即将交给后台 Agent 处理。只回复一句简短确认，不要声称任务已完成。\n用户：{user_input}",
+                persona=persona,
+            )
+        except Exception:
+            result = ""
         return result or "我先帮你处理一下，完成后把结果告诉你。"
 
     async def present_agent_result(

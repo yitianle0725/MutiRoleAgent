@@ -6,6 +6,8 @@ ReactAgent 执行。P2 再接入独立 RoleplayEngine 和事实结果包装。
 
 from __future__ import annotations
 
+import asyncio
+import uuid
 from collections.abc import AsyncIterator, Awaitable, Callable
 from dataclasses import dataclass
 from typing import Any
@@ -15,6 +17,7 @@ from agent.stream_events import StructuredData, TextChunk, ToolEvent
 
 from .session_runner import SessionAgentRunner
 from .roleplay import RoleplayEngine
+from .runs import AgentRun, RunStore
 
 
 StreamEvent = TextChunk | ToolEvent | StructuredData
@@ -35,9 +38,13 @@ class ConversationCoordinator:
         self,
         runner: SessionAgentRunner,
         roleplay: RoleplayEngine | None = None,
+        run_store: RunStore | None = None,
     ) -> None:
         self._runner = runner
         self._roleplay = roleplay or RoleplayEngine()
+        self._runs = run_store or RunStore()
+        self._tasks: dict[str, asyncio.Task[None]] = {}
+        self._tasks_lock = asyncio.Lock()
 
     async def chat_reply(
         self,
@@ -88,36 +95,10 @@ class ConversationCoordinator:
     ) -> OrchestratedTurnResult:
         """非流式兼容接口，聚合文本事件后返回统一 DTO。"""
 
-        chunks: list[str] = []
-        steps = 0
-        tool_events: list[dict[str, Any]] = []
-        async for event in self.stream_user_turn(
-            prompt,
-            session_id=session_id,
-            user_id=user_id,
-            persona=persona,
-        ):
-            if isinstance(event, TextChunk):
-                chunks.append(event.content)
-            elif isinstance(event, ToolEvent) and event.phase == "start":
-                steps += 1
-                tool_events.append({
-                    "phase": event.phase,
-                    "tool_name": event.tool_name,
-                    "args": event.tool_args,
-                })
-
-        fact = AgentFactResult(
-            status="completed",
-            text="".join(chunks),
-            tool_events=tool_events,
-            steps=steps,
+        fact = await self._collect_fact(
+            prompt, session_id=session_id, user_id=user_id, persona=persona
         )
-        response_text = await self._roleplay.present_agent_result(
-            fact,
-            user_input=prompt,
-            persona=persona,
-        )
+        response_text = await self._present_fact(fact, prompt, persona)
 
         return OrchestratedTurnResult(
             response_text=response_text,
@@ -128,3 +109,128 @@ class ConversationCoordinator:
             role_name=persona,
             fact_result=fact,
         )
+
+    async def start_agent_turn(
+        self,
+        prompt: str,
+        *,
+        session_id: str = "default",
+        user_id: str | None = None,
+        persona: str | None = None,
+        attempt: int = 1,
+    ) -> OrchestratedTurnResult:
+        """启动后台 Agent 任务，立即返回 ACK 和 run_id。"""
+
+        thread_id = session_id
+        run = await self._runs.create(
+            session_id=session_id,
+            thread_id=thread_id,
+            prompt=prompt,
+            attempt=attempt,
+        )
+        ack = await self._roleplay.delegated_ack(prompt, persona=persona)
+        task = asyncio.create_task(
+            self._run_background(
+                run,
+                user_id=user_id,
+                persona=persona,
+            ),
+            name=f"agent-run-{run.run_id}",
+        )
+        async with self._tasks_lock:
+            self._tasks[run.run_id] = task
+        return OrchestratedTurnResult(
+            response_text=ack,
+            delegated=True,
+            completed=False,
+            run_id=run.run_id,
+            status="running",
+            role_name=persona,
+        )
+
+    async def get_run(self, run_id: str) -> AgentRun | None:
+        return await self._runs.get(run_id)
+
+    async def get_run_events(self, run_id: str) -> list[dict[str, Any]]:
+        return await self._runs.read_events(run_id)
+
+    async def cancel_run(self, run_id: str) -> AgentRun | None:
+        run = await self._runs.get(run_id)
+        if run is None or run.status != "running":
+            return run
+        async with self._tasks_lock:
+            task = self._tasks.get(run_id)
+        if task is not None and not task.done():
+            task.cancel()
+            await asyncio.gather(task, return_exceptions=True)
+        return await self._runs.set_status(
+            run_id, "cancelled", steps=run.steps, error="用户取消任务"
+        )
+
+    async def retry_run(self, run_id: str, *, user_id: str | None = None, persona: str | None = None) -> OrchestratedTurnResult:
+        run = await self._runs.get(run_id)
+        if run is None:
+            raise ValueError(f"任务不存在：{run_id}")
+        if run.status not in {"failed", "cancelled"}:
+            raise ValueError("只有失败或已取消的任务可以重试")
+        return await self.start_agent_turn(
+            run.prompt,
+            session_id=run.session_id,
+            user_id=user_id,
+            persona=persona,
+            attempt=run.attempt + 1,
+        )
+
+    async def request_user_input(
+        self,
+        run_id: str,
+        question: str,
+        *,
+        field: str = "answer",
+        options: list[str] | None = None,
+    ) -> AgentRun | None:
+        """记录等待输入状态；后续由 LangGraph interrupt/resume 提供图恢复。"""
+
+        run = await self._runs.get(run_id)
+        if run is None:
+            return None
+        return await self._runs.set_status(
+            run_id,
+            "waiting_for_input",
+            steps=run.steps,
+            pending_user_input={
+                "question": question,
+                "field": field,
+                "options": options or [],
+                "thread_id": run.thread_id,
+            },
+        )
+
+    async def _collect_fact(self, prompt: str, *, session_id: str, user_id: str | None, persona: str | None) -> AgentFactResult:
+        chunks: list[str] = []
+        tool_events: list[dict[str, Any]] = []
+        steps = 0
+        async for event in self.stream_user_turn(prompt, session_id=session_id, user_id=user_id, persona=persona):
+            if isinstance(event, TextChunk):
+                chunks.append(event.content)
+            elif isinstance(event, ToolEvent) and event.phase == "start":
+                steps += 1
+                tool_events.append({"phase": event.phase, "tool_name": event.tool_name, "args": event.tool_args})
+        return AgentFactResult(status="completed", text="".join(chunks), tool_events=tool_events, steps=steps)
+
+    async def _present_fact(self, fact: AgentFactResult, prompt: str, persona: str | None) -> str:
+        return await self._roleplay.present_agent_result(fact, user_input=prompt, persona=persona)
+
+    async def _run_background(self, run: AgentRun, *, user_id: str | None, persona: str | None) -> None:
+        try:
+            fact = await self._collect_fact(run.prompt, session_id=run.session_id, user_id=user_id, persona=persona)
+            response = await self._present_fact(fact, run.prompt, persona)
+            await self._runs.append_event(run.run_id, "run.result", {"response_text": response, "status": fact.status})
+            await self._runs.set_status(run.run_id, "completed", steps=fact.steps, summary=fact.text[:1200])
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:
+            await self._runs.set_status(run.run_id, "failed", error=f"{type(exc).__name__}: {exc}")
+        finally:
+            async with self._tasks_lock:
+                self._tasks.pop(run.run_id, None)

@@ -103,6 +103,48 @@ class RunStore:
         async with self._lock:
             return await asyncio.to_thread(self._read_sync, run_id)
 
+    async def set_status(
+        self,
+        run_id: str,
+        status: RunStatus,
+        *,
+        steps: int | None = None,
+        summary: str | None = None,
+        error: str | None = None,
+        pending_user_input: dict[str, Any] | None = None,
+    ) -> AgentRun | None:
+        """追加状态事件并返回重建后的运行记录。"""
+
+        current = await self.get(run_id)
+        if current is None:
+            return None
+        if current.status in {"completed", "failed", "cancelled"} and status != current.status:
+            return current
+        data: dict[str, Any] = {"status": status}
+        if steps is not None:
+            data["steps"] = max(int(steps), 0)
+        if summary is not None:
+            data["summary"] = summary
+        if error is not None:
+            data["error"] = error
+        if pending_user_input is not None:
+            data["pending_user_input"] = pending_user_input
+        await self.append_event(run_id, "run.status_changed", data)
+        return await self.get(run_id)
+
+    async def recover_interrupted(self) -> int:
+        """服务启动时将遗留 running 任务标为失败。"""
+
+        runs = await self.list_runs(status="running", limit=100000)
+        for run in runs:
+            await self.set_status(
+                run.run_id,
+                "failed",
+                steps=run.steps,
+                error="服务进程中断，任务未完成",
+            )
+        return len(runs)
+
     def _path(self, run_id: str) -> Path:
         return self.base_dir / f"{run_id}.jsonl"
 
