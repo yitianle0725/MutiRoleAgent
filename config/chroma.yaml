@@ -17,20 +17,26 @@ retrieval:
 batch_size: 32
 max_workers: 4
 
-# ---- FAQ 知识库（产品文档/故障排除/选购指南） ----
-faq:
-  collection_name: faq
-  data_path: data/faq
-  allow_knowledge_file_type: ["txt", "pdf"]
+# ---- ACGN 每日资讯知识库 ----
+acgn_daily:
+  collection_name: acgn_daily
+  data_path: data/acgn_daily
+  allow_knowledge_file_type: ["json"]
 
-# ---- Worldbook 世界观知识库（角色/剧情/世界观） ----
-worldbook:
-  collection_name: worldbook
-  data_path: data/worldbook
-  allow_knowledge_file_type: ["txt", "pdf"]
-
-# ---- Anime 动漫知识库（爬取的番剧 JSON 数据） ----
+# ---- Anime 动漫知识库 ----
 anime:
   collection_name: anime
   data_path: data/anime
   allow_knowledge_file_type: ["json"]
+
+# ---- Game 游戏知识库 ----
+game:
+  collection_name: game
+  data_path: data/game
+  allow_knowledge_file_type: ["json"]
+
+# ---- Novel 小说知识库 ----
+novel:
+  collection_name: novel
+  data_path: data/novel
+  allow_knowledge_file_type: ["json", "txt"]

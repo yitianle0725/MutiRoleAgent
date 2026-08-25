@@ -37,10 +37,11 @@ from utils.document_normalizer import normalize_documents
 # ==================== 配置常量 ====================
 
 # 有效的 collection 名称
-COLLECTION_FAQ = "faq"
-COLLECTION_WORLDBOOK = "worldbook"
+COLLECTION_ACGN_DAILY = "acgn_daily"
 COLLECTION_ANIME = "anime"
-_ALL_COLLECTIONS = (COLLECTION_FAQ, COLLECTION_WORLDBOOK, COLLECTION_ANIME)
+COLLECTION_GAME = "game"
+COLLECTION_NOVEL = "novel"
+_ALL_COLLECTIONS = (COLLECTION_ACGN_DAILY, COLLECTION_ANIME, COLLECTION_GAME, COLLECTION_NOVEL)
 
 # 共享配置
 _PERSIST_DIR = get_abs_path(chroma_config["persist_directory"])
@@ -250,13 +251,13 @@ class VectorStore:
 
     # ---- 检索器 ----
 
-    def get_retriever(self, collection_name: str = COLLECTION_FAQ):
+    def get_retriever(self, collection_name: str = COLLECTION_ANIME):
         """获取指定 collection 的混合检索器。
 
         返回 HybridRetriever 实例 (Vector + BM25 + 可选 Reranker)。
 
         Args:
-            collection_name: ``"faq"`` / ``"worldbook"`` / ``"anime"``。
+            collection_name: ``"acgn_daily"`` / ``"anime"`` / ``"game"`` / ``"novel"``。
         """
         store = self._get_store(collection_name)
         bm25 = self._get_bm25(collection_name)
@@ -273,7 +274,7 @@ class VectorStore:
 
     # ---- 兼容旧接口 (retriever.invoke) ----
 
-    def get_simple_retriever(self, collection_name: str = COLLECTION_FAQ):
+    def get_simple_retriever(self, collection_name: str = COLLECTION_ANIME):
         """获取简单的 ChromaDB 检索器（无 BM25/Reranker）。
 
         向后兼容接口：返回一个可 invoke(query) 的对象。
@@ -287,7 +288,7 @@ class VectorStore:
         """从配置的 data_path 加载文档到指定 collection。
 
         Args:
-            collection_name: ``"faq"`` / ``"worldbook"`` / ``"anime"`` / ``None``（全部）。
+            collection_name: ``"acgn_daily"`` / ``"anime"`` / ``"game"`` / ``"novel"`` / ``None``（全部）。
         """
         collections_to_load: list[str] = (
             list(_ALL_COLLECTIONS) if collection_name is None

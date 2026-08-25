@@ -23,7 +23,13 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 
 from model.factory import chat_model
-from rag.vector_store import vector_store, COLLECTION_FAQ, COLLECTION_WORLDBOOK, COLLECTION_ANIME
+from rag.vector_store import (
+    COLLECTION_ACGN_DAILY,
+    COLLECTION_ANIME,
+    COLLECTION_GAME,
+    COLLECTION_NOVEL,
+    vector_store,
+)
 from utils.config_handler import keywords_config
 from utils.logger_handler import logger
 from utils.prompt_loader import load_rag_prompts
@@ -35,10 +41,18 @@ from utils.config_handler import chroma_config
 # ==================== 路由关键词（从 keywords.yaml 读取） ====================
 
 _RK = keywords_config.get("rag_routing", {})
-_WORLDBOOK_KEYWORDS: list[str] = _RK.get("worldbook", [])
-_FAQ_STRONG_KEYWORDS: list[str] = _RK.get("faq_strong", [])
+_ACGN_DAILY_KEYWORDS: list[str] = _RK.get("acgn_daily", ["最新", "资讯", "新闻", "更新"])
 _ANIME_KEYWORDS: list[str] = _RK.get("anime", [])
+_GAME_KEYWORDS: list[str] = _RK.get("game", ["原神", "崩坏", "星穹铁道", "绝区零", "米游社", "游戏攻略"])
+_NOVEL_KEYWORDS: list[str] = _RK.get("novel", ["小说", "起点", "作者", "章节", "榜单"])
 _CONTEXT_MAX_CHARS = int(chroma_config.get("retrieval", {}).get("context_max_chars", 8000))
+
+_COLLECTION_LABELS = {
+    COLLECTION_ACGN_DAILY: "每日 ACGN 资讯库",
+    COLLECTION_ANIME: "动漫资料库",
+    COLLECTION_GAME: "游戏资料库",
+    COLLECTION_NOVEL: "小说资料库",
+}
 
 def _route_query(query: str) -> list[str]:
     """根据查询内容返回应检索的 collection 列表。
@@ -46,24 +60,18 @@ def _route_query(query: str) -> list[str]:
     Returns:
         ``["faq"]`` / ``["worldbook"]`` / ``["anime"]`` / 组合
     """
-    # 1) FAQ 强匹配 → 仅 faq（产品咨询）
-    if any(kw in query for kw in _FAQ_STRONG_KEYWORDS):
-        logger.debug(f"[RAG route] 强 FAQ 匹配 → faq")
-        return [COLLECTION_FAQ]
-
-    # 2) Worldbook 匹配 → 仅 worldbook（世界观/角色扮演）
-    if any(kw in query for kw in _WORLDBOOK_KEYWORDS):
-        logger.debug(f"[RAG route] Worldbook 匹配 → worldbook")
-        return [COLLECTION_WORLDBOOK]
-
-    # 3) Anime 匹配 → anime + faq（动漫知识 + 通用知识）
+    # 具体领域优先于泛化的 ACGN 资讯关键词。
     if any(kw in query for kw in _ANIME_KEYWORDS):
-        logger.debug(f"[RAG route] Anime 匹配 → anime + faq")
-        return [COLLECTION_ANIME, COLLECTION_FAQ]
+        return [COLLECTION_ANIME]
+    if any(kw in query for kw in _GAME_KEYWORDS):
+        return [COLLECTION_GAME]
+    if any(kw in query for kw in _NOVEL_KEYWORDS):
+        return [COLLECTION_NOVEL]
+    if any(kw in query for kw in _ACGN_DAILY_KEYWORDS):
+        return [COLLECTION_ACGN_DAILY]
 
-    # 4) 默认 → 全部 collection
-    logger.debug(f"[RAG route] 默认 → 全部")
-    return [COLLECTION_FAQ, COLLECTION_ANIME]
+    logger.debug("[RAG route] 默认 → 全部")
+    return [COLLECTION_ACGN_DAILY, COLLECTION_ANIME, COLLECTION_GAME, COLLECTION_NOVEL]
 
 
 # ==================== RAG 服务 ====================
@@ -86,7 +94,7 @@ class RagSummarizeService:
 
     # ---- 检索 ----
 
-    def retrieve_docs(self, query: str, collection_name: str = COLLECTION_FAQ):
+    def retrieve_docs(self, query: str, collection_name: str = COLLECTION_ANIME):
         """从指定 collection 检索相关文档。"""
         retriever = vector_store.get_retriever(collection_name)
         return retriever.invoke(query)
@@ -109,9 +117,6 @@ class RagSummarizeService:
         4. 调用 LLM 总结
         """
         collections = _route_query(query)
-        # 保持路由函数的历史契约；真正执行检索时对低置信度默认路由补查 worldbook。
-        if collections == [COLLECTION_FAQ, COLLECTION_ANIME]:
-            collections = [COLLECTION_FAQ, COLLECTION_WORLDBOOK, COLLECTION_ANIME]
         context = ""
         retrieved_documents: list[tuple[str, object]] = []
         counter = 0
@@ -128,7 +133,7 @@ class RagSummarizeService:
                 retrieval_trace["collections"][coll_name] = {"error": str(e)}
                 continue
 
-            source_label = "产品知识库" if coll_name == COLLECTION_FAQ else "世界观资料库"
+            source_label = _COLLECTION_LABELS[coll_name]
             for doc in docs:
                 counter += 1
                 context += (

@@ -28,9 +28,10 @@ def get_string2md5(input_str: str, encoding='utf-8'):
 
 
 class KnowledgeBaseService(object):
-    def __init__(self):
-        # 用户上传走 faq 知识库
-        faq_config = chroma_config["faq"]
+    def __init__(self, collection_name: str = "anime"):
+        # Streamlit 遗留上传入口默认写入动漫库，避免引用已移除的 faq collection。
+        collection_config = chroma_config[collection_name]
+        self.collection_name = collection_config["collection_name"]
         persist_dir = get_abs_path(chroma_config["persist_directory"])
         os.makedirs(persist_dir, exist_ok=True)
 
@@ -38,7 +39,7 @@ class KnowledgeBaseService(object):
         self._dim_guard = DimensionGuard(persist_dir)
         if embedding_model.is_available():
             self._dim_guard.check_or_clear(
-                faq_config["collection_name"], embedding_model
+                self.collection_name, embedding_model
             )
         else:
             logger.warning(
@@ -46,13 +47,13 @@ class KnowledgeBaseService(object):
             )
 
         self.chroma = Chroma(
-            collection_name=faq_config["collection_name"],
+            collection_name=self.collection_name,
             embedding_function=embedding_model,
             persist_directory=persist_dir,
         )
 
         # max_split_char_number 不在 chroma.yaml 中，取与 chunk_size 一致
-        self.max_split_char_number = faq_config.get(
+        self.max_split_char_number = collection_config.get(
             "max_split_char_number", chroma_config["chunk_size"]
         )
 
@@ -91,7 +92,7 @@ class KnowledgeBaseService(object):
         try:
             from rag.bm25 import ChineseBM25
 
-            bm25_path = os.path.join(self._bm25_dir, "bm25_faq.pkl")
+            bm25_path = os.path.join(self._bm25_dir, f"bm25_{self.collection_name}.pkl")
 
             # 读取 ChromaDB 中的所有文档
             results = self.chroma.get()
@@ -108,11 +109,11 @@ class KnowledgeBaseService(object):
                 bm25.index(docs)
                 bm25.save(bm25_path)
                 logger.info(
-                    f"[KB] BM25 索引已同步: faq ({bm25.doc_count} docs)"
+                    f"[KB] BM25 索引已同步: {self.collection_name} ({bm25.doc_count} docs)"
                 )
             # 同步到全局 vector_store 的 BM25 缓存
             from rag.vector_store import vector_store
-            vector_store._bm25_indexes.pop("faq", None)
+            vector_store._bm25_indexes.pop(self.collection_name, None)
         except Exception as e:
             logger.warning(f"[KB] BM25 索引同步失败: {e}")
 
@@ -125,8 +126,8 @@ class KnowledgeBaseService(object):
         mtime_ns = os.stat(file_path).st_mtime_ns if file_path and os.path.exists(file_path) else 0
         with sqlite3.connect(self._file_index_path) as connection:
             record = connection.execute(
-                "SELECT last_modified_ts, md5_hex FROM knowledge_files WHERE file_path = ? AND collection_name = 'faq'",
-                (source_path,),
+                "SELECT last_modified_ts, md5_hex FROM knowledge_files WHERE file_path = ? AND collection_name = ?",
+                (source_path, self.collection_name),
             ).fetchone()
         if record and (record[0] == mtime_ns or record[1] == md5_hex):
             return "[跳过]内容已存在知识库中"
@@ -157,12 +158,12 @@ class KnowledgeBaseService(object):
                 connection.execute(
                     """
                     INSERT INTO knowledge_files(file_path, collection_name, last_modified_ts, md5_hex)
-                    VALUES (?, 'faq', ?, ?)
+                    VALUES (?, ?, ?, ?)
                     ON CONFLICT(file_path, collection_name) DO UPDATE SET
                         last_modified_ts = excluded.last_modified_ts,
                         md5_hex = excluded.md5_hex
                     """,
-                    (source_path, mtime_ns, md5_hex),
+                    (source_path, self.collection_name, mtime_ns, md5_hex),
                 )
             logger.info(f"[KB] {filename} 上传成功 ({len(knowledge_chunks)} chunks)")
 

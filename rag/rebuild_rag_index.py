@@ -1,8 +1,8 @@
 """Safely rebuild one or more RAG collections.
 
-This command is intentionally explicit: it clears only the selected Chroma
-collection, its BM25 cache, and its file-sync records before loading the
-documents again with the embedding provider configured in ``.env``.
+This command clears only the selected Chroma collection, its BM25 cache, and
+its file-sync records before loading the documents again with the embedding
+provider configured in ``.env``.
 """
 
 from __future__ import annotations
@@ -12,8 +12,8 @@ import sqlite3
 import sys
 from pathlib import Path
 
-# When the file is launched directly, Python starts with ``scripts/`` on
-# sys.path. Add the project root so package imports work from any shell.
+# Direct execution starts with ``rag/`` on sys.path, so add the project root
+# before importing sibling packages.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -23,7 +23,7 @@ from utils.config_handler import chroma_config
 from utils.path_tool import get_project_path
 
 
-COLLECTIONS = ("faq", "worldbook", "anime")
+COLLECTIONS = ("acgn_daily", "anime", "game", "novel")
 
 
 def _persist_directory() -> Path:
