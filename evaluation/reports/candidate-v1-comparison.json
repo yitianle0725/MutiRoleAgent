@@ -1,0 +1,32 @@
+{
+  "baseline": "baseline-v1",
+  "candidate": "candidate-v1",
+  "metrics": {
+    "score": {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0
+    },
+    "tool_routing": {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0
+    },
+    "fact_fidelity": {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0
+    },
+    "hallucination_free": {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0
+    },
+    "source_coverage": {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0
+    }
+  },
+  "regression_cases": []
+}

@@ -415,4 +415,4 @@ if __name__ == "__main__":
     # fetch_season_links()
 
     # # 测试2: 爬取 202607 季度番剧
-    fetch_season_anime("https://yuc.wiki/202607/")
+    fetch_season_anime("https://yuc.wiki/202407/")

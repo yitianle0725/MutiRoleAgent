@@ -213,7 +213,25 @@ python -m evaluation.langsmith_eval
 python -m evaluation.langsmith_eval --langsmith
 ```
 
-评测低于质量门槛时命令返回非零状态，报告默认写入 `data/evaluations/`。
+评测低于质量门槛时命令返回非零状态，报告默认写入 `evaluation/reports/`。
+
+运行 20 条基准集，并生成本地基线报告：
+
+```powershell
+python -m evaluation.langsmith_eval --dataset evaluation/datasets/benchmark_v1.json --output evaluation/reports/baseline-v1.json --version baseline-v1
+```
+
+在修改 Prompt、Decision Engine 或工具逻辑后，使用同一数据集生成候选报告并比较：
+
+```powershell
+python -m evaluation.langsmith_eval --dataset evaluation/datasets/benchmark_v1.json --output evaluation/reports/candidate-v2.json --version candidate-v2 --baseline evaluation/reports/baseline-v1.json
+```
+
+默认模式用于校验金标和评测器本身。评测真实 Agent 时，先将实际回答、路由和工具调用写成 `evaluation/results_example.json` 所示格式，再传入：
+
+```powershell
+python -m evaluation.langsmith_eval --dataset evaluation/datasets/benchmark_v1.json --results evaluation/actual-results.json --output evaluation/reports/actual-v2.json --version actual-v2 --baseline evaluation/reports/baseline-v1.json
+```
 
 ## 项目结构
 

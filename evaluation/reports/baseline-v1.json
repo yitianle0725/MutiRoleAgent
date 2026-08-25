@@ -1,0 +1,271 @@
+{
+  "dataset_version": "baseline-v1",
+  "total": 20,
+  "passed": 20,
+  "score": 1.0,
+  "results": [
+    {
+      "case_id": "chat-greeting",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "chat-thanks",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "chat-emotion",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "anime-recommend",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "anime-current",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "anime-detail",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "anime-season",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "novel-search",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "novel-detail",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "novel-rank",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "game-news",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "game-event",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "game-sr",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "rag-anime",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "rag-worldbook",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "web-fallback",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "tool-error",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "structured-output",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "source-conflict",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    },
+    {
+      "case_id": "pending-input",
+      "passed": true,
+      "scores": {
+        "answer_contains_expected": 1.0,
+        "route_correct": 1.0,
+        "tool_routing": 1.0,
+        "fact_fidelity": 1.0,
+        "hallucination_free": 1.0,
+        "source_coverage": 1.0
+      },
+      "failures": []
+    }
+  ],
+  "prompt_version": "v1",
+  "model": "unknown",
+  "code_version": "working-tree"
+}

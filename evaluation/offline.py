@@ -22,6 +22,8 @@ class EvaluationCase:
     route: str = "agent"
     tools_expected: list[str] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
+    forbidden_output: list[str] = field(default_factory=list)
+    expected_sources: list[str] = field(default_factory=list)
 
 
 @dataclass(slots=True)
@@ -76,15 +78,52 @@ def evaluate_case(case: EvaluationCase, *, answer: str, route: str | None = None
             failures.append("fact_error_not_preserved")
     else:
         scores["fact_fidelity"] = 1.0
+    forbidden = [item for item in case.forbidden_output if item.lower() in answer_text.lower()]
+    scores["hallucination_free"] = 0.0 if forbidden else 1.0
+    if forbidden:
+        failures.append("forbidden_claim_present")
+    if case.expected_sources:
+        used_sources = answer_text.lower()
+        source_hits = sum(1 for source in case.expected_sources if source.lower() in used_sources)
+        scores["source_coverage"] = source_hits / len(case.expected_sources)
+        if source_hits < len(case.expected_sources):
+            failures.append("expected_source_missing")
+    else:
+        scores["source_coverage"] = 1.0
     passed = not failures
     return EvaluationResult(case.id, passed, scores, failures)
 
 
-def evaluate_dataset(cases: list[EvaluationCase], *, answers: dict[str, str] | None = None, dataset_version: str = "local-v1") -> EvaluationReport:
+def evaluate_dataset(cases: list[EvaluationCase], *, answers: dict[str, str] | None = None, routes: dict[str, str] | None = None, tools: dict[str, list[str]] | None = None, dataset_version: str = "local-v1") -> EvaluationReport:
     answers = answers or {case.id: case.expected_output for case in cases}
-    results = [evaluate_case(case, answer=answers.get(case.id, ""), route=case.route, tools_used=case.tools_expected) for case in cases]
+    routes = routes or {}
+    tools = tools or {}
+    results = [evaluate_case(case, answer=answers.get(case.id, ""), route=routes.get(case.id, case.route), tools_used=tools.get(case.id, case.tools_expected)) for case in cases]
     passed = sum(item.passed for item in results)
     return EvaluationReport(dataset_version, len(results), passed, round(passed / len(results), 4) if results else 0.0, results)
+
+
+def compare_reports(baseline: EvaluationReport, candidate: EvaluationReport) -> dict[str, Any]:
+    """比较两个版本的通过率、工具路由、事实保真和幻觉率。"""
+    def average(report: EvaluationReport, key: str) -> float:
+        values = [item.scores.get(key, 0.0) for item in report.results]
+        return sum(values) / len(values) if values else 0.0
+    metrics = {"score": "score", "tool_routing": "tool_routing", "fact_fidelity": "fact_fidelity", "hallucination_free": "hallucination_free", "source_coverage": "source_coverage"}
+    result: dict[str, Any] = {"baseline": baseline.dataset_version, "candidate": candidate.dataset_version, "metrics": {}}
+    for name, key in metrics.items():
+        old = baseline.score if key == "score" else average(baseline, key)
+        new = candidate.score if key == "score" else average(candidate, key)
+        result["metrics"][name] = {"baseline": round(old, 4), "candidate": round(new, 4), "delta": round(new - old, 4)}
+    result["regression_cases"] = [item.case_id for item in candidate.results if not item.passed]
+    return result
+
+
+def benchmark_report(report: EvaluationReport) -> dict[str, Any]:
+    """输出 benchmark 关注的四项核心指标。"""
+    def average(key: str) -> float:
+        values = [item.scores.get(key, 0.0) for item in report.results]
+        return round(sum(values) / len(values), 4) if values else 0.0
+    return {"dataset_version": report.dataset_version, "total": report.total, "pass_rate": report.score, "tool_routing_accuracy": average("tool_routing"), "fact_fidelity_rate": average("fact_fidelity"), "hallucination_free_rate": average("hallucination_free"), "source_coverage": average("source_coverage"), "quality_gate": report.score >= 0.8 and average("hallucination_free") >= 0.9}
 
 
 def load_dataset(path: str | Path) -> list[EvaluationCase]:

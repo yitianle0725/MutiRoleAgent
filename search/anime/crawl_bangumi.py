@@ -25,7 +25,8 @@ os.makedirs(_DATA_DIR, exist_ok=True)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ==================== 全局配置 ====================
-BASE_URL = "https://bangumi.lol"
+# BASE_URL = "https://bangumi.lol"
+BASE_URL = "https://bangumi.pro"
 TIMEOUT = 15
 RETRY_TIMES = 3
 MIN_SLEEP = 0.8

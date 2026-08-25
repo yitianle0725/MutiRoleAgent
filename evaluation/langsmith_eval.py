@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 
-from .offline import evaluate_dataset, load_dataset, save_report
+from .offline import benchmark_report, compare_reports, evaluate_dataset, load_dataset, save_report
 
 
 def upload_to_langsmith(cases, *, project: str, dataset_name: str) -> str | None:
@@ -37,18 +38,45 @@ def evaluate_with_langsmith(target, *, dataset: str, evaluators: list | None = N
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="MutiRoleAgent offline evaluation")
-    parser.add_argument("--dataset", default="evaluation/datasets/smoke.json")
-    parser.add_argument("--output", default="data/evaluations/smoke-report.json")
+    parser.add_argument("--dataset", default="evaluation/datasets/benchmark_v1.json")
+    parser.add_argument("--output", default="evaluation/reports/benchmark_v1.json")
     parser.add_argument("--langsmith", action="store_true", help="上传脱敏数据集；需要 LangSmith API Key")
+    parser.add_argument("--baseline", help="已有评测报告路径，用于 A/B 版本对比")
+    parser.add_argument("--version", default="benchmark-v1", help="本次候选版本名称")
+    parser.add_argument("--results", help="真实运行结果 JSON：包含 answers/routes/tools 三个按 case id 索引的对象")
     args = parser.parse_args()
     cases = load_dataset(args.dataset)
     if args.langsmith:
         upload_to_langsmith(cases, project="MutiRoleAgent", dataset_name=Path(args.dataset).stem)
-    report = evaluate_dataset(cases)
+    result_data: dict[str, object] = {}
+    if args.results:
+        result_data = json.loads(Path(args.results).read_text(encoding="utf-8"))
+    report = evaluate_dataset(
+        cases,
+        answers=result_data.get("answers") if isinstance(result_data.get("answers"), dict) else None,
+        routes=result_data.get("routes") if isinstance(result_data.get("routes"), dict) else None,
+        tools=result_data.get("tools") if isinstance(result_data.get("tools"), dict) else None,
+        dataset_version=args.version,
+    )
     save_report(report, args.output)
-    print(f"dataset={report.dataset_version} passed={report.passed}/{report.total} score={report.score:.3f}")
+    benchmark = benchmark_report(report)
+    print(json.dumps(benchmark, ensure_ascii=False, indent=2))
     print(f"report={Path(args.output)}")
-    return 0 if report.score >= 0.8 else 1
+    if args.baseline:
+        baseline_data = json.loads(Path(args.baseline).read_text(encoding="utf-8"))
+        from .offline import EvaluationReport, EvaluationResult
+        baseline = EvaluationReport(
+            dataset_version=baseline_data["dataset_version"], total=baseline_data["total"],
+            passed=baseline_data["passed"], score=baseline_data["score"],
+            results=[EvaluationResult(**item) for item in baseline_data["results"]],
+        )
+        comparison = compare_reports(baseline, report)
+        comparison_path = Path(args.output).with_name(f"{Path(args.output).stem}-comparison.json")
+        comparison_path.write_text(json.dumps(comparison, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"comparison={comparison_path}")
+        if any(value["delta"] < 0 for value in comparison["metrics"].values()):
+            return 1
+    return 0 if benchmark["quality_gate"] else 1
 
 
 if __name__ == "__main__":

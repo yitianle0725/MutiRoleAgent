@@ -1,0 +1,14 @@
+{
+  "answers": {
+    "anime-recommend": "来源：AniList、Jikan",
+    "tool-error": "网络超时"
+  },
+  "routes": {
+    "anime-recommend": "agent",
+    "chat-greeting": "chat"
+  },
+  "tools": {
+    "anime-recommend": ["search_anime"],
+    "tool-error": ["search_anime"]
+  }
+}
