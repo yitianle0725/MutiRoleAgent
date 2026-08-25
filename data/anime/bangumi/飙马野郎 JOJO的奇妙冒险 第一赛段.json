@@ -1,0 +1,106 @@
+{
+  "title_cn": "飙马野郎 JOJO的奇妙冒险 第一赛段",
+  "title_jp": "スティール・ボール・ラン ジョジョの奇妙な冒険 1st STAGE 飙马野郎 JOJO的奇妙冒险",
+  "url": "https://bangumi.pro/subject/551918",
+  "stats": {
+    "rating": "7.5",
+    "rank": "#929",
+    "rating_desc": "力荐"
+  },
+  "tags": [
+    {
+      "name": "漫画改",
+      "count": 719
+    },
+    {
+      "name": "JOJO",
+      "count": 649
+    },
+    {
+      "name": "战斗",
+      "count": 637
+    },
+    {
+      "name": "冒险",
+      "count": 520
+    },
+    {
+      "name": "荒木飞吕彦",
+      "count": 457
+    }
+  ],
+  "summary_jp": "1890年のアメリカ。総距離約4,000マイル、賞金総額5,000万ドル、\n\r\n人類史上初の乗馬による北米大陸横断レース「スティール・ボール・ラン」が開催されようとしていた。\n\n\n\r\nかつて天才騎手と呼ばれながらも、半身不随となり、失意の中にいたジョニィ･ジョースター。\n\n\n\r\n彼はこのレースで優勝を目論む謎のアウトロー、ジャイロ･ツェペリが引き起こした不思議な現象に希望を見出し、\n\r\n｢スティール･ボール･ラン｣への参加を決意する。\n\n\n\r\n二人はそれぞれの思惑を胸に協力関係を結び、過酷な冒険へと踏み出す。",
+  "episodes": [
+    {
+      "ep": 1,
+      "title_cn": "飙马野郎",
+      "title_jp": "スティール・ボール・ラン",
+      "air_date": "2026-03-19"
+    }
+  ],
+  "characters": [
+    {
+      "name_cn": "乔尼·乔斯达",
+      "name_jp": "ジョニィ・ジョースター",
+      "role": "主角",
+      "cv": "坂田将吾",
+      "url": "https://bangumi.pro/character/18574"
+    },
+    {
+      "name_cn": "杰洛·齐贝林",
+      "name_jp": "ジャイロ・ツェペリ",
+      "role": "主角",
+      "cv": "阿座上洋平",
+      "url": "https://bangumi.pro/character/18573"
+    },
+    {
+      "name_cn": "迪亚哥·布兰多",
+      "name_jp": "ディエゴ・ブランドー",
+      "role": "配角",
+      "cv": "石川界人",
+      "url": "https://bangumi.pro/character/18580"
+    },
+    {
+      "name_cn": "露西·史提尔",
+      "name_jp": "ルーシー・スティール",
+      "role": "配角",
+      "cv": "高橋李依",
+      "url": "https://bangumi.pro/character/19186"
+    },
+    {
+      "name_cn": "沙男",
+      "name_jp": "サンドマン",
+      "role": "配角",
+      "cv": "水中雅章",
+      "url": "https://bangumi.pro/character/19187"
+    },
+    {
+      "name_cn": "史蒂芬·史特尔",
+      "name_jp": "スティーブン・スティール",
+      "role": "配角",
+      "cv": "三宅健太",
+      "url": "https://bangumi.pro/character/21154"
+    },
+    {
+      "name_cn": "曼登·提姆",
+      "name_jp": "マウンテン・ティム",
+      "role": "配角",
+      "cv": "",
+      "url": "https://bangumi.pro/character/67153"
+    },
+    {
+      "name_cn": "乌尔默德·阿布德尔",
+      "name_jp": "ウルムド・アブドゥル",
+      "role": "配角",
+      "cv": "三宅健太",
+      "url": "https://bangumi.pro/character/67154"
+    },
+    {
+      "name_cn": "波克洛克",
+      "name_jp": "ポコロコ",
+      "role": "配角",
+      "cv": "松田健一郎",
+      "url": "https://bangumi.pro/character/67156"
+    }
+  ]
+}

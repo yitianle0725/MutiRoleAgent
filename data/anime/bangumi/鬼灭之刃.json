@@ -1,277 +1,120 @@
 {
   "title_cn": "鬼灭之刃",
   "title_jp": "鬼滅の刃",
-  "url": "https://bangumi.lol/subject/245665",
+  "url": "https://bangumi.pro/subject/168891",
   "stats": {
-    "rating": "7.3",
-    "rank": "#1536",
+    "rating": "6.8",
+    "rank": "#6840",
     "rating_desc": "推荐"
   },
   "tags": [
     {
+      "name": "漫画",
+      "count": 593
+    },
+    {
       "name": "热血",
-      "count": 4751
+      "count": 344
     },
     {
       "name": "战斗",
-      "count": 4386
+      "count": 322
     },
     {
-      "name": "ufotable",
-      "count": 4204
+      "name": "JUMP",
+      "count": 317
     },
     {
-      "name": "漫改",
-      "count": 2465
-    },
-    {
-      "name": "2019年4月",
-      "count": 2337
+      "name": "吾峠呼世晴",
+      "count": 310
     }
   ],
-  "summary_jp": "大正时期、日本。\n\r\n卖炭的心地善良的少年·炭治郎，有一天被鬼杀死了家人。\n\r\n而唯一幸存下来的妹妹祢豆子变成了鬼。\n\r\n被绝望的现实打垮的炭治郎，为了让妹妹变回人类并讨伐杀害家人的鬼，决心沿着“鬼杀队”的道路前进。\n\r\n人与鬼交织的悲哀的兄妹的故事，现在开始！",
-  "episodes": [
-    {
-      "ep": 1,
-      "title_cn": "残酷",
-      "title_jp": "残酷",
-      "air_date": "2019-04-06"
-    },
-    {
-      "ep": 2,
-      "title_cn": "培育师・鳞泷左近次",
-      "title_jp": "育手・鱗滝左近次",
-      "air_date": "2019-04-13"
-    },
-    {
-      "ep": 3,
-      "title_cn": "锖兔与真菰",
-      "title_jp": "錆兎と真菰",
-      "air_date": "2019-04-20"
-    },
-    {
-      "ep": 4,
-      "title_cn": "最终选拔",
-      "title_jp": "最終選別",
-      "air_date": "2019-04-27"
-    },
-    {
-      "ep": 5,
-      "title_cn": "自己的钢",
-      "title_jp": "己の鋼",
-      "air_date": "2019-05-04"
-    },
-    {
-      "ep": 6,
-      "title_cn": "带着鬼的剑士",
-      "title_jp": "鬼を連れた剣士",
-      "air_date": "2019-05-11"
-    },
-    {
-      "ep": 7,
-      "title_cn": "鬼舞辻无惨",
-      "title_jp": "鬼舞辻無惨",
-      "air_date": "2019-05-18"
-    },
-    {
-      "ep": 8,
-      "title_cn": "幻惑的血香",
-      "title_jp": "幻惑の血の香り",
-      "air_date": "2019-05-25"
-    },
-    {
-      "ep": 9,
-      "title_cn": "手球鬼与箭头鬼",
-      "title_jp": "手毬鬼と矢印鬼",
-      "air_date": "2019-06-01"
-    },
-    {
-      "ep": 10,
-      "title_cn": "一直在一起",
-      "title_jp": "ずっと一緒にいる",
-      "air_date": "2019-06-08"
-    },
-    {
-      "ep": 11,
-      "title_cn": "鼓之宅邸",
-      "title_jp": "鼓の屋敷",
-      "air_date": "2019-06-15"
-    },
-    {
-      "ep": 12,
-      "title_cn": "野猪露牙 善逸沉睡",
-      "title_jp": "猪は牙を剥き　善逸は眠る",
-      "air_date": "2019-06-22"
-    },
-    {
-      "ep": 13,
-      "title_cn": "比生命更重要的东西",
-      "title_jp": "命より大事なもの",
-      "air_date": "2019-06-29"
-    },
-    {
-      "ep": 14,
-      "title_cn": "紫藤花家纹之家",
-      "title_jp": "藤の花の家紋の家",
-      "air_date": "2019-07-06"
-    },
-    {
-      "ep": 15,
-      "title_cn": "那田蜘蛛山",
-      "title_jp": "那田蜘蛛山",
-      "air_date": "2019-07-13"
-    },
-    {
-      "ep": 16,
-      "title_cn": "让自己以外的某人前进",
-      "title_jp": "自分ではない誰かを前へ",
-      "air_date": "2019-07-20"
-    },
-    {
-      "ep": 17,
-      "title_cn": "集中一点登峰造极",
-      "title_jp": "ひとつのことを極め抜け",
-      "air_date": "2019-07-27"
-    },
-    {
-      "ep": 18,
-      "title_cn": "虚假的羁绊",
-      "title_jp": "偽物の絆",
-      "air_date": "2019-08-03"
-    },
-    {
-      "ep": 19,
-      "title_cn": "火神",
-      "title_jp": "ヒノカミ",
-      "air_date": "2019-08-10"
-    },
-    {
-      "ep": 20,
-      "title_cn": "拼凑的家人",
-      "title_jp": "寄せ集めの家族",
-      "air_date": "2019-08-17"
-    },
-    {
-      "ep": 21,
-      "title_cn": "违反队律",
-      "title_jp": "隊律違反",
-      "air_date": "2019-08-24"
-    },
-    {
-      "ep": 22,
-      "title_cn": "主公大人",
-      "title_jp": "お館様",
-      "air_date": "2019-08-31"
-    },
-    {
-      "ep": 23,
-      "title_cn": "柱合会议",
-      "title_jp": "柱合会議",
-      "air_date": "2019-09-07"
-    },
-    {
-      "ep": 24,
-      "title_cn": "机能恢复训练",
-      "title_jp": "機能回復訓練",
-      "air_date": "2019-09-14"
-    },
-    {
-      "ep": 25,
-      "title_cn": "继子·栗花落香奈乎",
-      "title_jp": "継子・栗花落カナヲ",
-      "air_date": "2019-09-21"
-    },
-    {
-      "ep": 26,
-      "title_cn": "新的任务",
-      "title_jp": "新たなる任務",
-      "air_date": "2019-09-28"
-    }
-  ],
+  "summary_jp": "时值日本大正时期。\n\r\n　　传说太阳下山后，恶鬼出没吃人。亦有猎鬼人斩杀恶鬼、保护人们。\n\r\n　　卖炭少年·炭治郎，他那平凡而幸福的日常生活，在家人遭到恶鬼袭击的那一天发生剧变。母亲与四个弟妹惨遭杀害，唯一生还的妹妹·祢豆子亦异变成凶暴的鬼。\n\r\n　　在猎鬼人的指引下，立志成为猎鬼人的炭治郎与变成鬼却尚存理智的祢豆子二人踏上了旅程。通过艰苦的剑术修行与赌命试炼，炭治郎成为了鬼猎人组织“鬼杀队”的一员。\n\r\n　　为了让妹妹祢豆子变回人类，为了讨伐杀害家人的恶鬼，为了斩断悲伤的连锁，少年与鬼的战斗不曾停歇。\n\r\n　　幸福被破坏之时，总是弥漫着鲜血的味道。纵然我身俱灭，定将恶鬼斩杀！血风剑戟冒险谭，开幕！",
+  "episodes": [],
   "characters": [
     {
       "name_cn": "灶门炭治郎",
       "name_jp": "竈門炭治郎",
       "role": "主角",
-      "cv": "佐藤聡美",
-      "url": "https://bangumi.lol/character/57305"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57305"
     },
     {
       "name_cn": "灶门祢豆子",
       "name_jp": "竈門禰豆子",
       "role": "主角",
-      "cv": "鬼頭明里",
-      "url": "https://bangumi.lol/character/57306"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57306"
     },
     {
       "name_cn": "我妻善逸",
       "name_jp": "我妻善逸",
       "role": "主角",
-      "cv": "下野紘",
-      "url": "https://bangumi.lol/character/57307"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57307"
     },
     {
       "name_cn": "嘴平伊之助",
       "name_jp": "嘴平伊之助",
       "role": "主角",
-      "cv": "松岡禎丞",
-      "url": "https://bangumi.lol/character/57308"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57308"
     },
     {
       "name_cn": "富冈义勇",
       "name_jp": "冨岡義勇",
       "role": "配角",
-      "cv": "櫻井孝宏",
-      "url": "https://bangumi.lol/character/57309"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57309"
     },
     {
-      "name_cn": "鳞泷左近次",
-      "name_jp": "鱗滝左近次",
+      "name_cn": "胡蝶忍",
+      "name_jp": "胡蝶しのぶ",
       "role": "配角",
-      "cv": "大塚芳忠",
-      "url": "https://bangumi.lol/character/57321"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57310"
     },
     {
-      "name_cn": "锖兔",
-      "name_jp": "錆兎",
+      "name_cn": "炼狱杏寿郎",
+      "name_jp": "煉獄杏寿郎",
       "role": "配角",
-      "cv": "梶裕貴",
-      "url": "https://bangumi.lol/character/69514"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57311"
     },
     {
-      "name_cn": "真菰",
-      "name_jp": "真菰",
+      "name_cn": "栗花落香奈乎",
+      "name_jp": "栗花落カナヲ",
       "role": "配角",
-      "cv": "加隈亜衣",
-      "url": "https://bangumi.lol/character/69515"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57312"
     },
     {
-      "name_cn": "产屋敷彼方",
-      "name_jp": "産屋敷かなた",
+      "name_cn": "宇髓天元",
+      "name_jp": "宇髄天元",
       "role": "配角",
-      "cv": "井澤詩織",
-      "url": "https://bangumi.lol/character/69518"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57313"
     },
     {
-      "name_cn": "产屋敷辉利哉",
-      "name_jp": "産屋敷輝利哉",
+      "name_cn": "产屋敷耀哉",
+      "name_jp": "産屋敷耀哉",
       "role": "配角",
-      "cv": "悠木碧",
-      "url": "https://bangumi.lol/character/69517"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57314"
     },
     {
-      "name_cn": "天王寺松卫门",
-      "name_jp": "天王寺松衛門",
+      "name_cn": "甘露寺蜜璃",
+      "name_jp": "甘露寺蜜璃",
       "role": "配角",
-      "cv": "山崎たくみ",
-      "url": "https://bangumi.lol/character/69520"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57315"
     },
     {
-      "name_cn": "钢铁冢萤",
-      "name_jp": "鋼鐵塚蛍",
+      "name_cn": "悲鸣屿行冥",
+      "name_jp": "悲鳴嶼行冥",
       "role": "配角",
-      "cv": "浪川大輔",
-      "url": "https://bangumi.lol/character/69519"
+      "cv": "",
+      "url": "https://bangumi.pro/character/57316"
     }
   ]
 }

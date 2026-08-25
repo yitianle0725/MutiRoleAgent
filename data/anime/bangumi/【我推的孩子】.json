@@ -1,0 +1,211 @@
+{
+  "title_cn": "【我推的孩子】",
+  "title_jp": "【推しの子】",
+  "url": "https://bangumi.pro/subject/386809",
+  "stats": {
+    "rating": "7.4",
+    "rank": "#1269",
+    "rating_desc": "推荐"
+  },
+  "tags": [
+    {
+      "name": "动画工房",
+      "count": 4748
+    },
+    {
+      "name": "偶像",
+      "count": 4530
+    },
+    {
+      "name": "2023年4月",
+      "count": 3357
+    },
+    {
+      "name": "漫画改",
+      "count": 3254
+    },
+    {
+      "name": "赤坂明",
+      "count": 2739
+    }
+  ],
+  "summary_jp": "“在演艺圈里，谎言就是武器。 ”\n\r\n在小城市工作的妇产科医生・五郎，有一天他所推的偶像“B小町”出现在了他的面前。“B小町”有着一个禁忌的秘密。\n\r\n如此这般的两人实现了最糟糕的相遇，从此命运的齿轮开始转动——",
+  "episodes": [
+    {
+      "ep": 1,
+      "title_cn": "母亲和孩子",
+      "title_jp": "Mother and Children",
+      "air_date": "2023-04-12"
+    },
+    {
+      "ep": 2,
+      "title_cn": "第三个选择",
+      "title_jp": "三つ目の選択肢",
+      "air_date": "2023-04-19"
+    },
+    {
+      "ep": 3,
+      "title_cn": "漫画原作连续剧",
+      "title_jp": "漫画原作ドラマ",
+      "air_date": "2023-04-26"
+    },
+    {
+      "ep": 4,
+      "title_cn": "演员",
+      "title_jp": "役者",
+      "air_date": "2023-05-03"
+    },
+    {
+      "ep": 5,
+      "title_cn": "恋爱实境秀",
+      "title_jp": "恋愛リアリティショー",
+      "air_date": "2023-05-10"
+    },
+    {
+      "ep": 6,
+      "title_cn": "网上自搜",
+      "title_jp": "エゴサーチ",
+      "air_date": "2023-05-17"
+    },
+    {
+      "ep": 7,
+      "title_cn": "网络热议",
+      "title_jp": "バズ",
+      "air_date": "2023-05-24"
+    },
+    {
+      "ep": 8,
+      "title_cn": "第一次",
+      "title_jp": "初めて",
+      "air_date": "2023-06-07"
+    },
+    {
+      "ep": 9,
+      "title_cn": "B小町",
+      "title_jp": "B小町",
+      "air_date": "2023-06-14"
+    },
+    {
+      "ep": 10,
+      "title_cn": "压力",
+      "title_jp": "プレッシャー",
+      "air_date": "2023-06-21"
+    },
+    {
+      "ep": 11,
+      "title_cn": "偶像",
+      "title_jp": "アイドル",
+      "air_date": "2023-06-28"
+    },
+    {
+      "ep": 0,
+      "title_cn": "",
+      "title_jp": "TVアニメ【推しの子】最新情報発表会",
+      "air_date": "2023-02-19"
+    },
+    {
+      "ep": "07.5",
+      "title_cn": "",
+      "title_jp": ".5 TVアニメ【推しの子】振り返り特番～【推しの子】は推せるときに推せ！～",
+      "air_date": "2023-05-31"
+    },
+    {
+      "ep": 0,
+      "title_cn": "",
+      "title_jp": "アイドル",
+      "air_date": ""
+    },
+    {
+      "ep": 0,
+      "title_cn": "",
+      "title_jp": "メフィスト",
+      "air_date": ""
+    }
+  ],
+  "characters": [
+    {
+      "name_cn": "阿库亚 / 星野爱久爱海",
+      "name_jp": "アクア / 星野愛久愛海",
+      "role": "主角",
+      "cv": "大塚剛央",
+      "url": "https://bangumi.pro/character/102125"
+    },
+    {
+      "name_cn": "露比 / 星野瑠美衣",
+      "name_jp": "ルビー / 星野瑠美衣",
+      "role": "主角",
+      "cv": "伊駒ゆりえ",
+      "url": "https://bangumi.pro/character/102126"
+    },
+    {
+      "name_cn": "星野爱",
+      "name_jp": "星野アイ",
+      "role": "配角",
+      "cv": "高橋李依",
+      "url": "https://bangumi.pro/character/102127"
+    },
+    {
+      "name_cn": "有马加奈",
+      "name_jp": "有馬かな",
+      "role": "配角",
+      "cv": "潘めぐみ",
+      "url": "https://bangumi.pro/character/102128"
+    },
+    {
+      "name_cn": "黑川茜",
+      "name_jp": "黒川あかね",
+      "role": "配角",
+      "cv": "石見舞菜香",
+      "url": "https://bangumi.pro/character/102130"
+    },
+    {
+      "name_cn": "MEM啾",
+      "name_jp": "MEMちょ",
+      "role": "配角",
+      "cv": "大久保瑠美",
+      "url": "https://bangumi.pro/character/102129"
+    },
+    {
+      "name_cn": "斋藤壹护",
+      "name_jp": "斎藤壱護",
+      "role": "配角",
+      "cv": "江川央生",
+      "url": "https://bangumi.pro/character/102131"
+    },
+    {
+      "name_cn": "斋藤京子",
+      "name_jp": "斎藤ミヤコ",
+      "role": "配角",
+      "cv": "Lynn",
+      "url": "https://bangumi.pro/character/102132"
+    },
+    {
+      "name_cn": "五反田泰志",
+      "name_jp": "五反田泰志",
+      "role": "配角",
+      "cv": "加瀬康之",
+      "url": "https://bangumi.pro/character/102133"
+    },
+    {
+      "name_cn": "鹫见夕雪",
+      "name_jp": "鷲見ゆき",
+      "role": "配角",
+      "cv": "大西沙織",
+      "url": "https://bangumi.pro/character/102139"
+    },
+    {
+      "name_cn": "熊野信行",
+      "name_jp": "熊野ノブユキ",
+      "role": "配角",
+      "cv": "大野智敬",
+      "url": "https://bangumi.pro/character/102140"
+    },
+    {
+      "name_cn": "森本剑吾",
+      "name_jp": "森本ケンゴ",
+      "role": "配角",
+      "cv": "坂泰斗",
+      "url": "https://bangumi.pro/character/102141"
+    }
+  ]
+}

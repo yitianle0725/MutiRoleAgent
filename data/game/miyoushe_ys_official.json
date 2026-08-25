@@ -3,8 +3,8 @@
   "game": "原神",
   "source": "miyoushe.com",
   "source_url": "https://www.miyoushe.com/ys/home/28",
-  "collected_at": "2026-08-22T08:34:55.074635+00:00",
-  "datetime": "2026-08-22 16:34:55",
+  "collected_at": "2026-08-25T12:19:25.387878+00:00",
+  "datetime": "2026-08-25 20:19:25",
   "community_map": [
     {
       "title": "酒馆",
@@ -64,26 +64,47 @@
     ],
     "资讯": [
       {
-        "title": "《原神》过场动画-「『死亡』已在身边」 4小时前",
-        "url": "https://www.miyoushe.com/ys/article/77671799"
+        "title": "《原神》7.0版本表情包「派蒙的画作第52弹」现已上线 8小时前",
+        "url": "https://www.miyoushe.com/ys/article/77737393"
       },
       {
-        "title": "阿蕾奇诺生日快乐 | 看你的表情…这些贺卡和信件里也有你的？ 4小时前",
-        "url": "https://www.miyoushe.com/ys/article/77671795"
+        "title": "《原神》过场动画-「凯旋」 08-23",
+        "url": "https://www.miyoushe.com/ys/article/77699769"
       },
       {
-        "title": "《原神》过场动画-「星锋」 08-21",
-        "url": "https://www.miyoushe.com/ys/article/77648601"
+        "title": "至冬纪事：旅途趣闻大收集！ 08-23",
+        "url": "https://www.miyoushe.com/ys/article/77693728"
       },
       {
-        "title": "珐露珊生日快乐 | 我的课堂随时欢迎提问哦。 08-20",
-        "url": "https://www.miyoushe.com/ys/article/77624816"
+        "title": "《原神》剧情PV-「冰中余烬」 08-23",
+        "url": "https://www.miyoushe.com/ys/article/77693633"
       },
       {
-        "title": "《原神》哥伦比娅印象服登场 至冬周边上架 08-19",
-        "url": "https://www.miyoushe.com/ys/article/77604466"
+        "title": "《原神》过场动画-「『复活』之时将至」 08-22",
+        "url": "https://www.miyoushe.com/ys/article/77677647"
       }
     ],
-    "活动": []
+    "活动": [
+      {
+        "title": "【米游币兑换中心】原神商品上新！ 进行中 2026.08.12 - 2026.09.23",
+        "url": "https://www.miyoushe.com/ys/article/77386688"
+      },
+      {
+        "title": "【网页活动上线】「至冬漫游手册」网页活动限时开启 进行中 2026.08.12 - 2026.08.25",
+        "url": "https://www.miyoushe.com/ys/article/77378172"
+      },
+      {
+        "title": "「千星创作赛」正式启动！ 进行中 2026.08.12 - 2026.10.24",
+        "url": "https://www.miyoushe.com/ys/article/77371944"
+      },
+      {
+        "title": "【有奖活动】7.0版本第一期话题活动开启~ 进行中 2026.08.12 - 2026.09.09",
+        "url": "https://www.miyoushe.com/ys/article/77371512"
+      },
+      {
+        "title": "「无神怜爱的冻土」7.0版本合影活动开启，参与必得评论装扮~ 进行中 2026.08.12 - 2026.09.09",
+        "url": "https://www.miyoushe.com/ys/article/77371505"
+      }
+    ]
   }
 }

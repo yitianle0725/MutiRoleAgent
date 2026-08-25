@@ -1,0 +1,792 @@
+{
+  "generated_at": "2026-08-25T19:32:45.438888+08:00",
+  "corpus": {
+    "document_count": 227,
+    "sources": [
+      "data\\anime\\yuc\\yuc_202601.json",
+      "data\\anime\\yuc\\yuc_202604.json",
+      "data\\anime\\yuc\\yuc_202607.json",
+      "data/anime/bangumi/*.json"
+    ]
+  },
+  "dataset": "evaluation\\datasets\\anime_retrieval_subset_v1.json",
+  "case_count": 20,
+  "results": [
+    {
+      "strategy": "A_dashscope_bm25",
+      "config": {
+        "dense_weight": 0.7,
+        "sparse_weight": 0.3,
+        "reranker_enabled": false
+      },
+      "metrics": {
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "mrr": 1.0,
+        "ndcg_at_3": 1.0,
+        "mean_latency_ms": 787.21,
+        "p95_latency_ms": 766.79
+      },
+      "details": [
+        {
+          "id": "bangumi-demon-slayer",
+          "query": "鬼灭之刃的题材和评分怎么样？",
+          "expected_title": "鬼灭之刃",
+          "rank": 1,
+          "latency_ms": 688.75,
+          "retrieved_titles": [
+            "鬼灭之刃",
+            "攻壳机动队 THE GHOST IN THE SHELL",
+            "火影忍者"
+          ]
+        },
+        {
+          "id": "bangumi-attack-on-titan",
+          "query": "进击的巨人有哪些标签？",
+          "expected_title": "进击的巨人",
+          "rank": 1,
+          "latency_ms": 752.39,
+          "retrieved_titles": [
+            "进击的巨人",
+            "我的英雄学院",
+            "无头骑士异闻录"
+          ]
+        },
+        {
+          "id": "bangumi-mushoku",
+          "query": "无职转生第三季的评分和类型是什么？",
+          "expected_title": "无职转生 第三季",
+          "rank": 1,
+          "latency_ms": 672.53,
+          "retrieved_titles": [
+            "无职转生 第三季 ～到了异世界就拿出真本事～",
+            "无职转生 第3期",
+            "我的青春恋爱物语果然有问题"
+          ]
+        },
+        {
+          "id": "bangumi-jujutsu",
+          "query": "咒术回战是什么类型的动画？",
+          "expected_title": "咒术回战",
+          "rank": 1,
+          "latency_ms": 744.34,
+          "retrieved_titles": [
+            "咒术回战 第3期",
+            "咒术回战",
+            "女主角？圣女？不，我是杂役女仆（自豪）！"
+          ]
+        },
+        {
+          "id": "bangumi-naruto",
+          "query": "火影忍者的题材和评价",
+          "expected_title": "火影忍者",
+          "rank": 1,
+          "latency_ms": 682.18,
+          "retrieved_titles": [
+            "火影忍者",
+            "我的青春恋爱物语果然有问题",
+            "刀剑神域"
+          ]
+        },
+        {
+          "id": "bangumi-sword-art-online",
+          "query": "刀剑神域有哪些标签？",
+          "expected_title": "刀剑神域",
+          "rank": 1,
+          "latency_ms": 748.95,
+          "retrieved_titles": [
+            "刀剑神域",
+            "刃牙道 Part.2",
+            "无头骑士异闻录"
+          ]
+        },
+        {
+          "id": "bangumi-your-lie",
+          "query": "四月是你的谎言的评价",
+          "expected_title": "四月是你的谎言",
+          "rank": 1,
+          "latency_ms": 707.41,
+          "retrieved_titles": [
+            "四月是你的谎言",
+            "昔涟",
+            "魔法科高校的劣等生"
+          ]
+        },
+        {
+          "id": "bangumi-bleach",
+          "query": "死神千年血战篇的动画信息",
+          "expected_title": "死神 千年血战篇",
+          "rank": 1,
+          "latency_ms": 711.73,
+          "retrieved_titles": [
+            "死神 千年血战篇 Part.4 祸进谭",
+            "死神 千年血战篇",
+            "死亡账号"
+          ]
+        },
+        {
+          "id": "bangumi-blue-lock",
+          "query": "碧蓝之海的评分",
+          "expected_title": "碧蓝之海",
+          "rank": 1,
+          "latency_ms": 752.87,
+          "retrieved_titles": [
+            "碧蓝之海 第3期",
+            "碧蓝之海",
+            "碧蓝之海 第三季"
+          ]
+        },
+        {
+          "id": "bangumi-tiger-dragon",
+          "query": "龙与虎是什么题材？",
+          "expected_title": "龙与虎",
+          "rank": 1,
+          "latency_ms": 729.45,
+          "retrieved_titles": [
+            "龙与虎",
+            "猫与龙",
+            "咒术回战"
+          ]
+        },
+        {
+          "id": "yuc-202601-prism",
+          "query": "2026年1月的新番棱镜恋曲是什么改编？",
+          "expected_title": "棱镜恋曲",
+          "rank": 1,
+          "latency_ms": 741.47,
+          "retrieved_titles": [
+            "棱镜恋曲",
+            "复制品也想谈恋爱",
+            "与奔跑在透明之夜的你谈一场看不见的恋爱"
+          ]
+        },
+        {
+          "id": "yuc-202601-jujutsu",
+          "query": "咒术回战第三期的播出信息",
+          "expected_title": "咒术回战 第3期",
+          "rank": 1,
+          "latency_ms": 707.23,
+          "retrieved_titles": [
+            "咒术回战 第3期",
+            "咒术回战",
+            "无职转生 第3期"
+          ]
+        },
+        {
+          "id": "yuc-202601-oshinoko",
+          "query": "我推的孩子第三期什么时候播出？",
+          "expected_title": "我推的孩子 第3期",
+          "rank": 1,
+          "latency_ms": 734.35,
+          "retrieved_titles": [
+            "我推的孩子 第3期",
+            "无职转生 第3期",
+            "咒术回战 第3期"
+          ]
+        },
+        {
+          "id": "yuc-202604-stone",
+          "query": "石纪元第四期第三部分的制作信息",
+          "expected_title": "石纪元 第4期 Part.3",
+          "rank": 1,
+          "latency_ms": 699.9,
+          "retrieved_titles": [
+            "石纪元 第4期 Part.3",
+            "石纪元 科学与未来 第3部分",
+            "Re:从零开始的异世界生活第4期 Part.2 夺还篇"
+          ]
+        },
+        {
+          "id": "yuc-202604-jojo",
+          "query": "JOJO奇妙冒险飙马野郎是什么类型？",
+          "expected_title": "JOJO奇妙冒险 飙马野郎",
+          "rank": 1,
+          "latency_ms": 766.79,
+          "retrieved_titles": [
+            "JOJO奇妙冒险 飙马野郎",
+            "最强职业不是勇者也不是贤者好像是鉴定士(伪)的样子",
+            "女骑士成为蛮族的新娘"
+          ]
+        },
+        {
+          "id": "yuc-202604-dorohedoro",
+          "query": "异兽魔都第二期的档期",
+          "expected_title": "异兽魔都 第2期",
+          "rank": 1,
+          "latency_ms": 692.51,
+          "retrieved_titles": [
+            "异兽魔都 第2期",
+            "魔都精兵的奴隶 第2期",
+            "地狱乐 第2期"
+          ]
+        },
+        {
+          "id": "yuc-202607-goodbye-lara",
+          "query": "再见拉拉的制作公司和题材",
+          "expected_title": "再见 拉拉",
+          "rank": 1,
+          "latency_ms": 758.61,
+          "retrieved_titles": [
+            "再见 拉拉",
+            "令和的斑小姐",
+            "轻松熊"
+          ]
+        },
+        {
+          "id": "yuc-202607-mevius",
+          "query": "梅比乌斯之尘是什么动画？",
+          "expected_title": "梅比乌斯之尘",
+          "rank": 1,
+          "latency_ms": 2031.17,
+          "retrieved_titles": [
+            "梅比乌斯之尘",
+            "攻壳机动队 THE GHOST IN THE SHELL",
+            "四月是你的谎言"
+          ]
+        },
+        {
+          "id": "yuc-202607-bleach",
+          "query": "死神千年血战篇第四部分祸进谭的信息",
+          "expected_title": "死神 千年血战篇 Part.4 祸进谭",
+          "rank": 1,
+          "latency_ms": 703.91,
+          "retrieved_titles": [
+            "死神 千年血战篇 Part.4 祸进谭",
+            "死神 千年血战篇",
+            "Re:从零开始的异世界生活第4期 Part.2 夺还篇"
+          ]
+        },
+        {
+          "id": "yuc-202607-grand-blue",
+          "query": "碧蓝之海第三期的播出资料",
+          "expected_title": "碧蓝之海 第3期",
+          "rank": 1,
+          "latency_ms": 717.61,
+          "retrieved_titles": [
+            "碧蓝之海 第3期",
+            "碧蓝之海 第三季",
+            "碧蓝之海"
+          ]
+        }
+      ]
+    },
+    {
+      "strategy": "B_bge_m3_onnx_bm25",
+      "config": {
+        "dense_weight": 0.7,
+        "sparse_weight": 0.3,
+        "reranker_enabled": false
+      },
+      "metrics": {
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "mrr": 1.0,
+        "ndcg_at_3": 1.0,
+        "mean_latency_ms": 23.81,
+        "p95_latency_ms": 28.73
+      },
+      "details": [
+        {
+          "id": "bangumi-demon-slayer",
+          "query": "鬼灭之刃的题材和评分怎么样？",
+          "expected_title": "鬼灭之刃",
+          "rank": 1,
+          "latency_ms": 33.0,
+          "retrieved_titles": [
+            "鬼灭之刃",
+            "鬼的新娘",
+            "死亡账号"
+          ]
+        },
+        {
+          "id": "bangumi-attack-on-titan",
+          "query": "进击的巨人有哪些标签？",
+          "expected_title": "进击的巨人",
+          "rank": 1,
+          "latency_ms": 24.21,
+          "retrieved_titles": [
+            "进击的巨人",
+            "女主角？圣女？不，我是杂役女仆（自豪）！",
+            "枪神 STARGAZE"
+          ]
+        },
+        {
+          "id": "bangumi-mushoku",
+          "query": "无职转生第三季的评分和类型是什么？",
+          "expected_title": "无职转生 第三季",
+          "rank": 1,
+          "latency_ms": 28.73,
+          "retrieved_titles": [
+            "无职转生 第三季 ～到了异世界就拿出真本事～",
+            "无职转生 第3期",
+            "终末的女武神 第3期"
+          ]
+        },
+        {
+          "id": "bangumi-jujutsu",
+          "query": "咒术回战是什么类型的动画？",
+          "expected_title": "咒术回战",
+          "rank": 1,
+          "latency_ms": 22.89,
+          "retrieved_titles": [
+            "咒术回战 第3期",
+            "新 魔神坛斗士",
+            "落第贤者的学院无双"
+          ]
+        },
+        {
+          "id": "bangumi-naruto",
+          "query": "火影忍者的题材和评价",
+          "expected_title": "火影忍者",
+          "rank": 1,
+          "latency_ms": 22.41,
+          "retrieved_titles": [
+            "火影忍者",
+            "火喰鸟 羽州褴褛鸢组",
+            "淡岛百景"
+          ]
+        },
+        {
+          "id": "bangumi-sword-art-online",
+          "query": "刀剑神域有哪些标签？",
+          "expected_title": "刀剑神域",
+          "rank": 1,
+          "latency_ms": 21.71,
+          "retrieved_titles": [
+            "刀剑神域",
+            "《绝区零》叶瞬光EP《千万次初见》",
+            "地狱模式 喜欢速通游戏的玩家在废设定异世界无双 第2期"
+          ]
+        },
+        {
+          "id": "bangumi-your-lie",
+          "query": "四月是你的谎言的评价",
+          "expected_title": "四月是你的谎言",
+          "rank": 1,
+          "latency_ms": 23.74,
+          "retrieved_titles": [
+            "四月是你的谎言",
+            "欺诈游戏",
+            "欢迎来到实力至上主义教室 第4期"
+          ]
+        },
+        {
+          "id": "bangumi-bleach",
+          "query": "死神千年血战篇的动画信息",
+          "expected_title": "死神 千年血战篇",
+          "rank": 1,
+          "latency_ms": 25.27,
+          "retrieved_titles": [
+            "死神 千年血战篇 Part.4 祸进谭",
+            "死神 千年血战篇",
+            "死亡账号"
+          ]
+        },
+        {
+          "id": "bangumi-blue-lock",
+          "query": "碧蓝之海的评分",
+          "expected_title": "碧蓝之海",
+          "rank": 1,
+          "latency_ms": 21.88,
+          "retrieved_titles": [
+            "碧蓝之海 第3期",
+            "碧蓝之海",
+            "碧蓝航线 微速前行 第2期"
+          ]
+        },
+        {
+          "id": "bangumi-tiger-dragon",
+          "query": "龙与虎是什么题材？",
+          "expected_title": "龙与虎",
+          "rank": 1,
+          "latency_ms": 20.96,
+          "retrieved_titles": [
+            "龙与虎",
+            "猫与龙",
+            "转生之后的我变成了龙蛋目标是世界最强"
+          ]
+        },
+        {
+          "id": "yuc-202601-prism",
+          "query": "2026年1月的新番棱镜恋曲是什么改编？",
+          "expected_title": "棱镜恋曲",
+          "rank": 1,
+          "latency_ms": 27.59,
+          "retrieved_titles": [
+            "棱镜恋曲",
+            "相反的你和我",
+            "与奔跑在透明之夜的你谈一场看不见的恋爱"
+          ]
+        },
+        {
+          "id": "yuc-202601-jujutsu",
+          "query": "咒术回战第三期的播出信息",
+          "expected_title": "咒术回战 第3期",
+          "rank": 1,
+          "latency_ms": 21.57,
+          "retrieved_titles": [
+            "咒术回战 第3期",
+            "终末的女武神 第3期",
+            "无职转生 第3期"
+          ]
+        },
+        {
+          "id": "yuc-202601-oshinoko",
+          "query": "我推的孩子第三期什么时候播出？",
+          "expected_title": "我推的孩子 第3期",
+          "rank": 1,
+          "latency_ms": 19.81,
+          "retrieved_titles": [
+            "我推的孩子 第3期",
+            "无职转生 第3期",
+            "转生成自动贩卖机的我今天也在迷宫徘徊 第3期"
+          ]
+        },
+        {
+          "id": "yuc-202604-stone",
+          "query": "石纪元第四期第三部分的制作信息",
+          "expected_title": "石纪元 第4期 Part.3",
+          "rank": 1,
+          "latency_ms": 23.34,
+          "retrieved_titles": [
+            "石纪元 第4期 Part.3",
+            "小书痴的下克上 第4期第三部 领主的养女",
+            "我推的孩子 第3期"
+          ]
+        },
+        {
+          "id": "yuc-202604-jojo",
+          "query": "JOJO奇妙冒险飙马野郎是什么类型？",
+          "expected_title": "JOJO奇妙冒险 飙马野郎",
+          "rank": 1,
+          "latency_ms": 24.2,
+          "retrieved_titles": [
+            "JOJO奇妙冒险 飙马野郎",
+            "最强职业不是勇者也不是贤者好像是鉴定士(伪)的样子",
+            "被遗弃圣女的异世界美食之旅"
+          ]
+        },
+        {
+          "id": "yuc-202604-dorohedoro",
+          "query": "异兽魔都第二期的档期",
+          "expected_title": "异兽魔都 第2期",
+          "rank": 1,
+          "latency_ms": 23.39,
+          "retrieved_titles": [
+            "异兽魔都 第2期",
+            "魔都精兵的奴隶 第2期",
+            "擅长逃跑的殿下 第2期"
+          ]
+        },
+        {
+          "id": "yuc-202607-goodbye-lara",
+          "query": "再见拉拉的制作公司和题材",
+          "expected_title": "再见 拉拉",
+          "rank": 1,
+          "latency_ms": 22.66,
+          "retrieved_titles": [
+            "再见 拉拉",
+            "淫狱团地",
+            "轻松熊"
+          ]
+        },
+        {
+          "id": "yuc-202607-mevius",
+          "query": "梅比乌斯之尘是什么动画？",
+          "expected_title": "梅比乌斯之尘",
+          "rank": 1,
+          "latency_ms": 23.11,
+          "retrieved_titles": [
+            "梅比乌斯之尘",
+            "说出你们先走我断后的十年后我成为了传说",
+            "摩绪"
+          ]
+        },
+        {
+          "id": "yuc-202607-bleach",
+          "query": "死神千年血战篇第四部分祸进谭的信息",
+          "expected_title": "死神 千年血战篇 Part.4 祸进谭",
+          "rank": 1,
+          "latency_ms": 24.75,
+          "retrieved_titles": [
+            "死神 千年血战篇 Part.4 祸进谭",
+            "死神 千年血战篇",
+            "Re:从零开始的异世界生活第4期 Part.2 夺还篇"
+          ]
+        },
+        {
+          "id": "yuc-202607-grand-blue",
+          "query": "碧蓝之海第三期的播出资料",
+          "expected_title": "碧蓝之海 第3期",
+          "rank": 1,
+          "latency_ms": 21.02,
+          "retrieved_titles": [
+            "碧蓝之海 第3期",
+            "无职转生 第3期",
+            "终末的女武神 第3期"
+          ]
+        }
+      ]
+    },
+    {
+      "strategy": "D_bge_m3_onnx_bm25_reranker",
+      "config": {
+        "dense_weight": 0.7,
+        "sparse_weight": 0.3,
+        "reranker_enabled": true,
+        "reranker_top_k": 10,
+        "reranker_final_k": 3
+      },
+      "metrics": {
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "mrr": 1.0,
+        "ndcg_at_3": 1.0,
+        "mean_latency_ms": 950.31,
+        "p95_latency_ms": 1634.99
+      },
+      "details": [
+        {
+          "id": "bangumi-demon-slayer",
+          "query": "鬼灭之刃的题材和评分怎么样？",
+          "expected_title": "鬼灭之刃",
+          "rank": 1,
+          "latency_ms": 1053.51,
+          "retrieved_titles": [
+            "鬼灭之刃",
+            "转生成女性向游戏只有毁灭END的坏人大小姐",
+            "又被杀掉了呢 侦探大人"
+          ]
+        },
+        {
+          "id": "bangumi-attack-on-titan",
+          "query": "进击的巨人有哪些标签？",
+          "expected_title": "进击的巨人",
+          "rank": 1,
+          "latency_ms": 1355.86,
+          "retrieved_titles": [
+            "进击的巨人",
+            "枪神 STARGAZE",
+            "转生之后的我变成了龙蛋目标是世界最强"
+          ]
+        },
+        {
+          "id": "bangumi-mushoku",
+          "query": "无职转生第三季的评分和类型是什么？",
+          "expected_title": "无职转生 第三季",
+          "rank": 1,
+          "latency_ms": 1411.95,
+          "retrieved_titles": [
+            "无职转生 第三季 ～到了异世界就拿出真本事～",
+            "无职转生 第3期",
+            "终末的女武神 第3期"
+          ]
+        },
+        {
+          "id": "bangumi-jujutsu",
+          "query": "咒术回战是什么类型的动画？",
+          "expected_title": "咒术回战",
+          "rank": 1,
+          "latency_ms": 404.61,
+          "retrieved_titles": [
+            "咒术回战 第3期",
+            "魔法少女奈叶 EXCEEDSGun Blaze Vengeance",
+            "被追放的转生重骑士用游戏知识开无双"
+          ]
+        },
+        {
+          "id": "bangumi-naruto",
+          "query": "火影忍者的题材和评价",
+          "expected_title": "火影忍者",
+          "rank": 1,
+          "latency_ms": 969.41,
+          "retrieved_titles": [
+            "火影忍者",
+            "地狱模式 喜欢速通游戏的玩家在废设定异世界无双 第2期",
+            "鬼灭之刃"
+          ]
+        },
+        {
+          "id": "bangumi-sword-art-online",
+          "query": "刀剑神域有哪些标签？",
+          "expected_title": "刀剑神域",
+          "rank": 1,
+          "latency_ms": 1402.25,
+          "retrieved_titles": [
+            "刀剑神域",
+            "说出你们先走我断后的十年后我成为了传说",
+            "地狱模式 喜欢速通游戏的玩家在废设定异世界无双 第2期"
+          ]
+        },
+        {
+          "id": "bangumi-your-lie",
+          "query": "四月是你的谎言的评价",
+          "expected_title": "四月是你的谎言",
+          "rank": 1,
+          "latency_ms": 1138.81,
+          "retrieved_titles": [
+            "四月是你的谎言",
+            "茉莉花酱的好感度正在崩坏",
+            "复制品也想谈恋爱"
+          ]
+        },
+        {
+          "id": "bangumi-bleach",
+          "query": "死神千年血战篇的动画信息",
+          "expected_title": "死神 千年血战篇",
+          "rank": 1,
+          "latency_ms": 1634.99,
+          "retrieved_titles": [
+            "死神 千年血战篇 Part.4 祸进谭",
+            "死神 千年血战篇",
+            "又被杀掉了呢 侦探大人"
+          ]
+        },
+        {
+          "id": "bangumi-blue-lock",
+          "query": "碧蓝之海的评分",
+          "expected_title": "碧蓝之海",
+          "rank": 1,
+          "latency_ms": 1557.28,
+          "retrieved_titles": [
+            "碧蓝之海",
+            "昔涟",
+            "碧蓝之海 第3期"
+          ]
+        },
+        {
+          "id": "bangumi-tiger-dragon",
+          "query": "龙与虎是什么题材？",
+          "expected_title": "龙与虎",
+          "rank": 1,
+          "latency_ms": 1327.4,
+          "retrieved_titles": [
+            "龙与虎",
+            "说出你们先走我断后的十年后我成为了传说",
+            "转生之后的我变成了龙蛋目标是世界最强"
+          ]
+        },
+        {
+          "id": "yuc-202601-prism",
+          "query": "2026年1月的新番棱镜恋曲是什么改编？",
+          "expected_title": "棱镜恋曲",
+          "rank": 1,
+          "latency_ms": 467.73,
+          "retrieved_titles": [
+            "棱镜恋曲",
+            "声称不爱我的下任公爵为何会溺爱我",
+            "复制品也想谈恋爱"
+          ]
+        },
+        {
+          "id": "yuc-202601-jujutsu",
+          "query": "咒术回战第三期的播出信息",
+          "expected_title": "咒术回战 第3期",
+          "rank": 1,
+          "latency_ms": 521.24,
+          "retrieved_titles": [
+            "咒术回战 第3期",
+            "MF Ghost 极速车魂 第3期",
+            "雷霆三人行"
+          ]
+        },
+        {
+          "id": "yuc-202601-oshinoko",
+          "query": "我推的孩子第三期什么时候播出？",
+          "expected_title": "我推的孩子 第3期",
+          "rank": 1,
+          "latency_ms": 512.34,
+          "retrieved_titles": [
+            "我推的孩子 第3期",
+            "无职转生 第3期",
+            "超超超超喜欢你的100个女孩子 第3期"
+          ]
+        },
+        {
+          "id": "yuc-202604-stone",
+          "query": "石纪元第四期第三部分的制作信息",
+          "expected_title": "石纪元 第4期 Part.3",
+          "rank": 1,
+          "latency_ms": 528.59,
+          "retrieved_titles": [
+            "石纪元 第4期 Part.3",
+            "转生成自动贩卖机的我今天也在迷宫徘徊 第3期",
+            "小书痴的下克上 第4期第三部 领主的养女"
+          ]
+        },
+        {
+          "id": "yuc-202604-jojo",
+          "query": "JOJO奇妙冒险飙马野郎是什么类型？",
+          "expected_title": "JOJO奇妙冒险 飙马野郎",
+          "rank": 1,
+          "latency_ms": 535.66,
+          "retrieved_titles": [
+            "JOJO奇妙冒险 飙马野郎",
+            "最强出涸皇子的暗跃帝位争夺",
+            "最强职业不是勇者也不是贤者好像是鉴定士(伪)的样子"
+          ]
+        },
+        {
+          "id": "yuc-202604-dorohedoro",
+          "query": "异兽魔都第二期的档期",
+          "expected_title": "异兽魔都 第2期",
+          "rank": 1,
+          "latency_ms": 568.31,
+          "retrieved_titles": [
+            "异兽魔都 第2期",
+            "魔都精兵的奴隶 第2期",
+            "Clevatess 第2期魔兽之王与虚假的勇者传承"
+          ]
+        },
+        {
+          "id": "yuc-202607-goodbye-lara",
+          "query": "再见拉拉的制作公司和题材",
+          "expected_title": "再见 拉拉",
+          "rank": 1,
+          "latency_ms": 516.41,
+          "retrieved_titles": [
+            "再见 拉拉",
+            "哪里有温柔对待阿宅的辣妹",
+            "当前 正被打扰中"
+          ]
+        },
+        {
+          "id": "yuc-202607-mevius",
+          "query": "梅比乌斯之尘是什么动画？",
+          "expected_title": "梅比乌斯之尘",
+          "rank": 1,
+          "latency_ms": 630.1,
+          "retrieved_titles": [
+            "梅比乌斯之尘",
+            "摩绪",
+            "说出你们先走我断后的十年后我成为了传说"
+          ]
+        },
+        {
+          "id": "yuc-202607-bleach",
+          "query": "死神千年血战篇第四部分祸进谭的信息",
+          "expected_title": "死神 千年血战篇 Part.4 祸进谭",
+          "rank": 1,
+          "latency_ms": 1902.42,
+          "retrieved_titles": [
+            "死神 千年血战篇 Part.4 祸进谭",
+            "死神 千年血战篇",
+            "又被杀掉了呢 侦探大人"
+          ]
+        },
+        {
+          "id": "yuc-202607-grand-blue",
+          "query": "碧蓝之海第三期的播出资料",
+          "expected_title": "碧蓝之海 第3期",
+          "rank": 1,
+          "latency_ms": 567.24,
+          "retrieved_titles": [
+            "碧蓝之海 第3期",
+            "无职转生 第3期",
+            "超超超超喜欢你的100个女孩子 第3期"
+          ]
+        }
+      ]
+    }
+  ]
+}

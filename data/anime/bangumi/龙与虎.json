@@ -1,32 +1,32 @@
 {
   "title_cn": "龙与虎",
   "title_jp": "とらドラ！",
-  "url": "https://bangumi.lol/subject/909",
+  "url": "https://bangumi.pro/subject/909",
   "stats": {
     "rating": "8.0",
-    "rank": "#246",
+    "rank": "#250",
     "rating_desc": "力荐"
   },
   "tags": [
     {
       "name": "钉宫理惠",
-      "count": 5722
+      "count": 5718
     },
     {
       "name": "校园",
-      "count": 5152
+      "count": 5161
     },
     {
       "name": "龙与虎",
-      "count": 5034
+      "count": 5030
     },
     {
       "name": "恋爱",
-      "count": 4329
+      "count": 4341
     },
     {
       "name": "J.C.STAFF",
-      "count": 4306
+      "count": 4304
     }
   ],
   "summary_jp": "因眼神凶恶而被班里同学看作不良少年的高须龙儿，进入了高中二年级，并幸运地和暗恋的少女栉枝实乃梨同班，对崭新的校园生活满怀希望。\n\r\n　　开学典礼后龙儿与校内最恐怖的有“掌上老虎”之称的逢坂大河狭路相逢，周围人一同陷入了惊恐状态。然而他意外地发现，逢坂同时也是实乃梨的闺蜜。\n\r\n　　在二人相遇的当晚，龙儿知道了原来她暗恋的是自己的好友北村祐作，而自己暗恋实乃梨的事也被大河知道了！互相了解对方情况的两人结成了“恋爱同盟战线”，开始了半共同生活……",
@@ -194,84 +194,84 @@
       "name_jp": "高須竜児",
       "role": "主角",
       "cv": "間島淳司",
-      "url": "https://bangumi.lol/character/11778"
+      "url": "https://bangumi.pro/character/11778"
     },
     {
       "name_cn": "逢坂大河",
       "name_jp": "逢坂大河",
       "role": "主角",
       "cv": "釘宮理恵",
-      "url": "https://bangumi.lol/character/1762"
+      "url": "https://bangumi.pro/character/1762"
     },
     {
       "name_cn": "栉枝实乃梨",
       "name_jp": "櫛枝実乃梨",
       "role": "主角",
       "cv": "堀江由衣",
-      "url": "https://bangumi.lol/character/10456"
+      "url": "https://bangumi.pro/character/10456"
     },
     {
       "name_cn": "川岛亚美",
       "name_jp": "川嶋亜美",
       "role": "主角",
       "cv": "喜多村英梨",
-      "url": "https://bangumi.lol/character/319"
+      "url": "https://bangumi.pro/character/319"
     },
     {
       "name_cn": "北村佑作",
       "name_jp": "北村祐作",
       "role": "主角",
       "cv": "野島裕史",
-      "url": "https://bangumi.lol/character/12563"
+      "url": "https://bangumi.pro/character/12563"
     },
     {
       "name_cn": "高须泰子",
       "name_jp": "高須泰子",
       "role": "配角",
       "cv": "大原さやか",
-      "url": "https://bangumi.lol/character/16660"
+      "url": "https://bangumi.pro/character/16660"
     },
     {
       "name_cn": "小鹦",
       "name_jp": "インコちゃん",
       "role": "配角",
       "cv": "後藤沙緒里",
-      "url": "https://bangumi.lol/character/16664"
+      "url": "https://bangumi.pro/character/16664"
     },
     {
       "name_cn": "恋洼百合",
       "name_jp": "恋ヶ窪ゆり",
       "role": "配角",
       "cv": "田中理恵",
-      "url": "https://bangumi.lol/character/6341"
+      "url": "https://bangumi.pro/character/6341"
     },
     {
       "name_cn": "狩野堇",
       "name_jp": "狩野すみれ",
       "role": "配角",
       "cv": "甲斐田裕子",
-      "url": "https://bangumi.lol/character/16662"
+      "url": "https://bangumi.pro/character/16662"
     },
     {
       "name_cn": "春田浩次",
       "name_jp": "春田浩次",
       "role": "配角",
       "cv": "吉野裕行",
-      "url": "https://bangumi.lol/character/6340"
+      "url": "https://bangumi.pro/character/6340"
     },
     {
       "name_cn": "能登久光",
       "name_jp": "能登久光",
       "role": "配角",
       "cv": "興津和幸",
-      "url": "https://bangumi.lol/character/6339"
+      "url": "https://bangumi.pro/character/6339"
     },
     {
       "name_cn": "木原麻耶",
       "name_jp": "木原麻耶",
       "role": "配角",
       "cv": "野中藍",
-      "url": "https://bangumi.lol/character/16661"
+      "url": "https://bangumi.pro/character/16661"
     }
   ]
 }

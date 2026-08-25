@@ -1,0 +1,1297 @@
+{
+  "generated_at": "2026-08-25T20:30:23.798433+08:00",
+  "corpus": {
+    "document_counts": {
+      "anime": 242,
+      "acgn_daily": 3,
+      "game": 3,
+      "novel": 27
+    },
+    "sources": [
+      "data\\anime\\yuc\\yuc_202601.json",
+      "data\\anime\\yuc\\yuc_202604.json",
+      "data\\anime\\yuc\\yuc_202607.json",
+      "data/anime/bangumi/*.json"
+    ]
+  },
+  "dataset": "evaluation\\datasets\\acgn_retrieval_100.json",
+  "case_count": 100,
+  "results": [
+    {
+      "strategy": "A_anime_dashscope_bm25",
+      "domain": "anime",
+      "config": {
+        "dense_weight": 0.7,
+        "sparse_weight": 0.3,
+        "reranker_enabled": false
+      },
+      "metrics": {
+        "recall_at_3": 0.92,
+        "precision_at_3": 0.3067,
+        "mrr": 0.92,
+        "ndcg_at_3": 0.92,
+        "mean_latency_ms": 904.81,
+        "p95_latency_ms": 1074.7
+      },
+      "details": [
+        {
+          "id": "a01",
+          "query": "鬼灭之刃的题材和评分",
+          "expected_title": "鬼灭之刃",
+          "rank": 1,
+          "latency_ms": 920.26,
+          "retrieved_titles": [
+            "鬼灭之刃",
+            "火影忍者",
+            "刀剑神域"
+          ]
+        },
+        {
+          "id": "a02",
+          "query": "那个卖炭少年和鬼妹妹的动画叫什么",
+          "expected_title": "鬼灭之刃",
+          "rank": 1,
+          "latency_ms": 807.76,
+          "retrieved_titles": [
+            "鬼灭之刃",
+            "鬼的新娘",
+            "神八小妹不可怕"
+          ]
+        },
+        {
+          "id": "a03",
+          "query": "进击的巨人有哪些标签",
+          "expected_title": "进击的巨人",
+          "rank": 1,
+          "latency_ms": 999.33,
+          "retrieved_titles": [
+            "进击的巨人",
+            "我的英雄学院",
+            "无头骑士异闻录"
+          ]
+        },
+        {
+          "id": "a04",
+          "query": "调查兵团和巨人战争那部番",
+          "expected_title": "进击的巨人",
+          "rank": 1,
+          "latency_ms": 822.35,
+          "retrieved_titles": [
+            "进击的巨人",
+            "攻壳机动队 THE GHOST IN THE SHELL",
+            "魔神坛斗士"
+          ]
+        },
+        {
+          "id": "a05",
+          "query": "无职转生第三季评分",
+          "expected_title": "无职转生 第三季",
+          "rank": 1,
+          "latency_ms": 879.35,
+          "retrieved_titles": [
+            "无职转生 第三季 ～到了异世界就拿出真本事～",
+            "无职转生 第3期",
+            "关于我转生变成史莱姆这档事"
+          ]
+        },
+        {
+          "id": "a06",
+          "query": "咒术回战的类型",
+          "expected_title": "咒术回战",
+          "rank": 1,
+          "latency_ms": 1147.65,
+          "retrieved_titles": [
+            "咒术回战 第3期",
+            "咒术回战 死灭回游 前篇",
+            "咒术回战"
+          ]
+        },
+        {
+          "id": "a07",
+          "query": "虎杖和五条悟所在的动画",
+          "expected_title": "咒术回战",
+          "rank": 1,
+          "latency_ms": 944.66,
+          "retrieved_titles": [
+            "咒术回战 死灭回游 前篇",
+            "咒术回战",
+            "龙与虎"
+          ]
+        },
+        {
+          "id": "a08",
+          "query": "刀剑神域标签",
+          "expected_title": "刀剑神域",
+          "rank": 1,
+          "latency_ms": 928.45,
+          "retrieved_titles": [
+            "刀剑神域",
+            "乡下大叔成为剑圣 第2期",
+            "刃牙道 Part.2"
+          ]
+        },
+        {
+          "id": "a09",
+          "query": "四月是你的谎言评价",
+          "expected_title": "四月是你的谎言",
+          "rank": 1,
+          "latency_ms": 828.02,
+          "retrieved_titles": [
+            "四月是你的谎言",
+            "【我推的孩子】",
+            "昔涟"
+          ]
+        },
+        {
+          "id": "a10",
+          "query": "死神千年血战篇资料",
+          "expected_title": "死神 千年血战篇",
+          "rank": 1,
+          "latency_ms": 825.28,
+          "retrieved_titles": [
+            "死神 千年血战篇 Part.4 祸进谭",
+            "死神 千年血战篇",
+            "死神 千年血战篇-祸进谭-"
+          ]
+        },
+        {
+          "id": "a11",
+          "query": "火影忍者的题材",
+          "expected_title": "火影忍者",
+          "rank": 1,
+          "latency_ms": 812.76,
+          "retrieved_titles": [
+            "火影忍者",
+            "刀剑神域",
+            "死神 千年血战篇"
+          ]
+        },
+        {
+          "id": "a12",
+          "query": "龙与虎是什么类型",
+          "expected_title": "龙与虎",
+          "rank": 1,
+          "latency_ms": 867.89,
+          "retrieved_titles": [
+            "龙与虎",
+            "猫与龙",
+            "转生之后的我变成了龙蛋目标是世界最强"
+          ]
+        },
+        {
+          "id": "a13",
+          "query": "碧蓝之海评分",
+          "expected_title": "碧蓝之海",
+          "rank": 1,
+          "latency_ms": 883.33,
+          "retrieved_titles": [
+            "碧蓝之海 第3期",
+            "碧蓝之海",
+            "碧蓝之海 第三季"
+          ]
+        },
+        {
+          "id": "a14",
+          "query": "2026年夏季再见拉拉制作公司",
+          "expected_title": "再见 拉拉",
+          "rank": 1,
+          "latency_ms": 866.27,
+          "retrieved_titles": [
+            "再见 拉拉",
+            "轻松熊",
+            "令和的斑小姐"
+          ]
+        },
+        {
+          "id": "a15",
+          "query": "梅比乌斯之尘是哪部番",
+          "expected_title": "梅比乌斯之尘",
+          "rank": 1,
+          "latency_ms": 838.55,
+          "retrieved_titles": [
+            "梅比乌斯之尘",
+            "梅比乌斯之尘",
+            "四月是你的谎言"
+          ]
+        },
+        {
+          "id": "a16",
+          "query": "JOJO飙马野郎档期",
+          "expected_title": "JOJO奇妙冒险 飙马野郎",
+          "rank": 1,
+          "latency_ms": 843.24,
+          "retrieved_titles": [
+            "JOJO奇妙冒险 飙马野郎",
+            "飙马野郎 JOJO的奇妙冒险 第一赛段",
+            "飙马野郎 JOJO的奇妙冒险 第二&第三赛段"
+          ]
+        },
+        {
+          "id": "a17",
+          "query": "异兽魔都第二期信息",
+          "expected_title": "异兽魔都 第2期",
+          "rank": 1,
+          "latency_ms": 910.94,
+          "retrieved_titles": [
+            "异兽魔都 第2期",
+            "魔都精兵的奴隶 第2期",
+            "地狱乐 第2期"
+          ]
+        },
+        {
+          "id": "a18",
+          "query": "我推的孩子第三期播出",
+          "expected_title": "我推的孩子 第3期",
+          "rank": 1,
+          "latency_ms": 1062.52,
+          "retrieved_titles": [
+            "我推的孩子 第3期",
+            "【我推的孩子】",
+            "无职转生 第3期"
+          ]
+        },
+        {
+          "id": "a19",
+          "query": "科学家石头世界第四季",
+          "expected_title": "石纪元 第4期 Part.3",
+          "rank": null,
+          "latency_ms": 1074.7,
+          "retrieved_titles": [
+            "Re:从零开始的异世界生活 第4期",
+            "Re:从零开始的异世界生活第4期 Part.2 夺还篇",
+            "石纪元 科学与未来 第3部分"
+          ]
+        },
+        {
+          "id": "a20",
+          "query": "新魔神坛斗士资料",
+          "expected_title": "新 魔神坛斗士",
+          "rank": 1,
+          "latency_ms": 941.22,
+          "retrieved_titles": [
+            "新 魔神坛斗士",
+            "新 魔神坛斗士 Part.2",
+            "魔神坛斗士"
+          ]
+        },
+        {
+          "id": "a21",
+          "query": "比较鬼灭之刃和咒术回战评分",
+          "expected_title": "鬼灭之刃",
+          "rank": 1,
+          "latency_ms": 894.69,
+          "retrieved_titles": [
+            "鬼灭之刃",
+            "咒术回战 死灭回游 前篇",
+            "咒术回战 第3期"
+          ]
+        },
+        {
+          "id": "a22",
+          "query": "进击的巨人与火影忍者标签对比",
+          "expected_title": "进击的巨人",
+          "rank": 1,
+          "latency_ms": 798.32,
+          "retrieved_titles": [
+            "进击的巨人",
+            "火影忍者",
+            "鬼灭之刃"
+          ]
+        },
+        {
+          "id": "a23",
+          "query": "本地资料里没有的动画银河远征者",
+          "expected_title": "银河远征者",
+          "rank": null,
+          "latency_ms": 895.68,
+          "retrieved_titles": [
+            "卡片战斗先导者Divinez 幻真星战篇",
+            "枪神 STARGAZE",
+            "石纪元 科学与未来 第3部分"
+          ]
+        },
+        {
+          "id": "a24",
+          "query": "鲁迪乌斯转生异世界的第三季",
+          "expected_title": "无职转生 第三季",
+          "rank": 1,
+          "latency_ms": 949.12,
+          "retrieved_titles": [
+            "无职转生 第三季 ～到了异世界就拿出真本事～",
+            "关于我转生变成史莱姆这档事",
+            "Re：从零开始的异世界生活"
+          ]
+        },
+        {
+          "id": "a25",
+          "query": "碧蓝之海第三期播出资料",
+          "expected_title": "碧蓝之海 第3期",
+          "rank": 1,
+          "latency_ms": 877.91,
+          "retrieved_titles": [
+            "碧蓝之海 第3期",
+            "碧蓝之海 第三季",
+            "碧蓝之海"
+          ]
+        }
+      ]
+    },
+    {
+      "strategy": "A_acgn_daily_dashscope_bm25",
+      "domain": "acgn_daily",
+      "config": {
+        "dense_weight": 0.7,
+        "sparse_weight": 0.3,
+        "reranker_enabled": false
+      },
+      "metrics": {
+        "recall_at_3": 0.28,
+        "precision_at_3": 0.0933,
+        "mrr": 0.28,
+        "ndcg_at_3": 0.28,
+        "mean_latency_ms": 955.32,
+        "p95_latency_ms": 1230.34
+      },
+      "details": [
+        {
+          "id": "d01",
+          "query": "今日ACGN资讯",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 959.82,
+          "retrieved_titles": [
+            "archive_index",
+            "i18n_cache",
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定"
+          ]
+        },
+        {
+          "id": "d02",
+          "query": "今天有什么动漫游戏小说新闻",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 946.93,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d03",
+          "query": "本周番剧资讯",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 902.95,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d04",
+          "query": "最新游戏新闻",
+          "expected_title": "游戏",
+          "rank": 1,
+          "latency_ms": 1019.87,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d05",
+          "query": "最近小说资讯",
+          "expected_title": "小说",
+          "rank": 1,
+          "latency_ms": 928.29,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d06",
+          "query": "汇总今天的动漫和游戏资讯",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 833.5,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d07",
+          "query": "汇总本周小说和动漫新闻",
+          "expected_title": "小说",
+          "rank": 1,
+          "latency_ms": 848.15,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d08",
+          "query": "ACG圈子今天有什么新鲜事",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1031.44,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d09",
+          "query": "每日资讯归档日期",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 856.85,
+          "retrieved_titles": [
+            "archive_index",
+            "i18n_cache",
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定"
+          ]
+        },
+        {
+          "id": "d10",
+          "query": "ACGN日报来源有哪些",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 869.6,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d11",
+          "query": "本地没有的昨天体育新闻",
+          "expected_title": "体育",
+          "rank": null,
+          "latency_ms": 857.13,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "i18n_cache",
+            "archive_index"
+          ]
+        },
+        {
+          "id": "d12",
+          "query": "每日动漫资讯条数",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1029.21,
+          "retrieved_titles": [
+            "archive_index",
+            "i18n_cache",
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定"
+          ]
+        },
+        {
+          "id": "d13",
+          "query": "每日游戏资讯分类",
+          "expected_title": "游戏",
+          "rank": 1,
+          "latency_ms": 1074.83,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d14",
+          "query": "每日小说资讯分类",
+          "expected_title": "小说",
+          "rank": 1,
+          "latency_ms": 784.7,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d15",
+          "query": "动漫游戏小说三类资讯一起看",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 851.22,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d16",
+          "query": "ACGN每日汇总里有些什么",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 792.76,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d17",
+          "query": "最新日报生成时间",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 796.51,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d18",
+          "query": "日报中有哪些来源健康",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 995.09,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "i18n_cache",
+            "archive_index"
+          ]
+        },
+        {
+          "id": "d19",
+          "query": "本地没有的金融市场快讯",
+          "expected_title": "金融",
+          "rank": null,
+          "latency_ms": 1094.7,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "i18n_cache",
+            "archive_index"
+          ]
+        },
+        {
+          "id": "d20",
+          "query": "ACGN日报最新一条内容",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1070.75,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "i18n_cache",
+            "archive_index"
+          ]
+        },
+        {
+          "id": "d21",
+          "query": "比较日报中的动漫和小说条目",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1230.34,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d22",
+          "query": "日报archive有什么作用",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1429.08,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d23",
+          "query": "每天自动抓取的二次元新闻",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1070.51,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d24",
+          "query": "ACGN资讯是否包含游戏内容",
+          "expected_title": "游戏",
+          "rank": 1,
+          "latency_ms": 837.97,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "i18n_cache",
+            "archive_index"
+          ]
+        },
+        {
+          "id": "d25",
+          "query": "ACGN资讯是否包含小说内容",
+          "expected_title": "小说",
+          "rank": 1,
+          "latency_ms": 770.72,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "archive_index",
+            "i18n_cache"
+          ]
+        }
+      ]
+    },
+    {
+      "strategy": "A_game_dashscope_bm25",
+      "domain": "game",
+      "config": {
+        "dense_weight": 0.7,
+        "sparse_weight": 0.3,
+        "reranker_enabled": false
+      },
+      "metrics": {
+        "recall_at_3": 0.92,
+        "precision_at_3": 0.3067,
+        "mrr": 0.8333,
+        "ndcg_at_3": 0.8557,
+        "mean_latency_ms": 939.48,
+        "p95_latency_ms": 1167.44
+      },
+      "details": [
+        {
+          "id": "g01",
+          "query": "原神官方公告有哪些",
+          "expected_title": "原神",
+          "rank": 1,
+          "latency_ms": 1033.08,
+          "retrieved_titles": [
+            "原神",
+            "绝区零",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g02",
+          "query": "提瓦特最近发布了什么公告",
+          "expected_title": "原神",
+          "rank": 3,
+          "latency_ms": 977.48,
+          "retrieved_titles": [
+            "绝区零",
+            "崩坏星穹铁道",
+            "原神"
+          ]
+        },
+        {
+          "id": "g03",
+          "query": "原神最近的活动资讯",
+          "expected_title": "原神",
+          "rank": 1,
+          "latency_ms": 966.18,
+          "retrieved_titles": [
+            "原神",
+            "绝区零",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g04",
+          "query": "崩坏星穹铁道官方消息",
+          "expected_title": "崩坏：星穹铁道",
+          "rank": 1,
+          "latency_ms": 1187.98,
+          "retrieved_titles": [
+            "崩坏星穹铁道",
+            "绝区零",
+            "原神"
+          ]
+        },
+        {
+          "id": "g05",
+          "query": "星穹列车最近有什么更新",
+          "expected_title": "崩坏：星穹铁道",
+          "rank": 1,
+          "latency_ms": 947.26,
+          "retrieved_titles": [
+            "崩坏星穹铁道",
+            "原神",
+            "绝区零"
+          ]
+        },
+        {
+          "id": "g06",
+          "query": "绝区零公告",
+          "expected_title": "绝区零",
+          "rank": 1,
+          "latency_ms": 997.32,
+          "retrieved_titles": [
+            "绝区零",
+            "崩坏星穹铁道",
+            "原神"
+          ]
+        },
+        {
+          "id": "g07",
+          "query": "绝区零最近的资讯",
+          "expected_title": "绝区零",
+          "rank": 1,
+          "latency_ms": 1167.44,
+          "retrieved_titles": [
+            "绝区零",
+            "原神",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g08",
+          "query": "原神活动和公告分别有哪些",
+          "expected_title": "原神",
+          "rank": 1,
+          "latency_ms": 1013.5,
+          "retrieved_titles": [
+            "原神",
+            "绝区零",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g09",
+          "query": "比较原神和绝区零最近公告",
+          "expected_title": "原神",
+          "rank": 2,
+          "latency_ms": 943.12,
+          "retrieved_titles": [
+            "绝区零",
+            "原神",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g10",
+          "query": "崩坏星穹铁道与原神资讯对比",
+          "expected_title": "崩坏：星穹铁道",
+          "rank": 1,
+          "latency_ms": 912.11,
+          "retrieved_titles": [
+            "崩坏星穹铁道",
+            "原神",
+            "绝区零"
+          ]
+        },
+        {
+          "id": "g11",
+          "query": "米游社原神官方板块的最新文章",
+          "expected_title": "原神",
+          "rank": 1,
+          "latency_ms": 912.8,
+          "retrieved_titles": [
+            "原神",
+            "崩坏星穹铁道",
+            "绝区零"
+          ]
+        },
+        {
+          "id": "g12",
+          "query": "原神社区地图和官方资讯",
+          "expected_title": "原神",
+          "rank": 1,
+          "latency_ms": 865.23,
+          "retrieved_titles": [
+            "原神",
+            "绝区零",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g13",
+          "query": "星穹铁道活动公告内容",
+          "expected_title": "崩坏：星穹铁道",
+          "rank": 1,
+          "latency_ms": 968.81,
+          "retrieved_titles": [
+            "崩坏星穹铁道",
+            "绝区零",
+            "原神"
+          ]
+        },
+        {
+          "id": "g14",
+          "query": "绝区零活动资讯内容",
+          "expected_title": "绝区零",
+          "rank": 1,
+          "latency_ms": 914.13,
+          "retrieved_titles": [
+            "绝区零",
+            "原神",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g15",
+          "query": "本地没有的幻塔官方公告",
+          "expected_title": "幻塔",
+          "rank": null,
+          "latency_ms": 1027.7,
+          "retrieved_titles": [
+            "绝区零",
+            "原神",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g16",
+          "query": "空荧酒馆对应的米哈游游戏公告",
+          "expected_title": "原神",
+          "rank": 1,
+          "latency_ms": 907.46,
+          "retrieved_titles": [
+            "原神",
+            "绝区零",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g17",
+          "query": "三个米游社游戏各自最近的官方资讯",
+          "expected_title": "原神",
+          "rank": 1,
+          "latency_ms": 831.34,
+          "retrieved_titles": [
+            "原神",
+            "绝区零",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g18",
+          "query": "原神公告日期和标题",
+          "expected_title": "原神",
+          "rank": 1,
+          "latency_ms": 971.31,
+          "retrieved_titles": [
+            "原神",
+            "绝区零",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g19",
+          "query": "崩坏星穹铁道公告日期和标题",
+          "expected_title": "崩坏：星穹铁道",
+          "rank": 1,
+          "latency_ms": 887.82,
+          "retrieved_titles": [
+            "崩坏星穹铁道",
+            "原神",
+            "绝区零"
+          ]
+        },
+        {
+          "id": "g20",
+          "query": "绝区零公告日期和标题",
+          "expected_title": "绝区零",
+          "rank": 1,
+          "latency_ms": 841.12,
+          "retrieved_titles": [
+            "绝区零",
+            "原神",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g21",
+          "query": "原神与星穹铁道活动数量比较",
+          "expected_title": "原神",
+          "rank": 2,
+          "latency_ms": 838.08,
+          "retrieved_titles": [
+            "崩坏星穹铁道",
+            "原神",
+            "绝区零"
+          ]
+        },
+        {
+          "id": "g22",
+          "query": "狡兔屋所在游戏的最新消息",
+          "expected_title": "绝区零",
+          "rank": 2,
+          "latency_ms": 874.51,
+          "retrieved_titles": [
+            "原神",
+            "绝区零",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g23",
+          "query": "本地资料没有的英雄联盟版本公告",
+          "expected_title": "英雄联盟",
+          "rank": null,
+          "latency_ms": 816.51,
+          "retrieved_titles": [
+            "绝区零",
+            "原神",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g24",
+          "query": "米游社绝区零官方页面",
+          "expected_title": "绝区零",
+          "rank": 1,
+          "latency_ms": 844.78,
+          "retrieved_titles": [
+            "绝区零",
+            "原神",
+            "崩坏星穹铁道"
+          ]
+        },
+        {
+          "id": "g25",
+          "query": "米游社星穹铁道官方页面",
+          "expected_title": "崩坏：星穹铁道",
+          "rank": 1,
+          "latency_ms": 839.99,
+          "retrieved_titles": [
+            "崩坏星穹铁道",
+            "原神",
+            "绝区零"
+          ]
+        }
+      ]
+    },
+    {
+      "strategy": "A_novel_dashscope_bm25",
+      "domain": "novel",
+      "config": {
+        "dense_weight": 0.7,
+        "sparse_weight": 0.3,
+        "reranker_enabled": false
+      },
+      "metrics": {
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.3333,
+        "mrr": 0.8667,
+        "ndcg_at_3": 0.9009,
+        "mean_latency_ms": 878.29,
+        "p95_latency_ms": 934.2
+      },
+      "details": [
+        {
+          "id": "n01",
+          "query": "玄鉴仙族作者和最新章节",
+          "expected_title": "玄鉴仙族",
+          "rank": 1,
+          "latency_ms": 910.51,
+          "retrieved_titles": [
+            "玄鉴仙族",
+            "玄鉴仙族",
+            "novel_qidian_rank"
+          ]
+        },
+        {
+          "id": "n02",
+          "query": "季越人的家族修仙小说更新到哪了",
+          "expected_title": "玄鉴仙族",
+          "rank": 1,
+          "latency_ms": 855.09,
+          "retrieved_titles": [
+            "玄鉴仙族",
+            "玄鉴仙族",
+            "玄鉴仙族"
+          ]
+        },
+        {
+          "id": "n03",
+          "query": "夜无疆的作者是谁",
+          "expected_title": "夜无疆",
+          "rank": 1,
+          "latency_ms": 890.98,
+          "retrieved_titles": [
+            "夜无疆",
+            "夜无疆",
+            "夜无疆"
+          ]
+        },
+        {
+          "id": "n04",
+          "query": "斗破苍穹搜索结果",
+          "expected_title": "斗破苍穹",
+          "rank": 1,
+          "latency_ms": 887.8,
+          "retrieved_titles": [
+            "斗破苍穹",
+            "斗罗大陆",
+            "夜无疆"
+          ]
+        },
+        {
+          "id": "n05",
+          "query": "斗罗大陆搜索结果",
+          "expected_title": "斗罗大陆",
+          "rank": 1,
+          "latency_ms": 870.6,
+          "retrieved_titles": [
+            "斗罗大陆",
+            "斗罗大陆",
+            "斗罗之灵珠神剑"
+          ]
+        },
+        {
+          "id": "n06",
+          "query": "起点人气榜前十",
+          "expected_title": "玄鉴仙族",
+          "rank": 3,
+          "latency_ms": 933.89,
+          "retrieved_titles": [
+            "人气至上，我扮演超级天才",
+            "孤主",
+            "夜无疆"
+          ]
+        },
+        {
+          "id": "n07",
+          "query": "起点小说排行榜",
+          "expected_title": "夜无疆",
+          "rank": 3,
+          "latency_ms": 832.37,
+          "retrieved_titles": [
+            "全球排行榜",
+            "孤主",
+            "novel_qidian_rank"
+          ]
+        },
+        {
+          "id": "n08",
+          "query": "陆江仙附身铜镜的修仙故事",
+          "expected_title": "玄鉴仙族",
+          "rank": 1,
+          "latency_ms": 845.84,
+          "retrieved_titles": [
+            "玄鉴仙族",
+            "玄鉴仙族",
+            "玄鉴仙族"
+          ]
+        },
+        {
+          "id": "n09",
+          "query": "玄鉴仙族简介",
+          "expected_title": "玄鉴仙族",
+          "rank": 1,
+          "latency_ms": 858.36,
+          "retrieved_titles": [
+            "玄鉴仙族",
+            "玄鉴仙族",
+            "玄鉴仙族"
+          ]
+        },
+        {
+          "id": "n10",
+          "query": "夜无疆最新章节",
+          "expected_title": "夜无疆",
+          "rank": 1,
+          "latency_ms": 899.62,
+          "retrieved_titles": [
+            "夜无疆",
+            "夜无疆",
+            "夜无疆"
+          ]
+        },
+        {
+          "id": "n11",
+          "query": "比较玄鉴仙族和夜无疆的更新信息",
+          "expected_title": "玄鉴仙族",
+          "rank": 1,
+          "latency_ms": 815.11,
+          "retrieved_titles": [
+            "夜无疆",
+            "玄鉴仙族",
+            "夜无疆"
+          ]
+        },
+        {
+          "id": "n12",
+          "query": "斗破苍穹和斗罗大陆搜索结果对比",
+          "expected_title": "斗破苍穹",
+          "rank": 1,
+          "latency_ms": 934.2,
+          "retrieved_titles": [
+            "斗破苍穹",
+            "斗罗大陆",
+            "斗罗大陆"
+          ]
+        },
+        {
+          "id": "n13",
+          "query": "仙侠小说榜单资料",
+          "expected_title": "玄鉴仙族",
+          "rank": 2,
+          "latency_ms": 861.82,
+          "retrieved_titles": [
+            "仙侠世界",
+            "夜无疆",
+            "修仙从陆家开始"
+          ]
+        },
+        {
+          "id": "n14",
+          "query": "那本写陆家修仙的书叫什么",
+          "expected_title": "玄鉴仙族",
+          "rank": 2,
+          "latency_ms": 868.04,
+          "retrieved_titles": [
+            "修仙从陆家开始",
+            "玄鉴仙族",
+            "玄鉴仙族"
+          ]
+        },
+        {
+          "id": "n15",
+          "query": "本地没有的小说星海遗民",
+          "expected_title": "星海遗民",
+          "rank": 1,
+          "latency_ms": 918.36,
+          "retrieved_titles": [
+            "星海遗民",
+            "星海遗民",
+            "星河之主"
+          ]
+        },
+        {
+          "id": "n16",
+          "query": "玄鉴仙族标签",
+          "expected_title": "玄鉴仙族",
+          "rank": 1,
+          "latency_ms": 839.76,
+          "retrieved_titles": [
+            "玄鉴仙族",
+            "玄鉴仙族",
+            "玄鉴仙族"
+          ]
+        },
+        {
+          "id": "n17",
+          "query": "夜无疆简介和字数",
+          "expected_title": "夜无疆",
+          "rank": 1,
+          "latency_ms": 925.97,
+          "retrieved_titles": [
+            "夜无疆",
+            "夜无疆",
+            "夜无疆"
+          ]
+        },
+        {
+          "id": "n18",
+          "query": "起点玄幻分类作品",
+          "expected_title": "夜无疆",
+          "rank": 2,
+          "latency_ms": 883.97,
+          "retrieved_titles": [
+            "孤主",
+            "夜无疆",
+            "夜无疆"
+          ]
+        },
+        {
+          "id": "n19",
+          "query": "起点仙侠分类作品",
+          "expected_title": "玄鉴仙族",
+          "rank": 2,
+          "latency_ms": 856.77,
+          "retrieved_titles": [
+            "仙侠世界",
+            "夜无疆",
+            "夜无疆"
+          ]
+        },
+        {
+          "id": "n20",
+          "query": "两个起点作品的作者和状态",
+          "expected_title": "玄鉴仙族",
+          "rank": 1,
+          "latency_ms": 842.62,
+          "retrieved_titles": [
+            "novel_qidian_rank",
+            "孤主",
+            "夜无疆"
+          ]
+        },
+        {
+          "id": "n21",
+          "query": "辰东写的那部新书",
+          "expected_title": "夜无疆",
+          "rank": 1,
+          "latency_ms": 952.17,
+          "retrieved_titles": [
+            "夜无疆",
+            "夜无疆",
+            "斗破苍穹"
+          ]
+        },
+        {
+          "id": "n22",
+          "query": "斗破苍穹书籍详情",
+          "expected_title": "斗破苍穹",
+          "rank": 1,
+          "latency_ms": 853.86,
+          "retrieved_titles": [
+            "斗破苍穹",
+            "novel_qidian_rank",
+            "斗罗之灵珠神剑"
+          ]
+        },
+        {
+          "id": "n23",
+          "query": "斗罗大陆作者信息",
+          "expected_title": "斗罗大陆",
+          "rank": 1,
+          "latency_ms": 903.57,
+          "retrieved_titles": [
+            "斗罗大陆",
+            "斗罗大陆",
+            "斗罗之灵珠神剑"
+          ]
+        },
+        {
+          "id": "n24",
+          "query": "没有抓到的起点新书无尽星河",
+          "expected_title": "无尽星河",
+          "rank": 1,
+          "latency_ms": 840.7,
+          "retrieved_titles": [
+            "无尽星河",
+            "星河之主",
+            "novel_qidian_rank"
+          ]
+        },
+        {
+          "id": "n25",
+          "query": "玄鉴仙族最新更新时间",
+          "expected_title": "玄鉴仙族",
+          "rank": 1,
+          "latency_ms": 875.36,
+          "retrieved_titles": [
+            "玄鉴仙族",
+            "玄鉴仙族",
+            "novel_qidian_rank"
+          ]
+        }
+      ]
+    }
+  ]
+}

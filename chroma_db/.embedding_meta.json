@@ -19,5 +19,12 @@
     "dims": 1024,
     "created_at": "2026-08-17T15:57:39.477307",
     "updated_at": "2026-08-17T15:57:39.477307"
+  },
+  "acgn_daily": {
+    "provider": "dashscope",
+    "model": "text-embedding-v4",
+    "dims": 1024,
+    "created_at": "2026-08-25T17:32:30.324858",
+    "updated_at": "2026-08-25T17:32:30.324858"
   }
 }

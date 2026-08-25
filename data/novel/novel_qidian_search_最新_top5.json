@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "source": "qidian.com",
+  "search_keyword": "最新",
+  "search_url": "https://www.qidian.com/so/%E6%9C%80%E6%96%B0.html",
+  "datetime": "2026-08-25 20:18:44",
+  "collected_at": "2026-08-25T12:18:44.635925+00:00",
+  "count": 5,
+  "books": [
+    {
+      "title": "最新篮球规则图解",
+      "url": "https://www.qidian.com/book/1012229545/",
+      "author": "",
+      "categories": [
+        "体育运动"
+      ],
+      "status": "完结",
+      "description": "《最新篮球规则图解》全面而系统地将最新版篮球规则和裁判方法的主要条款进行了诠释。书中编写内容从基本执裁要素入手，结合优秀裁判员的实践经验，将新旧规则进行对比，帮助教练员更好的展现出指挥才能、帮助运动员更好的发挥出技术水平，帮助裁判员更好的表现出执裁能力。《最新篮球规则图解》可作为裁判员和广大裁判爱好者学习篮球规则、裁判法的辅导用书，也可作为广大篮球爱好者提高竞技水平和欣赏水平的参考资料。",
+      "latest_chapter": {
+        "title": "",
+        "url": "https://read.qidian.com/chapter/-FACRZnEgT-NURuUMJnHnQ2/8K42191gNQA1/"
+      }
+    },
+    {
+      "title": "诛仙",
+      "url": "https://www.qidian.com/book/2019/",
+      "author": "萧鼎",
+      "categories": [
+        "仙侠"
+      ],
+      "status": "完结",
+      "description": "《诛仙》最新修订版实体书已经面世，感谢大家支持。这世间本是没有什么神仙的，但自太古以来，人类眼见周遭世界，诸般奇异之事……",
+      "latest_chapter": {
+        "title": "第一百八十三章 红鸾笑",
+        "url": "https://www.qidian.com/chapter/2019/92775639/"
+      }
+    },
+    {
+      "title": "柯学世界里的柯研人",
+      "url": "https://www.qidian.com/book/1026199909/",
+      "author": "入夜眠",
+      "categories": [
+        "轻小说"
+      ],
+      "status": "连载",
+      "description": "琴酒:“icewine...”“呐，这是最新开发的追踪软体，只需要20秒就可以找到目标...”ps:本书是轻松+破案+日常类型的",
+      "latest_chapter": {
+        "title": "第三千六百七十九章 无法曝光的身份，谁用是谁的",
+        "url": "https://www.qidian.com/chapter/1026199909/924125441/"
+      }
+    },
+    {
+      "title": "最新垂钓知识图鉴",
+      "url": "https://www.qidian.com/book/1016796985/",
+      "author": "",
+      "categories": [
+        "体育运动"
+      ],
+      "status": "完结",
+      "description": "为了让广大垂钓爱好者和对垂钓活动怀着极大的兴趣的初学者全面掌握垂钓的有关知识，学习垂钓技巧，本书结合现代垂钓的特点，总结了国内外垂钓的方法，详尽地介绍了垂钓的所有知识，包括垂钓的准备、垂钓的作用、垂钓的用具、鱼饵的知识、鱼类的鉴别和摄食习性、垂钓新法、钓点的选择、垂钓适合的天气、四季垂钓要点、垂钓必知的技巧处理及常见淡水鱼的垂钓方法等，内容丰富全面，形式新颖独特，图解详细，简单易懂，由浅入深，力图让广大读者全面而准确地了解垂钓知识，加入到垂钓的活动中，成功地学会垂钓。",
+      "latest_chapter": {
+        "title": "",
+        "url": "https://read.qidian.com/chapter/S8mk0cLPnHw3LbtcZNMchg2/8K42191gNQA1/"
+      }
+    },
+    {
+      "title": "最新汽车维修1128问",
+      "url": "https://www.qidian.com/book/1017589175/",
+      "author": "",
+      "categories": [
+        "工业技术"
+      ],
+      "status": "完结",
+      "description": "《最新汽车维修1128问》依据劳动和社会保障部2005年颁布实施的《汽车修理工国家职业标准》编写，涵盖了初、中、高三级汽车修理工应知应会的内容。为提高阅读性，增强对汽车修理工考级的指导性，本书简化了部分一般性知识内容，重点介绍了修理工应会部分，可作为汽车修理工日常学习和考级的工具书。",
+      "latest_chapter": {
+        "title": "",
+        "url": "https://read.qidian.com/chapter/MPMQxf_oHvvH0qbqCO3QNg2/8K42191gNQA1/"
+      }
+    }
+  ],
+  "saved_path": "D:\\develop\\PythonStudy\\MutiRoleAgent\\data\\novel\\novel_qidian_search_最新_top5.json"
+}

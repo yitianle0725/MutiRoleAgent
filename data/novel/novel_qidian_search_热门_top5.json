@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "source": "qidian.com",
+  "search_keyword": "热门",
+  "search_url": "https://www.qidian.com/so/%E7%83%AD%E9%97%A8.html",
+  "datetime": "2026-08-25 20:18:54",
+  "collected_at": "2026-08-25T12:18:54.839505+00:00",
+  "count": 5,
+  "books": [
+    {
+      "title": "热门闽菜",
+      "url": "https://www.qidian.com/book/1001447039/",
+      "author": "",
+      "categories": [
+        "烹饪美食"
+      ],
+      "status": "完结",
+      "description": "闽菜是中国八大菜系之一，经历了中原汉族文化和当地古越族文化的混合、交流而逐渐形成的。闽菜以烹制山珍海味而著称，在色香味形俱佳的基础上，尤以“香”、“味”见长，其清鲜、和醇、荤香、不腻的风格特色，以及汤路广泛的特点，在烹坛园地中独具一席。本书精选了扳指干贝、八块鸡、八宝鲟饭、炒面线、河鳗炖豆腐、醉排骨等好吃的闽菜。教人们利用闲暇之时，烹制出具有浓厚家乡风味及地方特色的菜肴，使人在舒适温馨的环境中，全身心地释放，消除疲劳，减轻压力，既增加了活力，又带来健康的享受。",
+      "latest_chapter": {
+        "title": "第5章 附录：厨房小常识",
+        "url": "https://www.qidian.com/chapter/1001447039/233565846/"
+      }
+    },
+    {
+      "title": "东京热门",
+      "url": "https://www.qidian.com/book/1010543438/",
+      "author": "意定闲",
+      "categories": [
+        "历史"
+      ],
+      "status": "完结",
+      "description": "现代女子赤凤凰魂回北宋，阴差阳错，与一流氓合体，悲天悯人，欲以己之力，挽救天下苍生，然冥冥中有注定。。。",
+      "latest_chapter": {
+        "title": "第五百章 我会回来的(大结局)",
+        "url": "https://read.qidian.com/chapter/ylmaGEqMtTsuTkiRw_sFYA2/6UJMblP6dsGaGfXRMrUjdw2/"
+      }
+    },
+    {
+      "title": "视频：盘点诸天热门事件",
+      "url": "https://www.qidian.com/book/1030965476/",
+      "author": "画中无山海",
+      "categories": [
+        "轻小说"
+      ],
+      "status": "完结",
+      "description": "“我只想好好打游戏，你为什么要装主神空间吓我？”方罗喝了一大口肥宅快乐水。“不过……如果只是剪视频的话……这好简单”放下手里的东西，方罗很快的就完成了这一次的盘点。好的呢～开始播出。…………与此同时，无数动漫次元望着眼前凭空出现的屏幕陷入了沉思。满配之战！我的儿子，首先你要为背叛我付出代价！罗杰被抓？独闯海军本部！恐惧吧！这就是海贼提督！究极圣战！战斗暴龙兽的盖亚能量炮！神的审判！打破四维！必杀·认真一拳！！新书已发《冒牌主神》",
+      "latest_chapter": {
+        "title": "诸天：无限次元大乱斗",
+        "url": "https://www.qidian.com/chapter/1030965476/747244291/"
+      }
+    },
+    {
+      "title": "非热门诸天",
+      "url": "https://www.qidian.com/book/1021673793/",
+      "author": "痞英俊",
+      "categories": [
+        "科幻"
+      ],
+      "status": "完结",
+      "description": "九叔世界、笑傲世界、神雕三部曲世界、斗破世界、斗罗世界，这些热门世界本书统统都没有。要的就是小众。首先安排个好色无耻的宋太宗",
+      "latest_chapter": {
+        "title": "高梁河车神篇1 朕没有杀皇兄",
+        "url": "https://read.qidian.com/chapter/qlrtyOMeZKcWXXlYBroA6g2/unDLruLCYFLwrjbX3WA1AA2/"
+      }
+    },
+    {
+      "title": "小儿诸热门",
+      "url": "https://www.qidian.com/book/1001554141/",
+      "author": "",
+      "categories": [
+        "公版免费书"
+      ],
+      "status": "完结",
+      "description": "本书为公版书，为不受著作权法限制的作家、艺术家及其它人士发布的作品，供广大读者阅读交流。汇聚授权电子版权。",
+      "latest_chapter": {
+        "title": "第3章",
+        "url": "https://read.qidian.com/chapter/VyJAf4VxffZdi5-cWpsVtA2/fJa1QnwzkulMs5iq0oQwLQ2/"
+      }
+    }
+  ],
+  "saved_path": "D:\\develop\\PythonStudy\\MutiRoleAgent\\data\\novel\\novel_qidian_search_热门_top5.json"
+}

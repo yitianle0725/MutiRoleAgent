@@ -1,0 +1,658 @@
+{
+  "generated_at": "2026-08-25T20:34:38.410042+08:00",
+  "corpus": {
+    "document_counts": {
+      "acgn_daily": 157
+    },
+    "sources": [
+      "data\\anime\\yuc\\yuc_202601.json",
+      "data\\anime\\yuc\\yuc_202604.json",
+      "data\\anime\\yuc\\yuc_202607.json",
+      "data/anime/bangumi/*.json"
+    ]
+  },
+  "dataset": "evaluation\\datasets\\acgn_retrieval_100.json",
+  "case_count": 100,
+  "results": [
+    {
+      "strategy": "B_acgn_daily_bge_m3_onnx_bm25",
+      "domain": "acgn_daily",
+      "config": {
+        "dense_weight": 0.7,
+        "sparse_weight": 0.3,
+        "reranker_enabled": false
+      },
+      "metrics": {
+        "recall_at_3": 0.08,
+        "precision_at_3": 0.0267,
+        "mrr": 0.0333,
+        "ndcg_at_3": 0.0452,
+        "mean_latency_ms": 27.92,
+        "p95_latency_ms": 31.17
+      },
+      "details": [
+        {
+          "id": "d01",
+          "query": "今日ACGN资讯",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 26.18,
+          "retrieved_titles": [
+            "【今日放送 18:00】光阴之外2 第10集",
+            "【今日放送 09:00】择日飞升 第8集",
+            "【今日放送 22:46】MAO 第21集"
+          ]
+        },
+        {
+          "id": "d02",
+          "query": "今天有什么动漫游戏小说新闻",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 26.95,
+          "retrieved_titles": [
+            "『俺だけが魔法使い族の異世界 御伽の英雄と囚われのエルフ』のコミカライズ連載が開始",
+            "第19回GA文庫大賞（前期）の一次選考結果が発表",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 34 话"
+          ]
+        },
+        {
+          "id": "d03",
+          "query": "本周番剧资讯",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 23.7,
+          "retrieved_titles": [
+            "【漫画更新】Dugeundugeun Daejakjeon 第 34 话",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 33 话",
+            "【漫画更新】Ryuu: Ron 第 1 话「Bedbugs」"
+          ]
+        },
+        {
+          "id": "d04",
+          "query": "最新游戏新闻",
+          "expected_title": "游戏",
+          "rank": 3,
+          "latency_ms": 24.64,
+          "retrieved_titles": [
+            "「平均的なゲーマーなどもはや存在しない」との大規模分析。好みはどんどん細分化、“万人ウケ狙い”は厳しい時代に",
+            "Steam無料・怪奇事件捜査ゲーム『No Results Found』、「圧倒的に好評」の大人気。“227人死亡事件”を起こした新興宗教の真実に徹底「検索」で迫る",
+            "《又一个僵尸幸存者》现已脱离抢先体验并正式发售"
+          ]
+        },
+        {
+          "id": "d05",
+          "query": "最近小说资讯",
+          "expected_title": "小说",
+          "rank": null,
+          "latency_ms": 24.01,
+          "retrieved_titles": [
+            "『青龍の瞳の花嫁』のコミカライズ連載が開始 可愛い押しかけ妻による中華求婚物語",
+            "第19回GA文庫大賞（前期）の一次選考結果が発表",
+            "アース・スターノベル2026年8月刊行のラインナップをご紹介。『異世界は猫と共に6』『二度目はタの付く自由業4』など4冊"
+          ]
+        },
+        {
+          "id": "d06",
+          "query": "汇总今天的动漫和游戏资讯",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 30.77,
+          "retrieved_titles": [
+            "『ドラクエ』指人形のように遊べる「ミニパペットぬいぐるみ」が楽しい！メタルスライムやミイラ男を指先にセット",
+            "【今日放送 15:30】クレヨンしんちゃん 第1349集",
+            "archive_index"
+          ]
+        },
+        {
+          "id": "d07",
+          "query": "汇总本周小说和动漫新闻",
+          "expected_title": "小说",
+          "rank": null,
+          "latency_ms": 30.91,
+          "retrieved_titles": [
+            "『Re：ゼロから始める異世界生活』第46巻の発売を記念したWEBサイン会が大垣書店にて開催決定",
+            "『俺だけが魔法使い族の異世界 御伽の英雄と囚われのエルフ』のコミカライズ連載が開始",
+            "第19回GA文庫大賞（前期）の一次選考結果が発表"
+          ]
+        },
+        {
+          "id": "d08",
+          "query": "ACG圈子今天有什么新鲜事",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 30.27,
+          "retrieved_titles": [
+            "archive_index",
+            "触乐怪话：《杀死比尔》与《堡垒之夜》的6件事",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d09",
+          "query": "每日资讯归档日期",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 30.93,
+          "retrieved_titles": [
+            "【漫画更新】Dugeundugeun Daejakjeon 第 34 话",
+            "archive_index",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d10",
+          "query": "ACGN日报来源有哪些",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 25.91,
+          "retrieved_titles": [
+            "archive_index",
+            "我也要录吗？录音笔VOL.769",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d11",
+          "query": "本地没有的昨天体育新闻",
+          "expected_title": "体育",
+          "rank": null,
+          "latency_ms": 29.4,
+          "retrieved_titles": [
+            "archive_index",
+            "i18n_cache",
+            "小島秀夫監督の著書を読んだ。自分はどんなゲームでできているのか？eスポーツキャスターが考えてみた"
+          ]
+        },
+        {
+          "id": "d12",
+          "query": "每日动漫资讯条数",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 28.21,
+          "retrieved_titles": [
+            "archive_index",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 34 话",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 33 话"
+          ]
+        },
+        {
+          "id": "d13",
+          "query": "每日游戏资讯分类",
+          "expected_title": "游戏",
+          "rank": null,
+          "latency_ms": 28.22,
+          "retrieved_titles": [
+            "「平均的なゲーマーなどもはや存在しない」との大規模分析。好みはどんどん細分化、“万人ウケ狙い”は厳しい時代に",
+            "archive_index",
+            "【最大6人】足を引っ張り合いながらデスゲームに挑む協力ホラー『C.U.B.E』早期アクセス開始"
+          ]
+        },
+        {
+          "id": "d14",
+          "query": "每日小说资讯分类",
+          "expected_title": "小说",
+          "rank": null,
+          "latency_ms": 22.75,
+          "retrieved_titles": [
+            "第19回GA文庫大賞（前期）の一次選考結果が発表",
+            "archive_index",
+            "『青龍の瞳の花嫁』のコミカライズ連載が開始 可愛い押しかけ妻による中華求婚物語"
+          ]
+        },
+        {
+          "id": "d15",
+          "query": "动漫游戏小说三类资讯一起看",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 32.88,
+          "retrieved_titles": [
+            "“時代劇”アニメといえば？ 3位「銀魂」、2位「薄桜鬼」、1位は…現在放送中の話題作「逃げ上手の若君」＜26年版＞",
+            "『王者の盤狂わせ』第3巻発売記念フェアが全国の書店にて開催決定",
+            "『俺だけが魔法使い族の異世界 御伽の英雄と囚われのエルフ』のコミカライズ連載が開始"
+          ]
+        },
+        {
+          "id": "d16",
+          "query": "ACGN每日汇总里有些什么",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 27.64,
+          "retrieved_titles": [
+            "archive_index",
+            "从冯骥的创作十条谈谈“黑神话”系列和游戏科学",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d17",
+          "query": "最新日报生成时间",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 24.67,
+          "retrieved_titles": [
+            "archive_index",
+            "i18n_cache",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 34 话"
+          ]
+        },
+        {
+          "id": "d18",
+          "query": "日报中有哪些来源健康",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 27.99,
+          "retrieved_titles": [
+            "archive_index",
+            "i18n_cache",
+            "“暑くって動けないんだよッ” ちいかわたちの可愛いフィギュア入りチョコが登場！ 「パキシパキ」「ウラ イーハェィ」などセリフも楽しめる"
+          ]
+        },
+        {
+          "id": "d19",
+          "query": "本地没有的金融市场快讯",
+          "expected_title": "金融",
+          "rank": null,
+          "latency_ms": 28.18,
+          "retrieved_titles": [
+            "archive_index",
+            "i18n_cache",
+            "猿が高速移動して銃をぶっ放すパルクールFPS『HYPER PRIMATE』配信！ 世界最速の猿を目指せ"
+          ]
+        },
+        {
+          "id": "d20",
+          "query": "ACGN日报最新一条内容",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 28.0,
+          "retrieved_titles": [
+            "archive_index",
+            "《赛博朋克：边缘行者2》公布最新预告，将于10月20日上线",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d21",
+          "query": "比较日报中的动漫和小说条目",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 31.12,
+          "retrieved_titles": [
+            "『俺だけが魔法使い族の異世界 御伽の英雄と囚われのエルフ』のコミカライズ連載が開始",
+            "第19回GA文庫大賞（前期）の一次選考結果が発表",
+            "アース・スターノベル2026年8月刊行のラインナップをご紹介。『異世界は猫と共に6』『二度目はタの付く自由業4』など4冊"
+          ]
+        },
+        {
+          "id": "d22",
+          "query": "日报archive有什么作用",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 27.05,
+          "retrieved_titles": [
+            "archive_index",
+            "我也要录吗？录音笔VOL.769",
+            "从冯骥的创作十条谈谈“黑神话”系列和游戏科学"
+          ]
+        },
+        {
+          "id": "d23",
+          "query": "每天自动抓取的二次元新闻",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 30.66,
+          "retrieved_titles": [
+            "archive_index",
+            "【漫画更新】Boukensha Matching App de Aishou Batsugun Dakedo Seikaku Saiakuna Onna to Party Kunda Kekka, Ecchi Aishou ga 200% Koe datta Node Yoru wa Juujunna Saikou no Teammate ni Narimashita 第 6 话「A New Partner」",
+            "『青龍の瞳の花嫁』のコミカライズ連載が開始 可愛い押しかけ妻による中華求婚物語"
+          ]
+        },
+        {
+          "id": "d24",
+          "query": "ACGN资讯是否包含游戏内容",
+          "expected_title": "游戏",
+          "rank": 2,
+          "latency_ms": 25.78,
+          "retrieved_titles": [
+            "archive_index",
+            "《又一个僵尸幸存者》现已脱离抢先体验并正式发售",
+            "i18n_cache"
+          ]
+        },
+        {
+          "id": "d25",
+          "query": "ACGN资讯是否包含小说内容",
+          "expected_title": "小说",
+          "rank": null,
+          "latency_ms": 31.17,
+          "retrieved_titles": [
+            "archive_index",
+            "《又一个僵尸幸存者》现已脱离抢先体验并正式发售",
+            "i18n_cache"
+          ]
+        }
+      ]
+    },
+    {
+      "strategy": "D_acgn_daily_bge_m3_onnx_bm25_reranker",
+      "domain": "acgn_daily",
+      "config": {
+        "dense_weight": 0.7,
+        "sparse_weight": 0.3,
+        "reranker_enabled": true,
+        "reranker_top_k": 10,
+        "reranker_final_k": 3
+      },
+      "metrics": {
+        "recall_at_3": 0.08,
+        "precision_at_3": 0.0267,
+        "mrr": 0.06,
+        "ndcg_at_3": 0.0652,
+        "mean_latency_ms": 1254.7,
+        "p95_latency_ms": 1518.88
+      },
+      "details": [
+        {
+          "id": "d01",
+          "query": "今日ACGN资讯",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 748.49,
+          "retrieved_titles": [
+            "【今日放送 22:46】MAO 第21集",
+            "【今日放送 20:00】猫と竜 第9集",
+            "【今日放送 18:00】光阴之外2 第10集"
+          ]
+        },
+        {
+          "id": "d02",
+          "query": "今天有什么动漫游戏小说新闻",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1481.17,
+          "retrieved_titles": [
+            "【漫画更新】Ryuu: Ron 第 1 话「Bedbugs」",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 34 话",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 33 话"
+          ]
+        },
+        {
+          "id": "d03",
+          "query": "本周番剧资讯",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1245.84,
+          "retrieved_titles": [
+            "【今日放送 15:30】クレヨンしんちゃん 第1349集",
+            "【漫画更新】Osekkai Joshi (Pre-Serialization) 第 31 话「A Busybody Girl Asks It」",
+            "【今日放送 17:26】魔入りました！入間くん 第4シリーズ 第19集"
+          ]
+        },
+        {
+          "id": "d04",
+          "query": "最新游戏新闻",
+          "expected_title": "游戏",
+          "rank": 2,
+          "latency_ms": 1421.81,
+          "retrieved_titles": [
+            "「平均的なゲーマーなどもはや存在しない」との大規模分析。好みはどんどん細分化、“万人ウケ狙い”は厳しい時代に",
+            "触乐本周行业大事：腾讯、吉比特Q2及上半年业绩发布，信宸资本入局灵犀互娱收购，甄子丹助阵《影之刃零》预售开启",
+            "「新約・怒首領蜂大復活」，8月27日にSteamで発売決定。最大10人で戦う「弾幕対戦モード ロワイヤル」を搭載"
+          ]
+        },
+        {
+          "id": "d05",
+          "query": "最近小说资讯",
+          "expected_title": "小说",
+          "rank": null,
+          "latency_ms": 1002.03,
+          "retrieved_titles": [
+            "『青龍の瞳の花嫁』のコミカライズ連載が開始 可愛い押しかけ妻による中華求婚物語",
+            "アース・スターノベル2026年8月刊行のラインナップをご紹介。『異世界は猫と共に6』『二度目はタの付く自由業4』など4冊",
+            "【漫画更新】Hunter x Hunter (Official Colored) 第 392 话「Information」"
+          ]
+        },
+        {
+          "id": "d06",
+          "query": "汇总今天的动漫和游戏资讯",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1141.98,
+          "retrieved_titles": [
+            "キングボンビー襲来！『桃鉄』のSLが「プラレール」になって登場、フィギュアや“目的地到着”などゲーム再現できる背景カードも付属",
+            "【今日放送 15:30】クレヨンしんちゃん 第1349集",
+            "【漫画更新】Ryuu: Ron 第 1 话「Bedbugs」"
+          ]
+        },
+        {
+          "id": "d07",
+          "query": "汇总本周小说和动漫新闻",
+          "expected_title": "小说",
+          "rank": null,
+          "latency_ms": 1277.85,
+          "retrieved_titles": [
+            "弱肉強食、十人十色、犬猿の仲…「ブルーロック」の名場面でことわざ100語を学べる！ 巻頭には人気キャラクターのカラー解説ページも",
+            "【漫画更新】Dāng È Yì Yù Dào Bìng Jiāo 第 79 话「On Behalf of Duke Sterling」",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 34 话"
+          ]
+        },
+        {
+          "id": "d08",
+          "query": "ACG圈子今天有什么新鲜事",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1518.88,
+          "retrieved_titles": [
+            "触乐怪话：《杀死比尔》与《堡垒之夜》的6件事",
+            "“暑くって動けないんだよッ” ちいかわたちの可愛いフィギュア入りチョコが登場！ 「パキシパキ」「ウラ イーハェィ」などセリフも楽しめる",
+            "【漫画更新】焦糖玛奇怪 第 2 话"
+          ]
+        },
+        {
+          "id": "d09",
+          "query": "每日资讯归档日期",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1362.87,
+          "retrieved_titles": [
+            "archive_index",
+            "【今日放送 15:30】クレヨンしんちゃん 第1349集",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 34 话"
+          ]
+        },
+        {
+          "id": "d10",
+          "query": "ACGN日报来源有哪些",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1170.05,
+          "retrieved_titles": [
+            "【漫画更新】Dugeundugeun Daejakjeon 第 34 话",
+            "我也要录吗？录音笔VOL.769",
+            "「頭文字DAC」，公道最強決定戦4thの地方大会を8月29日より順次開催"
+          ]
+        },
+        {
+          "id": "d11",
+          "query": "本地没有的昨天体育新闻",
+          "expected_title": "体育",
+          "rank": null,
+          "latency_ms": 1144.29,
+          "retrieved_titles": [
+            "【今日放送 15:30】クレヨンしんちゃん 第1349集",
+            "「平均的なゲーマーなどもはや存在しない」との大規模分析。好みはどんどん細分化、“万人ウケ狙い”は厳しい時代に",
+            "小島秀夫監督の著書を読んだ。自分はどんなゲームでできているのか？eスポーツキャスターが考えてみた"
+          ]
+        },
+        {
+          "id": "d12",
+          "query": "每日动漫资讯条数",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 991.19,
+          "retrieved_titles": [
+            "【漫画更新】Dāng È Yì Yù Dào Bìng Jiāo 第 79 话「On Behalf of Duke Sterling」",
+            "【漫画更新】Boukensha Matching App de Aishou Batsugun Dakedo Seikaku Saiakuna Onna to Party Kunda Kekka, Ecchi Aishou ga 200% Koe datta Node Yoru wa Juujunna Saikou no Teammate ni Narimashita 第 6 话「A New Partner」",
+            "【今日放送 16:00】ドラえもん (2005) 第929集"
+          ]
+        },
+        {
+          "id": "d13",
+          "query": "每日游戏资讯分类",
+          "expected_title": "游戏",
+          "rank": null,
+          "latency_ms": 1219.81,
+          "retrieved_titles": [
+            "『ドラクエ』指人形のように遊べる「ミニパペットぬいぐるみ」が楽しい！メタルスライムやミイラ男を指先にセット",
+            "【最大6人】足を引っ張り合いながらデスゲームに挑む協力ホラー『C.U.B.E』早期アクセス開始",
+            "archive_index"
+          ]
+        },
+        {
+          "id": "d14",
+          "query": "每日小说资讯分类",
+          "expected_title": "小说",
+          "rank": null,
+          "latency_ms": 1021.53,
+          "retrieved_titles": [
+            "i18n_cache",
+            "【漫画更新】Ryuu: Ron 第 1 话「Bedbugs」",
+            "『青龍の瞳の花嫁』のコミカライズ連載が開始 可愛い押しかけ妻による中華求婚物語"
+          ]
+        },
+        {
+          "id": "d15",
+          "query": "动漫游戏小说三类资讯一起看",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1175.02,
+          "retrieved_titles": [
+            "第19回GA文庫大賞（前期）の一次選考結果が発表",
+            "アース・スターノベル2026年8月刊行のラインナップをご紹介。『異世界は猫と共に6』『二度目はタの付く自由業4』など4冊",
+            "GB向け新作！？立派な天使を目指してレッスンやアルバイトに「魔王城で」奔走する育成シム『魔王城のミラテン』【東京ゲームダンジョン13】"
+          ]
+        },
+        {
+          "id": "d16",
+          "query": "ACGN每日汇总里有些什么",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1435.02,
+          "retrieved_titles": [
+            "我也要录吗？录音笔VOL.769",
+            "i18n_cache",
+            "从冯骥的创作十条谈谈“黑神话”系列和游戏科学"
+          ]
+        },
+        {
+          "id": "d17",
+          "query": "最新日报生成时间",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1191.96,
+          "retrieved_titles": [
+            "【今日放送 22:46】MAO 第21集",
+            "【今日放送 15:30】クレヨンしんちゃん 第1349集",
+            "archive_index"
+          ]
+        },
+        {
+          "id": "d18",
+          "query": "日报中有哪些来源健康",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1313.93,
+          "retrieved_titles": [
+            "【漫画更新】Osekkai Joshi (Pre-Serialization) 第 31 话「A Busybody Girl Asks It」",
+            "“暑くって動けないんだよッ” ちいかわたちの可愛いフィギュア入りチョコが登場！ 「パキシパキ」「ウラ イーハェィ」などセリフも楽しめる",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 33 话"
+          ]
+        },
+        {
+          "id": "d19",
+          "query": "本地没有的金融市场快讯",
+          "expected_title": "金融",
+          "rank": null,
+          "latency_ms": 1133.86,
+          "retrieved_titles": [
+            "「平均的なゲーマーなどもはや存在しない」との大規模分析。好みはどんどん細分化、“万人ウケ狙い”は厳しい時代に",
+            "archive_index",
+            "『青龍の瞳の花嫁』のコミカライズ連載が開始 可愛い押しかけ妻による中華求婚物語"
+          ]
+        },
+        {
+          "id": "d20",
+          "query": "ACGN日报最新一条内容",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1522.0,
+          "retrieved_titles": [
+            "「頭文字DAC」，公道最強決定戦4thの地方大会を8月29日より順次開催",
+            "《赛博朋克：边缘行者2》公布最新预告，将于10月20日上线",
+            "【漫画更新】Dugeundugeun Daejakjeon 第 33 话"
+          ]
+        },
+        {
+          "id": "d21",
+          "query": "比较日报中的动漫和小说条目",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1400.05,
+          "retrieved_titles": [
+            "『青龍の瞳の花嫁』のコミカライズ連載が開始 可愛い押しかけ妻による中華求婚物語",
+            "第19回GA文庫大賞（前期）の一次選考結果が発表",
+            "“暑くって動けないんだよッ” ちいかわたちの可愛いフィギュア入りチョコが登場！ 「パキシパキ」「ウラ イーハェィ」などセリフも楽しめる"
+          ]
+        },
+        {
+          "id": "d22",
+          "query": "日报archive有什么作用",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1516.63,
+          "retrieved_titles": [
+            "archive_index",
+            "i18n_cache",
+            "我也要录吗？录音笔VOL.769"
+          ]
+        },
+        {
+          "id": "d23",
+          "query": "每天自动抓取的二次元新闻",
+          "expected_title": "动漫",
+          "rank": null,
+          "latency_ms": 1202.91,
+          "retrieved_titles": [
+            "【漫画更新】焦糖玛奇怪 第 2 话",
+            "『俺だけが魔法使い族の異世界 御伽の英雄と囚われのエルフ』のコミカライズ連載が開始",
+            "『青龍の瞳の花嫁』のコミカライズ連載が開始 可愛い押しかけ妻による中華求婚物語"
+          ]
+        },
+        {
+          "id": "d24",
+          "query": "ACGN资讯是否包含游戏内容",
+          "expected_title": "游戏",
+          "rank": 1,
+          "latency_ms": 1393.44,
+          "retrieved_titles": [
+            "《又一个僵尸幸存者》现已脱离抢先体验并正式发售",
+            "「平均的なゲーマーなどもはや存在しない」との大規模分析。好みはどんどん細分化、“万人ウケ狙い”は厳しい時代に",
+            "「新約・怒首領蜂大復活」，8月27日にSteamで発売決定。最大10人で戦う「弾幕対戦モード ロワイヤル」を搭載"
+          ]
+        },
+        {
+          "id": "d25",
+          "query": "ACGN资讯是否包含小说内容",
+          "expected_title": "小说",
+          "rank": null,
+          "latency_ms": 1334.84,
+          "retrieved_titles": [
+            "《又一个僵尸幸存者》现已脱离抢先体验并正式发售",
+            "【漫画更新】Class no Gal ni Kuuki Atsukai Sareteimasu 第 77 话「My Childhood Friend Is Unusually Aggressive ㉔」",
+            "『俺だけが魔法使い族の異世界 御伽の英雄と囚われのエルフ』のコミカライズ連載が開始"
+          ]
+        }
+      ]
+    }
+  ]
+}
