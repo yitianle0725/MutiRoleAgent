@@ -46,6 +46,7 @@ from agent.stream_events import TextChunk, ToolEvent, StructuredData
 from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
 from memory.user_profile_extractor import extract_and_save_profile, build_profile_context
+from memory.l2_memory import capture_explicit_turn
 from agent.cita.semantic import SemanticEngine, SemanticAnalysis
 from tools.agent_tools import (
     search_anime, fetch_anime, get_season_anime,
@@ -552,6 +553,15 @@ class ReactAgent:
                     loop = asyncio.get_running_loop()
                     loop.create_task(
                         extract_and_save_profile(self.user_id, query, full_response)
+                    )
+                    # 仅沉淀明确表达的长期事实，并保留用户原话作为证据。
+                    loop.create_task(
+                        asyncio.to_thread(
+                            capture_explicit_turn,
+                            self.user_id,
+                            self.session_id,
+                            query,
+                        )
                     )
                 except RuntimeError:
                     pass
