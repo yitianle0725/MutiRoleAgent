@@ -38,3 +38,6 @@ logs/
 
 # 本地文档（不上传仓库）
 local_docs_study/
+
+# ========== 本地模型权重（不上传Git） ==========
+resources/models/

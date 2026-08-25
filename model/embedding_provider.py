@@ -24,6 +24,7 @@ Usage::
 
 import os
 import logging
+from pathlib import Path
 from abc import ABC, abstractmethod
 from typing import Sequence
 
@@ -44,6 +45,10 @@ _EMBEDDING_API_KEY = (
 )
 _EMBEDDING_BASE_URL = os.getenv("EMBEDDING_BASE_URL", "")
 _EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-v4")
+_LOCAL_EMBEDDING_PATH = Path(os.getenv(
+    "LOCAL_EMBEDDING_MODEL_PATH",
+    str(Path(__file__).resolve().parents[1] / "resources" / "models" / "Xenova" / "bge-m3"),
+))
 
 
 # ==================== Abstract Base ====================
@@ -130,11 +135,11 @@ class LocalONNXProvider(EmbeddingProvider):
 
     def __init__(self, cache_dir: str | None = None):
         self._model = None
+        self._session = None
+        self._tokenizer = None
         self._dims: int | None = None
         self._lock = __import__("threading").Lock()
-        self._cache_dir = cache_dir or os.path.join(
-            os.path.dirname(__file__), "..", "models"
-        )
+        self._cache_dir = str(cache_dir or _LOCAL_EMBEDDING_PATH)
 
     @property
     def name(self) -> str:
@@ -160,14 +165,25 @@ class LocalONNXProvider(EmbeddingProvider):
 
     def _ensure_loaded(self):
         """懒加载 bge-m3 模型。"""
-        if self._model is not None:
+        if self._session is not None or self._model is not None:
             return
 
         with self._lock:
-            if self._model is not None:
+            if self._session is not None or self._model is not None:
                 return
 
             try:
+                import onnxruntime as ort
+                from transformers import AutoTokenizer
+
+                model_file = Path(self._cache_dir) / "onnx" / "model_int8.onnx"
+                if model_file.exists():
+                    self._tokenizer = AutoTokenizer.from_pretrained(self._cache_dir, local_files_only=True)
+                    self._session = ort.InferenceSession(str(model_file), providers=["CPUExecutionProvider"])
+                    self._dims = int(self._session.get_outputs()[0].shape[-1])
+                    logger.info(f"[LocalONNXProvider] loaded ONNX model, dims={self._dims}")
+                    return
+
                 from sentence_transformers import SentenceTransformer
 
                 logger.info(
@@ -213,12 +229,14 @@ class LocalONNXProvider(EmbeddingProvider):
             return []
         self._ensure_loaded()
         with self._lock:
-            embeddings = self._model.encode(  # type: ignore[union-attr]
-                texts,
-                normalize_embeddings=True,
-                show_progress_bar=False,
-                batch_size=32,
-            )
+            if self._session is not None:
+                encoded = self._tokenizer(texts, padding=True, truncation=True, max_length=512, return_tensors="np")
+                outputs = self._session.run(["last_hidden_state"], {k: v.astype("int64") for k, v in encoded.items()})[0]
+                mask = encoded["attention_mask"][..., None]
+                embeddings = (outputs * mask).sum(axis=1) / mask.sum(axis=1).clip(min=1)
+                norms = (embeddings**2).sum(axis=1, keepdims=True) ** 0.5
+                return (embeddings / norms.clip(min=1e-12)).tolist()
+            embeddings = self._model.encode(texts, normalize_embeddings=True, show_progress_bar=False, batch_size=32)  # type: ignore[union-attr]
         return embeddings.tolist()
 
 

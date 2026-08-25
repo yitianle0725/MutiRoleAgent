@@ -23,6 +23,7 @@ Usage::
 """
 
 import os
+from pathlib import Path
 from typing import Sequence
 
 from langchain_core.documents import Document
@@ -40,6 +41,8 @@ _RERANKER_ENABLED = chroma_config.get("retrieval", {}).get("reranker_enabled", F
 _RERANKER_TOP_K = chroma_config.get("retrieval", {}).get("reranker_top_k", 10)
 _RERANKER_FINAL_K = chroma_config.get("retrieval", {}).get("reranker_final_k", 5)
 _RERANKER_MODEL = chroma_config.get("retrieval", {}).get("reranker_model", "BAAI/bge-reranker-base")
+_RERANKER_BACKEND = os.getenv("RERANKER_BACKEND", "onnx")
+_RERANKER_PATH = Path(os.getenv("RERANKER_MODEL_PATH", str(Path(__file__).resolve().parents[1] / "resources" / "models" / "Xenova" / "bge-reranker-base")))
 
 
 class HybridRetriever:
@@ -354,6 +357,8 @@ class _RerankerWrapper:
 
     def __init__(self):
         self._model = None
+        self._tokenizer = None
+        self._session = None
 
     def compute_score(self, pairs: list[list[str]]) -> list[float] | None:
         """对 (query, doc) 对计算相关度分数。
@@ -378,6 +383,28 @@ class _RerankerWrapper:
         return self._model.predict(pairs).tolist()  # type: ignore[union-attr]
 
 
+def _onnx_compute_score(self: _RerankerWrapper, pairs: list[list[str]]) -> list[float] | None:
+    """使用本地 ONNX INT8 reranker 对候选对打分。"""
+    if not pairs:
+        return []
+    if self._session is None:
+        import onnxruntime as ort
+        from transformers import AutoTokenizer
+        model_file = _RERANKER_PATH / "onnx" / "model_int8.onnx"
+        if not model_file.exists():
+            raise FileNotFoundError(model_file)
+        self._tokenizer = AutoTokenizer.from_pretrained(str(_RERANKER_PATH), local_files_only=True)
+        self._session = ort.InferenceSession(str(model_file), providers=["CPUExecutionProvider"])
+        logger.info(f"[Reranker] loaded ONNX model from {_RERANKER_PATH}")
+    encoded = self._tokenizer(
+        [pair[0] for pair in pairs], [pair[1] for pair in pairs],
+        padding=True, truncation=True, max_length=512, return_tensors="np"
+    )
+    outputs = self._session.run(["logits"], {k: v.astype("int64") for k, v in encoded.items()})[0]
+    return outputs.reshape(-1).tolist()
+
+
+_RerankerWrapper.compute_score = _onnx_compute_score
 _reranker_instance: _RerankerWrapper | None = None
 
 
