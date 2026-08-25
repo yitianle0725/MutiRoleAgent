@@ -1,4 +1,6 @@
 {
+  "generated_at": "2026-08-25T07:23:56+00:00",
+  "generated_at_beijing": "2026-08-25 15:23:56",
   "dataset_version": "langsmith-upload-v1",
   "total": 20,
   "passed": 20,

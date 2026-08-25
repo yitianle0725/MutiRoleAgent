@@ -11,6 +11,7 @@ import re
 from pathlib import Path
 
 from eval.history_dataset import load_history_pairs
+from eval.report_time import report_timestamps
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB = ROOT / "data" / "chat_history.db"
@@ -81,6 +82,7 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=None)
     args = parser.parse_args()
     report = evaluate_history(load_history_pairs(args.db, args.limit))
+    report.update(report_timestamps())
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"History evaluation report: {args.output}")

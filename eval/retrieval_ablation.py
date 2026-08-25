@@ -11,6 +11,7 @@ from pathlib import Path
 from eval.metrics import ndcg_at_k, precision_at_k, recall_at_k, mrr
 from eval.runner import load_test_cases
 from rag.vector_store import vector_store
+from eval.report_time import report_timestamps
 
 
 CONFIGS = {
@@ -43,6 +44,7 @@ def run() -> dict[str, dict]:
 
 if __name__ == "__main__":
     output = run()
+    output = {**report_timestamps(), **output}
     path = Path(__file__).with_name("retrieval_ablation_report.json")
     path.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(output, ensure_ascii=False, indent=2))

@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from .offline import benchmark_report, compare_reports, evaluate_dataset, load_dataset, save_report
+from eval.report_time import report_timestamps
 
 
 def upload_to_langsmith(cases, *, project: str, dataset_name: str) -> str | None:
@@ -71,6 +72,7 @@ def main() -> int:
             results=[EvaluationResult(**item) for item in baseline_data["results"]],
         )
         comparison = compare_reports(baseline, report)
+        comparison.update(report_timestamps())
         comparison_path = Path(args.output).with_name(f"{Path(args.output).stem}-comparison.json")
         comparison_path.write_text(json.dumps(comparison, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"comparison={comparison_path}")

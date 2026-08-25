@@ -10,6 +10,7 @@ import json
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
+from eval.report_time import report_timestamps
 
 
 @dataclass(slots=True)
@@ -46,7 +47,7 @@ class EvaluationReport:
     code_version: str = "working-tree"
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        return {**report_timestamps(), **asdict(self)}
 
 
 def evaluate_case(case: EvaluationCase, *, answer: str, route: str | None = None, tools_used: list[str] | None = None) -> EvaluationResult:

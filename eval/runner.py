@@ -20,6 +20,7 @@ from rag.rag_service import _route_query
 from eval.agent_metrics import evaluate_agent_behavior
 from eval.regression import check_baseline_cases, check_thresholds, combine_regression_checks
 from eval.validate_dataset import validate_retrieval_cases
+from eval.report_time import report_timestamps
 
 
 def load_test_cases(path: str = None) -> list[dict]:
@@ -138,6 +139,7 @@ def run_and_evaluate():
         thresholds,
         performance_check,
     )
+    report.update(report_timestamps())
 
     # 保存报告
     output_path = os.path.join(os.path.dirname(__file__), "eval_report.json")
