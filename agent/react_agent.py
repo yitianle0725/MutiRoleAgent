@@ -46,7 +46,7 @@ from agent.stream_events import TextChunk, ToolEvent, StructuredData
 from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
 from memory.user_profile_extractor import extract_and_save_profile, build_profile_context
-from memory.l2_memory import capture_explicit_turn_async
+from memory.l2_memory import capture_explicit_turn_async, l2_memory_store
 from agent.cita.semantic import SemanticEngine, SemanticAnalysis
 from tools.agent_tools import (
     search_anime, fetch_anime, get_season_anime,
@@ -327,6 +327,7 @@ class ReactAgent:
     async def _execute_chat(
         self, query: str, history: list, trace_id: str,
         tracer: "ConversationTracer | None" = None,
+        l2_memory_context: str = "",
     ):
         """轻量 Chat 路径：直接 LLM 调用，无工具、无 ReAct 循环。
 
@@ -411,6 +412,8 @@ class ReactAgent:
             parts: list[str] = []
             if profile_context:
                 parts.append(profile_context)
+            if l2_memory_context:
+                parts.append(l2_memory_context)
             if cita_overlay:
                 parts.append(f"## 当前对话上下文\n{cita_overlay}")
 
@@ -436,6 +439,8 @@ class ReactAgent:
                 cita_overlay=cita_overlay,
                 user_profile=profile_context,
             )
+            if l2_memory_context:
+                system_prompt += "\n\n---\n\n" + l2_memory_context
 
             # 追加 Chat 模式专用指令
             chat_instruction = (
@@ -722,6 +727,16 @@ class ReactAgent:
         )
         tracer.after_trim(raw_history, trimmed_history)
 
+        # L2 仅检索并注入超过综合分阈值的少量记忆。
+        # SQLite 和 ONNX 推理均移出事件循环，避免阻塞流式响应。
+        l2_memory_context = ""
+        if self.user_id:
+            l2_memory_context = await asyncio.to_thread(
+                l2_memory_store.build_prompt_block,
+                self.user_id,
+                query,
+            )
+
         # ---- 2) Decision Engine 快/慢路由 ----
         decision = decision_engine.evaluate(
             query,
@@ -738,7 +753,13 @@ class ReactAgent:
         # ---- 2a) Chat 路径：直接 LLM，无工具 ----
         if decision.is_chat:
             tracer.chat_path_start(len(trimmed_history))
-            async for event in self._execute_chat(query, trimmed_history, trace_id, tracer):
+            async for event in self._execute_chat(
+                query,
+                trimmed_history,
+                trace_id,
+                tracer,
+                l2_memory_context,
+            ):
                 yield event
             tracer.exit()
             return
@@ -753,6 +774,8 @@ class ReactAgent:
             thread_id=self.thread_id,
             agent_summary=(session_store.get_agent_summary(self.session_id) or build_history_summary(trimmed_history)),
         )
+        if l2_memory_context:
+            state["messages"] = [SystemMessage(content=l2_memory_context), *state["messages"]]
         tracer.agent_path_start(len(state["messages"]))
         tracer.agent_model_before(len(state["messages"]))
 
