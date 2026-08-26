@@ -26,6 +26,17 @@ def build_history_summary(messages: Sequence[Any], *, max_chars: int = 1200) -> 
     return summary[:max_chars]
 
 
+def build_session_summary(messages: Sequence[Any], *, max_chars: int = 1200) -> str:
+    """Session Summary：只说明当前会话到目前为止发生了什么。"""
+    return build_history_summary(messages, max_chars=max_chars)
+
+
+def build_memory_summary(memories: Sequence[str], *, max_chars: int = 1200) -> str:
+    """Memory Summary：压缩多条长期经历后留下的稳定信息，不表示当前会话过程。"""
+    parts = ["- " + " ".join(str(item).split())[:240] for item in memories if str(item).strip()]
+    return "；".join(parts)[:max_chars]
+
+
 def should_build_summary(messages: Sequence[Any], *, max_messages: int = 20, max_chars: int = 12000) -> bool:
     """按消息数量或近似字符数判断是否需要刷新摘要。"""
     if len(messages) > max_messages:
