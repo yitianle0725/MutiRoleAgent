@@ -1,0 +1,33 @@
+{
+  "evaluated_at": "2026-08-26T15:00:38.588192+08:00",
+  "suite": "memory-online-v1",
+  "endpoint": "http://127.0.0.1:8000",
+  "user_id": "memory-online-79f1caf6",
+  "write_turn": {
+    "status_code": 200,
+    "answer": "⚠️ 处理请求时发生错误，请重试。",
+    "events": [
+      "chunk",
+      "chunk",
+      "chunk",
+      "done"
+    ]
+  },
+  "read_turn": {
+    "status_code": 200,
+    "answer": "⚠️ 处理请求时发生错误，请重试。",
+    "events": [
+      "chunk",
+      "chunk",
+      "chunk",
+      "done"
+    ]
+  },
+  "metrics": {
+    "write_http_ok": true,
+    "memory_persisted": false,
+    "read_http_ok": true,
+    "answer_used_preference": false
+  },
+  "passed": false
+}

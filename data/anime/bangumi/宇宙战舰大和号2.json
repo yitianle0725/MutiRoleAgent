@@ -1,0 +1,277 @@
+{
+  "title_cn": "宇宙战舰大和号2",
+  "title_jp": "宇宙戦艦ヤマト2",
+  "url": "https://bangumi.pro/subject/53788",
+  "stats": {
+    "rating": "7.1",
+    "rank": "#2149",
+    "rating_desc": "推荐"
+  },
+  "tags": [
+    {
+      "name": "TV",
+      "count": 25
+    },
+    {
+      "name": "1978",
+      "count": 21
+    },
+    {
+      "name": "宇宙战舰大和号",
+      "count": 17
+    },
+    {
+      "name": "科幻",
+      "count": 17
+    },
+    {
+      "name": "原创",
+      "count": 11
+    }
+  ],
+  "summary_jp": "《宇宙战舰大和号2》（原题：宇宙戦艦ヤマト2；英文题：Space Battleship Yamato 2）是日本读卖电视台制作的科幻电视动画，并于1978年10月14日至1979年4月7日之间每周六晚上19：00在日本电视台播映，同时也是宇宙战舰大和号系列的续集电视作品。",
+  "episodes": [
+    {
+      "ep": 1,
+      "title_cn": "",
+      "title_jp": "2201年ヤマト帰還せよ!",
+      "air_date": "1978-10-14"
+    },
+    {
+      "ep": 2,
+      "title_cn": "",
+      "title_jp": "彗星出現・ヤマトを改造せよ!",
+      "air_date": "1978-10-21"
+    },
+    {
+      "ep": 3,
+      "title_cn": "",
+      "title_jp": "地球の危機に起てヤマト!",
+      "air_date": "1978-10-28"
+    },
+    {
+      "ep": 4,
+      "title_cn": "",
+      "title_jp": "未知への発進!",
+      "air_date": "1978-11-04"
+    },
+    {
+      "ep": 5,
+      "title_cn": "",
+      "title_jp": "主砲全開! 目標ヤマト!!",
+      "air_date": "1978-11-11"
+    },
+    {
+      "ep": 6,
+      "title_cn": "",
+      "title_jp": "激戦! 空間騎兵隊",
+      "air_date": "1978-11-18"
+    },
+    {
+      "ep": 7,
+      "title_cn": "",
+      "title_jp": "逆襲! 姿なき潜宙艦",
+      "air_date": "1978-11-25"
+    },
+    {
+      "ep": 8,
+      "title_cn": "",
+      "title_jp": "宇宙気流! 脱出不可能",
+      "air_date": "1978-12-02"
+    },
+    {
+      "ep": 9,
+      "title_cn": "",
+      "title_jp": "突撃! ヤマトを爆沈せよ",
+      "air_date": "1978-12-09"
+    },
+    {
+      "ep": 10,
+      "title_cn": "",
+      "title_jp": "危機突破! 吠えろ波動砲",
+      "air_date": "1978-12-16"
+    },
+    {
+      "ep": 11,
+      "title_cn": "",
+      "title_jp": "復讐の鬼・デスラー総統",
+      "air_date": "1978-12-23"
+    },
+    {
+      "ep": 12,
+      "title_cn": "",
+      "title_jp": "ヤマト空洞惑星に死す!?",
+      "air_date": "1978-12-30"
+    },
+    {
+      "ep": 13,
+      "title_cn": "",
+      "title_jp": "猛攻! テレザート上陸作戦",
+      "air_date": "1979-01-06"
+    },
+    {
+      "ep": 14,
+      "title_cn": "",
+      "title_jp": "反撃! テレサを発見せよ",
+      "air_date": "1979-01-13"
+    },
+    {
+      "ep": 15,
+      "title_cn": "",
+      "title_jp": "テレサ・愛のはじまり",
+      "air_date": "1979-01-20"
+    },
+    {
+      "ep": 16,
+      "title_cn": "",
+      "title_jp": "テレサ・愛と別れ",
+      "air_date": "1979-01-27"
+    },
+    {
+      "ep": 17,
+      "title_cn": "",
+      "title_jp": "テレザート・宇宙に散る!",
+      "air_date": "1979-02-03"
+    },
+    {
+      "ep": 18,
+      "title_cn": "",
+      "title_jp": "決戦・全艦戦闘開始!",
+      "air_date": "1979-02-10"
+    },
+    {
+      "ep": 19,
+      "title_cn": "",
+      "title_jp": "ヤマト・激突ワープ!!",
+      "air_date": "1979-02-17"
+    },
+    {
+      "ep": 20,
+      "title_cn": "",
+      "title_jp": "ヤマト・奇襲に賭けろ!",
+      "air_date": "1979-02-24"
+    },
+    {
+      "ep": 21,
+      "title_cn": "",
+      "title_jp": "壮烈・土方艦長の死!",
+      "air_date": "1979-03-03"
+    },
+    {
+      "ep": 22,
+      "title_cn": "",
+      "title_jp": "ヤマト・徹底抗戦せよ!",
+      "air_date": "1979-03-10"
+    },
+    {
+      "ep": 23,
+      "title_cn": "",
+      "title_jp": "宿命の対決!",
+      "air_date": "1979-03-17"
+    },
+    {
+      "ep": 24,
+      "title_cn": "",
+      "title_jp": "死闘 二人の勇士!",
+      "air_date": "1979-03-24"
+    },
+    {
+      "ep": 25,
+      "title_cn": "",
+      "title_jp": "ヤマト 都市帝国攻略作戦",
+      "air_date": "1979-03-31"
+    },
+    {
+      "ep": 26,
+      "title_cn": "",
+      "title_jp": "ヤマトよ永遠に",
+      "air_date": "1979-04-07"
+    }
+  ],
+  "characters": [
+    {
+      "name_cn": "古代进",
+      "name_jp": "古代進",
+      "role": "主角",
+      "cv": "富山敬",
+      "url": "https://bangumi.pro/character/9493"
+    },
+    {
+      "name_cn": "森雪",
+      "name_jp": "森雪",
+      "role": "主角",
+      "cv": "麻上洋子",
+      "url": "https://bangumi.pro/character/9494"
+    },
+    {
+      "name_cn": "佐渡酒造",
+      "name_jp": "佐渡酒造",
+      "role": "配角",
+      "cv": "永井一郎",
+      "url": "https://bangumi.pro/character/9495"
+    },
+    {
+      "name_cn": "岛大介",
+      "name_jp": "島大介",
+      "role": "配角",
+      "cv": "仲村秀生",
+      "url": "https://bangumi.pro/character/9496"
+    },
+    {
+      "name_cn": "真田志郎",
+      "name_jp": "真田志郎",
+      "role": "配角",
+      "cv": "青野武",
+      "url": "https://bangumi.pro/character/9497"
+    },
+    {
+      "name_cn": "分析师",
+      "name_jp": "アナライザー",
+      "role": "配角",
+      "cv": "緒方賢一",
+      "url": "https://bangumi.pro/character/9498"
+    },
+    {
+      "name_cn": "德川彦左卫门",
+      "name_jp": "徳川彦左衛門",
+      "role": "配角",
+      "cv": "永井一郎",
+      "url": "https://bangumi.pro/character/9499"
+    },
+    {
+      "name_cn": "阿贝鲁特·德斯拉",
+      "name_jp": "アベルト・デスラー",
+      "role": "配角",
+      "cv": "伊武雅刀",
+      "url": "https://bangumi.pro/character/9501"
+    },
+    {
+      "name_cn": "加藤三郎",
+      "name_jp": "加藤三郎",
+      "role": "配角",
+      "cv": "神谷明",
+      "url": "https://bangumi.pro/character/9588"
+    },
+    {
+      "name_cn": "藤堂平九郎",
+      "name_jp": "藤堂平九郎",
+      "role": "配角",
+      "cv": "伊武雅刀",
+      "url": "https://bangumi.pro/character/53774"
+    },
+    {
+      "name_cn": "希法尔·莎贝拉",
+      "name_jp": "シファル・サーベラー",
+      "role": "配角",
+      "cv": "小原乃梨子",
+      "url": "https://bangumi.pro/character/65453"
+    },
+    {
+      "name_cn": "齐藤始",
+      "name_jp": "斉藤始",
+      "role": "配角",
+      "cv": "ささきいさお",
+      "url": "https://bangumi.pro/character/87035"
+    }
+  ]
+}

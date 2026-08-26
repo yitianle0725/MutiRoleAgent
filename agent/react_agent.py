@@ -912,12 +912,19 @@ class ReactAgent:
 
                 # ---- 4c) 用户画像提取（异步，不阻塞） ----
                 if self.user_id:
-                    import asyncio
                     try:
                         loop = asyncio.get_running_loop()
                         loop.create_task(
                             extract_and_save_profile(
                                 self.user_id, query, full_response
+                            )
+                        )
+                        # Agent 路径与 Chat 路径复用相同的 L2 写入逻辑。
+                        loop.create_task(
+                            capture_explicit_turn_async(
+                                self.user_id,
+                                self.session_id,
+                                query,
                             )
                         )
                     except RuntimeError:

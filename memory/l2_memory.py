@@ -158,7 +158,9 @@ class L2MemoryStore:
         *,
         limit: int = 4,
         min_score: float = 0.30,
-        min_relevance: float = 0.15,
+        min_semantic_relevance: float = 0.70,
+        min_lexical_relevance: float = 0.15,
+        semantic_margin: float = 0.08,
     ) -> list[dict]:
         """返回通过综合分阈值的记忆，供 Prompt 注入使用。"""
         with self._lock, self._connection() as conn:
@@ -168,11 +170,29 @@ class L2MemoryStore:
                 (user_id,),
             ).fetchall()
             query_vector = self._embed(query)
-            selected = []
+            scored: list[tuple[float, float, sqlite3.Row]] = []
             for row in rows:
                 relevance = self._relevance_score(query, query_vector, row)
                 score = self._rank_score(query, query_vector, row)
-                if relevance >= min_relevance and score >= min_score:
+                scored.append((relevance, score, row))
+
+            semantic_available = bool(
+                query_vector and any(row["embedding"] for _, _, row in scored)
+            )
+            best_relevance = max(
+                (relevance for relevance, _, _ in scored),
+                default=0.0,
+            )
+            selected = []
+            for relevance, score, row in scored:
+                lexical = _similarity(query, row["content"])
+                is_relevant = (
+                    relevance >= min_semantic_relevance
+                    and relevance >= best_relevance - semantic_margin
+                    if semantic_available
+                    else lexical >= min_lexical_relevance
+                )
+                if is_relevant and score >= min_score:
                     selected.append((score, row))
             selected.sort(key=lambda item: item[0], reverse=True)
             now = _now()

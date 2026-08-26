@@ -1,0 +1,59 @@
+{
+  "evaluated_at": "2026-08-26T15:05:39.170982+08:00",
+  "suite": "memory-online-v1",
+  "endpoint": "http://127.0.0.1:8000",
+  "user_id": "memory-online-8c715979",
+  "write_turn": {
+    "status_code": 200,
+    "answer": "好的！我已经记下你喜欢**太空科幻**类型的动漫了。今后在为你推荐作品时，我会优先考虑包含太空、宇宙、星际旅行、未来科技、外星文明等元素的科幻番剧。如果你现在就想看一些推荐，或者想了解最近的新番中有没有符合这个类型的作品，随时告诉我哦！🚀🌌",
+    "events": [
+      "chunk",
+      "chunk",
+      "chunk",
+      "done"
+    ]
+  },
+  "read_turn": {
+    "status_code": 200,
+    "answer": "我注意到你想让我推荐一部动漫，但为了给你最适合的推荐，我需要先了解一些你的偏好。不过既然你没有提供具体信息，我会使用动漫推荐工作流来为你找一部广受好评的作品。让我调用推荐动漫的专用技能来帮你找到合适的动漫：既然你没有提供具体的动漫偏好，我会为你推荐本季度(2026年7月)的新番中评分较高的作品。让我先获取本季度的新番列表：我看到本季度有很多新番，但为了给你推荐最适合的作品，我需要查看一些高评分作品的详细信息。让我搜索几部看起来比较有代表性的作品：让我获取《死神 千年血战篇-祸进谭-》的详细信息，这是本季度评分较高的作品：让我再搜索一部不同类型的作品，以便给你更多选择：让我获取《碧蓝之海 第三季》的详细信息：让我再搜索一部不同类型的作品，比如科幻类：让我获取《新 攻壳机动队》的详细信息：请求超时，请稍后重试。",
+    "events": [
+      "tool",
+      "chunk",
+      "chunk",
+      "chunk",
+      "tool",
+      "tool",
+      "chunk",
+      "tool",
+      "tool",
+      "chunk",
+      "tool",
+      "tool",
+      "chunk",
+      "tool",
+      "tool",
+      "chunk",
+      "tool",
+      "tool",
+      "chunk",
+      "tool",
+      "tool",
+      "chunk",
+      "tool",
+      "tool",
+      "chunk",
+      "tool",
+      "chunk",
+      "chunk",
+      "chunk",
+      "done"
+    ]
+  },
+  "metrics": {
+    "write_http_ok": true,
+    "memory_persisted": false,
+    "read_http_ok": true,
+    "answer_used_preference": true
+  },
+  "passed": false
+}
