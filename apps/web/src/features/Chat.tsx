@@ -4,11 +4,13 @@ import { Bubble, Sender } from '@ant-design/x'
 import {
   streamChat,
   getSessionHistory,
+  getSession,
   getSessionMonitor,
   listSessions,
   type SessionMonitor,
   type ToolEventData,
   type HistoryItem,
+  type SessionItem,
 } from '../api'
 import { getToolDisplayName } from './toolNames'
 import { useSpeech } from './voice/speak'
@@ -27,7 +29,15 @@ type ChatItem =
   | { kind: 'structured'; id: string; data: StructuredPayload; time: string }
 
 const DEFAULT_SESSION = 'default'
-const DEFAULT_PERSONA = 'Cyrene'
+const DEFAULT_SESSION_INFO: SessionItem = {
+  session_id: DEFAULT_SESSION,
+  title: '默认会话',
+  user_id: 'local_user',
+  persona_id: 'cyrene',
+  persona_name: 'Cyrene',
+  persona_display_name: '昔涟',
+  mode: 'chat',
+}
 
 const EMPTY_MONITOR: SessionMonitor = {
   total_turns: 0,
@@ -88,7 +98,7 @@ function MessageActions(props: { content: string; onRegenerate: () => void }) {
 
 export function Chat() {
   const [sessionId, setSessionId] = useState(DEFAULT_SESSION)
-  const [persona, setPersona] = useState(DEFAULT_PERSONA)
+  const [currentSession, setCurrentSession] = useState<SessionItem>(DEFAULT_SESSION_INFO)
   const [items, setItems] = useState<ChatItem[]>([])
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
@@ -128,7 +138,7 @@ export function Chat() {
       try {
         const list = await listSessions()
         const recent = list.find((s) => (s.message_count ?? 0) > 0)
-        if (recent) await handleSelectSession(recent.session_id)
+        if (recent) await handleSelectSession(recent)
       } catch (err) {
         console.error('[restore session]', err)
       }
@@ -159,9 +169,11 @@ export function Chat() {
   }, [items])
 
   // 切换会话：重新加载历史回填
-  const handleSelectSession = async (id: string) => {
+  const handleSelectSession = async (selected: SessionItem) => {
     if (busy) return
+    const id = selected.session_id
     setSessionId(id)
+    setCurrentSession(selected)
     setItems([])
     void refreshMonitor(id)
     try {
@@ -177,10 +189,6 @@ export function Chat() {
     } catch (err) {
       console.error('[history]', err)
     }
-  }
-
-  const handleSelectPersona = (name: string) => {
-    setPersona(name)
   }
 
   const handleSend = (text: string) => {
@@ -211,7 +219,7 @@ export function Chat() {
     setBusy(true)
 
     void streamChat(
-      { message: text, session_id: sessionId, persona },
+      { message: text, session_id: sessionId },
       {
         onChunk: (c) => {
           draftRef.current += c
@@ -368,16 +376,14 @@ export function Chat() {
     <div className="app-shell">
       <Sidebar
         sessionId={sessionId}
-        persona={persona}
-        onSelectSession={(id) => void handleSelectSession(id)}
-        onSelectPersona={handleSelectPersona}
-        onRefreshHistory={() => void handleSelectSession(sessionId)}
+        onSelectSession={(session) => void handleSelectSession(session)}
+        onRefreshHistory={() => void getSession(sessionId).then(handleSelectSession)}
       />
 
       <div className="chat-shell">
         <div className="chat-toolbar">
           <span className="chat-title">
-            💬 {sessionId === DEFAULT_SESSION ? '默认会话' : '会话'} · 角色：{persona}
+            {currentSession.mode === 'chat' ? '💬' : '🛠️'} {currentSession.title || '会话'} · {currentSession.persona_display_name || currentSession.persona_name} · {currentSession.mode === 'chat' ? 'Chat' : 'Work'}
           </span>
           <div className="chat-toolbar-actions">
             <label className="auto-speak-toggle">

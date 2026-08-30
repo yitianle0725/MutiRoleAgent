@@ -5,9 +5,7 @@ import type { StructuredPayload } from './features/StructuredCards'
 
 export interface ChatPayload {
   message: string
-  session_id?: string
-  persona?: string
-  user_id?: string
+  session_id: string
 }
 
 export interface ToolEventData {
@@ -146,7 +144,11 @@ function parseSseJson<T>(data: string): T | null {
 export interface SessionItem {
   session_id: string
   title: string
-  user_id?: string
+  user_id: string
+  persona_id: string
+  persona_name: string
+  persona_display_name: string
+  mode: 'chat' | 'work'
   message_count?: number
   updated_at?: string
 }
@@ -161,9 +163,16 @@ export async function listSessions(): Promise<SessionItem[]> {
   return await requestJson<SessionItem[]>('/api/v1/sessions')
 }
 
-export async function createSession(): Promise<string> {
-  const data = await requestJson<{ session_id: string }>('/api/v1/sessions', { method: 'POST' })
-  return data.session_id
+export async function createSession(input: {
+  user_id: string
+  persona_id: string
+  mode: 'chat' | 'work'
+}): Promise<SessionItem> {
+  return await requestJson<SessionItem>('/api/v1/sessions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(input),
+  })
 }
 
 export async function getSessionHistory(sessionId: string): Promise<HistoryItem[]> {
@@ -173,13 +182,25 @@ export async function getSessionHistory(sessionId: string): Promise<HistoryItem[
   return data.messages ?? []
 }
 
+export async function getSession(sessionId: string): Promise<SessionItem & { messages: HistoryItem[] }> {
+  return await requestJson<SessionItem & { messages: HistoryItem[] }>(
+    `/api/v1/sessions/${encodeURIComponent(sessionId)}`,
+  )
+}
+
 export async function deleteSession(sessionId: string): Promise<void> {
   await requestJson(`/api/v1/sessions/${encodeURIComponent(sessionId)}`, { method: 'DELETE' })
 }
 
-export async function listPersonas(): Promise<string[]> {
-  const data = await requestJson<{ names?: string[] }>('/api/v1/personas')
-  return data.names ?? []
+export interface PersonaItem {
+  persona_id: string
+  name: string
+  display_name: string
+}
+
+export async function listPersonas(): Promise<PersonaItem[]> {
+  const data = await requestJson<{ personas?: PersonaItem[] }>('/api/v1/personas')
+  return data.personas ?? []
 }
 
 export interface SessionMonitor {

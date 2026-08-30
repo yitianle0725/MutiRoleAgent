@@ -12,19 +12,32 @@
 from __future__ import annotations
 
 from pathlib import Path
+import asyncio
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from api.routes import chat, persona, sessions, voice, web, runs
+from memory.chat_db import chat_db
 
 # 前端构建产物目录（cd apps/web && npm run build）
 WEB_DIST = Path(__file__).resolve().parents[1] / "apps" / "web" / "dist"
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await asyncio.to_thread(chat_db.init_db)
+    yield
+
+
 def create_app() -> FastAPI:
-    app = FastAPI(title="MutiRoleAgent API", description="多角色 Agent 后端服务")
+    app = FastAPI(
+        title="MutiRoleAgent API",
+        description="多角色 Agent 后端服务",
+        lifespan=lifespan,
+    )
 
     # ---- 前端托管（构建产物存在时才挂载） ----
     index_html = WEB_DIST / "index.html"

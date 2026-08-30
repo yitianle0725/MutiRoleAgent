@@ -11,15 +11,12 @@ from __future__ import annotations
 
 import json
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from sse_starlette.sse import EventSourceResponse
 
-from agent.react_agent import ReactAgent
 from agent.stream_events import StructuredData, TextChunk, ToolEvent
-from channels.manager import agent_cache
-from orchestration.coordinator import ConversationCoordinator
-from orchestration.session_runner import SessionAgentRunner
+from channels.platforms.fastapi import conversation_coordinator
 
 router = APIRouter(tags=["chat"])
 
@@ -29,49 +26,6 @@ class ChatRequest(BaseModel):
 
     query: str = Field(..., description="用户输入的文本")
     session_id: str | None = Field(default=None, description="会话唯一标识，缺省用 default")
-    user_id: str | None = Field(default=None, description="用户 ID，可选")
-    persona: str | None = Field(default=None, description="角色人设名，如 Cyrene")
-
-
-async def get_or_create_agent(req: ChatRequest) -> ReactAgent:
-    """异步地获取（或创建并初始化）一个就绪 Agent。
-
-    逻辑对齐 ``app.py::_init_agent_sync``，但这里是纯 async 版本：
-    缓存未命中时直接 ``await agent.init_agent()``，无需后台线程包装。
-    """
-    session_id = req.session_id or "default"
-    cached = agent_cache.get(session_id)
-
-    if cached is not None:
-        # 角色 / 用户变化时淘汰旧缓存，重建
-        changed = (req.user_id and cached.user_id != req.user_id) or (
-            req.persona and cached.default_persona != req.persona
-        )
-        if changed:
-            agent_cache.evict(session_id)
-        else:
-            return cached
-
-    agent = ReactAgent(
-        session_id=session_id,
-        user_id=req.user_id,
-        default_persona=req.persona,
-    )
-    try:
-        await agent.init_agent()
-    except Exception as exc:
-        raise HTTPException(status_code=503, detail=f"Agent 初始化失败: {exc}") from exc
-    agent_cache.put(session_id, agent)
-    return agent
-
-
-async def _agent_factory(session_id: str, user_id: str | None, persona: str | None) -> ReactAgent:
-    return await get_or_create_agent(
-        ChatRequest(query="", session_id=session_id, user_id=user_id, persona=persona)
-    )
-
-
-conversation_coordinator = ConversationCoordinator(SessionAgentRunner(_agent_factory))
 
 
 @router.post("/chat/stream")
@@ -82,8 +36,6 @@ async def chat_stream(req: ChatRequest) -> EventSourceResponse:
             async for event in conversation_coordinator.handle_user_turn_stream(
                 req.query,
                 session_id=req.session_id or "default",
-                user_id=req.user_id,
-                persona=req.persona,
             ):
                 if isinstance(event, TextChunk):
                     # 逐段文字，前端做打字机效果

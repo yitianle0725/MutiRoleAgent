@@ -143,6 +143,8 @@ class ReactAgent:
         session_id: str = "default",
         user_id: str | None = None,
         default_persona: str | None = None,
+        *,
+        external_persistence: bool = False,
     ):
         """
         Args:
@@ -154,6 +156,8 @@ class ReactAgent:
         self.session_id = session_id
         self.user_id = user_id
         self.default_persona = default_persona
+        self.external_persistence = external_persistence
+        self._runtime_context = ""
         self._turn_lock = threading.Lock()
         self.performance_monitor = PerformanceMonitor()
         self.agent = None            # LangGraph 编译后的图
@@ -197,7 +201,7 @@ class ReactAgent:
         local_tools = [
             search_anime, fetch_anime, get_season_anime,
             search_novel, fetch_novel, search_game_official,
-            rag_summarize, switch_persona, reset_persona,
+            rag_summarize,
             get_public_ip, get_current_time,
             download_novel,
         ]
@@ -224,8 +228,11 @@ class ReactAgent:
 
         # 构建 system prompt（注入 Skill 摘要）
         try:
-            from prompts.composer import compose_base_prompt
-            system_prompt = compose_base_prompt(skills_summary=skills_summary)
+            from prompts.composer import compose_prompt
+            system_prompt = compose_prompt(
+                persona=self.default_persona,
+                skills_summary=skills_summary,
+            )
         except Exception:
             # Fallback: 旧架构
             base_prompt = load_system_prompts()
@@ -261,6 +268,10 @@ class ReactAgent:
         chat_db.load_session_into_store(self.session_id, session_store)
 
         self._initialized = True
+
+    def set_runtime_context(self, context: str) -> None:
+        """设置本轮由 SessionContextBuilder 产生的可信动态上下文。"""
+        self._runtime_context = str(context or "")
 
     # ==================== 消息提取 ====================
 
@@ -730,41 +741,19 @@ class ReactAgent:
         # L2 仅检索并注入超过综合分阈值的少量记忆。
         # SQLite 和 ONNX 推理均移出事件循环，避免阻塞流式响应。
         l2_memory_context = ""
-        if self.user_id:
+        if self.user_id and not self.external_persistence:
             l2_memory_context = await asyncio.to_thread(
                 l2_memory_store.build_prompt_block,
                 self.user_id,
                 query,
             )
 
-        # ---- 2) Decision Engine 快/慢路由 ----
-        decision = decision_engine.evaluate(
-            query,
-            session_id=self.session_id,
-            history=trimmed_history,
-        )
-        tracer.decision(decision.route, decision.confidence, decision.reason)
-        self._current_route = decision.route
-        logger.info(
-            f"[trace={trace_id}] Decision: route={decision.route} "
-            f"conf={decision.confidence:.2f} reason={decision.reason}"
-        )
+        # 模式已经由 Session 在创建时锁定。ReactAgent 仅承担 Work 执行，
+        # 不再根据用户文本重复判断 Chat / Agent。
+        self._current_route = "work"
+        tracer.decision("work", 1.0, "session_mode")
 
-        # ---- 2a) Chat 路径：直接 LLM，无工具 ----
-        if decision.is_chat:
-            tracer.chat_path_start(len(trimmed_history))
-            async for event in self._execute_chat(
-                query,
-                trimmed_history,
-                trace_id,
-                tracer,
-                l2_memory_context,
-            ):
-                yield event
-            tracer.exit()
-            return
-
-        # ---- 2b) Agent 路径：完整 ReAct Agent（原有流程） ----
+        # ---- 2) Work 路径：完整 ReAct Agent ----
         state = create_agent_state(
             user_query=query,
             session_id=self.session_id,
@@ -776,6 +765,8 @@ class ReactAgent:
         )
         if l2_memory_context:
             state["messages"] = [SystemMessage(content=l2_memory_context), *state["messages"]]
+        if self._runtime_context:
+            state["messages"] = [SystemMessage(content=self._runtime_context), *state["messages"]]
         tracer.agent_path_start(len(state["messages"]))
         tracer.agent_model_before(len(state["messages"]))
 
@@ -784,14 +775,9 @@ class ReactAgent:
         token_stats = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}
         last_graph_event_at = time.perf_counter()
         try:
-            graph_config = build_graph_config(
-                session_id=self.session_id,
-                thread_id=self.thread_id,
-                run_id=trace_id,
-            )
-            async for chunk in self.agent.astream(
+            async for chunk in self.core.astream(
                 state,
-                config=graph_config,
+                run_id=trace_id,
                 stream_mode="values",
             ):
                 now = time.perf_counter()
@@ -871,7 +857,7 @@ class ReactAgent:
                         raw_json=struct_result.raw_json,
                     )
 
-            if full_response:
+            if full_response and not self.external_persistence:
                 session_store.append_pair(self.session_id, query, full_response)
                 updated_history = session_store.get_history(self.session_id)
                 if should_build_summary(updated_history):

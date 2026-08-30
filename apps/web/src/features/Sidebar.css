@@ -12,6 +12,32 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
+.session-create-field {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+  color: var(--text-secondary, #666);
+  font-size: 12px;
+}
+
+.session-create-field select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  background: var(--panel-bg, #fff);
+}
+
+.sidebar-create {
+  width: 100%;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  background: #d96c98;
+  cursor: pointer;
+}
+
 .sidebar-header {
   display: flex;
   align-items: center;

@@ -10,11 +10,19 @@ from __future__ import annotations
 import asyncio
 import uuid
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
+from pydantic import BaseModel, Field
 
 from memory.chat_db import chat_db
 
 router = APIRouter(tags=["sessions"])
+
+
+class CreateSessionRequest(BaseModel):
+    user_id: str = "local_user"
+    persona_id: str = "cyrene"
+    mode: str = Field(default="chat", pattern="^(chat|work)$")
+    title: str = "新会话"
 
 
 @router.get("/sessions")
@@ -25,11 +33,17 @@ async def list_sessions(limit: int = 30):
 
 
 @router.post("/sessions")
-async def create_session():
+async def create_session(request: CreateSessionRequest):
     """新建一个空会话，返回新的 session_id。"""
     session_id = str(uuid.uuid4())
-    await asyncio.to_thread(chat_db.upsert_session_meta, session_id, title="新会话", user_id="")
-    return {"session_id": session_id}
+    return await asyncio.to_thread(
+        chat_db.create_session,
+        session_id,
+        user_id=request.user_id,
+        persona_id=request.persona_id,
+        mode=request.mode,
+        title=request.title,
+    )
 
 
 @router.get("/sessions/{session_id}/history")

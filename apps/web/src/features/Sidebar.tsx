@@ -1,26 +1,26 @@
-// 左侧栏：会话列表 + 角色选择
-// 会话来自后端 chat_db 持久化；角色来自 persona_loader
+// 左侧栏：会话列表 + 创建时锁定角色和模式
 import { useEffect, useState } from 'react'
 import {
   listSessions,
   createSession,
   deleteSession,
   listPersonas,
+  type PersonaItem,
   type SessionItem,
 } from '../api'
 import './Sidebar.css'
 
 interface SidebarProps {
   sessionId: string
-  persona: string
-  onSelectSession: (id: string) => void
-  onSelectPersona: (name: string) => void
+  onSelectSession: (session: SessionItem) => void
   onRefreshHistory: () => void
 }
 
 export function Sidebar(props: SidebarProps) {
   const [sessions, setSessions] = useState<SessionItem[]>([])
-  const [personas, setPersonas] = useState<string[]>([])
+  const [personas, setPersonas] = useState<PersonaItem[]>([])
+  const [newPersonaId, setNewPersonaId] = useState('cyrene')
+  const [newMode, setNewMode] = useState<'chat' | 'work'>('chat')
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
 
@@ -39,13 +39,20 @@ export function Sidebar(props: SidebarProps) {
 
   useEffect(() => {
     void loadSessions()
-    void listPersonas().then(setPersonas).catch(console.error)
+    void listPersonas().then((items) => {
+      setPersonas(items)
+      if (items.length > 0) setNewPersonaId(items[0].persona_id)
+    }).catch(console.error)
   }, [props.sessionId])
 
   const handleNew = async () => {
     try {
-      const id = await createSession()
-      props.onSelectSession(id) // 切到新会话（空历史）
+      const session = await createSession({
+        user_id: 'local_user',
+        persona_id: newPersonaId,
+        mode: newMode,
+      })
+      props.onSelectSession(session)
       await loadSessions()
     } catch (err) {
       console.error('[sessions] new', err)
@@ -56,10 +63,8 @@ export function Sidebar(props: SidebarProps) {
     if (!confirm(`确定删除会话「${id.slice(0, 8)}…」？`)) return
     try {
       await deleteSession(id)
-      if (id === props.sessionId) {
-        // 删除的是当前会话：切到默认
-        props.onSelectSession('default')
-      }
+      const remaining = sessions.filter((session) => session.session_id !== id)
+      if (id === props.sessionId && remaining[0]) props.onSelectSession(remaining[0])
       await loadSessions()
       props.onRefreshHistory()
     } catch (err) {
@@ -71,59 +76,46 @@ export function Sidebar(props: SidebarProps) {
     <aside className="sidebar">
       <div className="sidebar-section">
         <div className="sidebar-header">
-          <span className="sidebar-title">会话</span>
-          <button className="sidebar-new" onClick={() => void handleNew()} title="新建会话">
-            +
-          </button>
+          <span className="sidebar-title">新会话</span>
         </div>
-        <div className="session-list">
-          {loadError && (
-            <button className="sidebar-retry" onClick={() => void loadSessions()}>
-              {loadError}，重试
-            </button>
-          )}
-          {sessions.length === 0 && !loading && !loadError && (
-            <div className="sidebar-empty">暂无历史会话</div>
-          )}
-          {sessions.map((s) => (
-            <div
-              key={s.session_id}
-              className={`session-item ${s.session_id === props.sessionId ? 'is-active' : ''}`}
-            >
-              <button
-                className="session-item-main"
-                onClick={() => props.onSelectSession(s.session_id)}
-              >
-                <span className="session-item-title">{s.title || s.session_id.slice(0, 8)}</span>
-                <span className="session-item-meta">
-                  {s.message_count ?? 0} 条 · {s.updated_at?.slice(5, 16) ?? ''}
-                </span>
-              </button>
-              <button
-                className="session-item-del"
-                onClick={() => void handleDelete(s.session_id)}
-                title="删除会话"
-              >
-                ×
-              </button>
-            </div>
-          ))}
-        </div>
+        <label className="session-create-field">
+          <span>角色</span>
+          <select value={newPersonaId} onChange={(event) => setNewPersonaId(event.target.value)}>
+            {personas.map((persona) => (
+              <option key={persona.persona_id} value={persona.persona_id}>
+                {persona.display_name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="session-create-field">
+          <span>模式</span>
+          <select value={newMode} onChange={(event) => setNewMode(event.target.value as 'chat' | 'work')}>
+            <option value="chat">Chat · 陪伴聊天</option>
+            <option value="work">Work · 工具任务</option>
+          </select>
+        </label>
+        <button className="sidebar-create" onClick={() => void handleNew()}>
+          创建会话
+        </button>
       </div>
 
       <div className="sidebar-section">
-        <div className="sidebar-header">
-          <span className="sidebar-title">角色</span>
-        </div>
-        <div className="persona-list">
-          {personas.map((p) => (
-            <button
-              key={p}
-              className={`persona-item ${p === props.persona ? 'is-active' : ''}`}
-              onClick={() => props.onSelectPersona(p)}
-            >
-              {p}
-            </button>
+        <div className="sidebar-header"><span className="sidebar-title">会话</span></div>
+        <div className="session-list">
+          {loadError && <button className="sidebar-retry" onClick={() => void loadSessions()}>{loadError}，重试</button>}
+          {sessions.length === 0 && !loading && !loadError && <div className="sidebar-empty">暂无历史会话</div>}
+          {sessions.map((session) => (
+            <div key={session.session_id} className={`session-item ${session.session_id === props.sessionId ? 'is-active' : ''}`}>
+              <button className="session-item-main" onClick={() => props.onSelectSession(session)}>
+                <span className="session-item-title">{session.title || session.session_id.slice(0, 8)}</span>
+                <span className="session-item-meta">
+                  {session.persona_display_name || session.persona_name} · {session.mode === 'chat' ? 'Chat' : 'Work'}
+                </span>
+                <span className="session-item-meta">{session.message_count ?? 0} 条 · {session.updated_at?.slice(5, 16) ?? ''}</span>
+              </button>
+              <button className="session-item-del" onClick={() => void handleDelete(session.session_id)} title="删除会话">×</button>
+            </div>
           ))}
         </div>
       </div>

@@ -24,6 +24,9 @@ from memory.session_store import SessionStore, session_store as default_session_
 from .session_runner import SessionAgentRunner
 from .roleplay import RoleplayEngine
 from .runs import AgentRun, RunStore
+from .context_builder import SessionContextBuilder
+from .executors import ChatExecutor, WorkExecutor
+from .finish_hook import TurnFinishHook
 
 
 StreamEvent = TextChunk | ToolEvent | StructuredData
@@ -47,12 +50,20 @@ class ConversationCoordinator:
         run_store: RunStore | None = None,
         decision: DecisionEngine | None = None,
         session_store: SessionStore | None = None,
+        context_builder: SessionContextBuilder | None = None,
+        chat_executor: ChatExecutor | None = None,
+        work_executor: WorkExecutor | None = None,
+        finish_hook: TurnFinishHook | None = None,
     ) -> None:
         self._runner = runner
         self._roleplay = roleplay or RoleplayEngine()
         self._runs = run_store or RunStore()
         self._decision = decision or default_decision_engine
         self._session_store = session_store or default_session_store
+        self._context_builder = context_builder
+        self._chat_executor = chat_executor
+        self._work_executor = work_executor
+        self._finish_hook = finish_hook
         if getattr(self._runner, "_session_store", None) is None:
             self._runner._session_store = self._session_store
         if getattr(self._runner, "_run_store", None) is None:
@@ -80,6 +91,21 @@ class ConversationCoordinator:
 
     def bind_session(self, session_id: str) -> None:
         self._runner_session_id = session_id
+
+    def get_history_info(self) -> dict[str, Any]:
+        history = self._session_store.get_history(self.session_id)
+        return {
+            "message_count": len(history),
+            "round_count": len(history) // 2,
+            "estimated_tokens": sum(len(str(getattr(item, "content", ""))) for item in history) // 4,
+            "llm_total_tokens": 0,
+            "last_turn_tokens": 0,
+        }
+
+    def clear_history(self) -> None:
+        from memory.chat_db import chat_db
+        self._session_store.clear(self.session_id)
+        chat_db.clear_messages(self.session_id)
 
     async def chat_reply(
         self,
@@ -115,6 +141,23 @@ class ConversationCoordinator:
 
         lock = await self._get_session_lock(session_id)
         async with lock:
+            if self._context_builder and self._chat_executor and self._work_executor:
+                session = await self._context_builder.require_session(session_id)
+                context = await self._context_builder.build(session, prompt)
+                executor = self._chat_executor if session.mode == "chat" else self._work_executor
+                events: list[StreamEvent] = []
+                async for event in executor.stream(prompt, context):
+                    events.append(event)
+                    yield event
+                if self._finish_hook:
+                    await self._finish_hook.complete(
+                        context=context,
+                        prompt=prompt,
+                        events=events,
+                    )
+                return
+
+            # 旧构造方式只供尚未迁移的测试和兼容入口使用。
             history = await asyncio.to_thread(self._session_store.get_history, session_id)
             decision = self._decision.evaluate(
                 prompt,
@@ -352,7 +395,16 @@ class ConversationCoordinator:
         return fact
 
     async def _present_fact(self, fact: AgentFactResult, prompt: str, persona: str | None) -> str:
-        return await self._roleplay.present_agent_result(fact, user_input=prompt, persona=persona)
+        # Persona 已在 Chat/Work 的执行前 Prompt 中生效。成功结果直接返回，
+        # 避免第二次 LLM 改写破坏事实或削弱长期角色一致性。
+        if fact.status == "completed" and not fact.errors:
+            return fact.text
+        if fact.status == "failed":
+            detail = "; ".join(fact.errors) or fact.text or "未知错误"
+            return f"处理失败：{detail}"
+        if fact.status == "cancelled":
+            return f"处理已取消。{fact.text}".strip()
+        return fact.text or "还需要你补充一些信息。"
 
     async def _run_background(
         self,

@@ -25,6 +25,11 @@ from tools.voice import VoiceState, VoiceStateMachine
 from tools.voice.service import voice_conversation_service
 from orchestration.coordinator import ConversationCoordinator
 from orchestration.session_runner import SessionAgentRunner
+from orchestration.context_builder import SessionContextBuilder
+from orchestration.executors import ChatExecutor, WorkExecutor
+from orchestration.finish_hook import TurnFinishHook
+from memory.persona_catalog import persona_catalog
+from memory.session_store import session_store
 
 # ==================== 页面配置 ====================
 st.set_page_config(
@@ -33,37 +38,45 @@ st.set_page_config(
     layout="wide",
 )
 
+chat_db.init_db()
+
 # ==================== 会话状态初始化 ====================
 
 def _init_agent_sync(session_id: str, user_id: str | None = None, default_persona: str | None = None) -> ConversationCoordinator:
-    """在 Streamlit 启动时同步完成 Agent 异步初始化。
+    """构建与 FastAPI 相同的 Session 驱动主链。"""
+    chat_db.init_db()
+    session = chat_db.get_session(session_id)
+    if session is None:
+        persona_id = persona_catalog.id_for_name(default_persona or "Cyrene")
+        chat_db.create_session(
+            session_id,
+            user_id=user_id or "local_user",
+            persona_id=persona_id,
+            mode="chat",
+            title="新会话",
+        )
 
-    优先从跨 channel 共享的 ``agent_cache`` 获取，缓存未命中时才创建新实例。
-    """
-    # 快速路径：缓存命中
-    cached = agent_cache.get(session_id)
-    if cached is not None:
-        # 如果 user_id / persona 变化，淘汰旧缓存
-        if (user_id and cached.user_id != user_id) or \
-           (default_persona and cached.default_persona != default_persona):
-            agent_cache.evict(session_id)
-        else:
-            coordinator = ConversationCoordinator(
-                SessionAgentRunner(lambda sid, uid, persona: _resolved_agent(cached))
-            )
-            coordinator.bind_session(session_id)
-            return coordinator
+    async def agent_factory(sid: str, uid: str | None, persona: str | None) -> ReactAgent:
+        cached = agent_cache.get(sid)
+        if cached is not None:
+            return cached
+        work_agent = ReactAgent(
+            session_id=sid,
+            user_id=uid,
+            default_persona=persona,
+            external_persistence=True,
+        )
+        await work_agent.init_agent()
+        agent_cache.put(sid, work_agent)
+        return work_agent
 
-    agent = ReactAgent(session_id=session_id, user_id=user_id, default_persona=default_persona)
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    try:
-        loop.run_until_complete(agent.init_agent())
-    finally:
-        loop.close()
-    agent_cache.put(session_id, agent)
+    runner = SessionAgentRunner(agent_factory)
     coordinator = ConversationCoordinator(
-        SessionAgentRunner(lambda sid, uid, persona: _resolved_agent(agent))
+        runner,
+        context_builder=SessionContextBuilder(chat_db),
+        chat_executor=ChatExecutor(),
+        work_executor=WorkExecutor(runner),
+        finish_hook=TurnFinishHook(chat_db, session_store),
     )
     coordinator.bind_session(session_id)
     return coordinator
@@ -71,6 +84,17 @@ def _init_agent_sync(session_id: str, user_id: str | None = None, default_person
 
 async def _resolved_agent(agent: ReactAgent) -> ReactAgent:
     return agent
+
+
+def _load_session_binding(session_id: str) -> tuple[str, str]:
+    """把已有 Session 的不可变绑定同步到 Streamlit 状态。"""
+    meta = chat_db.get_session(session_id)
+    if meta is None:
+        raise ValueError(f"会话不存在：{session_id}")
+    st.session_state["user_id"] = meta["user_id"]
+    st.session_state["persona"] = meta["persona_name"]
+    st.session_state["mode"] = meta["mode"]
+    return meta["user_id"], meta["persona_name"]
 
 
 # session_id 持久化到 URL 参数，刷新页面不丢失
@@ -96,11 +120,19 @@ elif "session_id" not in st.session_state:
 PERSONA_NAMES = ["（无）"] + persona_loader.available_names
 
 if "user_id" not in st.session_state:
-    st.session_state["user_id"] = None
+    st.session_state["user_id"] = "local_user"
 
 # 默认角色人设：昔涟（Cyrene）
 if "persona" not in st.session_state:
     st.session_state["persona"] = "Cyrene"
+
+current_session_meta = chat_db.get_session(st.session_state["session_id"])
+if current_session_meta:
+    st.session_state["user_id"] = current_session_meta["user_id"]
+    st.session_state["persona"] = current_session_meta["persona_name"]
+    st.session_state["mode"] = current_session_meta["mode"]
+else:
+    st.session_state.setdefault("mode", "chat")
 
 if "agent" not in st.session_state:
     with st.spinner("正在初始化 Agent（加载 MCP 工具 + RAG 知识库）……"):
@@ -130,7 +162,7 @@ if "voice_transcript_clear_pending" not in st.session_state:
     st.session_state["voice_transcript_clear_pending"] = False
 
 # 便捷引用
-agent: ReactAgent = st.session_state["agent"]
+agent: ConversationCoordinator = st.session_state["agent"]
 
 # 如果 UI 消息列表为空但 SQLite 有历史，从数据库恢复
 if not st.session_state["message"] and agent.session_id:
@@ -154,50 +186,17 @@ with st.sidebar:
     current_sid = st.session_state["session_id"]
     current_uid = st.session_state.get("user_id")
 
-    # ---- 用户 ID ----
-    user_id_input = st.text_input(
-        "👤 用户 ID", value=current_uid or "",
-        placeholder="输入你的用户 ID（如 1001）…",
-        help="用于关联使用记录和长期记忆。",
-    )
-    if user_id_input != (current_uid or ""):
-        if user_id_input.strip():
-            st.session_state["user_id"] = user_id_input.strip()
-        else:
-            st.session_state["user_id"] = None
-        # 重建 agent 以应用新的 user_id
-        st.session_state["agent"] = _init_agent_sync(
-            current_sid, st.session_state["user_id"],
-            st.session_state["persona"],
-        )
-        st.rerun()
-
-    # ---- 角色人设 ----
+    # User、Persona 和 Mode 在创建 Session 时锁定，当前会话只读展示。
     persona_display = {
-        "（无）": "（无）",
         "Cyrene": "🌸 昔涟",
         "Columbina": "🕊️ 哥伦比亚",
         "Ye Shunguang": "✨ 叶瞬光",
         "Zhuang Fangyi": "🌿 庄方宜",
     }
     current_persona = st.session_state.get("persona", "Cyrene")
-    selected_label = persona_display.get(current_persona, current_persona)
-    selected_persona = st.selectbox(
-        "🎭 角色人设",
-        options=list(persona_display.keys()),
-        format_func=lambda k: persona_display.get(k, k),
-        index=list(persona_display.keys()).index(current_persona)
-            if current_persona in persona_display else 0,
-        help="切换 AI 的角色人设和语气风格。",
-    )
-    if selected_persona != current_persona:
-        new_persona = selected_persona if selected_persona != "（无）" else None
-        st.session_state["persona"] = new_persona
-        st.session_state["agent"] = _init_agent_sync(
-            current_sid, current_uid,
-            default_persona=new_persona,
-        )
-        st.rerun()
+    st.caption(f"👤 用户：**{current_uid or 'local_user'}**")
+    st.caption(f"🎭 角色：**{persona_display.get(current_persona, current_persona)}**")
+    st.caption(f"🧭 模式：**{str(st.session_state.get('mode', 'chat')).upper()}**")
 
     # 显示完整会话 ID（可复制）
     meta = chat_db.get_session_meta(current_sid)
@@ -237,14 +236,28 @@ with st.sidebar:
 
     st.divider()
 
-    # ---- 新建会话 ----
+    # ---- 新建会话：角色与模式在这里选择并锁定 ----
+    new_persona = st.selectbox(
+        "新会话角色",
+        options=list(persona_display.keys()),
+        format_func=lambda key: persona_display[key],
+    )
+    new_mode = st.selectbox("新会话模式", options=["chat", "work"], format_func=str.upper)
     if st.button("🆕 新建会话", use_container_width=True):
         new_id = str(uuid.uuid4())
+        chat_db.create_session(
+            new_id,
+            user_id=current_uid or "local_user",
+            persona_id=persona_catalog.id_for_name(new_persona),
+            mode=new_mode,
+            title="新会话",
+        )
         st.session_state["session_id"] = new_id
+        st.session_state["persona"] = new_persona
+        st.session_state["mode"] = new_mode
         st.query_params["session_id"] = new_id
         st.session_state["agent"] = _init_agent_sync(
-            new_id, st.session_state["user_id"],
-            st.session_state["persona"],
+            new_id, current_uid, new_persona,
         )
         st.session_state["message"] = []
         st.rerun()
@@ -256,11 +269,11 @@ with st.sidebar:
         label_visibility="collapsed",
     )
     if switch_to and switch_to != current_sid:
+        bound_user, bound_persona = _load_session_binding(switch_to)
         st.session_state["session_id"] = switch_to
         st.query_params["session_id"] = switch_to
         st.session_state["agent"] = _init_agent_sync(
-            switch_to, st.session_state["user_id"],
-            st.session_state["persona"],
+            switch_to, bound_user, bound_persona,
         )
         st.session_state["message"] = []
         st.rerun()
@@ -304,10 +317,11 @@ with st.sidebar:
                     label = f"{'👉 ' if is_current else ''}{stitle[:15]} ({count}条)"
                     if not is_current:
                         if st.button(label, key=f"sw_{sid}", use_container_width=True):
+                            bound_user, bound_persona = _load_session_binding(sid)
                             st.session_state["session_id"] = sid
                             st.query_params["session_id"] = sid
                             st.session_state["agent"] = _init_agent_sync(
-                                sid, current_uid, st.session_state.get("persona"),
+                                sid, bound_user, bound_persona,
                             )
                             st.session_state["message"] = []
                             st.rerun()
@@ -322,12 +336,21 @@ with st.sidebar:
                             remaining = chat_db.list_sessions_with_meta(limit=1)
                             if remaining:
                                 new_sid = remaining[0]["session_id"]
+                                bound_user, bound_persona = _load_session_binding(new_sid)
                             else:
                                 new_sid = str(uuid.uuid4())
+                                chat_db.create_session(
+                                    new_sid,
+                                    user_id=current_uid or "local_user",
+                                    persona_id=persona_catalog.id_for_name(current_persona),
+                                    mode="chat",
+                                    title="新会话",
+                                )
+                                bound_user, bound_persona = current_uid or "local_user", current_persona
                             st.session_state["session_id"] = new_sid
                             st.query_params["session_id"] = new_sid
                             st.session_state["agent"] = _init_agent_sync(
-                                new_sid, current_uid, st.session_state.get("persona"),
+                                new_sid, bound_user, bound_persona,
                             )
                         st.session_state["message"] = []
                         st.rerun()

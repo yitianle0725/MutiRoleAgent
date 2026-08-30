@@ -63,9 +63,14 @@ from agent.react_agent import ReactAgent
 from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_display_name, event_to_content_block
 from orchestration.coordinator import ConversationCoordinator
 from orchestration.session_runner import SessionAgentRunner
+from orchestration.context_builder import SessionContextBuilder
+from orchestration.executors import ChatExecutor, WorkExecutor
+from orchestration.finish_hook import TurnFinishHook
 from channels.base import Channel
 from channels.manager import agent_cache
 from memory.chat_db import chat_db
+from memory.persona_catalog import persona_catalog
+from memory.session_store import session_store
 from observability.store import monitor_store
 from utils.persona_loader import persona_loader
 from utils.logger_handler import logger
@@ -80,8 +85,6 @@ class ChatRequest(BaseModel):
 
     message: str = Field(..., description="用户输入文本", min_length=1)
     session_id: str = Field(default="default", description="会话唯一标识")
-    user_id: str | None = Field(default=None, description="用户 ID（可选）")
-    persona: str | None = Field(default=None, description="角色人设（可选，如 'Cyrene'）")
 
 
 class SessionInfo(BaseModel):
@@ -90,6 +93,10 @@ class SessionInfo(BaseModel):
     session_id: str
     title: str = ""
     user_id: str = ""
+    persona_id: str = ""
+    persona_name: str = ""
+    persona_display_name: str = ""
+    mode: str = "chat"
     message_count: int = 0
     updated_at: str | None = None
 
@@ -100,6 +107,12 @@ class SessionDetail(BaseModel):
     session_id: str
     title: str = ""
     user_id: str = ""
+    persona_id: str = ""
+    persona_name: str = ""
+    persona_display_name: str = ""
+    mode: str = "chat"
+    summary: str = ""
+    workspace: str | None = None
     message_count: int = 0
     messages: list[dict] = Field(default_factory=list)
     created_at: str | None = None
@@ -111,7 +124,9 @@ class CreateSessionRequest(BaseModel):
 
     session_id: str | None = Field(default=None, description="自定义会话 ID，不传则自动生成")
     title: str | None = Field(default=None, description="会话标题")
-    user_id: str | None = Field(default=None, description="用户 ID")
+    user_id: str = Field(default="local_user", description="用户 ID")
+    persona_id: str = Field(default="cyrene", description="稳定角色 ID")
+    mode: str = Field(default="chat", pattern="^(chat|work)$")
 
 
 class HealthResponse(BaseModel):
@@ -164,6 +179,7 @@ async def _get_or_create_agent(
             session_id=session_id,
             user_id=user_id,
             default_persona=persona,
+            external_persistence=True,
         )
         await agent.init_agent()
         agent_cache.put(session_id, agent)
@@ -171,8 +187,13 @@ async def _get_or_create_agent(
 
 
 # FastAPI 的主聊天入口统一经过 Coordinator；旧的 ReactAgent 仍作为底层兼容实现。
+session_runner = SessionAgentRunner(_get_or_create_agent)
 conversation_coordinator = ConversationCoordinator(
-    SessionAgentRunner(_get_or_create_agent)
+    session_runner,
+    context_builder=SessionContextBuilder(chat_db),
+    chat_executor=ChatExecutor(),
+    work_executor=WorkExecutor(session_runner),
+    finish_hook=TurnFinishHook(chat_db, session_store),
 )
 
 
@@ -183,12 +204,16 @@ conversation_coordinator = ConversationCoordinator(
 async def _lifespan(app: FastAPI):
     """FastAPI 生命周期：启动/关闭时管理 Agent 缓存。"""
     logger.info("[FastAPI] Channel 启动中…")
-    # 预初始化默认 Agent
-    try:
-        await _get_or_create_agent("default")
-        logger.info("[FastAPI] 默认 Agent 预初始化完成")
-    except Exception as e:
-        logger.warning(f"[FastAPI] 默认 Agent 预初始化失败（不影响使用）: {e}")
+    await asyncio.to_thread(chat_db.init_db)
+    if await asyncio.to_thread(chat_db.get_session, "default") is None:
+        await asyncio.to_thread(
+            chat_db.create_session,
+            "default",
+            user_id="local_user",
+            persona_id="cyrene",
+            mode="chat",
+            title="默认会话",
+        )
     yield
     # 关闭
     logger.info("[FastAPI] Channel 关闭中…")
@@ -235,7 +260,18 @@ def _create_app() -> FastAPI:
     @app.get("/api/v1/personas")
     async def list_personas():
         """返回当前磁盘配置中可用的角色名称。"""
-        return {"names": persona_loader.available_names}
+        personas = await asyncio.to_thread(persona_catalog.list)
+        return {
+            "names": [persona.name for persona in personas],
+            "personas": [
+                {
+                    "persona_id": persona.persona_id,
+                    "name": persona.name,
+                    "display_name": persona.display_name,
+                }
+                for persona in personas
+            ],
+        }
 
     @app.get("/api/v1/config")
     async def get_config():
@@ -315,8 +351,6 @@ def _create_app() -> FastAPI:
                 async for event in conversation_coordinator.stream_user_turn(
                     req.message,
                     session_id=req.session_id,
-                    user_id=req.user_id,
-                    persona=req.persona,
                 ):
                     if isinstance(event, TextChunk):
                         yield _sse_event("text", {"content": event.content, "content_block": event_to_content_block(event).to_dict()})
@@ -397,14 +431,9 @@ def _create_app() -> FastAPI:
                 if not message:
                     continue
 
-                persona = data.get("persona")
-                user_id = data.get("user_id")
-
                 async for event in conversation_coordinator.stream_user_turn(
                     message,
                     session_id=session_id,
-                    user_id=user_id,
-                    persona=persona,
                 ):
                     if isinstance(event, TextChunk):
                         await ws.send_json({"event": "text", "data": {"content": event.content}})
@@ -440,12 +469,16 @@ def _create_app() -> FastAPI:
     @app.get("/api/v1/sessions", response_model=list[SessionInfo])
     async def list_sessions(limit: int = 20):
         """获取会话列表（含标题、消息数）。"""
-        rows = chat_db.list_sessions_with_meta(limit=limit)
+        rows = await asyncio.to_thread(chat_db.list_sessions_with_meta, limit)
         return [
             SessionInfo(
                 session_id=r["session_id"],
                 title=r.get("title", ""),
                 user_id=r.get("user_id", ""),
+                persona_id=r.get("persona_id", ""),
+                persona_name=r.get("persona_name", ""),
+                persona_display_name=r.get("persona_display_name", ""),
+                mode=r.get("mode", "chat"),
                 message_count=r.get("message_count", 0),
                 updated_at=r.get("updated_at"),
             )
@@ -456,34 +489,47 @@ def _create_app() -> FastAPI:
     async def create_session(req: CreateSessionRequest):
         """创建新会话。"""
         sid = req.session_id or str(uuid.uuid4())
-        chat_db.upsert_session_meta(
-            session_id=sid,
-            title=req.title or "",
-            user_id=req.user_id or "",
-            message_count=0,
-        )
+        try:
+            row = await asyncio.to_thread(
+                chat_db.create_session,
+                sid,
+                title=req.title or "新会话",
+                user_id=req.user_id,
+                persona_id=req.persona_id,
+                mode=req.mode,
+            )
+        except ValueError as error:
+            raise HTTPException(status_code=400, detail=str(error)) from error
         logger.info(f"[FastAPI] 创建会话: {sid[:12]}…")
-        return SessionInfo(session_id=sid, title=req.title or "", user_id=req.user_id or "")
+        return SessionInfo(**{key: row.get(key) for key in SessionInfo.model_fields})
 
     @app.get("/api/v1/sessions/{session_id}", response_model=SessionDetail)
     async def get_session(session_id: str):
         """获取会话详情（含消息历史、元数据）。"""
-        meta = chat_db.get_session_meta(session_id)
-        messages = chat_db.get_history_raw(session_id)
+        meta = await asyncio.to_thread(chat_db.get_session_meta, session_id)
+        if meta is None:
+            raise HTTPException(status_code=404, detail="会话不存在")
+        messages = await asyncio.to_thread(chat_db.get_history_raw, session_id)
         return SessionDetail(
             session_id=session_id,
-            title=meta["title"] if meta else "",
-            user_id=meta["user_id"] if meta else "",
+            title=meta["title"],
+            user_id=meta["user_id"],
+            persona_id=meta["persona_id"],
+            persona_name=meta["persona_name"],
+            persona_display_name=meta["persona_display_name"],
+            mode=meta["mode"],
+            summary=meta["summary"],
+            workspace=meta["workspace"],
             message_count=len(messages),
             messages=messages,
-            created_at=meta.get("created_at") if meta else None,
-            updated_at=meta.get("updated_at") if meta else None,
+            created_at=meta.get("created_at"),
+            updated_at=meta.get("updated_at"),
         )
 
     @app.delete("/api/v1/sessions/{session_id}")
     async def delete_session(session_id: str):
         """清空会话（DB + 内存 + Agent 缓存）。"""
-        chat_db.clear_session(session_id)
+        await asyncio.to_thread(chat_db.clear_session, session_id)
         agent_cache.evict(session_id)
         # 清理 session_store
         try:

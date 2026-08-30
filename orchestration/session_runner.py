@@ -70,6 +70,7 @@ class SessionAgentRunner:
         user_id: str | None = None,
         persona: str | None = None,
         run_id: str | None = None,
+        runtime_context: str = "",
     ) -> AsyncIterator[StreamEvent]:
         """通过统一 runner 执行一轮流式请求。"""
 
@@ -80,6 +81,8 @@ class SessionAgentRunner:
                 user_id=user_id,
                 persona=persona,
             )
+            if hasattr(agent, "set_runtime_context"):
+                agent.set_runtime_context(runtime_context)
             # Agent 内部的可见历史由 ReactAgent 维护；Runner 只补充 Agent 专用审计历史。
             agent_history = []
             tool_calls: list[dict[str, Any]] = []
