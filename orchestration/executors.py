@@ -64,6 +64,7 @@ class WorkExecutor:
             prompt,
             user_id=context.session.user_id,
             persona=context.session.persona_name,
+            run_id=context.run_context.run_id if context.run_context else None,
             runtime_context=runtime_context,
         ):
             yield event

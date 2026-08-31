@@ -19,6 +19,8 @@ from agent.content import ContentBlock
 from agent.harness_events import HarnessEvent
 from agent.decision_engine import DecisionEngine, decision_engine as default_decision_engine
 from memory.session_store import SessionStore, session_store as default_session_store
+from runtime.context import RunContext
+from runtime.settlement import RunSettlementGate, RunTerminalResult
 
 from .session_runner import SessionAgentRunner
 from .roleplay import RoleplayEngine
@@ -141,14 +143,42 @@ class ConversationCoordinator:
         lock = await self._get_session_lock(session_id)
         async with lock:
             public_run_id = run_id or uuid.uuid4().hex
-            sequence = 0
+            run_context = RunContext(
+                session_id=session_id,
+                run_id=public_run_id,
+                thread_id=session_id,
+                metadata={"user_id": user_id, "persona": persona},
+            )
+            settlement = RunSettlementGate()
 
             def bind(event: HarnessEvent) -> HarnessEvent:
-                nonlocal sequence
-                sequence += 1
-                return event.bind(run_id=public_run_id, sequence=sequence)
+                return event.bind(
+                    run_id=run_context.run_id,
+                    sequence=run_context.next_sequence(),
+                )
 
-            yield bind(HarnessEvent(
+            async def publish(event: HarnessEvent) -> HarnessEvent:
+                bound = bind(event)
+                await self._runs.append_event(
+                    run_context.run_id,
+                    "runtime.event",
+                    bound.to_dict(),
+                )
+                return bound
+
+            existing_run = await self._runs.get(run_context.run_id)
+            if existing_run is None:
+                await self._runs.create(
+                    session_id=session_id,
+                    thread_id=run_context.thread_id or session_id,
+                    prompt=prompt,
+                    run_id=run_context.run_id,
+                    user_id=user_id,
+                    persona=persona,
+                    trace_id=run_context.run_id,
+                )
+
+            yield await publish(HarnessEvent(
                 type="run_start",
                 data={"session_id": session_id},
             ))
@@ -157,10 +187,11 @@ class ConversationCoordinator:
                 if self._context_builder and self._chat_executor and self._work_executor:
                     session = await self._context_builder.require_session(session_id)
                     context = await self._context_builder.build(session, prompt)
+                    context.run_context = run_context
                     executor = self._chat_executor if session.mode == "chat" else self._work_executor
                     events: list[StreamEvent] = []
                     async for event in executor.stream(prompt, context):
-                        event = bind(event)
+                        event = await publish(event)
                         events.append(event)
                         yield event
                     if self._finish_hook:
@@ -184,7 +215,7 @@ class ConversationCoordinator:
                         await asyncio.to_thread(
                             self._session_store.append_pair, session_id, prompt, response
                         )
-                        yield bind(HarnessEvent.final_text(response))
+                        yield await publish(HarnessEvent.final_text(response))
                     else:
                         async for event in self._runner.stream(
                             session_id,
@@ -193,18 +224,29 @@ class ConversationCoordinator:
                             persona=persona,
                             run_id=public_run_id,
                         ):
-                            yield bind(event)
+                            yield await publish(event)
             except Exception as error:
-                yield bind(HarnessEvent(
-                    type="run_end",
-                    data={
-                        "status": "failed",
-                        "error": f"{type(error).__name__}: {error}",
-                    },
-                ))
+                message = f"{type(error).__name__}: {error}"
+                terminal = RunTerminalResult(status="failed", error=message)
+                if settlement.try_settle(terminal):
+                    await self._runs.set_status(
+                        run_context.run_id,
+                        "failed",
+                        error=message,
+                    )
+                    yield await publish(HarnessEvent(
+                        type="run_end",
+                        data={"status": "failed", "error": message},
+                    ))
                 return
 
-            yield bind(HarnessEvent(type="run_end", data={"status": "completed"}))
+            terminal = RunTerminalResult(status="completed")
+            if settlement.try_settle(terminal):
+                await self._runs.set_status(run_context.run_id, "completed")
+                yield await publish(HarnessEvent(
+                    type="run_end",
+                    data={"status": "completed"},
+                ))
 
     async def handle_user_turn_stream(self, *args: Any, **kwargs: Any) -> AsyncIterator[StreamEvent]:
         """EchoBot 风格命名的统一流式入口。"""

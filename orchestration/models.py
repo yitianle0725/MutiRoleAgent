@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from langchain_core.messages import BaseMessage
+
+if TYPE_CHECKING:
+    from runtime.context import RunContext
 
 
 ConversationMode = Literal["chat", "work"]
@@ -54,4 +57,4 @@ class TurnContext:
     session: SessionContext
     history: list[BaseMessage] = field(default_factory=list)
     prompt_layers: PromptLayers | None = None
-
+    run_context: RunContext | None = None

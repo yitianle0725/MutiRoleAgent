@@ -667,7 +667,7 @@ class ReactAgent:
 
     # ==================== 核心执行 ====================
 
-    async def execute_stream_async(self, query: str):
+    async def execute_stream_async(self, query: str, *, run_id: str | None = None):
         """Run one turn at a time for each conversation session."""
         acquired = await asyncio.to_thread(
             self._turn_lock.acquire, True, TURN_QUEUE_TIMEOUT
@@ -685,7 +685,7 @@ class ReactAgent:
             self._current_outcome = "success"
             self.performance_monitor.start_turn()
             async with asyncio.timeout(LLM_TURN_TIMEOUT):
-                async for event in self._execute_stream_locked(query):
+                async for event in self._execute_stream_locked(query, run_id=run_id):
                     if event.type in {"process_text", "final_text"}:
                         self.performance_monitor.record_visible_text(
                             estimate_tokens(str(event.data.get("text", "")))
@@ -710,7 +710,7 @@ class ReactAgent:
             self._enqueue_turn_observation()
             self._turn_lock.release()
 
-    async def _execute_stream_locked(self, query: str):
+    async def _execute_stream_locked(self, query: str, *, run_id: str | None = None):
         """
         异步流式执行，产出统一 HarnessEvent。
 
@@ -725,8 +725,8 @@ class ReactAgent:
         if not self._initialized:
             await self.init_agent()
 
-        # ---- trace_id: 本轮对话唯一标识 ----
-        trace_id = str(uuid.uuid4())[:8]
+        # canonical run_id 由外层创建；同步兼容入口没有传入时才生成。
+        trace_id = run_id or uuid.uuid4().hex
         tracer = ConversationTracer(session_id=self.session_id, trace_id=trace_id)
         self._current_tracer = tracer
         tracer.enter(query)

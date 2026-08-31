@@ -7,6 +7,7 @@ P1 不复制 Agent 执行循环，runner 只负责按 session 隔离 Agent、统
 from __future__ import annotations
 
 import asyncio
+import inspect
 import os
 from collections.abc import AsyncIterator, Awaitable, Callable
 from typing import Any
@@ -92,7 +93,12 @@ class SessionAgentRunner:
                 context = await self.get_context(session_id)
                 agent_history = context["agent_history"]
             timeout = float(os.getenv("AGENT_TURN_TIMEOUT", "0"))
-            event_stream = agent.execute_stream_async(prompt)
+            execute_parameters = inspect.signature(agent.execute_stream_async).parameters
+            if "run_id" in execute_parameters:
+                event_stream = agent.execute_stream_async(prompt, run_id=run_id)
+            else:
+                # 兼容测试替身和迁移期第三方 Agent。
+                event_stream = agent.execute_stream_async(prompt)
 
             async def consume():
                 nonlocal step

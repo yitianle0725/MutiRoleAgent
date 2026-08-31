@@ -43,3 +43,7 @@ local_docs_study/
 
 # ========== 本地模型权重（不上传Git） ==========
 resources/models/
+
+# archify skill插件，用来画项目架构图、工作流、时序图
+.agents/
+skills-lock.json
