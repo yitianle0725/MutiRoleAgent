@@ -29,11 +29,9 @@
         context={"skill": "recommend-anime"},
     )
     if result and result.valid:
-        yield StructuredData(
+        yield HarnessEvent.structured_data(
             schema_type=result.schema_type,
-            model=result.model,
-            formatted=result.formatted,
-            raw_json=result.raw_json,
+            data=result.raw_json,
         )
 """
 

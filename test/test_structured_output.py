@@ -326,19 +326,21 @@ try:
 finally:
     os.unlink(tmp_path2)
 
-# ==================== 7. StructuredData Event ====================
-from agent.stream_events import StructuredData as SDEvent
-from dataclasses import fields
-sd_fields = {f.name for f in fields(SDEvent)}
-assert "schema_type" in sd_fields
-assert "model" in sd_fields
-assert "formatted" in sd_fields
-assert "raw_json" in sd_fields
-print("36/10 StructuredData 事件: 4 字段 OK ✓")
+# ==================== 7. HarnessEvent ====================
+from agent.harness_events import HarnessEvent
+event = HarnessEvent.structured_data(
+    schema_type="anime_recommendation",
+    data={"items": []},
+)
+assert event.type == "structured_data"
+assert event.data["schema_type"] == "anime_recommendation"
+assert event.data["data"] == {"items": []}
+print("36/10 HarnessEvent: structured_data 创建 OK ✓")
 
-event = SDEvent(schema_type="anime_recommendation", model=None, formatted="# test", raw_json={})
-assert event.formatted == "# test"
-print("37/10 StructuredData 事件: 创建 OK ✓")
+bound = event.bind(run_id="run-1", sequence=3)
+assert bound.to_dict()["run_id"] == "run-1"
+assert bound.to_dict()["sequence"] == 3
+print("37/10 HarnessEvent: 公共协议序列化 OK ✓")
 
 # ==================== 8. FileOperationResult ====================
 from agent.structured_output.formatter import format_file_result
@@ -402,6 +404,6 @@ print(f"   - Validator: extract → validate → feedback")
 print(f"   - Injector: prompt 注入正常工作")
 print(f"   - Pipeline: e2e 管道正常工作")
 print(f"   - Skill Loader: output_schema 提取正常")
-print(f"   - StructuredData: 事件模型正常")
+print(f"   - HarnessEvent: 结构化事件模型正常")
 print(f"   - RetryHandler: 机制就绪 (enabled={retry_handler.enabled})")
 print("=" * 50)

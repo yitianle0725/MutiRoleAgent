@@ -46,7 +46,64 @@ class ValidationResult:
     reason: str = ""  # "ok" | "no_json_found" | "validation_error" | "json_parse_error"
 
 
+@dataclass(frozen=True, slots=True)
+class JsonExtraction:
+    """解析后的 JSON，以及它在原始回答中的准确位置。"""
+
+    data: dict
+    start: int
+    end: int
+
+
 # ==================== JSON 提取 ====================
+
+def extract_json_with_span(text: str) -> JsonExtraction | None:
+    """提取 JSON，并保留源区间，供最终正文安全移除。"""
+
+    if not text:
+        return None
+
+    fenced_patterns = [
+        re.compile(r'```json\s*\n(.*?)\n```', re.DOTALL),
+        re.compile(r'```\s*\n(\{.*?\})\s*\n```', re.DOTALL),
+        re.compile(r'```\s*\n(\[.*?\])\s*\n```', re.DOTALL),
+    ]
+    for pattern in fenced_patterns:
+        match = pattern.search(text)
+        if not match:
+            continue
+        try:
+            parsed = json.loads(match.group(1))
+        except json.JSONDecodeError:
+            continue
+        data = {"items": parsed} if isinstance(parsed, list) else parsed
+        if isinstance(data, dict):
+            return JsonExtraction(data=data, start=match.start(), end=match.end())
+
+    for opening, closing in (("{", "}"), ("[", "]")):
+        try:
+            start = text.index(opening)
+        except ValueError:
+            continue
+        depth = 0
+        for index in range(start, len(text)):
+            if text[index] == opening:
+                depth += 1
+            elif text[index] == closing:
+                depth -= 1
+                if depth != 0:
+                    continue
+                end = index + 1
+                try:
+                    parsed = json.loads(text[start:end])
+                except json.JSONDecodeError:
+                    break
+                data = {"items": parsed} if isinstance(parsed, list) else parsed
+                if isinstance(data, dict):
+                    return JsonExtraction(data=data, start=start, end=end)
+                break
+    return None
+
 
 def extract_json(text: str) -> dict | None:
     """从文本中提取 JSON 对象。
@@ -60,66 +117,18 @@ def extract_json(text: str) -> dict | None:
     Returns:
         解析成功的 dict，或 None。
     """
-    if not text:
-        return None
+    extraction = extract_json_with_span(text)
+    return extraction.data if extraction else None
 
-    # 1) 围栏代码块: ```json ... ``` 或 ``` ... ```
-    fenced_patterns = [
-        re.compile(r'```json\s*\n(.*?)\n```', re.DOTALL),
-        re.compile(r'```\s*\n(\{.*?\})\s*\n```', re.DOTALL),
-        re.compile(r'```\s*\n(\[.*?\])\s*\n```', re.DOTALL),
-    ]
-    for pat in fenced_patterns:
-        m = pat.search(text)
-        if m:
-            try:
-                return json.loads(m.group(1))
-            except json.JSONDecodeError:
-                continue
 
-    # 2) 裸 JSON 对象: 第一个 { ... }
-    try:
-        start = text.index('{')
-        # 括号匹配
-        depth = 0
-        end = -1
-        for i in range(start, len(text)):
-            if text[i] == '{':
-                depth += 1
-            elif text[i] == '}':
-                depth -= 1
-                if depth == 0:
-                    end = i + 1
-                    break
-        if end > start:
-            candidate = text[start:end]
-            return json.loads(candidate)
-    except (ValueError, json.JSONDecodeError):
-        pass
+def remove_extracted_json(text: str) -> str:
+    """只移除能够成功解析的 JSON 区间，保留其余自然语言。"""
 
-    # 3) 裸 JSON 数组: 第一个 [ ... ]
-    try:
-        start = text.index('[')
-        depth = 0
-        end = -1
-        for i in range(start, len(text)):
-            if text[i] == '[':
-                depth += 1
-            elif text[i] == ']':
-                depth -= 1
-                if depth == 0:
-                    end = i + 1
-                    break
-        if end > start:
-            candidate = text[start:end]
-            result = json.loads(candidate)
-            if isinstance(result, list):
-                return {"items": result}  # 数组包装为对象
-            return result
-    except (ValueError, json.JSONDecodeError):
-        pass
-
-    return None
+    extraction = extract_json_with_span(text)
+    if extraction is None:
+        return text.strip()
+    remaining = text[:extraction.start] + text[extraction.end:]
+    return remaining.strip()
 
 
 # ==================== Schema 校验 ====================

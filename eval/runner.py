@@ -15,7 +15,6 @@ from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from agent.react_agent import ReactAgent
-from agent.stream_events import TextChunk, ToolEvent
 from rag.rag_service import _route_query
 from eval.agent_metrics import evaluate_agent_behavior
 from eval.regression import check_baseline_cases, check_thresholds, combine_regression_checks
@@ -43,13 +42,12 @@ async def run_single_case(agent: ReactAgent, case: dict) -> dict:
         turn_answer: list[str] = []
         try:
             async for event in agent.execute_stream_async(query):
-                if isinstance(event, TextChunk):
-                    turn_answer.append(event.content)
-                elif isinstance(event, ToolEvent):
-                    if event.phase == "start":
-                        tools_called.append(event.tool_name)
-                    elif event.phase == "end":
-                        tool_outputs.append(event.result_preview)
+                if event.type == "final_text":
+                    turn_answer.append(str(event.data.get("text", "")))
+                elif event.type == "tool_start":
+                    tools_called.append(str(event.data.get("tool_name", "")))
+                elif event.type == "tool_end":
+                    tool_outputs.append(str(event.data.get("result_preview", "")))
         except Exception as error:
             turn_answer.append(f"[ERROR: {error}]")
         answer_parts = turn_answer

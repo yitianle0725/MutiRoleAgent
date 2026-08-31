@@ -13,7 +13,7 @@ from datetime import datetime, date
 
 import streamlit as st
 from agent.react_agent import ReactAgent
-from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_display_name
+from agent.harness_events import get_tool_display_name
 from channels.manager import agent_cache
 from memory.chat_db import chat_db
 from agent.knowledge_base import KnowledgeBaseService
@@ -600,33 +600,39 @@ if prompt:
 
     try:
         for event in agent.execute_stream(prompt):
-            if isinstance(event, TextChunk):
+            if event.type == "final_text":
+                content = str(event.data.get("text", ""))
                 # 首次收到文字时清除等待状态
                 if not response_chunks:
                     status_placeholder.empty()
-                response_chunks.append(event.content)
-                for char in event.content:
+                response_chunks.append(content)
+                for char in content:
                     displayed_text += char
                     text_placeholder.write(displayed_text + "▌")
                     time.sleep(0.01)
                 text_placeholder.write(displayed_text)
 
-            elif isinstance(event, ToolEvent):
-                display_name = get_tool_display_name(event.tool_name)
-                if event.phase == "start":
+            elif event.type == "process_text":
+                status_placeholder.info(str(event.data.get("text", "")))
+
+            elif event.type in {"tool_start", "tool_end"}:
+                display_name = get_tool_display_name(str(event.data.get("tool_name", "")))
+                if event.type == "tool_start":
                     status_placeholder.warning(
                         f"⏳ 正在检索资料，请耐心等待…\n\n{display_name} — 执行中…"
                     )
-                elif event.phase == "end":
+                else:
                     status_placeholder.info(
                         f"⏳ 正在检索资料，请耐心等待…\n\n{display_name} — 已完成 ✓"
                     )
 
-            # Phase 6: 结构化数据事件
-            elif isinstance(event, StructuredData):
-                if event.formatted:
-                    displayed_text += f"\n\n---\n\n{event.formatted}"
-                    text_placeholder.write(displayed_text)
+            elif event.type == "structured_data":
+                with st.container(border=True):
+                    st.caption(str(event.data.get("schema_type", "结构化结果")))
+                    st.write(event.data.get("data", {}))
+
+            elif event.type == "run_end" and event.data.get("status") != "completed":
+                status_placeholder.error(str(event.data.get("error", "任务执行失败")))
 
         status_placeholder.empty()
         full_response = "".join(response_chunks)

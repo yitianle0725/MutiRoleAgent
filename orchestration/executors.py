@@ -7,14 +7,14 @@ from typing import Protocol
 
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from agent.stream_events import StructuredData, TextChunk, ToolEvent
+from agent.harness_events import HarnessEvent
 from memory.context_trimmer import trim_history
 from model.factory import chat_model
 from orchestration.models import TurnContext
 from orchestration.session_runner import SessionAgentRunner
 
 
-StreamEvent = TextChunk | ToolEvent | StructuredData
+StreamEvent = HarnessEvent
 
 
 class ConversationExecutor(Protocol):
@@ -39,7 +39,7 @@ class ChatExecutor:
                     for item in content
                 )
             if content:
-                yield TextChunk(content=str(content))
+                yield HarnessEvent.final_text(str(content), delta=True)
 
 
 class WorkExecutor:

@@ -266,6 +266,23 @@
   border-color: #b7eb8f;
   color: #389e0d;
 }
+
+.process-message {
+  max-width: 78%;
+  margin-left: 44px;
+  padding: 7px 11px;
+  border-left: 2px solid rgba(99, 102, 241, 0.45);
+  color: rgba(71, 85, 105, 0.86);
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.process-message.is-failed,
+.tool-bubble.is-failed {
+  border-color: rgba(220, 38, 38, 0.45);
+  color: #b91c1c;
+}
 .tool-bubble-spinner {
   width: 12px;
   height: 12px;

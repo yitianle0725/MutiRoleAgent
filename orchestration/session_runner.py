@@ -11,14 +11,14 @@ import os
 from collections.abc import AsyncIterator, Awaitable, Callable
 from typing import Any
 
-from agent.stream_events import StructuredData, TextChunk, ToolEvent
+from agent.harness_events import HarnessEvent
 from agent.checkpoint import AgentCheckpoint, CheckpointStore, checkpoint_store as default_checkpoint_store
 from memory.session_store import SessionStore
 from orchestration.runs import RunStore
 
 
 AgentFactory = Callable[[str, str | None, str | None], Awaitable[Any]]
-StreamEvent = TextChunk | ToolEvent | StructuredData
+StreamEvent = HarnessEvent
 
 
 class SessionAgentRunner:
@@ -109,7 +109,7 @@ class SessionAgentRunner:
                 async for event in consume():
                     yield event
             if self._session_store is not None and agent_history:
-                # ToolEvent 不是 LangChain BaseMessage，摘要只保存可序列化文本。
+                # 工具轨迹只进入审计摘要，不进入普通对话历史。
                 summary = "\n".join(str(item) for item in agent_history[-20:])
                 await asyncio.to_thread(self._session_store.set_agent_summary, session_id, summary[:4000])
                 if run_id is not None:
@@ -127,10 +127,10 @@ class SessionAgentRunner:
         self._step = step
         if self._run_store is not None and run_id is not None:
             await self._run_store.append_event(run_id, "agent.event", _event_record(event))
-        if isinstance(event, ToolEvent):
-            self._step += 1 if event.phase == "start" else 0
+        if event.type in {"tool_start", "tool_end"}:
+            self._step += 1 if event.type == "tool_start" else 0
             item = _event_record(event)
-            (tool_calls if event.phase == "start" else tool_results).append(item)
+            (tool_calls if event.type == "tool_start" else tool_results).append(item)
             agent_history.append(event)
         if run_id is not None:
             checkpoint = AgentCheckpoint(run_id=run_id, session_id=session_id, thread_id=session_id, step=self._step, tool_calls=tool_calls[-20:], tool_results=tool_results[-20:])
@@ -145,14 +145,4 @@ class SessionAgentRunner:
 
 def _event_record(event: StreamEvent) -> dict[str, Any]:
     """把流式事件转换为 RunStore 可持久化的简单字典。"""
-    if isinstance(event, TextChunk):
-        return {"type": "text", "content": event.content}
-    if isinstance(event, ToolEvent):
-        return {
-            "type": "tool",
-            "phase": event.phase,
-            "tool_name": event.tool_name,
-            "args": event.tool_args,
-            "result_preview": event.result_preview,
-        }
-    return {"type": "structured", "schema_type": event.schema_type, "data": event.raw_json}
+    return event.to_dict()

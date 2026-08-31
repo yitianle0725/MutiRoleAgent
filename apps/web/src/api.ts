@@ -8,19 +8,39 @@ export interface ChatPayload {
   session_id: string
 }
 
-export interface ToolEventData {
-  phase: 'start' | 'end'
-  tool_name: string
-  tool_args?: Record<string, unknown>
-  result_preview?: string
+interface HarnessEnvelope<T extends string, D> {
+  version: 1
+  type: T
+  run_id: string
+  sequence: number
+  data: D
 }
 
+export type HarnessEvent =
+  | HarnessEnvelope<'run_start', { session_id: string }>
+  | HarnessEnvelope<'process_text', { text: string; delta: boolean }>
+  | HarnessEnvelope<'tool_start', {
+      tool_call_id: string
+      tool_name: string
+      tool_args: Record<string, unknown>
+    }>
+  | HarnessEnvelope<'tool_end', {
+      tool_call_id: string
+      tool_name: string
+      status: 'completed' | 'failed'
+      result_preview: string
+      duration_ms?: number
+    }>
+  | HarnessEnvelope<'structured_data', StructuredPayload>
+  | HarnessEnvelope<'final_text', { text: string; delta: boolean }>
+  | HarnessEnvelope<'run_end', {
+      status: 'completed' | 'failed' | 'cancelled' | 'timeout'
+      error?: string
+    }>
+
 export interface StreamHandlers {
-  onChunk: (text: string) => void
-  onTool?: (tool: ToolEventData) => void
-  onStructured?: (data: StructuredPayload) => void
-  onDone: () => void
-  onError: (message: string) => void
+  onEvent: (event: HarnessEvent) => void
+  onTransportError: (message: string) => void
 }
 
 /** 发起 SSE 流式聊天，逐事件回调。 */
@@ -42,12 +62,12 @@ export async function streamChat(
     } catch {
       /* 非 JSON 错误 */
     }
-    handlers.onError(detail)
+    handlers.onTransportError(detail)
     return
   }
 
   if (!resp.body) {
-    handlers.onError('浏览器不支持流式响应')
+    handlers.onTransportError('浏览器不支持流式响应')
     return
   }
 
@@ -73,62 +93,22 @@ export async function streamChat(
     // 剩余残块
     if (buf.trim()) handleSseBlock(buf, handlers)
   } catch (err) {
-    handlers.onError(err instanceof Error ? err.message : String(err))
+    handlers.onTransportError(err instanceof Error ? err.message : String(err))
   }
 }
 
 function handleSseBlock(block: string, handlers: StreamHandlers): void {
-  let event = 'chunk'
   let data = ''
   for (const line of block.split('\n')) {
-    if (line.startsWith('event:')) event = line.slice(6).trim()
-    else if (line.startsWith('data:')) data += line.slice(5)
+    if (line.startsWith('data:')) data += line.slice(5)
   }
 
-  switch (event) {
-    case 'text':
-      // 空 chunk 无意义，跳过；但 done/error 即使 data 为空也必须处理
-      if (data) {
-        const payload = parseSseJson<{ content?: string }>(data)
-        handlers.onChunk(payload?.content ?? data)
-      }
-      break
-    case 'tool_start':
-      try {
-        handlers.onTool?.({ ...(JSON.parse(data) as ToolEventData), phase: 'start' })
-      } catch {
-        /* 忽略解析失败的工具事件 */
-      }
-      break
-    case 'tool_end':
-      try {
-        handlers.onTool?.({ ...(JSON.parse(data) as ToolEventData), phase: 'end' })
-      } catch {
-        /* 忽略解析失败的工具事件 */
-      }
-      break
-    case 'structured_data':
-      try {
-        const parsed = JSON.parse(data) as StructuredPayload
-        handlers.onStructured?.(parsed)
-      } catch {
-        // 兜底：解析失败时把原文当 markdown 渲染
-        handlers.onStructured?.({
-          schema_type: 'unknown',
-          raw_json: {},
-          formatted: data,
-        })
-      }
-      break
-    case 'done':
-      handlers.onDone()
-      break
-    case 'error':
-      handlers.onError((parseSseJson<{ message?: string }>(data)?.message ?? data) || '未知错误')
-      break
-    default:
-      break
+  const parsed = parseSseJson<HarnessEvent>(data)
+  if (!parsed?.type || parsed.version !== 1) {
+    handlers.onTransportError('收到无法识别的 HarnessEvent')
+    return
   }
+  handlers.onEvent(parsed)
 }
 
 // ==================== 会话 / 角色 / 配置 ====================

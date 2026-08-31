@@ -8,7 +8,7 @@ import {
   getSessionMonitor,
   listSessions,
   type SessionMonitor,
-  type ToolEventData,
+  type HarnessEvent,
   type HistoryItem,
   type SessionItem,
 } from '../api'
@@ -22,10 +22,11 @@ import { StructuredCards, type StructuredPayload } from './StructuredCards'
 import './Chat.css'
 import './StructuredCards.css'
 
-/** 统一条目：文本气泡 / 工具调用 / 结构化卡片 */
+/** 用户、过程、工具、结构化卡片和最终回答分别建模。 */
 type ChatItem =
   | { kind: 'text'; id: string; role: 'user' | 'assistant'; content: string; time: string }
-  | { kind: 'tool'; id: string; tool_name: string; phase: 'start' | 'end'; started_at: number }
+  | { kind: 'process'; id: string; content: string; failed?: boolean }
+  | { kind: 'tool'; id: string; tool_call_id: string; tool_name: string; phase: 'start' | 'end'; started_at: number; status?: 'completed' | 'failed'; duration_ms?: number }
   | { kind: 'structured'; id: string; data: StructuredPayload; time: string }
 
 const DEFAULT_SESSION = 'default'
@@ -62,14 +63,6 @@ function nowTime(): string {
 /** 从 SQLite 的 "YYYY-MM-DD HH:MM:SS" 中取 HH:MM。 */
 function historyTime(createdAt?: string): string {
   return createdAt ? createdAt.slice(11, 16) : ''
-}
-
-/** 移除文本里的 ```json ... ``` 代码块（结构化输出会单独渲染卡片，避免重复展示） */
-function stripJsonCodeBlocks(text: string): string {
-  return text
-    .replace(/```json\s*\n[\s\S]*?\n```/g, '')
-    .replace(/```\s*\n[\s\S]*?\n```/g, '')
-    .trim()
 }
 
 /** AI 消息气泡的操作按钮：复制 + 重生成 */
@@ -109,6 +102,8 @@ export function Chat() {
   const { speaking, speak } = useSpeech()
   const assistantIdRef = useRef<string | null>(null)
   const draftRef = useRef('')
+  const processIdRef = useRef<string | null>(null)
+  const processDraftRef = useRef('')
   const { recording, begin, end, cancel } = useRecorder({
     onResult: (text) => {
       // 识别结果填入输入框（用户可确认后再发送）
@@ -208,100 +203,116 @@ export function Chat() {
       },
     ])
 
-    // 准备一个空的 assistant 气泡，流式期间往里追加
-    const assistantId = crypto.randomUUID()
-    assistantIdRef.current = assistantId
+    // Final Answer 到达前不创建 Assistant 气泡，避免过程文本混入正文。
+    assistantIdRef.current = null
     draftRef.current = ''
-    setItems((prev) => [
-      ...prev,
-      { kind: 'text', id: assistantId, role: 'assistant', content: '', time: nowTime() },
-    ])
+    processIdRef.current = null
+    processDraftRef.current = ''
     setBusy(true)
 
     void streamChat(
       { message: text, session_id: sessionId },
       {
-        onChunk: (c) => {
-          draftRef.current += c
-          const id = assistantIdRef.current
-          setItems((prev) =>
-            prev.map((it) =>
-              it.kind === 'text' && it.id === id
-                ? { ...it, content: draftRef.current }
-                : it,
-            ),
-          )
-        },
-        onTool: (t: ToolEventData) => {
-          setItems((prev) => {
-            if (t.phase === 'start') {
-              return [
-                ...prev,
-                {
-                  kind: 'tool',
-                  id: crypto.randomUUID(),
-                  tool_name: t.tool_name,
-                  phase: 'start',
-                  started_at: Date.now(),
-                },
-              ]
-            }
-            // end：把同名工具中最后一条仍处于 start 的标记为 end
-            for (let i = prev.length - 1; i >= 0; i--) {
-              const it = prev[i]
-              if (it.kind === 'tool' && it.tool_name === t.tool_name && it.phase === 'start') {
-                const copy = [...prev]
-                copy[i] = { ...it, phase: 'end' }
-                return copy
-              }
-            }
-            return prev
-          })
-        },
-        onStructured: (data) => {
-          const id = assistantIdRef.current
-          setItems((prev) => {
-            const next = prev.map((it) =>
-              it.kind === 'text' && it.id === id
-                ? { ...it, content: stripJsonCodeBlocks(it.content) }
-                : it,
-            )
-            // 紧随 assistant 文本追加结构化卡片
-            next.push({
-              kind: 'structured',
-              id: crypto.randomUUID(),
-              data,
-              time: nowTime(),
-            })
-            return next
-          })
-        },
-        onDone: () => {
-          const finalText = draftRef.current
-          assistantIdRef.current = null
-          draftRef.current = ''
-          setBusy(false)
-          void refreshMonitor(sessionId)
-          if (autoSpeak && finalText) {
-            void speak(finalText).catch((err) => console.error('[TTS]', err))
-          }
-        },
-        onError: (msg) => {
-          const id = assistantIdRef.current
-          setItems((prev) =>
-            prev.map((it) =>
-              it.kind === 'text' && it.id === id
-                ? { ...it, content: (it.content || '') + `\n\n⚠️ ${msg}` }
-                : it,
-            ),
-          )
-          assistantIdRef.current = null
-          draftRef.current = ''
-          setBusy(false)
-          void refreshMonitor(sessionId)
-        },
+        onEvent: (event: HarnessEvent) => handleHarnessEvent(event),
+        onTransportError: (message) => finishWithError(message),
       },
     )
+
+    function handleHarnessEvent(event: HarnessEvent) {
+      switch (event.type) {
+        case 'process_text': {
+          processDraftRef.current += event.data.text
+          let id = processIdRef.current
+          if (!id) {
+            const newId = crypto.randomUUID()
+            processIdRef.current = newId
+            setItems((prev) => [...prev, { kind: 'process', id: newId, content: processDraftRef.current }])
+          } else {
+            setItems((prev) => prev.map((item) =>
+              item.kind === 'process' && item.id === id
+                ? { ...item, content: processDraftRef.current }
+                : item,
+            ))
+          }
+          break
+        }
+        case 'tool_start':
+          setItems((prev) => [...prev, {
+            kind: 'tool',
+            id: `${event.run_id}:${event.data.tool_call_id}`,
+            tool_call_id: event.data.tool_call_id,
+            tool_name: event.data.tool_name,
+            phase: 'start',
+            started_at: Date.now(),
+          }])
+          break
+        case 'tool_end':
+          setItems((prev) => prev.map((item) =>
+            item.kind === 'tool' && item.tool_call_id === event.data.tool_call_id
+              ? {
+                  ...item,
+                  phase: 'end',
+                  status: event.data.status,
+                  duration_ms: event.data.duration_ms,
+                }
+              : item,
+          ))
+          break
+        case 'structured_data':
+          setItems((prev) => [...prev, {
+            kind: 'structured',
+            id: crypto.randomUUID(),
+            data: event.data,
+            time: nowTime(),
+          }])
+          break
+        case 'final_text': {
+          draftRef.current += event.data.text
+          let id = assistantIdRef.current
+          if (!id) {
+            const newId = crypto.randomUUID()
+            assistantIdRef.current = newId
+            setItems((prev) => [...prev, {
+              kind: 'text', id: newId, role: 'assistant', content: draftRef.current, time: nowTime(),
+            }])
+          } else {
+            setItems((prev) => prev.map((item) =>
+              item.kind === 'text' && item.id === id
+                ? { ...item, content: draftRef.current }
+                : item,
+            ))
+          }
+          break
+        }
+        case 'run_end':
+          if (event.data.status === 'completed') finishRun()
+          else finishWithError(event.data.error || '任务执行失败')
+          break
+        default:
+          break
+      }
+    }
+
+    function finishRun() {
+      const finalText = draftRef.current
+      assistantIdRef.current = null
+      processIdRef.current = null
+      setBusy(false)
+      void refreshMonitor(sessionId)
+      if (autoSpeak && finalText) {
+        void speak(finalText).catch((err) => console.error('[TTS]', err))
+      }
+    }
+
+    function finishWithError(message: string) {
+      setItems((prev) => [...prev, {
+        kind: 'process', id: crypto.randomUUID(), content: `⚠️ ${message}`, failed: true,
+      }])
+      assistantIdRef.current = null
+      processIdRef.current = null
+      setBusy(false)
+      void refreshMonitor(sessionId)
+    }
   }
 
   // 渲染单条 ChatItem
@@ -344,20 +355,31 @@ export function Chat() {
         />
       )
     }
-    if (item.kind === 'tool') {
-      const elapsed = toolElapsed[item.id] ?? ''
+    if (item.kind === 'process') {
       return (
         <div key={item.id} className="chat-item-row">
-          <div className={`tool-bubble ${item.phase === 'end' ? 'is-done' : ''}`}>
+          <div className={`process-message ${item.failed ? 'is-failed' : ''}`}>
+            {item.content}
+          </div>
+        </div>
+      )
+    }
+    if (item.kind === 'tool') {
+      const elapsed = toolElapsed[item.id] ?? ''
+      const failed = item.phase === 'end' && item.status === 'failed'
+      return (
+        <div key={item.id} className="chat-item-row">
+          <div className={`tool-bubble ${item.phase === 'end' ? 'is-done' : ''} ${failed ? 'is-failed' : ''}`}>
             <span className="tool-bubble-spinner" />
             <span className="tool-bubble-name">
-              {item.phase === 'start' ? '🔍 正在查询' : '✅ 已完成'} ·{' '}
+              {item.phase === 'start' ? '🔍 正在执行' : failed ? '⚠️ 执行失败' : '✅ 已完成'} ·{' '}
               {getToolDisplayName(item.tool_name)}
             </span>
-            {elapsed && (
+            {(item.duration_ms != null || elapsed) && (
               <span className="tool-bubble-elapsed">
-                {item.phase === 'end' ? '' : '已用 '}
-                {elapsed}
+                {item.phase === 'end'
+                  ? (item.duration_ms != null ? `${(item.duration_ms / 1000).toFixed(1)}s` : '')
+                  : `已用 ${elapsed}`}
               </span>
             )}
           </div>

@@ -4,7 +4,7 @@ import asyncio
 import tempfile
 from pathlib import Path
 
-from agent.stream_events import TextChunk
+from agent.harness_events import HarnessEvent
 from orchestration.coordinator import ConversationCoordinator
 from orchestration.runs import RunStore
 from orchestration.session_runner import SessionAgentRunner
@@ -13,7 +13,7 @@ from orchestration.roleplay import RoleplayEngine
 
 class SlowAgent:
     async def execute_stream_async(self, prompt: str):
-        yield TextChunk(content=f"结果：{prompt}")
+        yield HarnessEvent.final_text(f"结果：{prompt}")
         await asyncio.sleep(0.2)
 
 

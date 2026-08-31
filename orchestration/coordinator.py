@@ -16,8 +16,7 @@ from typing import Any
 from agent.results import AgentFactResult, OrchestratedTurnResult
 from agent.request import AgentRequest
 from agent.content import ContentBlock
-from agent.stream_events import event_to_content_block
-from agent.stream_events import StructuredData, TextChunk, ToolEvent
+from agent.harness_events import HarnessEvent
 from agent.decision_engine import DecisionEngine, decision_engine as default_decision_engine
 from memory.session_store import SessionStore, session_store as default_session_store
 
@@ -29,7 +28,7 @@ from .executors import ChatExecutor, WorkExecutor
 from .finish_hook import TurnFinishHook
 
 
-StreamEvent = TextChunk | ToolEvent | StructuredData
+StreamEvent = HarnessEvent
 CompletionCallback = Callable[[OrchestratedTurnResult], Awaitable[None]]
 
 
@@ -141,47 +140,71 @@ class ConversationCoordinator:
 
         lock = await self._get_session_lock(session_id)
         async with lock:
-            if self._context_builder and self._chat_executor and self._work_executor:
-                session = await self._context_builder.require_session(session_id)
-                context = await self._context_builder.build(session, prompt)
-                executor = self._chat_executor if session.mode == "chat" else self._work_executor
-                events: list[StreamEvent] = []
-                async for event in executor.stream(prompt, context):
-                    events.append(event)
-                    yield event
-                if self._finish_hook:
-                    await self._finish_hook.complete(
-                        context=context,
-                        prompt=prompt,
-                        events=events,
+            public_run_id = run_id or uuid.uuid4().hex
+            sequence = 0
+
+            def bind(event: HarnessEvent) -> HarnessEvent:
+                nonlocal sequence
+                sequence += 1
+                return event.bind(run_id=public_run_id, sequence=sequence)
+
+            yield bind(HarnessEvent(
+                type="run_start",
+                data={"session_id": session_id},
+            ))
+
+            try:
+                if self._context_builder and self._chat_executor and self._work_executor:
+                    session = await self._context_builder.require_session(session_id)
+                    context = await self._context_builder.build(session, prompt)
+                    executor = self._chat_executor if session.mode == "chat" else self._work_executor
+                    events: list[StreamEvent] = []
+                    async for event in executor.stream(prompt, context):
+                        event = bind(event)
+                        events.append(event)
+                        yield event
+                    if self._finish_hook:
+                        await self._finish_hook.complete(
+                            context=context,
+                            prompt=prompt,
+                            events=events,
+                        )
+                else:
+                    # 旧构造方式只供尚未迁移的测试和兼容入口使用。
+                    history = await asyncio.to_thread(self._session_store.get_history, session_id)
+                    decision = self._decision.evaluate(
+                        prompt,
+                        session_id=session_id,
+                        history=history,
                     )
+                    if getattr(decision, "is_chat", False):
+                        response = await self._roleplay.chat_reply(
+                            prompt, persona=persona, history=history[-8:]
+                        )
+                        await asyncio.to_thread(
+                            self._session_store.append_pair, session_id, prompt, response
+                        )
+                        yield bind(HarnessEvent.final_text(response))
+                    else:
+                        async for event in self._runner.stream(
+                            session_id,
+                            prompt,
+                            user_id=user_id,
+                            persona=persona,
+                            run_id=public_run_id,
+                        ):
+                            yield bind(event)
+            except Exception as error:
+                yield bind(HarnessEvent(
+                    type="run_end",
+                    data={
+                        "status": "failed",
+                        "error": f"{type(error).__name__}: {error}",
+                    },
+                ))
                 return
 
-            # 旧构造方式只供尚未迁移的测试和兼容入口使用。
-            history = await asyncio.to_thread(self._session_store.get_history, session_id)
-            decision = self._decision.evaluate(
-                prompt,
-                session_id=session_id,
-                history=history,
-            )
-            if getattr(decision, "is_chat", False):
-                response = await self._roleplay.chat_reply(
-                    prompt, persona=persona, history=history[-8:]
-                )
-                await asyncio.to_thread(
-                    self._session_store.append_pair, session_id, prompt, response
-                )
-                yield TextChunk(content=response)
-                return
-
-            async for event in self._runner.stream(
-                session_id,
-                prompt,
-                user_id=user_id,
-                persona=persona,
-                run_id=run_id,
-            ):
-                yield event
+            yield bind(HarnessEvent(type="run_end", data={"status": "completed"}))
 
     async def handle_user_turn_stream(self, *args: Any, **kwargs: Any) -> AsyncIterator[StreamEvent]:
         """EchoBot 风格命名的统一流式入口。"""
@@ -380,13 +403,35 @@ class ConversationCoordinator:
         content_blocks: list[ContentBlock] = []
         steps = 0
         async for event in self.stream_user_turn(prompt, session_id=session_id, user_id=user_id, persona=persona, run_id=run_id):
-            content_blocks.append(event_to_content_block(event))
-            if isinstance(event, TextChunk):
-                chunks.append(event.content)
-            elif isinstance(event, ToolEvent):
-                if event.phase == "start":
+            if event.type == "final_text":
+                text = str(event.data.get("text", ""))
+                chunks.append(text)
+                content_blocks.append(ContentBlock(type="text", data=text))
+            elif event.type in {"tool_start", "tool_end"}:
+                if event.type == "tool_start":
                     steps += 1
-                tool_events.append({"phase": event.phase, "tool_name": event.tool_name, "args": event.tool_args, "result_preview": event.result_preview})
+                tool_events.append({
+                    "phase": "start" if event.type == "tool_start" else "end",
+                    "tool_call_id": event.data.get("tool_call_id", ""),
+                    "tool_name": event.data.get("tool_name", ""),
+                    "args": event.data.get("tool_args", {}),
+                    "result_preview": event.data.get("result_preview", ""),
+                })
+            elif event.type == "structured_data":
+                content_blocks.append(ContentBlock(
+                    type="json",
+                    data=event.data.get("data", {}),
+                    metadata={
+                        "kind": "structured_data",
+                        "schema_type": event.data.get("schema_type", ""),
+                    },
+                ))
+            elif event.type == "run_end" and event.data.get("status") == "failed":
+                tool_events.append({
+                    "phase": "end",
+                    "tool_name": "harness",
+                    "result_preview": str(event.data.get("error", "执行失败")),
+                })
         fact = AgentFactResult(status="completed", text="".join(chunks), content=content_blocks, tool_events=tool_events, steps=steps)
         for event in tool_events:
             preview = str(event.get("result_preview") or "")

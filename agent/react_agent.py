@@ -42,7 +42,7 @@ from agent.agent_state import create_agent_state
 from agent.langgraph_adapter import build_graph_config, build_checkpointer
 from agent.core import LangGraphAgentCore
 from agent.summary import build_history_summary, build_agent_summary, should_build_summary
-from agent.stream_events import TextChunk, ToolEvent, StructuredData
+from agent.harness_events import HarnessEvent, INTERNAL_TOOL_NAMES
 from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
 from memory.user_profile_extractor import extract_and_save_profile, build_profile_context
@@ -66,6 +66,14 @@ TRIM_MAX_TOKENS = _TRIM_CFG.get("trim_max_tokens", 6000)
 TRIM_MAX_ROUNDS = _TRIM_CFG.get("trim_max_rounds", 15)
 LLM_TURN_TIMEOUT = float(_TRIM_CFG.get("llm_turn_timeout", 90))
 TURN_QUEUE_TIMEOUT = float(_TRIM_CFG.get("turn_queue_timeout", 5))
+
+
+def classify_ai_content(message: AIMessage) -> str | None:
+    """按 tool_calls 判断一轮 LLM 文本的公共语义。"""
+
+    if not message.content:
+        return None
+    return "process_text" if message.tool_calls else "final_text"
 
 
 def _usage_value(usage: dict, names: set[str]) -> int:
@@ -358,7 +366,7 @@ class ReactAgent:
             tracer: 对话诊断追踪器（可选）。
 
         Yields:
-            TextChunk: 文字片段（与 Agent 路径统一格式）。
+            HarnessEvent: 最终文本片段。
         """
         from prompts.composer import compose_prompt, _load_system_base
         from agent.cita_classifier import classify_intent, build_cita_overlay
@@ -504,7 +512,7 @@ class ReactAgent:
                 )
                 if content:
                     response_chunks.append(content)
-                    yield TextChunk(content=content)
+                    yield HarnessEvent.final_text(str(content), delta=True)
             self.performance_monitor.record_llm_call(
                 time.perf_counter() - llm_started_at,
                 **usage_totals,
@@ -516,8 +524,7 @@ class ReactAgent:
                 tracer.fail(error_text)
                 tracer.exit(error=error_text)
             logger.error(f"[trace={trace_id}] Chat 路径异常: {e}", exc_info=True)
-            yield TextChunk(content=f"\n\n⚠️ 处理请求时发生错误（{type(e).__name__}），请重试。")
-            return
+            raise
 
         # 持久化
         full_response = "".join(response_chunks)
@@ -533,11 +540,9 @@ class ReactAgent:
         if active_skill and full_response:
             struct_result = await self._postprocess_structured(full_response, active_skill)
             if struct_result is not None:
-                yield StructuredData(
+                yield HarnessEvent.structured_data(
                     schema_type=struct_result.schema_type,
-                    model=struct_result.model,
-                    formatted=struct_result.formatted,
-                    raw_json=struct_result.raw_json,
+                    data=struct_result.raw_json,
                 )
 
         if full_response:
@@ -669,8 +674,7 @@ class ReactAgent:
         if not acquired:
             logger.warning("[ReactAgent] Overlapping request rejected")
             self.performance_monitor.record_rejection()
-            yield TextChunk(content="\n\n正在处理上一条消息，请等待其完成后再发送。")
-            return
+            raise RuntimeError("正在处理上一条消息，请等待其完成后再发送。")
 
         try:
             self._turn_started_at = time.perf_counter()
@@ -681,9 +685,9 @@ class ReactAgent:
             self.performance_monitor.start_turn()
             async with asyncio.timeout(LLM_TURN_TIMEOUT):
                 async for event in self._execute_stream_locked(query):
-                    if isinstance(event, TextChunk):
+                    if event.type in {"process_text", "final_text"}:
                         self.performance_monitor.record_visible_text(
-                            estimate_tokens(event.content)
+                            estimate_tokens(str(event.data.get("text", "")))
                         )
                     yield event
         except TimeoutError:
@@ -692,14 +696,14 @@ class ReactAgent:
                 self._current_tracer.fail("TimeoutError: turn timeout")
                 self._current_tracer.exit()
             logger.warning("[ReactAgent] Turn timed out after %.0f seconds", LLM_TURN_TIMEOUT)
-            yield TextChunk(content="\n\n请求超时，请稍后重试。")
+            raise
         except Exception as error:
             self._current_outcome = "error"
             if self._current_tracer:
                 self._current_tracer.fail(f"{type(error).__name__}: {error}")
                 self._current_tracer.exit()
             logger.error("[ReactAgent] Turn failed: %s", error, exc_info=True)
-            yield TextChunk(content="\n\n⚠️ 处理请求时发生错误，请重试。")
+            raise
         finally:
             self.performance_monitor.finish_turn(self._current_outcome)
             self._enqueue_turn_observation()
@@ -707,7 +711,7 @@ class ReactAgent:
 
     async def _execute_stream_locked(self, query: str):
         """
-        异步流式执行，产出结构化事件（TextChunk | ToolEvent）。
+        异步流式执行，产出统一 HarnessEvent。
 
         每轮执行前自动加载并裁剪会话历史，执行后持久化本轮对话。
 
@@ -715,8 +719,7 @@ class ReactAgent:
             query: 用户输入文本。
 
         Yields:
-            TextChunk: 文字片段（思考 / 回答）。
-            ToolEvent:  工具调用事件（开始 / 结束）。
+            HarnessEvent: 过程、工具、结构化数据或最终回答。
         """
         if not self._initialized:
             await self.init_agent()
@@ -771,7 +774,11 @@ class ReactAgent:
         tracer.agent_model_before(len(state["messages"]))
 
         # ---- 3) 流式执行 + 事件分类 ----
-        response_chunks: list[str] = []
+        final_response = ""
+        active_skill: str | None = None
+        hidden_tool_call_ids: set[str] = set()
+        tool_names_by_id: dict[str, str] = {}
+        tool_started_at: dict[str, float] = {}
         token_stats = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}
         last_graph_event_at = time.perf_counter()
         try:
@@ -789,11 +796,21 @@ class ReactAgent:
                     if latest_msg.tool_calls:
                         self.performance_monitor.record_step(len(latest_msg.tool_calls))
                         for tc in latest_msg.tool_calls:
-                            tracer.agent_tool_call(tc["name"])
-                            logger.info(f"[trace={trace_id}] 调用工具: {tc['name']}")
-                            yield ToolEvent(
-                                phase="start",
-                                tool_name=tc["name"],
+                            tool_name = tc["name"]
+                            tool_call_id = str(tc.get("id") or f"{tool_name}-{uuid.uuid4().hex[:8]}")
+                            tool_names_by_id[tool_call_id] = tool_name
+                            if tool_name == "invoke_skill":
+                                active_skill = tc.get("args", {}).get("skill_name") or active_skill
+                            if tool_name in INTERNAL_TOOL_NAMES:
+                                hidden_tool_call_ids.add(tool_call_id)
+                                logger.debug("[trace=%s] 内部工具: %s", trace_id, tool_name)
+                                continue
+                            tracer.agent_tool_call(tool_name)
+                            logger.info("[trace=%s] 调用工具: %s", trace_id, tool_name)
+                            tool_started_at[tool_call_id] = now
+                            yield HarnessEvent.tool_start(
+                                tool_call_id=tool_call_id,
+                                tool_name=tool_name,
                                 tool_args=tc.get("args", {}),
                             )
 
@@ -813,9 +830,19 @@ class ReactAgent:
 
                     # 3c) 文字内容
                     content = self._extract_content(latest_msg)
-                    if content:
-                        response_chunks.append(content)
-                        yield TextChunk(content=content)
+                    content_kind = classify_ai_content(latest_msg)
+                    if content and content_kind:
+                        if content_kind == "process_text":
+                            public_calls = [
+                                tc for tc in latest_msg.tool_calls
+                                if tc.get("name") not in INTERNAL_TOOL_NAMES
+                            ]
+                            if public_calls:
+                                yield HarnessEvent.process_text(content)
+                        else:
+                            # LangGraph 以无 tool_calls 的 AIMessage 结束循环。
+                            # 最终正文延迟到结构化数据拆分完成后再发送。
+                            final_response = content
 
                 # —— Tool 消息：工具返回结果 ——
                 elif isinstance(latest_msg, ToolMessage):
@@ -825,47 +852,59 @@ class ReactAgent:
                         success=not result_text.startswith("[工具调用被拒绝]"),
                     )
                     tool_name = getattr(latest_msg, "name", "unknown")
+                    tool_call_id = str(getattr(latest_msg, "tool_call_id", "") or "")
+                    tool_name = tool_names_by_id.get(tool_call_id, tool_name)
                     tracer.agent_tool_done(tool_name, len(result_text))
-                    yield ToolEvent(
-                        phase="end",
+                    if tool_call_id in hidden_tool_call_ids or tool_name in INTERNAL_TOOL_NAMES:
+                        last_graph_event_at = now
+                        continue
+                    started_at = tool_started_at.pop(tool_call_id, None)
+                    yield HarnessEvent.tool_end(
+                        tool_call_id=tool_call_id,
                         tool_name=tool_name,
+                        status=("failed" if result_text.startswith(
+                            ("[工具调用被拒绝]", "[工具执行失败]", "[参数错误]")
+                        ) else "completed"),
                         result_preview=(
                             result_text[:200] + "…" if len(result_text) > 200
                             else result_text
                         ),
+                        duration_ms=((now - started_at) * 1000 if started_at is not None else None),
                     )
 
                 last_graph_event_at = now
 
             # ---- 4) 持久化本轮对话（内存 + SQLite 双写） ----
-            full_response = "".join(response_chunks)
-            tracer.agent_path_done(len(full_response), token_stats)
+            tracer.agent_path_done(len(final_response), token_stats)
             logger.info(
                 f"[trace={trace_id}] 完成: tokens={token_stats}, "
-                f"响应长度={len(full_response)}"
+                f"响应长度={len(final_response)}"
             )
 
             # Phase 6: 结构化输出后处理
-            active_skill = self._extract_active_skill(state["messages"])
-            if active_skill and full_response:
-                struct_result = await self._postprocess_structured(full_response, active_skill)
+            if active_skill and final_response:
+                struct_result = await self._postprocess_structured(final_response, active_skill)
                 if struct_result is not None:
-                    yield StructuredData(
+                    from agent.structured_output.validator import remove_extracted_json
+
+                    final_response = remove_extracted_json(final_response)
+                    yield HarnessEvent.structured_data(
                         schema_type=struct_result.schema_type,
-                        model=struct_result.model,
-                        formatted=struct_result.formatted,
-                        raw_json=struct_result.raw_json,
+                        data=struct_result.raw_json,
                     )
 
-            if full_response and not self.external_persistence:
-                session_store.append_pair(self.session_id, query, full_response)
+            if final_response:
+                yield HarnessEvent.final_text(final_response)
+
+            if final_response and not self.external_persistence:
+                session_store.append_pair(self.session_id, query, final_response)
                 updated_history = session_store.get_history(self.session_id)
                 if should_build_summary(updated_history):
                     session_store.set_agent_summary(
                         self.session_id,
                         build_agent_summary(updated_history),
                     )
-                chat_db.save_pair(self.session_id, query, full_response)
+                chat_db.save_pair(self.session_id, query, final_response)
                 tracer.persist(
                     session_store.history_length(self.session_id),
                     chat_db.session_message_count(self.session_id),
@@ -902,7 +941,7 @@ class ReactAgent:
                         loop = asyncio.get_running_loop()
                         loop.create_task(
                             extract_and_save_profile(
-                                self.user_id, query, full_response
+                                self.user_id, query, final_response
                             )
                         )
                         # Agent 路径与 Chat 路径复用相同的 L2 写入逻辑。
@@ -925,7 +964,7 @@ class ReactAgent:
                 f"[ReactAgent] 流式执行异常: {type(e).__name__}: {e}",
                 exc_info=True,
             )
-            yield TextChunk(content=f"\n\n⚠️ 处理请求时发生错误（{type(e).__name__}），请重试。")
+            raise
 
     def _save_title_from_query(self, first_query: str) -> None:
         """Save a useful local title without making another model request."""
@@ -965,7 +1004,7 @@ class ReactAgent:
 
     def execute_stream(self, query: str):
         """
-        同步流式接口，yield 结构化事件（TextChunk | ToolEvent）。
+        同步流式接口，yield HarnessEvent。
 
         用于 Streamlit 这类同步框架中直接调用，无需手动管理事件循环。
 
@@ -996,7 +1035,10 @@ class ReactAgent:
             try:
                 kind, value = result_queue.get(timeout=300)
             except queue.Empty:
-                yield TextChunk(content="\n\n⚠️ 请求超时（300s），请重试。")
+                yield HarnessEvent(
+                    type="run_end",
+                    data={"status": "failed", "error": "请求超时（300s），请重试。"},
+                )
                 break
 
             if kind == "done":
@@ -1006,7 +1048,10 @@ class ReactAgent:
                     f"[ReactAgent] 流式执行异常: {type(value).__name__}: {value}",
                     exc_info=True,
                 )
-                yield TextChunk(content=f"\n\n⚠️ 处理请求时发生错误（{type(value).__name__}），请重试。")
+                yield HarnessEvent(
+                    type="run_end",
+                    data={"status": "failed", "error": f"{type(value).__name__}: {value}"},
+                )
                 break
             else:
                 yield value
@@ -1017,12 +1062,11 @@ class ReactAgent:
         """
         向后兼容的纯文本流式接口。
 
-        仅产出 TextChunk 的 content 字符串，
-        ToolEvent 被跳过（适合不需要工具日志的旧版 UI）。
+        仅产出 final_text 字符串，其他 HarnessEvent 被跳过。
         """
         for event in self.execute_stream(query):
-            if isinstance(event, TextChunk):
-                yield event.content
+            if event.type == "final_text":
+                yield str(event.data.get("text", ""))
 
 
 # ==================== 入口 ====================

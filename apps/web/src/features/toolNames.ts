@@ -1,4 +1,4 @@
-// 工具中文名映射（对齐后端 agent/stream_events.py 的 TOOL_DISPLAY_NAMES）
+// 工具中文名映射（对齐后端 agent/harness_events.py 的 TOOL_DISPLAY_NAMES）
 
 const TOOL_DISPLAY_NAMES: Record<string, string> = {
   search_anime: '🔍 搜索动漫作品',

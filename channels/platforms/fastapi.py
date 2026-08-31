@@ -26,22 +26,12 @@ DELETE   /api/v1/sessions/{session_id}          清空会话
 GET      /health                                健康检查
 ======== ====================================== ==========
 
-SSE 事件格式::
+SSE 与 WebSocket 共用 HarnessEvent。SSE 的 ``event`` 等于事件 ``type``，
+``data`` 是完整事件信封::
 
-    event: text
-    data: {"content": "你好"}
-
-    event: tool_start
-    data: {"tool_name": "search_anime", "tool_args": {...}}
-
-    event: tool_end
-    data: {"tool_name": "search_anime", "result_preview": "..."}
-
-    event: structured_data
-    data: {"schema_type": "anime", "model": "...", "formatted": "..."}
-
-    event: done
-    data: {}
+    event: final_text
+    data: {"version": 1, "type": "final_text", "run_id": "run-1",
+           "sequence": 2, "data": {"text": "你好", "delta": false}}
 """
 
 from __future__ import annotations
@@ -60,7 +50,7 @@ from fastapi.responses import Response, StreamingResponse
 from pydantic import BaseModel, Field
 
 from agent.react_agent import ReactAgent
-from agent.stream_events import TextChunk, ToolEvent, StructuredData, get_tool_display_name, event_to_content_block
+from agent.harness_events import HarnessEvent
 from orchestration.coordinator import ConversationCoordinator
 from orchestration.session_runner import SessionAgentRunner
 from orchestration.context_builder import SessionContextBuilder
@@ -343,8 +333,7 @@ def _create_app() -> FastAPI:
     async def chat_stream(req: ChatRequest):
         """SSE 流式聊天。
 
-        遍历 Agent 的异步流式输出，将 ``TextChunk`` / ``ToolEvent`` / ``StructuredData``
-        格式化为 SSE 事件流，浏览器原生 ``EventSource`` 可直接消费。
+        HarnessEvent 会原样作为 SSE 公共协议发送。
         """
         async def event_stream() -> AsyncIterator[str]:
             try:
@@ -352,36 +341,14 @@ def _create_app() -> FastAPI:
                     req.message,
                     session_id=req.session_id,
                 ):
-                    if isinstance(event, TextChunk):
-                        yield _sse_event("text", {"content": event.content, "content_block": event_to_content_block(event).to_dict()})
-
-                    elif isinstance(event, ToolEvent):
-                        if event.phase == "start":
-                            yield _sse_event("tool_start", {
-                                "tool_name": event.tool_name,
-                                "tool_args": event.tool_args or {},
-                                "content_block": event_to_content_block(event).to_dict(),
-                            })
-                        elif event.phase == "end":
-                            yield _sse_event("tool_end", {
-                                "tool_name": event.tool_name,
-                                "result_preview": event.result_preview or "",
-                                "content_block": event_to_content_block(event).to_dict(),
-                            })
-
-                    elif isinstance(event, StructuredData):
-                        yield _sse_event("structured_data", {
-                            "schema_type": event.schema_type,
-                            "model": event.model,
-                            "formatted": event.formatted,
-                            "raw_json": event.raw_json,
-                            "content_block": event_to_content_block(event).to_dict(),
-                        })
-
-                yield _sse_event("done", {})
+                    yield _sse_event(event)
             except Exception as e:
                 logger.error(f"[FastAPI SSE] 流式异常: {type(e).__name__}: {e}", exc_info=True)
-                yield _sse_event("error", {"message": str(e)[:200]})
+                failure = HarnessEvent(
+                    type="run_end",
+                    data={"status": "failed", "error": str(e)[:200]},
+                )
+                yield _sse_event(failure)
 
         return StreamingResponse(
             event_stream(),
@@ -405,7 +372,8 @@ def _create_app() -> FastAPI:
 
         服务端帧::
 
-            {"event": "text", "data": {"content": "你"}}
+            {"version": 1, "type": "final_text", "run_id": "...", "sequence": 2,
+             "data": {"text": "你", "delta": true}}
             {"event": "tool_start", "data": {"tool_name": "...", "tool_args": {...}}}
             {"event": "tool_end", "data": {"tool_name": "...", "result_preview": "..."}}
             {"event": "done"}
@@ -435,29 +403,7 @@ def _create_app() -> FastAPI:
                     message,
                     session_id=session_id,
                 ):
-                    if isinstance(event, TextChunk):
-                        await ws.send_json({"event": "text", "data": {"content": event.content}})
-
-                    elif isinstance(event, ToolEvent):
-                        if event.phase == "start":
-                            await ws.send_json({"event": "tool_start", "data": {
-                                "tool_name": event.tool_name,
-                                "tool_args": event.tool_args or {},
-                            }})
-                        elif event.phase == "end":
-                            await ws.send_json({"event": "tool_end", "data": {
-                                "tool_name": event.tool_name,
-                                "result_preview": event.result_preview or "",
-                            }})
-
-                    elif isinstance(event, StructuredData):
-                        await ws.send_json({"event": "structured_data", "data": {
-                            "schema_type": event.schema_type,
-                            "model": event.model,
-                            "formatted": event.formatted,
-                        }})
-
-                await ws.send_json({"event": "done"})
+                    await ws.send_json(event.to_dict())
 
         except WebSocketDisconnect:
             logger.info(f"[FastAPI WS] 断开: session={session_id[:12]}…")
@@ -546,10 +492,20 @@ def _create_app() -> FastAPI:
 # ==================== SSE 辅助 ====================
 
 
-def _sse_event(event: str, data: dict) -> str:
-    """格式化一条 SSE 事件。"""
-    payload = json.dumps(data, ensure_ascii=False)
-    return f"event: {event}\ndata: {payload}\n\n"
+def harness_event_sse_message(event: HarnessEvent) -> dict[str, str]:
+    """生成 sse-starlette 和测试均可复用的消息结构。"""
+
+    return {
+        "event": event.type,
+        "data": json.dumps(event.to_dict(), ensure_ascii=False),
+    }
+
+
+def _sse_event(event: HarnessEvent) -> str:
+    """把 HarnessEvent 编码为标准 SSE 文本帧。"""
+
+    message = harness_event_sse_message(event)
+    return f"event: {message['event']}\ndata: {message['data']}\n\n"
 
 
 # ==================== Channel 封装 ====================

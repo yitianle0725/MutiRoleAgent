@@ -3,7 +3,7 @@
 import asyncio
 import tempfile
 
-from agent.stream_events import TextChunk, ToolEvent
+from agent.harness_events import HarnessEvent
 from orchestration.coordinator import ConversationCoordinator
 from orchestration.session_runner import SessionAgentRunner
 from orchestration.runs import RunStore
@@ -18,8 +18,8 @@ class ForceAgentDecision:
 
 class FakeAgent:
     async def execute_stream_async(self, prompt: str):
-        yield ToolEvent(phase="start", tool_name="fake_tool")
-        yield TextChunk(content=f"回答：{prompt}")
+        yield HarnessEvent.tool_start(tool_call_id="call-1", tool_name="fake_tool")
+        yield HarnessEvent.final_text(f"回答：{prompt}")
 
 
 async def _factory(session_id: str, user_id: str | None, persona: str | None):
@@ -44,8 +44,8 @@ def test_runner_serializes_same_session():
         runner = SessionAgentRunner(_factory)
         outputs = []
         async for event in runner.stream("session-1", "测试"):
-            if isinstance(event, TextChunk):
-                outputs.append(event.content)
+            if event.type == "final_text":
+                outputs.append(str(event.data["text"]))
         assert outputs == ["回答：测试"]
 
     asyncio.run(run())

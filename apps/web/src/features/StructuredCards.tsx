@@ -1,11 +1,10 @@
 // 结构化输出卡片：根据 schema_type 渲染不同卡片，禁止原始 JSON 文本直接展示
-// 后端 StructuredData 事件携带 schema_type / raw_json / formatted / model
+// StructuredData 与最终自然语言分离，只携带 schema_type 和结构化 data。
 import type { CSSProperties } from 'react'
 
 export interface StructuredPayload {
   schema_type: string
-  raw_json: Record<string, unknown>
-  formatted: string
+  data: Record<string, unknown>
 }
 
 /** 通用封面占位（无图时显示首字 + 渐变背景） */
@@ -145,23 +144,23 @@ function WeatherReportView({ data }: { data: Record<string, unknown> }) {
   )
 }
 
-/** 兜底渲染：formatted markdown 仅在无法识别 schema 时显示 */
-function FallbackView({ formatted }: { formatted: string }) {
-  return <div className="structured-fallback">{formatted}</div>
+/** 未注册卡片只显示类型，不把原始 JSON 暴露到聊天正文。 */
+function FallbackView({ schemaType }: { schemaType: string }) {
+  return <div className="structured-fallback">暂不支持此卡片：{schemaType}</div>
 }
 
 export function StructuredCards({ data }: { data: StructuredPayload }) {
   const wrapStyle: CSSProperties = { margin: '12px 0' }
   switch (data.schema_type) {
     case 'anime_recommendation':
-      return <div style={wrapStyle}><AnimeRecommendationView data={data.raw_json} /></div>
+      return <div style={wrapStyle}><AnimeRecommendationView data={data.data} /></div>
     case 'season_overview':
-      return <div style={wrapStyle}><SeasonOverviewView data={data.raw_json} /></div>
+      return <div style={wrapStyle}><SeasonOverviewView data={data.data} /></div>
     case 'anime_deep_dive':
-      return <div style={wrapStyle}><AnimeDeepDiveView data={data.raw_json} /></div>
+      return <div style={wrapStyle}><AnimeDeepDiveView data={data.data} /></div>
     case 'weather_report':
-      return <div style={wrapStyle}><WeatherReportView data={data.raw_json} /></div>
+      return <div style={wrapStyle}><WeatherReportView data={data.data} /></div>
     default:
-      return <div style={wrapStyle}><FallbackView formatted={data.formatted} /></div>
+      return <div style={wrapStyle}><FallbackView schemaType={data.schema_type} /></div>
   }
 }

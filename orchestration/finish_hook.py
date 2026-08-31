@@ -6,14 +6,14 @@ import asyncio
 import re
 
 from agent.summary import build_history_summary, should_build_summary
-from agent.stream_events import StructuredData, TextChunk, ToolEvent
+from agent.harness_events import HarnessEvent
 from memory.chat_db import ChatDB
 from memory.session_store import SessionStore
 from memory.user_profile_extractor import extract_and_save_profile
 from orchestration.models import TurnContext
 
 
-StreamEvent = TextChunk | ToolEvent | StructuredData
+StreamEvent = HarnessEvent
 
 
 class TurnFinishHook:
@@ -28,7 +28,11 @@ class TurnFinishHook:
         prompt: str,
         events: list[StreamEvent],
     ) -> None:
-        response = "".join(event.content for event in events if isinstance(event, TextChunk)).strip()
+        response = "".join(
+            str(event.data.get("text", ""))
+            for event in events
+            if event.type == "final_text"
+        ).strip()
         if not response:
             return
         session = context.session

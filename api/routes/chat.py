@@ -1,7 +1,6 @@
 """聊天流式路由。
 
-把 Agent 的异步事件流（``TextChunk`` / ``ToolEvent`` / ``StructuredData``）
-翻译成 SSE 事件推送，供前端 React 界面消费。
+把统一 HarnessEvent 直接作为 SSE 事件推送。
 
 复用 ``channels.manager.agent_cache`` —— 与 Streamlit / CLI 共享同一个
 已初始化的 Agent 实例，避免重复加载 MCP 工具与 RAG 知识库。
@@ -9,14 +8,11 @@
 
 from __future__ import annotations
 
-import json
-
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from sse_starlette.sse import EventSourceResponse
 
-from agent.stream_events import StructuredData, TextChunk, ToolEvent
-from channels.platforms.fastapi import conversation_coordinator
+from channels.platforms.fastapi import conversation_coordinator, harness_event_sse_message
 
 router = APIRouter(tags=["chat"])
 
@@ -37,42 +33,15 @@ async def chat_stream(req: ChatRequest) -> EventSourceResponse:
                 req.query,
                 session_id=req.session_id or "default",
             ):
-                if isinstance(event, TextChunk):
-                    # 逐段文字，前端做打字机效果
-                    yield {"event": "chunk", "data": event.content}
-                elif isinstance(event, ToolEvent):
-                    # data 必须是 JSON 字符串（sse-starlette 对 dict 会 str() 成
-                    # Python repr，前端 JSON.parse 会失败），这里手动序列化。
-                    yield {
-                        "event": "tool",
-                        "data": json.dumps(
-                            {
-                                "phase": event.phase,
-                                "tool_name": event.tool_name,
-                                "tool_args": event.tool_args,
-                                "result_preview": event.result_preview,
-                            },
-                            ensure_ascii=False,
-                        ),
-                    }
-                elif isinstance(event, StructuredData):
-                    # 结构化输出（番剧卡 / 天气卡 等）：把 schema_type、raw_json、formatted
-                    # 一起 JSON 序列化下发，前端按 schema_type 渲染对应卡片（避免展示原始 JSON）
-                    yield {
-                        "event": "structured",
-                        "data": json.dumps(
-                            {
-                                "schema_type": event.schema_type,
-                                "raw_json": event.raw_json,
-                                "formatted": event.formatted,
-                            },
-                            ensure_ascii=False,
-                        ),
-                    }
-            yield {"event": "done", "data": ""}
+                yield harness_event_sse_message(event)
         except Exception as exc:
-            # Agent 出错时也发事件而非断开连接，前端能展示给用户
-            yield {"event": "error", "data": str(exc)}
+            # 正常执行异常已由 Coordinator 转成 run_end；这里只处理传输层异常。
+            from agent.harness_events import HarnessEvent
+
+            yield harness_event_sse_message(HarnessEvent(
+                type="run_end",
+                data={"status": "failed", "error": str(exc)},
+            ))
 
     return EventSourceResponse(event_generator())
 

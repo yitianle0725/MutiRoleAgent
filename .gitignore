@@ -19,6 +19,7 @@ __pycache__/
 # 数据文件（敏感/大型）
 data/workspace/
 data/checkpoints/
+data/runs/
 *.db
 *.sqlite3
 

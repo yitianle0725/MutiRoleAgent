@@ -3,7 +3,7 @@ from __future__ import annotations
 import asyncio
 import sqlite3
 
-from agent.stream_events import TextChunk
+from agent.harness_events import HarnessEvent
 from memory.chat_db import ChatDB
 from orchestration.context_builder import SessionContextBuilder
 from orchestration.coordinator import ConversationCoordinator
@@ -21,7 +21,7 @@ class _RecordingExecutor:
 
     async def stream(self, prompt, context):
         self.contexts.append(context)
-        yield TextChunk(content=f"{self.label}:{prompt}")
+        yield HarnessEvent.final_text(f"{self.label}:{prompt}")
 
 
 class _FinishHook:
@@ -120,7 +120,8 @@ def test_coordinator_routes_only_by_locked_session_mode(tmp_path):
         async for event in coordinator.stream_user_turn(
             "搜索最新资讯", session_id=session_id
         ):
-            chunks.append(event.content)
+            if event.type == "final_text":
+                chunks.append(str(event.data["text"]))
         return "".join(chunks)
 
     assert asyncio.run(collect("chat-session")) == "chat:搜索最新资讯"

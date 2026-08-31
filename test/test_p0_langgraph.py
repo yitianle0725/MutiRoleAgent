@@ -5,7 +5,7 @@ from agent.langgraph_adapter import build_graph_config
 from agent.results import AgentFactResult
 from agent.agent_state import create_agent_state
 from agent.request import AgentRequest
-from agent.stream_events import StructuredData, TextChunk, ToolEvent, event_to_content_block
+from agent.harness_events import HarnessEvent
 
 
 def test_content_blocks_preserve_text_and_attachment():
@@ -44,8 +44,13 @@ def test_agent_request_normalizes_runtime_fields():
     assert request.timeout_seconds == 1.0
 
 
-def test_stream_events_convert_to_content_blocks():
-    assert event_to_content_block(TextChunk("文本")).type == "text"
-    assert event_to_content_block(ToolEvent("start", "search")).type == "json"
-    structured = StructuredData("demo", object(), "", {"ok": True})
-    assert event_to_content_block(structured).metadata["schema_type"] == "demo"
+def test_harness_event_is_directly_serializable():
+    event = HarnessEvent.structured_data(schema_type="demo", data={"ok": True})
+    bound = event.bind(run_id="r1", sequence=2)
+    assert bound.to_dict() == {
+        "version": 1,
+        "type": "structured_data",
+        "run_id": "r1",
+        "sequence": 2,
+        "data": {"schema_type": "demo", "data": {"ok": True}},
+    }
