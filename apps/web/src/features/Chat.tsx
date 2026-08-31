@@ -25,9 +25,11 @@ import './StructuredCards.css'
 /** 用户、过程、工具、结构化卡片和最终回答分别建模。 */
 type ChatItem =
   | { kind: 'text'; id: string; role: 'user' | 'assistant'; content: string; time: string }
-  | { kind: 'process'; id: string; content: string; failed?: boolean }
-  | { kind: 'tool'; id: string; tool_call_id: string; tool_name: string; phase: 'start' | 'end'; started_at: number; status?: 'completed' | 'failed'; duration_ms?: number }
+  | { kind: 'process'; id: string; content: string; run_id?: string; failed?: boolean }
+  | { kind: 'tool'; id: string; run_id: string; tool_call_id: string; tool_name: string; phase: 'start' | 'end'; started_at: number; status?: 'completed' | 'failed'; duration_ms?: number }
   | { kind: 'structured'; id: string; data: StructuredPayload; time: string }
+
+type RunActivityItem = Extract<ChatItem, { kind: 'process' } | { kind: 'tool' }>
 
 const DEFAULT_SESSION = 'default'
 const DEFAULT_SESSION_INFO: SessionItem = {
@@ -99,6 +101,7 @@ export function Chat() {
   const [asrMsg, setAsrMsg] = useState('')
   const [toolElapsed, setToolElapsed] = useState<Record<string, string>>({})
   const [monitor, setMonitor] = useState<SessionMonitor>(EMPTY_MONITOR)
+  const [lastRunId, setLastRunId] = useState('')
   const { speaking, speak } = useSpeech()
   const assistantIdRef = useRef<string | null>(null)
   const draftRef = useRef('')
@@ -117,6 +120,10 @@ export function Chat() {
     .filter((it): it is Extract<ChatItem, { kind: 'text' }> => it.kind === 'text')
     .reverse()
     .find((m) => m.role === 'assistant')?.content ?? ''
+  const lastRunActivity = items.filter(
+    (item): item is RunActivityItem =>
+      (item.kind === 'process' || item.kind === 'tool') && item.run_id === lastRunId,
+  )
 
   const refreshMonitor = async (id: string) => {
     try {
@@ -220,13 +227,18 @@ export function Chat() {
 
     function handleHarnessEvent(event: HarnessEvent) {
       switch (event.type) {
+        case 'run_start':
+          setLastRunId(event.run_id)
+          break
         case 'process_text': {
-          processDraftRef.current += event.data.text
+          processDraftRef.current = event.data.delta
+            ? processDraftRef.current + event.data.text
+            : event.data.text
           let id = processIdRef.current
           if (!id) {
             const newId = crypto.randomUUID()
             processIdRef.current = newId
-            setItems((prev) => [...prev, { kind: 'process', id: newId, content: processDraftRef.current }])
+            setItems((prev) => [...prev, { kind: 'process', id: newId, run_id: event.run_id, content: processDraftRef.current }])
           } else {
             setItems((prev) => prev.map((item) =>
               item.kind === 'process' && item.id === id
@@ -240,6 +252,7 @@ export function Chat() {
           setItems((prev) => [...prev, {
             kind: 'tool',
             id: `${event.run_id}:${event.data.tool_call_id}`,
+            run_id: event.run_id,
             tool_call_id: event.data.tool_call_id,
             tool_name: event.data.tool_name,
             phase: 'start',
@@ -267,7 +280,9 @@ export function Chat() {
           }])
           break
         case 'final_text': {
-          draftRef.current += event.data.text
+          draftRef.current = event.data.delta
+            ? draftRef.current + event.data.text
+            : event.data.text
           let id = assistantIdRef.current
           if (!id) {
             const newId = crypto.randomUUID()
@@ -408,6 +423,11 @@ export function Chat() {
             {currentSession.mode === 'chat' ? '💬' : '🛠️'} {currentSession.title || '会话'} · {currentSession.persona_display_name || currentSession.persona_name} · {currentSession.mode === 'chat' ? 'Chat' : 'Work'}
           </span>
           <div className="chat-toolbar-actions">
+            {lastRunId && (
+              <span className="run-id-badge" title={lastRunId}>
+                Run {lastRunId.slice(0, 8)}
+              </span>
+            )}
             <label className="auto-speak-toggle">
               <input
                 type="checkbox"
@@ -419,6 +439,26 @@ export function Chat() {
             <SettingsPanel />
           </div>
         </div>
+
+        {lastRunId && (
+          <details className="run-details">
+            <summary>执行详情 · Run {lastRunId.slice(0, 8)}</summary>
+            <div className="run-details-id">完整 ID：{lastRunId}</div>
+            {lastRunActivity.length === 0 ? (
+              <div className="run-details-empty">本次运行尚未调用公开工具。</div>
+            ) : (
+              <div className="run-details-list">
+                {lastRunActivity.map((item) => (
+                  <div key={`trace-${item.id}`} className="run-details-entry">
+                    {item.kind === 'process'
+                      ? item.content
+                      : `${item.phase === 'start' ? '执行中' : item.status === 'failed' ? '失败' : '完成'} · ${getToolDisplayName(item.tool_name)}${item.duration_ms != null ? ` · ${(item.duration_ms / 1000).toFixed(1)}s` : ''}`}
+                  </div>
+                ))}
+              </div>
+            )}
+          </details>
+        )}
 
         <div className="chat-body">
           {items.length === 0 ? (

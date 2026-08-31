@@ -115,3 +115,39 @@ def test_sse_and_websocket_share_the_same_envelope():
 
     assert message["event"] == "final_text"
     assert json.loads(message["data"]) == event.to_dict()
+
+
+def test_finish_hook_respects_delta_replace_semantics(tmp_path, monkeypatch):
+    database = ChatDB(str(tmp_path / "chat.db"))
+    database.init_db()
+    database.create_session(
+        "session-2",
+        user_id="user-1",
+        persona_id="cyrene",
+        mode="work",
+    )
+    monkeypatch.setattr(
+        "orchestration.finish_hook.schedule_profile_extraction",
+        lambda *args, **kwargs: None,
+    )
+    hook = TurnFinishHook(database, SessionStore())
+    context = asyncio.run(
+        SessionContextBuilder(database).build(
+            database.require_session("session-2"),
+            "查询",
+        )
+    )
+
+    asyncio.run(hook.complete(
+        context=context,
+        prompt="查询",
+        events=[
+            HarnessEvent.final_text("临时文本", delta=True),
+            HarnessEvent.final_text("", delta=False),
+            HarnessEvent.final_text("最终", delta=True),
+            HarnessEvent.final_text("答案", delta=True),
+        ],
+    ))
+
+    history = database.get_history_raw("session-2")
+    assert history[-1]["content"] == "最终答案"

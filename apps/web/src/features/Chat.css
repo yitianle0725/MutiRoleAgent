@@ -250,3 +250,40 @@
 .ant-bubble:hover .msg-actions {
   opacity: 1;
 }
+.run-id-badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(116, 105, 255, 0.12);
+  color: var(--ant-color-text-secondary, #666);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 12px;
+}
+
+.run-details {
+  margin: 0 20px 8px;
+  padding: 8px 12px;
+  border: 1px solid rgba(127, 127, 127, 0.18);
+  border-radius: 10px;
+  color: var(--ant-color-text-secondary, #666);
+  font-size: 12px;
+}
+
+.run-details summary {
+  cursor: pointer;
+  user-select: none;
+}
+
+.run-details-id,
+.run-details-empty,
+.run-details-list {
+  margin-top: 8px;
+}
+
+.run-details-id {
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+.run-details-entry + .run-details-entry {
+  margin-top: 5px;
+}

@@ -58,3 +58,4 @@ class TurnContext:
     history: list[BaseMessage] = field(default_factory=list)
     prompt_layers: PromptLayers | None = None
     run_context: RunContext | None = None
+    trace_context: RunContext | None = None

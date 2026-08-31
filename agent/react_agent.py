@@ -43,6 +43,10 @@ from agent.langgraph_adapter import build_graph_config, build_checkpointer
 from agent.core import LangGraphAgentCore
 from agent.summary import build_history_summary, build_agent_summary, should_build_summary
 from agent.harness_events import HarnessEvent, INTERNAL_TOOL_NAMES
+from runtime.context import RunContext
+from runtime.events import RunEvent
+from runtime.native_runtime import NativeAgentRuntime
+from runtime.request import RuntimeRequest
 from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
 from memory.user_profile_extractor import build_profile_context, schedule_profile_extraction
@@ -176,6 +180,7 @@ class ReactAgent:
         self._current_route = "unknown"
         self._current_outcome = "success"
         self.thread_id = session_id
+        self.native_runtime: NativeAgentRuntime | None = None
 
     # ==================== 初始化 ====================
 
@@ -269,6 +274,11 @@ class ReactAgent:
             **agent_kwargs,
         )
         self.core = LangGraphAgentCore(self.agent, session_id=self.session_id, thread_id=self.thread_id)
+        self.native_runtime = NativeAgentRuntime(
+            chat_model,
+            all_tools,
+            system_prompt=system_prompt,
+        )
         print(f"[init_agent] 统一中间件已激活: Gate + Policy + Timeout + CITA + Persona")
 
         # 持久化初始化：建表 + 从 SQLite 恢复历史到内存
@@ -280,6 +290,198 @@ class ReactAgent:
     def set_runtime_context(self, context: str) -> None:
         """设置本轮由 SessionContextBuilder 产生的可信动态上下文。"""
         self._runtime_context = str(context or "")
+
+    async def execute_runtime_stream_async(
+        self,
+        query: str,
+        *,
+        run_context: RunContext,
+    ):
+        """使用自研 Runtime 执行一轮，并直接产出 v2 RunEvent。"""
+
+        acquired = await asyncio.to_thread(
+            self._turn_lock.acquire, True, TURN_QUEUE_TIMEOUT
+        )
+        if not acquired:
+            self.performance_monitor.record_rejection()
+            raise RuntimeError("正在处理上一条消息，请等待其完成后再发送。")
+
+        try:
+            self._turn_started_at = time.perf_counter()
+            self._turn_snapshot_start = self.performance_monitor.snapshot()
+            self._current_outcome = "success"
+            self.performance_monitor.start_turn()
+            async for event in self._execute_native_runtime_locked(
+                query,
+                run_context=run_context,
+            ):
+                if event.type == "run_failed":
+                    self._current_outcome = str(event.data.get("status") or "error")
+                elif event.type == "run_finished" and event.data.get("status") == "cancelled":
+                    self._current_outcome = "cancelled"
+                elif event.type == "text_delta" and event.visibility == "public":
+                    self.performance_monitor.record_visible_text(
+                        estimate_tokens(str(event.data.get("text", "")))
+                    )
+                yield event
+        except Exception:
+            self._current_outcome = "error"
+            raise
+        finally:
+            self.performance_monitor.finish_turn(self._current_outcome)
+            self._enqueue_turn_observation()
+            self._turn_lock.release()
+
+    async def _execute_native_runtime_locked(
+        self,
+        query: str,
+        *,
+        run_context: RunContext,
+    ):
+        if not self._initialized:
+            await self.init_agent()
+        if self.native_runtime is None:
+            raise RuntimeError("Native Runtime 尚未初始化")
+
+        trace_id = run_context.run_id
+        tracer = ConversationTracer(session_id=self.session_id, trace_id=trace_id)
+        self._current_tracer = tracer
+        self._current_route = "work"
+        tracer.enter(query)
+
+        raw_history = await asyncio.to_thread(
+            session_store.get_history,
+            self.session_id,
+        )
+        tracer.load_history(raw_history)
+        trimmed_history = trim_history(
+            raw_history,
+            max_tokens=TRIM_MAX_TOKENS,
+            max_rounds=TRIM_MAX_ROUNDS,
+        )
+        tracer.after_trim(raw_history, trimmed_history)
+        tracer.decision("work", 1.0, "native_runtime")
+
+        l2_memory_context = ""
+        if self.user_id and not self.external_persistence:
+            l2_memory_context = await asyncio.to_thread(
+                l2_memory_store.build_prompt_block,
+                self.user_id,
+                query,
+            )
+        runtime_context = "\n\n---\n\n".join(
+            part for part in (l2_memory_context, self._runtime_context) if part
+        )
+        history = [
+            {
+                "role": (
+                    "user" if getattr(message, "type", "") == "human"
+                    else "assistant" if getattr(message, "type", "") == "ai"
+                    else "system"
+                ),
+                "content": self._extract_content(message),
+            }
+            for message in trimmed_history
+            if getattr(message, "type", "") in {"human", "ai", "system"}
+        ]
+        request = RuntimeRequest(
+            session_id=self.session_id,
+            prompt=query,
+            user_id=self.user_id,
+            persona=self.default_persona,
+            history=history,
+            max_rounds=int(agent_config.get("max_steps", 20)),
+            timeout_seconds=LLM_TURN_TIMEOUT,
+            metadata={
+                "runtime_context": runtime_context,
+                "context_sources": [
+                    "system_prompt",
+                    "session_mode",
+                    "user_profile",
+                    "session_memory",
+                ],
+            },
+        )
+
+        final_response = ""
+        active_skill: str | None = None
+        token_stats = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}
+        round_usage = {"input_tokens": 0, "output_tokens": 0}
+        terminal_event: RunEvent | None = None
+        tracer.agent_path_start(len(history) + 1)
+
+        async for event in self.native_runtime.stream(request, run_context):
+            if event.type == "tool_call_started":
+                tool_name = str(event.data.get("tool_name", ""))
+                if tool_name == "invoke_skill":
+                    tool_args = event.data.get("tool_args", {})
+                    if isinstance(tool_args, dict):
+                        active_skill = str(tool_args.get("skill_name") or "") or active_skill
+                if event.visibility == "public":
+                    tracer.agent_tool_call(tool_name)
+                    self.performance_monitor.record_step(1)
+            elif event.type == "tool_call_finished":
+                self.performance_monitor.record_tool_call(
+                    float(event.data.get("duration_ms", 0)) / 1000,
+                    success=event.data.get("status") == "completed",
+                )
+            elif event.type == "usage_updated":
+                input_tokens = int(event.data.get("input_tokens", 0) or 0)
+                output_tokens = int(event.data.get("output_tokens", 0) or 0)
+                token_stats["input_tokens"] += input_tokens
+                token_stats["output_tokens"] += output_tokens
+                token_stats["total_tokens"] += int(
+                    event.data.get("total_tokens", input_tokens + output_tokens) or 0
+                )
+                round_usage = {
+                    "input_tokens": input_tokens,
+                    "output_tokens": output_tokens,
+                }
+            elif event.type == "model_finished":
+                self.performance_monitor.record_llm_call(
+                    float(event.data.get("duration_ms", 0)) / 1000,
+                    round_usage["input_tokens"],
+                    round_usage["output_tokens"],
+                )
+                round_usage = {"input_tokens": 0, "output_tokens": 0}
+            elif event.type == "text_finished" and event.data.get("role") == "answer":
+                final_response = str(event.data.get("text", ""))
+            elif event.type in {"run_finished", "run_failed"}:
+                terminal_event = event
+                continue
+            yield event
+
+        if active_skill and final_response:
+            struct_result = await self._postprocess_structured(
+                final_response,
+                active_skill,
+            )
+            if struct_result is not None:
+                yield run_context.event(
+                    "structured_data",
+                    {
+                        "schema_type": struct_result.schema_type,
+                        "data": struct_result.raw_json,
+                    },
+                )
+
+        tracer.agent_path_done(len(final_response), token_stats)
+        if final_response and not self.external_persistence:
+            await asyncio.to_thread(
+                session_store.append_pair,
+                self.session_id,
+                query,
+                final_response,
+            )
+            await asyncio.to_thread(
+                chat_db.save_pair,
+                self.session_id,
+                query,
+                final_response,
+            )
+        tracer.exit()
+        if terminal_event is not None:
+            yield terminal_event
 
     # ==================== 消息提取 ====================
 

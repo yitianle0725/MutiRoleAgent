@@ -9,6 +9,7 @@ from __future__ import annotations
 import asyncio
 import inspect
 import os
+import uuid
 from collections.abc import AsyncIterator, Awaitable, Callable
 from typing import Any
 
@@ -16,6 +17,8 @@ from agent.harness_events import HarnessEvent
 from agent.checkpoint import AgentCheckpoint, CheckpointStore, checkpoint_store as default_checkpoint_store
 from memory.session_store import SessionStore
 from orchestration.runs import RunStore
+from runtime.context import RunContext
+from runtime.legacy_adapter import LegacyEventStreamAdapter
 
 
 AgentFactory = Callable[[str, str | None, str | None], Awaitable[Any]]
@@ -39,6 +42,8 @@ class SessionAgentRunner:
         self._checkpoint_store = checkpoint_store or default_checkpoint_store
         self._locks: dict[str, asyncio.Lock] = {}
         self._locks_guard = asyncio.Lock()
+        self._run_contexts: dict[str, RunContext] = {}
+        self._run_contexts_guard = asyncio.Lock()
 
     async def _session_lock(self, session_id: str) -> asyncio.Lock:
         async with self._locks_guard:
@@ -71,6 +76,7 @@ class SessionAgentRunner:
         user_id: str | None = None,
         persona: str | None = None,
         run_id: str | None = None,
+        trace_context: RunContext | None = None,
         runtime_context: str = "",
     ) -> AsyncIterator[StreamEvent]:
         """通过统一 runner 执行一轮流式请求。"""
@@ -93,12 +99,56 @@ class SessionAgentRunner:
                 context = await self.get_context(session_id)
                 agent_history = context["agent_history"]
             timeout = float(os.getenv("AGENT_TURN_TIMEOUT", "0"))
-            execute_parameters = inspect.signature(agent.execute_stream_async).parameters
-            if "run_id" in execute_parameters:
-                event_stream = agent.execute_stream_async(prompt, run_id=run_id)
+            use_native_runtime = (
+                os.getenv("AGENT_RUNTIME", "native").strip().lower() == "native"
+                and hasattr(agent, "execute_runtime_stream_async")
+            )
+            if use_native_runtime:
+                runtime_run_id = run_id or uuid.uuid4().hex
+                run_context = trace_context or RunContext(
+                    session_id=session_id,
+                    run_id=runtime_run_id,
+                    thread_id=session_id,
+                )
+                legacy_adapter = LegacyEventStreamAdapter()
+
+                async def native_event_stream():
+                    async with self._run_contexts_guard:
+                        self._run_contexts[runtime_run_id] = run_context
+                    try:
+                        async for runtime_event in agent.execute_runtime_stream_async(
+                            prompt,
+                            run_context=run_context,
+                        ):
+                            if self._run_store is not None:
+                                await self._run_store.append_event(
+                                    runtime_run_id,
+                                    "runtime.event.v2",
+                                    runtime_event.to_dict(),
+                                )
+                            if runtime_event.type == "run_failed":
+                                raise RuntimeError(
+                                    str(runtime_event.data.get("error", "Agent 运行失败"))
+                                )
+                            if (
+                                runtime_event.type == "run_finished"
+                                and runtime_event.data.get("status") == "cancelled"
+                            ):
+                                raise asyncio.CancelledError
+                            for legacy_event in legacy_adapter.feed(runtime_event):
+                                yield legacy_event
+                    finally:
+                        async with self._run_contexts_guard:
+                            self._run_contexts.pop(runtime_run_id, None)
+
+                event_stream = native_event_stream()
             else:
-                # 兼容测试替身和迁移期第三方 Agent。
-                event_stream = agent.execute_stream_async(prompt)
+                execute_parameters = inspect.signature(agent.execute_stream_async).parameters
+                if "run_id" in execute_parameters:
+                    event_stream = agent.execute_stream_async(prompt, run_id=run_id)
+                else:
+                    # 兼容测试替身和迁移期第三方 Agent。
+                    event_stream = agent.execute_stream_async(prompt)
 
             async def consume():
                 nonlocal step
@@ -147,6 +197,16 @@ class SessionAgentRunner:
 
         async with self._locks_guard:
             self._locks.pop(session_id, None)
+
+    async def request_cancel(self, run_id: str) -> bool:
+        """向正在执行的 Native Runtime 传播协作式取消信号。"""
+
+        async with self._run_contexts_guard:
+            context = self._run_contexts.get(run_id)
+        if context is None:
+            return False
+        context.cancel()
+        return True
 
 
 def _event_record(event: StreamEvent) -> dict[str, Any]:

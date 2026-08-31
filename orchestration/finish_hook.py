@@ -28,11 +28,13 @@ class TurnFinishHook:
         prompt: str,
         events: list[StreamEvent],
     ) -> None:
-        response = "".join(
-            str(event.data.get("text", ""))
-            for event in events
-            if event.type == "final_text"
-        ).strip()
+        response = ""
+        for event in events:
+            if event.type != "final_text":
+                continue
+            text = str(event.data.get("text", ""))
+            response = response + text if event.data.get("delta") else text
+        response = response.strip()
         if not response:
             return
         session = context.session

@@ -20,6 +20,7 @@ from agent.harness_events import HarnessEvent
 from agent.decision_engine import DecisionEngine, decision_engine as default_decision_engine
 from memory.session_store import SessionStore, session_store as default_session_store
 from runtime.context import RunContext
+from runtime.legacy_adapter import harness_to_run_event
 from runtime.settlement import RunSettlementGate, RunTerminalResult
 
 from .session_runner import SessionAgentRunner
@@ -149,7 +150,14 @@ class ConversationCoordinator:
                 thread_id=session_id,
                 metadata={"user_id": user_id, "persona": persona},
             )
+            trace_context = RunContext(
+                session_id=session_id,
+                run_id=public_run_id,
+                thread_id=session_id,
+                metadata={"user_id": user_id, "persona": persona},
+            )
             settlement = RunSettlementGate()
+            persist_public_as_v2 = False
 
             def bind(event: HarnessEvent) -> HarnessEvent:
                 return event.bind(
@@ -164,6 +172,14 @@ class ConversationCoordinator:
                     "runtime.event",
                     bound.to_dict(),
                 )
+                if persist_public_as_v2:
+                    runtime_event = harness_to_run_event(event, trace_context)
+                    if runtime_event is not None:
+                        await self._runs.append_event(
+                            trace_context.run_id,
+                            "runtime.event.v2",
+                            runtime_event.to_dict(),
+                        )
                 return bound
 
             existing_run = await self._runs.get(run_context.run_id)
@@ -188,12 +204,37 @@ class ConversationCoordinator:
                     session = await self._context_builder.require_session(session_id)
                     context = await self._context_builder.build(session, prompt)
                     context.run_context = run_context
+                    context.trace_context = trace_context
                     executor = self._chat_executor if session.mode == "chat" else self._work_executor
+                    if session.mode == "chat":
+                        persist_public_as_v2 = True
+                        for runtime_event in (
+                            trace_context.event(
+                                "run_started",
+                                {"session_id": session_id, "runtime": "native-chat"},
+                            ),
+                            trace_context.event("model_started", {"round_id": "chat"}),
+                        ):
+                            await self._runs.append_event(
+                                trace_context.run_id,
+                                "runtime.event.v2",
+                                runtime_event.to_dict(),
+                            )
                     events: list[StreamEvent] = []
                     async for event in executor.stream(prompt, context):
                         event = await publish(event)
                         events.append(event)
                         yield event
+                    if session.mode == "chat":
+                        runtime_event = trace_context.event(
+                            "model_finished",
+                            {"round_id": "chat"},
+                        )
+                        await self._runs.append_event(
+                            trace_context.run_id,
+                            "runtime.event.v2",
+                            runtime_event.to_dict(),
+                        )
                     if self._finish_hook:
                         await self._finish_hook.complete(
                             context=context,
@@ -202,6 +243,16 @@ class ConversationCoordinator:
                         )
                 else:
                     # 旧构造方式只供尚未迁移的测试和兼容入口使用。
+                    persist_public_as_v2 = True
+                    runtime_event = trace_context.event(
+                        "run_started",
+                        {"session_id": session_id, "runtime": "legacy"},
+                    )
+                    await self._runs.append_event(
+                        trace_context.run_id,
+                        "runtime.event.v2",
+                        runtime_event.to_dict(),
+                    )
                     history = await asyncio.to_thread(self._session_store.get_history, session_id)
                     decision = self._decision.evaluate(
                         prompt,
@@ -229,6 +280,16 @@ class ConversationCoordinator:
                 message = f"{type(error).__name__}: {error}"
                 terminal = RunTerminalResult(status="failed", error=message)
                 if settlement.try_settle(terminal):
+                    if persist_public_as_v2:
+                        runtime_event = trace_context.event(
+                            "run_failed",
+                            {"status": "failed", "error": message},
+                        )
+                        await self._runs.append_event(
+                            trace_context.run_id,
+                            "runtime.event.v2",
+                            runtime_event.to_dict(),
+                        )
                     await self._runs.set_status(
                         run_context.run_id,
                         "failed",
@@ -242,6 +303,16 @@ class ConversationCoordinator:
 
             terminal = RunTerminalResult(status="completed")
             if settlement.try_settle(terminal):
+                if persist_public_as_v2:
+                    runtime_event = trace_context.event(
+                        "run_finished",
+                        {"status": "completed"},
+                    )
+                    await self._runs.append_event(
+                        trace_context.run_id,
+                        "runtime.event.v2",
+                        runtime_event.to_dict(),
+                    )
                 await self._runs.set_status(run_context.run_id, "completed")
                 yield await publish(HarnessEvent(
                     type="run_end",
@@ -345,8 +416,28 @@ class ConversationCoordinator:
     async def get_run(self, run_id: str) -> AgentRun | None:
         return await self._runs.get(run_id)
 
-    async def get_run_events(self, run_id: str) -> list[dict[str, Any]]:
-        return await self._runs.read_events(run_id)
+    async def get_run_events(
+        self,
+        run_id: str,
+        *,
+        include_private: bool = False,
+    ) -> list[dict[str, Any]]:
+        """读取运行事件；普通查询不会暴露 private/debug Runtime 数据。"""
+
+        records = await self._runs.read_events(run_id)
+        if include_private:
+            return records
+        public_records: list[dict[str, Any]] = []
+        for record in records:
+            if record.get("event") == "runtime.event.v2":
+                event_data = record.get("data", {})
+                if (
+                    isinstance(event_data, dict)
+                    and event_data.get("visibility") != "public"
+                ):
+                    continue
+            public_records.append(record)
+        return public_records
 
     async def get_agent_context(self, session_id: str) -> dict[str, Any]:
         """调试/管理入口：查看 Agent 专用历史摘要，不暴露给角色层。"""
@@ -364,8 +455,18 @@ class ConversationCoordinator:
         async with self._tasks_lock:
             task = self._tasks.get(run_id)
         if task is not None and not task.done():
-            task.cancel()
-            await asyncio.gather(task, return_exceptions=True)
+            cooperative = await self._runner.request_cancel(run_id)
+            if cooperative:
+                try:
+                    await asyncio.wait_for(asyncio.shield(task), timeout=1.0)
+                except TimeoutError:
+                    task.cancel()
+                    await asyncio.gather(task, return_exceptions=True)
+                except asyncio.CancelledError:
+                    pass
+            else:
+                task.cancel()
+                await asyncio.gather(task, return_exceptions=True)
         updated = await self._runs.set_status(
             run_id, "cancelled", steps=run.steps, error="用户取消任务"
         )
@@ -440,15 +541,14 @@ class ConversationCoordinator:
         return OrchestratedTurnResult(delegated=True, completed=False, run_id=run_id, status="running")
 
     async def _collect_fact(self, prompt: str, *, session_id: str, user_id: str | None, persona: str | None, run_id: str | None = None) -> AgentFactResult:
-        chunks: list[str] = []
+        response_text = ""
         tool_events: list[dict[str, Any]] = []
         content_blocks: list[ContentBlock] = []
         steps = 0
         async for event in self.stream_user_turn(prompt, session_id=session_id, user_id=user_id, persona=persona, run_id=run_id):
             if event.type == "final_text":
                 text = str(event.data.get("text", ""))
-                chunks.append(text)
-                content_blocks.append(ContentBlock(type="text", data=text))
+                response_text = response_text + text if event.data.get("delta") else text
             elif event.type in {"tool_start", "tool_end"}:
                 if event.type == "tool_start":
                     steps += 1
@@ -474,7 +574,9 @@ class ConversationCoordinator:
                     "tool_name": "harness",
                     "result_preview": str(event.data.get("error", "执行失败")),
                 })
-        fact = AgentFactResult(status="completed", text="".join(chunks), content=content_blocks, tool_events=tool_events, steps=steps)
+        if response_text:
+            content_blocks.insert(0, ContentBlock(type="text", data=response_text))
+        fact = AgentFactResult(status="completed", text=response_text, content=content_blocks, tool_events=tool_events, steps=steps)
         for event in tool_events:
             preview = str(event.get("result_preview") or "")
             if preview.startswith(("[工具调用被拒绝]", "[工具执行失败]", "[参数错误]")):
