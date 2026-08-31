@@ -16,7 +16,7 @@ V1 → V2 映射
 
     from agent.cita_classifier import classify_intent, build_cita_overlay, IntentResult
 
-    result = classify_intent("我的扫地机器人坏了怎么办")
+    result = classify_intent("我的项目启动失败了怎么办")
     # result.intent_type, result.emotions, result.needs_rag, ...
     overlay = build_cita_overlay(result)
 """

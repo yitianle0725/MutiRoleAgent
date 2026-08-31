@@ -21,7 +21,7 @@ Execution Policy 参数校验模块
 
     from agent.execution_policy import validate_tool_args
 
-    result = validate_tool_args("rag_summarize", {"query": "扫地机器人保养"})
+    result = validate_tool_args("rag_summarize", {"query": "LangGraph checkpoint 原理"})
     if not result.valid:
         return ToolMessage(content=f"[参数错误] {result.error_message}", ...)
 """

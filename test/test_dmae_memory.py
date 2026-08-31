@@ -40,13 +40,13 @@ print("\n=== RAG 路由测试 ===")
 from rag.rag_service import _route_query
 
 # FAQ 路由
-r = _route_query("滤网怎么更换")
+r = _route_query("如何阅读项目文档")
 assert r == ["faq"], f"期望 ['faq']，得到 {r}"
-print("✅ 滤网更换 → faq")
+print("✅ 文档问题 → faq")
 
-r = _route_query("机器人故障了怎么办")
+r = _route_query("请总结知识库资料")
 assert r == ["faq"], f"期望 ['faq']，得到 {r}"
-print("✅ 故障问题 → faq")
+print("✅ 知识库问题 → faq")
 
 # Worldbook 路由
 r = _route_query("昔涟是谁")
@@ -69,48 +69,47 @@ from memory.chat_db import chat_db
 chat_db.init_db()
 
 # 写入画像
-chat_db.upsert_user_profile(
+chat_db.upsert_global_user_profile(
     "test_user_001",
-    device_model="石头P10",
-    preferences='["静音","定时"]',
-    issues_log='["滤网堵塞"]',
+    language="中文",
+    occupation="软件工程师",
+    stable_interests=["动漫", "Agent"],
+    preferences={"回答风格": "简洁"},
 )
 print("✅ 用户画像写入成功")
 
 # 读取画像
-profile = chat_db.get_user_profile("test_user_001")
+profile = chat_db.get_global_user_profile("test_user_001")
 assert profile is not None
-assert profile["device_model"] == "石头P10"
-print(f"✅ 用户画像读取成功: device={profile['device_model']}")
+assert profile["occupation"] == "软件工程师"
+print(f"✅ 用户画像读取成功: occupation={profile['occupation']}")
 
 # 增量更新
-chat_db.upsert_user_profile(
+chat_db.upsert_global_user_profile(
     "test_user_001",
-    preferences='["静音","定时","强力"]',
+    language="中文",
+    occupation="软件工程师",
+    stable_interests=["动漫", "Agent", "Python"],
+    preferences={"回答风格": "简洁"},
 )
-profile2 = chat_db.get_user_profile("test_user_001")
-assert "强力" in profile2["preferences"]
-print(f"✅ 增量更新: prefs={profile2['preferences']}")
+profile2 = chat_db.get_global_user_profile("test_user_001")
+assert "Python" in profile2["stable_interests"]
+print(f"✅ 增量更新: interests={profile2['stable_interests']}")
 
 # build_profile_context
-from memory.user_profile_extractor import build_profile_context, _extract_device_model
+from memory.user_profile_extractor import build_profile_context
 ctx = build_profile_context("test_user_001")
-assert "石头P10" in ctx
-assert "静音" in ctx
+assert "软件工程师" in ctx
+assert "Python" in ctx
 print(f"✅ 画像上下文生成: {ctx[:80]}...")
-
-# 设备型号关键词提取
-d = _extract_device_model("我买了石头P10，感觉还不错")
-assert d == "石头P10", f"期望 石头P10，得到 {d}"
-print(f"✅ 设备型号关键词提取: {d}")
 
 # ==================== L1 会话标题测试 ====================
 print("\n=== L1 会话标题测试 ===")
 
-chat_db.upsert_session_meta("test_session_001", title="滤网更换咨询", user_id="test_user_001")
+chat_db.upsert_session_meta("test_session_001", title="项目文档咨询", user_id="test_user_001")
 meta = chat_db.get_session_meta("test_session_001")
 assert meta is not None
-assert meta["title"] == "滤网更换咨询"
+assert meta["title"] == "项目文档咨询"
 print(f"✅ 会话标题写入/读取: {meta['title']}")
 
 sessions = chat_db.list_sessions_with_meta(limit=5)

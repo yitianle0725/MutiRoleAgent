@@ -745,6 +745,81 @@ class ChatDB:
             finally:
                 conn.close()
 
+    def get_global_user_profile(self, user_id: str) -> dict | None:
+        """读取跨角色、跨模式共享的稳定用户画像。"""
+
+        conn = sqlite3.connect(self._db_path)
+        conn.row_factory = sqlite3.Row
+        try:
+            row = conn.execute(
+                """SELECT u.display_name, p.language, p.occupation,
+                          p.stable_interests, p.preferences, p.extra
+                   FROM user_profiles p
+                   JOIN users u ON u.user_id = p.user_id
+                   WHERE p.user_id = ?""",
+                (user_id,),
+            ).fetchone()
+        finally:
+            conn.close()
+        if row is None:
+            return None
+
+        profile = dict(row)
+        for field_name, default in (
+            ("stable_interests", []),
+            ("preferences", {}),
+            ("extra", {}),
+        ):
+            try:
+                profile[field_name] = json.loads(profile[field_name] or "")
+            except (TypeError, json.JSONDecodeError):
+                profile[field_name] = default
+        return profile
+
+    def upsert_global_user_profile(
+        self,
+        user_id: str,
+        *,
+        language: str = "",
+        occupation: str = "",
+        stable_interests: list[str] | None = None,
+        preferences: dict | None = None,
+        extra: dict | None = None,
+    ) -> None:
+        """写入已经合并完成的 User Global Profile。"""
+
+        with self._lock:
+            conn = sqlite3.connect(self._db_path)
+            try:
+                conn.execute(
+                    "INSERT OR IGNORE INTO users(user_id) VALUES(?)",
+                    (user_id,),
+                )
+                conn.execute(
+                    """INSERT INTO user_profiles(
+                           user_id, language, occupation, stable_interests,
+                           preferences, extra, updated_at
+                       ) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                       ON CONFLICT(user_id) DO UPDATE SET
+                           language=excluded.language,
+                           occupation=excluded.occupation,
+                           stable_interests=excluded.stable_interests,
+                           preferences=excluded.preferences,
+                           extra=excluded.extra,
+                           updated_at=CURRENT_TIMESTAMP""",
+                    (
+                        user_id,
+                        language.strip()[:80],
+                        occupation.strip()[:160],
+                        json.dumps(stable_interests or [], ensure_ascii=False),
+                        json.dumps(preferences or {}, ensure_ascii=False),
+                        json.dumps(extra or {}, ensure_ascii=False),
+                    ),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
     def get_user_persona_profile(self, user_id: str, persona_id: str) -> dict | None:
         conn = sqlite3.connect(self._db_path)
         conn.row_factory = sqlite3.Row

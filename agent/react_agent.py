@@ -45,7 +45,7 @@ from agent.summary import build_history_summary, build_agent_summary, should_bui
 from agent.harness_events import HarnessEvent, INTERNAL_TOOL_NAMES
 from agent.action_gate import action_gate
 from agent.decision_engine import decision_engine
-from memory.user_profile_extractor import extract_and_save_profile, build_profile_context
+from memory.user_profile_extractor import build_profile_context, schedule_profile_extraction
 from memory.l2_memory import capture_explicit_turn_async, l2_memory_store
 from agent.cita.semantic import SemanticEngine, SemanticAnalysis
 from tools.agent_tools import (
@@ -373,7 +373,10 @@ class ReactAgent:
 
         # 构建轻量 system prompt（无 Skill 摘要，无工具规则的精简版）
         persona = self.default_persona
-        profile_context = build_profile_context(self.user_id) if self.user_id else ""
+        profile_context = (
+            await asyncio.to_thread(build_profile_context, self.user_id)
+            if self.user_id else ""
+        )
 
         # CITA 2.0 语义分析（Chat 路径也享受增强分析）
         cita_overlay = ""
@@ -572,9 +575,7 @@ class ReactAgent:
             if self.user_id:
                 try:
                     loop = asyncio.get_running_loop()
-                    loop.create_task(
-                        extract_and_save_profile(self.user_id, query, full_response)
-                    )
+                    schedule_profile_extraction(self.user_id, query, full_response)
                     # 仅沉淀明确表达的长期事实，并保留用户原话作为证据。
                     loop.create_task(
                         capture_explicit_turn_async(
@@ -939,10 +940,8 @@ class ReactAgent:
                 if self.user_id:
                     try:
                         loop = asyncio.get_running_loop()
-                        loop.create_task(
-                            extract_and_save_profile(
-                                self.user_id, query, final_response
-                            )
+                        schedule_profile_extraction(
+                            self.user_id, query, final_response
                         )
                         # Agent 路径与 Chat 路径复用相同的 L2 写入逻辑。
                         loop.create_task(

@@ -68,10 +68,10 @@ def test_history_only_persists_user_and_final_text(tmp_path, monkeypatch):
     )
     session_store = SessionStore()
 
-    async def ignore_profile(*args, **kwargs):
-        return None
-
-    monkeypatch.setattr("orchestration.finish_hook.extract_and_save_profile", ignore_profile)
+    monkeypatch.setattr(
+        "orchestration.finish_hook.schedule_profile_extraction",
+        lambda *args, **kwargs: None,
+    )
     executor = _HarnessExecutor()
     coordinator = ConversationCoordinator(
         _UnusedRunner(),

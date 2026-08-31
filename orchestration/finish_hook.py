@@ -9,7 +9,7 @@ from agent.summary import build_history_summary, should_build_summary
 from agent.harness_events import HarnessEvent
 from memory.chat_db import ChatDB
 from memory.session_store import SessionStore
-from memory.user_profile_extractor import extract_and_save_profile
+from memory.user_profile_extractor import schedule_profile_extraction
 from orchestration.models import TurnContext
 
 
@@ -44,7 +44,7 @@ class TurnFinishHook:
             self._session_store.set_agent_summary(session.session_id, summary)
             await asyncio.to_thread(self._database.update_session_summary, session.session_id, summary)
 
-        asyncio.create_task(extract_and_save_profile(session.user_id, prompt, response))
+        schedule_profile_extraction(session.user_id, prompt, response)
         await self._capture_scoped_memory(context, prompt)
 
     async def _capture_scoped_memory(self, context: TurnContext, prompt: str) -> None:
