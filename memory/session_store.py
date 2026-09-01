@@ -9,8 +9,8 @@
   后续可替换为 SQLite / Redis 实现持久化，接口不变。
 - **隔离保证**：每个 ``session_id`` 拥有独立的消息列表，
   不同 session 之间互不可见、互不干扰。
-- **消息格式**：存储原始 ``BaseMessage`` 列表，与 LangGraph State
-  的 messages 字段格式一致，零转换成本。
+- **消息格式**：存储原始 ``BaseMessage`` 列表，与 Native Runtime
+  的历史消息格式一致，零转换成本。
 
 使用方式::
 

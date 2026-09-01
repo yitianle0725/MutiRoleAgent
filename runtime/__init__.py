@@ -5,6 +5,12 @@ from .events import EventVisibility, RunEvent, RunEventType
 from .protocol import AgentRuntime
 from .request import RuntimeRequest
 from .settlement import RunSettlementGate, RunTerminalResult, TerminalStatus
+from .tool_contracts import (
+    AnswerabilityDecision,
+    Evidence,
+    ToolRequirement,
+    ToolResultEnvelope,
+)
 
 __all__ = [
     "AgentRuntime",
@@ -16,4 +22,8 @@ __all__ = [
     "RunSettlementGate",
     "RunTerminalResult",
     "TerminalStatus",
+    "AnswerabilityDecision",
+    "Evidence",
+    "ToolRequirement",
+    "ToolResultEnvelope",
 ]

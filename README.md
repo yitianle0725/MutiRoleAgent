@@ -6,7 +6,7 @@
 
 ### Agent 与对话
 
-- 基于 LangChain / LangGraph 的 ReAct Agent，模型可以根据问题自主调用工具。
+- 项目自研 Native Agent Runtime 显式驱动 ReAct 循环，并对工具结果执行证据校验。
 - Decision Engine + CITA 语义分析：区分闲聊、知识库问答、联网查询和复杂任务。
 - 支持多会话隔离，SQLite 持久化会话标题、消息和统计信息。
 - 支持角色人设切换、角色风格、世界观和人物关系文件。
@@ -40,7 +40,7 @@
 | 层次 | 技术 |
 | --- | --- |
 | Python | Python 3.12+ |
-| Agent | LangChain、LangGraph、Pydantic |
+| Agent | Native Agent Runtime、LangChain Core、Pydantic |
 | 质量工程 | LangSmith Tracing、离线 Evaluation、Prompt Registry |
 | LLM | OpenAI 兼容接口，默认适配 DashScope / Qwen |
 | Web 后端 | FastAPI、Uvicorn、SSE、WebSocket |
@@ -238,7 +238,7 @@ python -m evaluation.langsmith_eval --dataset evaluation/datasets/benchmark_v1.j
 ```text
 MutiRoleAgent/
 ├── agent/                     # Agent 核心、路由、Persona、结构化输出
-│   ├── react_agent.py         # LangGraph ReAct Agent 主循环
+│   ├── react_agent.py         # Native Runtime 会话入口
 │   ├── decision_engine.py     # chat / agent 路由
 │   ├── action_gate.py         # 工具白名单和危险操作拦截
 │   ├── execution_policy.py    # 工具参数校验
@@ -248,7 +248,8 @@ MutiRoleAgent/
 ├── api/                      # 旧版 FastAPI 路由模块
 ├── channels/platforms/       # 当前 FastAPI Channel 入口
 ├── apps/web/                 # React + TypeScript + Vite 前端
-├── tools/                    # 本地工具、MCP 客户端、统一中间件、语音
+├── runtime/                  # Agent Loop、工具策略、证据、校验和事件协议
+├── tools/                    # 本地工具、MCP 客户端、语音
 ├── model/                    # LLM、Embedding、维度检查、Embedding worker
 ├── rag/                      # Chroma、混合检索、BM25、上下文构建
 ├── memory/                   # SQLite 会话、内存历史、上下文压缩
@@ -273,11 +274,13 @@ MutiRoleAgent/
 
 Agent 并不是每条消息都调用工具。流程如下：
 
-1. Decision Engine 判断是闲聊还是 Agent 任务。
-2. Agent 任务进入 LangGraph ReAct 循环。
-3. LLM 根据工具 schema 选择工具。
-4. UnifiedMiddleware 执行 Action Gate、参数校验、超时和错误处理。
-5. 工具结果回传给模型，模型再生成最终回答。
+1. Coordinator 根据会话模式进入 Chat 或 Work 执行器。
+2. Work 请求进入项目自研 Native ReAct 循环。
+3. ToolPolicy 判断是否强制取证，并约束工具范围、必需字段和调用预算。
+4. LLM 在约束内提出工具调用；ToolScheduler 统一执行 Gate、参数校验、超时和有界重试。
+5. ResultValidator 将结果分成执行状态与质量状态，并把可信来源写入 EvidenceLedger。
+6. AnswerabilityGate 判断证据是否足够；不足时 fallback、询问或安全拒答。
+7. AnswerValidator 阻止输出证据中不存在的链接，校验通过后才公开最终答案。
 
 典型调用顺序：
 

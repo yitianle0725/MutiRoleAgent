@@ -1,7 +1,4 @@
-"""P3 业务运行记录。
-
-LangGraph checkpointer 保存图状态；RunStore 保存业务任务状态和可查询事件，二者不混用。
-"""
+"""Native Runtime 的业务运行状态和可查询事件存储。"""
 
 from __future__ import annotations
 

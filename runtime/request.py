@@ -8,7 +8,7 @@ from typing import Any
 
 @dataclass(slots=True)
 class RuntimeRequest:
-    """进入 Runtime 的单轮请求，不暴露 LangChain 或 LangGraph 类型。"""
+    """进入 Runtime 的单轮请求，不向上层暴露模型 SDK 类型。"""
 
     session_id: str
     prompt: str

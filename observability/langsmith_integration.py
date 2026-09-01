@@ -1,6 +1,6 @@
 """LangSmith 可选集成。
 
- LangGraph/LangChain 会根据 LANGSMITH_TRACING 自动发送 trace。本模块负责统一
+ LangChain 会根据 LANGSMITH_TRACING 自动发送 trace。本模块负责统一
 配置校验、采样、敏感字段过滤和 RunnableConfig metadata；未配置 LangSmith 时完全 no-op。
 """
 

@@ -1,8 +1,4 @@
-"""统一对话编排边界。
-
-P1 版本只做入口收敛和生命周期编排，Agent 业务仍由现有 LangGraph-backed
-ReactAgent 执行。P2 再接入独立 RoleplayEngine 和事实结果包装。
-"""
+"""统一对话入口、生命周期、恢复与角色呈现边界。"""
 
 from __future__ import annotations
 
@@ -501,7 +497,7 @@ class ConversationCoordinator:
         field: str = "answer",
         options: list[str] | None = None,
     ) -> AgentRun | None:
-        """记录等待输入状态；后续由 LangGraph interrupt/resume 提供图恢复。"""
+        """记录等待输入状态，保留原始请求和待补字段。"""
 
         run = await self._runs.get(run_id)
         if run is None:
@@ -525,20 +521,38 @@ class ConversationCoordinator:
         return updated
 
     async def resume_agent_run(self, run_id: str, value: Any) -> OrchestratedTurnResult:
-        """恢复等待输入的 LangGraph run；使用原 thread_id，不重放历史。"""
+        """用用户补充信息创建关联的新 Run，安全恢复未完成任务。"""
         run = await self._runs.get(run_id)
         if run is None:
             raise ValueError(f"任务不存在：{run_id}")
         if run.status != "waiting_for_input":
             raise ValueError("只有 waiting_for_input 任务可以恢复")
-        agent = await self._runner.get_agent(run.session_id, user_id=run.user_id, persona=run.persona)
-        core = getattr(agent, "core", None)
-        if core is None:
-            raise RuntimeError("当前 Agent 未提供 LangGraph Core resume 接口")
-        result = await core.resume(value, run_id=run.run_id)
-        await self._runs.append_event(run_id, "run.resumed", {"value_provided": True})
-        await self._runs.set_status(run_id, "running", steps=run.steps, clear_pending_input=True)
-        return OrchestratedTurnResult(delegated=True, completed=False, run_id=run_id, status="running")
+        field = str((run.pending_user_input or {}).get("field") or "answer")
+        resumed_prompt = (
+            f"{run.prompt}\n\n用户补充信息（{field}）：{value}\n"
+            "请基于补充信息重新执行任务。"
+        )
+        await self._runs.append_event(
+            run_id,
+            "run.resumed",
+            {"value_provided": True, "recovery_mode": "linked_replay"},
+        )
+        await self._runs.set_status(
+            run_id,
+            "failed",
+            steps=run.steps,
+            error="已通过关联 Run 使用用户补充信息恢复",
+            clear_pending_input=True,
+        )
+        return await self.start_agent_turn(
+            resumed_prompt,
+            session_id=run.session_id,
+            user_id=run.user_id,
+            persona=run.persona,
+            attempt=run.attempt + 1,
+            retry_of_run_id=run.run_id,
+            route_mode=run.route_mode,
+        )
 
     async def _collect_fact(self, prompt: str, *, session_id: str, user_id: str | None, persona: str | None, run_id: str | None = None) -> AgentFactResult:
         response_text = ""

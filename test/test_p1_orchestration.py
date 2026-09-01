@@ -3,7 +3,6 @@
 import asyncio
 import tempfile
 
-from agent.harness_events import HarnessEvent
 from orchestration.coordinator import ConversationCoordinator
 from orchestration.session_runner import SessionAgentRunner
 from orchestration.runs import RunStore
@@ -17,9 +16,24 @@ class ForceAgentDecision:
 
 
 class FakeAgent:
-    async def execute_stream_async(self, prompt: str):
-        yield HarnessEvent.tool_start(tool_call_id="call-1", tool_name="fake_tool")
-        yield HarnessEvent.final_text(f"回答：{prompt}")
+    async def execute_runtime_stream_async(self, prompt: str, *, run_context):
+        yield run_context.event("run_started", {"runtime": "native"})
+        yield run_context.event("tool_call_started", {
+            "tool_call_id": "call-1",
+            "tool_name": "fake_tool",
+            "tool_args": {},
+        })
+        yield run_context.event("text_started", {"message_id": "message-1"})
+        yield run_context.event("text_delta", {
+            "message_id": "message-1",
+            "text": f"回答：{prompt}",
+        })
+        yield run_context.event("text_finished", {
+            "message_id": "message-1",
+            "role": "answer",
+            "text": f"回答：{prompt}",
+        })
+        yield run_context.event("run_finished", {"status": "completed"})
 
 
 async def _factory(session_id: str, user_id: str | None, persona: str | None):

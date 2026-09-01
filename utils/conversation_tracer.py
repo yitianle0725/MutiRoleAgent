@@ -10,7 +10,7 @@
     ├── 2. 裁剪上下文 (trim_history)
     ├── 3. 决策路由 (DecisionEngine)
     ├── 4a. Chat 路径 (chat_model.astream)
-    ├── 4b. Agent 路径 (LangGraph ReAct)
+    ├── 4b. Agent 路径 (Native Runtime)
     │       ├── 模型调用前 (middleware)
     │       ├── 工具调用
     │       └── 模型调用后

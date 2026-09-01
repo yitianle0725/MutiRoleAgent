@@ -9,7 +9,7 @@ from typing import Any
 def build_history_summary(messages: Sequence[Any], *, max_chars: int = 1200) -> str:
     """生成不调用模型的安全摘要，保留最近消息事实片段。
 
-    P3 先提供确定性摘要；后续可替换为 LangGraph 摘要节点，但状态字段保持不变。
+    使用确定性摘要，状态字段由项目 Runtime 自己维护。
     """
 
     snippets: list[str] = []

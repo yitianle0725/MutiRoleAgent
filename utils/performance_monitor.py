@@ -39,7 +39,7 @@ class PerformanceSnapshot:
 
 
 class PerformanceMonitor:
-    """Collect metrics without coupling the UI to LangGraph internals."""
+    """Collect metrics without coupling the UI to Runtime internals."""
 
     def __init__(self) -> None:
         self._lock = threading.Lock()

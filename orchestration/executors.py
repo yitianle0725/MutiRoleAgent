@@ -43,7 +43,7 @@ class ChatExecutor:
 
 
 class WorkExecutor:
-    """复用现有 LangGraph Agent，但不再参与模式判断。"""
+    """把 Work 会话交给唯一 Native Agent Runtime。"""
 
     def __init__(self, runner: SessionAgentRunner) -> None:
         self._runner = runner

@@ -84,7 +84,7 @@ def test_native_runtime_streams_answer_and_traces_tool_lifecycle():
     text_deltas = [
         event.data["text"]
         for event in events
-        if event.type == "text_delta"
+        if event.type == "text_delta" and event.visibility == "public"
     ]
     assert "".join(text_deltas) == "答案"
     assert text_deltas

@@ -4,35 +4,13 @@ from __future__ import annotations
 
 import asyncio
 
-from agent.harness_events import HarnessEvent
 from runtime.context import RunContext
-from runtime.langgraph_runtime import LangGraphRuntimeAdapter
 from runtime.legacy_adapter import run_to_harness_event
-from runtime.request import RuntimeRequest
 from runtime.settlement import RunSettlementGate, RunTerminalResult
 from agent.checkpoint import CheckpointStore
 from orchestration.runs import RunStore
 from orchestration.session_runner import SessionAgentRunner
 from orchestration.coordinator import ConversationCoordinator
-
-
-class _RecordingRunner:
-    def __init__(self) -> None:
-        self.run_id = None
-
-    async def stream(self, session_id, prompt, **kwargs):
-        self.run_id = kwargs.get("run_id")
-        yield HarnessEvent.tool_start(
-            tool_call_id="call-1",
-            tool_name="search_anime",
-            tool_args={"query": prompt},
-        )
-        yield HarnessEvent.tool_end(
-            tool_call_id="call-1",
-            tool_name="search_anime",
-            result_preview="完成",
-        )
-        yield HarnessEvent.final_text("回答", delta=True)
 
 
 def test_run_context_assigns_canonical_id_and_monotonic_sequence():
@@ -56,31 +34,6 @@ def test_settlement_gate_only_accepts_the_first_terminal_result():
     assert gate.result == RunTerminalResult(status="completed")
 
 
-def test_langgraph_adapter_emits_v2_events_with_one_run_id():
-    async def collect():
-        runner = _RecordingRunner()
-        runtime = LangGraphRuntimeAdapter(runner)
-        context = RunContext(session_id="session-1", run_id="run-1")
-        request = RuntimeRequest(session_id="session-1", prompt="推荐动漫")
-        events = [event async for event in runtime.stream(request, context)]
-        return runner, events
-
-    runner, events = asyncio.run(collect())
-
-    assert runner.run_id == "run-1"
-    assert [event.type for event in events] == [
-        "run_started",
-        "tool_call_started",
-        "tool_call_finished",
-        "text_started",
-        "text_delta",
-        "text_finished",
-        "run_finished",
-    ]
-    assert [event.sequence for event in events] == list(range(1, 8))
-    assert {event.run_id for event in events} == {"run-1"}
-
-
 def test_v2_text_delta_can_be_served_to_the_legacy_frontend():
     context = RunContext(session_id="session-1", run_id="run-1")
     event = context.event("text_delta", {"text": "增量"})
@@ -94,7 +47,7 @@ def test_v2_text_delta_can_be_served_to_the_legacy_frontend():
     assert legacy.sequence == 1
 
 
-def test_session_runner_uses_native_runtime_and_persists_v2_events(tmp_path, monkeypatch):
+def test_session_runner_uses_native_runtime_and_persists_v2_events(tmp_path):
     class NativeAgent:
         async def execute_runtime_stream_async(self, prompt, *, run_context):
             yield run_context.event("run_started", {"runtime": "native"})
@@ -140,7 +93,6 @@ def test_session_runner_uses_native_runtime_and_persists_v2_events(tmp_path, mon
         ]
         return events, await store.read_events("run-1")
 
-    monkeypatch.setenv("AGENT_RUNTIME", "native")
     events, records = asyncio.run(collect())
 
     assert [event.data["text"] for event in events if event.type == "final_text"] == ["逐", "字"]
@@ -173,7 +125,7 @@ def test_public_run_events_hide_private_and_debug_runtime_data(tmp_path):
         ):
             await store.append_event("run-1", "runtime.event.v2", event.to_dict())
         coordinator = ConversationCoordinator(
-            SessionAgentRunner(_RecordingRunner),
+            SessionAgentRunner(lambda *_: None),
             run_store=store,
         )
         return (

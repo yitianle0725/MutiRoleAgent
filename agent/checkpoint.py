@@ -1,7 +1,6 @@
 """项目层的轻量 checkpoint 元数据存储。
 
-完整图状态由 LangGraph checkpointer 保存；这里仅记录业务运行需要的索引和摘要，
-用于在没有直接查询 saver 的部署中恢复 RunStore 状态。
+这里记录 Native Runtime 的业务运行索引和工具摘要，供运行审计与恢复检查使用。
 """
 
 from __future__ import annotations
@@ -27,7 +26,7 @@ class AgentCheckpoint:
 
 
 class CheckpointStore:
-    """按 run 保存轻量 checkpoint 索引，不复制 LangGraph messages。"""
+    """按 run 保存轻量 checkpoint 索引，不复制完整模型消息。"""
 
     def __init__(self, base_dir: str | Path = "data/checkpoints") -> None:
         self.base_dir = Path(base_dir)

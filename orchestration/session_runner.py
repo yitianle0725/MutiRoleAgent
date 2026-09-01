@@ -1,14 +1,8 @@
-"""Session 与现有 LangGraph ReactAgent 的适配层。
-
-P1 不复制 Agent 执行循环，runner 只负责按 session 隔离 Agent、统一锁和
-异步调用边界。后续接入持久化 checkpointer 时只需替换内部 Agent 工厂。
-"""
+"""Session 与项目自研 Agent Runtime 的适配层。"""
 
 from __future__ import annotations
 
 import asyncio
-import inspect
-import os
 import uuid
 from collections.abc import AsyncIterator, Awaitable, Callable
 from typing import Any
@@ -26,7 +20,7 @@ StreamEvent = HarnessEvent
 
 
 class SessionAgentRunner:
-    """按会话串行调用 Agent，避免入口直接操作 LangGraph 图。"""
+    """按会话串行调用唯一 Native Runtime。"""
 
     def __init__(
         self,
@@ -98,57 +92,46 @@ class SessionAgentRunner:
             if self._session_store is not None:
                 context = await self.get_context(session_id)
                 agent_history = context["agent_history"]
-            timeout = float(os.getenv("AGENT_TURN_TIMEOUT", "0"))
-            use_native_runtime = (
-                os.getenv("AGENT_RUNTIME", "native").strip().lower() == "native"
-                and hasattr(agent, "execute_runtime_stream_async")
-            )
-            if use_native_runtime:
-                runtime_run_id = run_id or uuid.uuid4().hex
-                run_context = trace_context or RunContext(
+            if not hasattr(agent, "execute_runtime_stream_async"):
+                raise TypeError("Agent 必须实现 execute_runtime_stream_async")
+            runtime_run_id = run_id or uuid.uuid4().hex
+            run_context = trace_context or RunContext(
                     session_id=session_id,
                     run_id=runtime_run_id,
                     thread_id=session_id,
                 )
-                legacy_adapter = LegacyEventStreamAdapter()
+            legacy_adapter = LegacyEventStreamAdapter()
 
-                async def native_event_stream():
-                    async with self._run_contexts_guard:
-                        self._run_contexts[runtime_run_id] = run_context
-                    try:
-                        async for runtime_event in agent.execute_runtime_stream_async(
+            async def native_event_stream():
+                async with self._run_contexts_guard:
+                    self._run_contexts[runtime_run_id] = run_context
+                try:
+                    async for runtime_event in agent.execute_runtime_stream_async(
                             prompt,
                             run_context=run_context,
                         ):
-                            if self._run_store is not None:
-                                await self._run_store.append_event(
+                        if self._run_store is not None:
+                            await self._run_store.append_event(
                                     runtime_run_id,
                                     "runtime.event.v2",
                                     runtime_event.to_dict(),
                                 )
-                            if runtime_event.type == "run_failed":
-                                raise RuntimeError(
+                        if runtime_event.type == "run_failed":
+                            raise RuntimeError(
                                     str(runtime_event.data.get("error", "Agent 运行失败"))
                                 )
-                            if (
-                                runtime_event.type == "run_finished"
-                                and runtime_event.data.get("status") == "cancelled"
-                            ):
-                                raise asyncio.CancelledError
-                            for legacy_event in legacy_adapter.feed(runtime_event):
-                                yield legacy_event
-                    finally:
-                        async with self._run_contexts_guard:
-                            self._run_contexts.pop(runtime_run_id, None)
+                        if (
+                            runtime_event.type == "run_finished"
+                            and runtime_event.data.get("status") == "cancelled"
+                        ):
+                            raise asyncio.CancelledError
+                        for legacy_event in legacy_adapter.feed(runtime_event):
+                            yield legacy_event
+                finally:
+                    async with self._run_contexts_guard:
+                        self._run_contexts.pop(runtime_run_id, None)
 
-                event_stream = native_event_stream()
-            else:
-                execute_parameters = inspect.signature(agent.execute_stream_async).parameters
-                if "run_id" in execute_parameters:
-                    event_stream = agent.execute_stream_async(prompt, run_id=run_id)
-                else:
-                    # 兼容测试替身和迁移期第三方 Agent。
-                    event_stream = agent.execute_stream_async(prompt)
+            event_stream = native_event_stream()
 
             async def consume():
                 nonlocal step
@@ -157,13 +140,8 @@ class SessionAgentRunner:
                     step = self._step
                     yield event
 
-            if timeout > 0:
-                async with asyncio.timeout(timeout):
-                    async for event in consume():
-                        yield event
-            else:
-                async for event in consume():
-                    yield event
+            async for event in consume():
+                yield event
             if self._session_store is not None and agent_history:
                 # 工具轨迹只进入审计摘要，不进入普通对话历史。
                 summary = "\n".join(str(item) for item in agent_history[-20:])

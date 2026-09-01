@@ -43,6 +43,16 @@ def run_to_harness_event(event: RunEvent) -> HarnessEvent | None:
         converted = HarnessEvent(type="tool_start", data=data)
     elif event.type == "tool_call_finished":
         converted = HarnessEvent(type="tool_end", data=data)
+    elif event.type == "tool_call_retried":
+        converted = HarnessEvent.process_text(
+            f"工具暂时不可用，正在进行第 {data.get('attempt', 2)} 次尝试……",
+            delta=False,
+        )
+    elif event.type == "fallback_started":
+        converted = HarnessEvent.process_text(
+            "首选来源未提供有效结果，正在尝试备用来源……",
+            delta=False,
+        )
     elif event.type == "structured_data":
         converted = HarnessEvent(type="structured_data", data=data)
     elif event.type in {"run_finished", "run_failed"}:
