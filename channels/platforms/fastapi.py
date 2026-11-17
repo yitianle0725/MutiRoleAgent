@@ -40,17 +40,21 @@ import asyncio
 import json
 import os
 import uuid
-from contextlib import asynccontextmanager
+from contextlib import aclosing, asynccontextmanager
 from typing import AsyncIterator
 
 import uvicorn
+from anyio import CancelScope
 from fastapi import FastAPI, HTTPException, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response, StreamingResponse
+from fastapi.responses import Response
 from pydantic import BaseModel, Field
+from sse_starlette.sse import EventSourceResponse
+from starlette.types import Receive, Scope, Send
 
 from agent.react_agent import ReactAgent
 from agent.harness_events import HarnessEvent
+from api.routes import runs
 from orchestration.coordinator import ConversationCoordinator
 from orchestration.session_runner import SessionAgentRunner
 from orchestration.context_builder import SessionContextBuilder
@@ -219,6 +223,8 @@ def _create_app() -> FastAPI:
         version="1.0.0",
         lifespan=_lifespan,
     )
+    app.state.conversation_coordinator = conversation_coordinator
+    app.include_router(runs.router, prefix="/api/v1")
 
     # CORS：本地开发全开
     app.add_middleware(
@@ -330,34 +336,32 @@ def _create_app() -> FastAPI:
     # ---- SSE 流式聊天 ----
 
     @app.post("/api/v1/chat/stream")
-    async def chat_stream(req: ChatRequest):
+    async def chat_stream(req: ChatRequest, request: Request):
         """SSE 流式聊天。
 
         HarnessEvent 会原样作为 SSE 公共协议发送。
         """
-        async def event_stream() -> AsyncIterator[str]:
+        async def event_stream() -> AsyncIterator[dict[str, str]]:
             try:
-                async for event in conversation_coordinator.stream_user_turn(
+                coordinator = request.app.state.conversation_coordinator
+                async with aclosing(coordinator.stream_user_turn(
                     req.message,
                     session_id=req.session_id,
-                ):
-                    yield _sse_event(event)
+                )) as events:
+                    async for event in events:
+                        yield harness_event_sse_message(event)
             except Exception as e:
                 logger.error(f"[FastAPI SSE] 流式异常: {type(e).__name__}: {e}", exc_info=True)
                 failure = HarnessEvent(
                     type="run_end",
                     data={"status": "failed", "error": str(e)[:200]},
                 )
-                yield _sse_event(failure)
+                yield harness_event_sse_message(failure)
 
-        return StreamingResponse(
+        return ChatEventSourceResponse(
             event_stream(),
-            media_type="text/event-stream",
-            headers={
-                "Cache-Control": "no-cache",
-                "Connection": "keep-alive",
-                "X-Accel-Buffering": "no",
-            },
+            sep="\n",
+            headers={"Cache-Control": "no-cache"},
         )
 
     # ---- WebSocket ----
@@ -399,11 +403,13 @@ def _create_app() -> FastAPI:
                 if not message:
                     continue
 
-                async for event in conversation_coordinator.stream_user_turn(
+                coordinator = ws.app.state.conversation_coordinator
+                async with aclosing(coordinator.stream_user_turn(
                     message,
                     session_id=session_id,
-                ):
-                    await ws.send_json(event.to_dict())
+                )) as events:
+                    async for event in events:
+                        await ws.send_json(event.to_dict())
 
         except WebSocketDisconnect:
             logger.info(f"[FastAPI WS] 断开: session={session_id[:12]}…")
@@ -501,11 +507,15 @@ def harness_event_sse_message(event: HarnessEvent) -> dict[str, str]:
     }
 
 
-def _sse_event(event: HarnessEvent) -> str:
-    """把 HarnessEvent 编码为标准 SSE 文本帧。"""
+class ChatEventSourceResponse(EventSourceResponse):
+    """客户端断开时关闭生成器，包括响应正停在发送事件的情况。"""
 
-    message = harness_event_sse_message(event)
-    return f"event: {message['event']}\ndata: {message['data']}\n\n"
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        try:
+            await super().__call__(scope, receive, send)
+        finally:
+            with CancelScope(shield=True):
+                await self.body_iterator.aclose()
 
 
 # ==================== Channel 封装 ====================

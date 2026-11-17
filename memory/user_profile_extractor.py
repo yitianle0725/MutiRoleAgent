@@ -6,7 +6,7 @@ import asyncio
 import json
 from typing import Any
 
-from memory.chat_db import chat_db
+from memory.chat_db import ChatDB, chat_db
 from model.factory import chat_model
 from utils.logger_handler import logger
 
@@ -160,12 +160,12 @@ def schedule_profile_extraction(
     )
 
 
-def build_profile_context(user_id: str | None) -> str:
+def build_profile_context(user_id: str | None, *, database: ChatDB | None = None) -> str:
     """构建注入 Prompt 的 User Global Profile 文本。"""
 
     if not user_id:
         return ""
-    profile = chat_db.get_global_user_profile(user_id)
+    profile = (database if database is not None else chat_db).get_global_user_profile(user_id)
     if not profile:
         return ""
 

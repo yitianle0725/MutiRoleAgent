@@ -8,11 +8,11 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter
-from pydantic import BaseModel, Field
-from sse_starlette.sse import EventSourceResponse
+from contextlib import aclosing
 
-from channels.platforms.fastapi import conversation_coordinator, harness_event_sse_message
+from fastapi import APIRouter, Request
+from pydantic import BaseModel, Field
+from channels.platforms.fastapi import ChatEventSourceResponse, harness_event_sse_message
 
 router = APIRouter(tags=["chat"])
 
@@ -25,15 +25,17 @@ class ChatRequest(BaseModel):
 
 
 @router.post("/chat/stream")
-async def chat_stream(req: ChatRequest) -> EventSourceResponse:
+async def chat_stream(req: ChatRequest, request: Request) -> ChatEventSourceResponse:
     """SSE 流式聊天：Agent 产出一行，前端实时推送一行。"""
     async def event_generator():
         try:
-            async for event in conversation_coordinator.handle_user_turn_stream(
+            coordinator = request.app.state.conversation_coordinator
+            async with aclosing(coordinator.stream_user_turn(
                 req.query,
                 session_id=req.session_id or "default",
-            ):
-                yield harness_event_sse_message(event)
+            )) as events:
+                async for event in events:
+                    yield harness_event_sse_message(event)
         except Exception as exc:
             # 正常执行异常已由 Coordinator 转成 run_end；这里只处理传输层异常。
             from agent.harness_events import HarnessEvent
@@ -43,7 +45,7 @@ async def chat_stream(req: ChatRequest) -> EventSourceResponse:
                 data={"status": "failed", "error": str(exc)},
             ))
 
-    return EventSourceResponse(event_generator())
+    return ChatEventSourceResponse(event_generator())
 
 
 @router.get("/chat/health")

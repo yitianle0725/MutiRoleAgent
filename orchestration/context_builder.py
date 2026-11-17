@@ -36,7 +36,7 @@ class SessionContextBuilder:
                 session.user_id,
                 session.persona_id,
             ),
-            asyncio.to_thread(build_profile_context, session.user_id),
+            asyncio.to_thread(build_profile_context, session.user_id, database=self._database),
         )
 
         persona_context = await asyncio.to_thread(

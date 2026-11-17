@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import uuid
 from collections.abc import AsyncIterator, Awaitable, Callable
+from contextlib import aclosing
 from typing import Any
 
 from agent.harness_events import HarnessEvent
@@ -106,42 +107,31 @@ class SessionAgentRunner:
                 async with self._run_contexts_guard:
                     self._run_contexts[runtime_run_id] = run_context
                 try:
-                    async for runtime_event in agent.execute_runtime_stream_async(
-                            prompt,
-                            run_context=run_context,
-                        ):
-                        if self._run_store is not None:
-                            await self._run_store.append_event(
-                                    runtime_run_id,
-                                    "runtime.event.v2",
-                                    runtime_event.to_dict(),
+                    async with aclosing(agent.execute_runtime_stream_async(
+                        prompt, run_context=run_context,
+                    )) as events:
+                        async for runtime_event in events:
+                            if self._run_store is not None:
+                                await self._run_store.append_event(
+                                    runtime_run_id, "runtime.event.v2", runtime_event.to_dict(),
                                 )
-                        if runtime_event.type == "run_failed":
-                            raise RuntimeError(
-                                    str(runtime_event.data.get("error", "Agent 运行失败"))
-                                )
-                        if (
-                            runtime_event.type == "run_finished"
-                            and runtime_event.data.get("status") == "cancelled"
-                        ):
-                            raise asyncio.CancelledError
-                        for legacy_event in legacy_adapter.feed(runtime_event):
-                            yield legacy_event
+                            if runtime_event.type == "run_failed":
+                                raise RuntimeError(str(runtime_event.data.get("error", "Agent 运行失败")))
+                            if (
+                                runtime_event.type == "run_finished"
+                                and runtime_event.data.get("status") == "cancelled"
+                            ):
+                                raise asyncio.CancelledError
+                            for legacy_event in legacy_adapter.feed(runtime_event):
+                                yield legacy_event
                 finally:
                     async with self._run_contexts_guard:
                         self._run_contexts.pop(runtime_run_id, None)
 
-            event_stream = native_event_stream()
-
-            async def consume():
-                nonlocal step
+            async with aclosing(native_event_stream()) as event_stream:
                 async for event in event_stream:
-                    await self._handle_event(event, session_id, run_id, agent_history, tool_calls, tool_results, step)
-                    step = self._step
+                    step = await self._handle_event(event, session_id, run_id, agent_history, tool_calls, tool_results, step)
                     yield event
-
-            async for event in consume():
-                yield event
             if self._session_store is not None and agent_history:
                 # 工具轨迹只进入审计摘要，不进入普通对话历史。
                 summary = "\n".join(str(item) for item in agent_history[-20:])
@@ -158,17 +148,17 @@ class SessionAgentRunner:
                     ))
 
     async def _handle_event(self, event, session_id, run_id, agent_history, tool_calls, tool_results, step):
-        self._step = step
         if self._run_store is not None and run_id is not None:
             await self._run_store.append_event(run_id, "agent.event", _event_record(event))
         if event.type in {"tool_start", "tool_end"}:
-            self._step += 1 if event.type == "tool_start" else 0
+            step += 1 if event.type == "tool_start" else 0
             item = _event_record(event)
             (tool_calls if event.type == "tool_start" else tool_results).append(item)
             agent_history.append(event)
         if run_id is not None:
-            checkpoint = AgentCheckpoint(run_id=run_id, session_id=session_id, thread_id=session_id, step=self._step, tool_calls=tool_calls[-20:], tool_results=tool_results[-20:])
+            checkpoint = AgentCheckpoint(run_id=run_id, session_id=session_id, thread_id=session_id, step=step, tool_calls=tool_calls[-20:], tool_results=tool_results[-20:])
             await self._checkpoint_store.save(checkpoint)
+        return step
 
     async def close_session(self, session_id: str) -> None:
         """释放会话锁对象，供会话删除时调用。"""

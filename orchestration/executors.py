@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import AsyncIterator
+from contextlib import aclosing
 from typing import Protocol
 
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -59,7 +60,7 @@ class WorkExecutor:
             )
         else:
             runtime_context = ""
-        async for event in self._runner.stream(
+        async with aclosing(self._runner.stream(
             context.session.session_id,
             prompt,
             user_id=context.session.user_id,
@@ -67,5 +68,6 @@ class WorkExecutor:
             run_id=context.run_context.run_id if context.run_context else None,
             trace_context=context.trace_context,
             runtime_context=runtime_context,
-        ):
-            yield event
+        )) as events:
+            async for event in events:
+                yield event

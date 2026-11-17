@@ -1,7 +1,7 @@
 """Send the 100-case ACGN dataset through the real FastAPI SSE endpoint.
 
 Start the backend first, for example:
-``D:/develop/Anaconda/python.exe -m uvicorn api.main:app --host 127.0.0.1 --port 8000``
+``python -m uvicorn channels.platforms.fastapi:app --host 127.0.0.1 --port 8000``
 """
 
 from __future__ import annotations
@@ -12,7 +12,6 @@ import json
 import statistics
 import sys
 import time
-import uuid
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -25,6 +24,8 @@ if str(PROJECT_ROOT) not in sys.path:
 
 DATASET = PROJECT_ROOT / "evaluation" / "datasets" / "acgn_retrieval_100.json"
 REPORTS = PROJECT_ROOT / "evaluation" / "reports"
+CHAT_ENDPOINT = "/api/v1/chat/stream"
+SESSION_ENDPOINT = "/api/v1/sessions"
 
 
 def _parse_sse_block(block: str) -> tuple[str, str]:
@@ -41,58 +42,80 @@ def _parse_sse_block(block: str) -> tuple[str, str]:
 async def _send_case(client: httpx.AsyncClient, case: dict, semaphore: asyncio.Semaphore) -> dict:
     async with semaphore:
         started = time.perf_counter()
-        session_id = f"eval-{case['id']}-{uuid.uuid4().hex[:8]}"
+        session_id = None
         result = {
             "id": case["id"],
             "domain": case.get("domain", "unknown"),
             "category": case.get("category", "unknown"),
             "query": case["query"],
             "status_code": None,
+            "run_status": None,
+            "run_id": None,
             "answer": "",
             "tool_calls": [],
             "events": Counter(),
             "error": None,
         }
         try:
+            session = await client.post(SESSION_ENDPOINT, json={
+                "title": f"ACGN Eval {case['id']}",
+                "user_id": "evaluation",
+                "persona_id": "cyrene",
+                "mode": "work",
+            })
+            session.raise_for_status()
+            session_id = session.json()["session_id"]
+            started = time.perf_counter()
             async with client.stream(
                 "POST",
-                "/api/chat/stream",
-                json={"query": case["query"], "session_id": session_id, "persona": "Cyrene"},
+                CHAT_ENDPOINT,
+                json={"message": case["query"], "session_id": session_id},
             ) as response:
                 result["status_code"] = response.status_code
-                chunks: list[str] = []
-                buffer = ""
+                response.raise_for_status()
+                lines: list[str] = []
                 async for raw_line in response.aiter_lines():
-                    if raw_line == "":
-                        if buffer.strip():
-                            event, data = _parse_sse_block(buffer)
-                            result["events"][event] += 1
-                            if event == "chunk":
-                                chunks.append(data)
-                            elif event == "tool":
-                                try:
-                                    result["tool_calls"].append(json.loads(data))
-                                except json.JSONDecodeError:
-                                    result["tool_calls"].append({"raw": data})
-                            elif event == "error":
-                                result["error"] = data
-                            buffer = ""
-                    else:
-                        buffer += raw_line + "\n"
-                if buffer.strip():
-                    event, data = _parse_sse_block(buffer)
-                    result["events"][event] += 1
-                    if event == "chunk":
-                        chunks.append(data)
-                result["answer"] = "".join(chunks)
-                if response.status_code >= 400:
-                    result["error"] = result["error"] or f"HTTP {response.status_code}"
+                    if raw_line:
+                        lines.append(raw_line)
+                    elif lines:
+                        _consume_event(result, "\n".join(lines))
+                        lines.clear()
+                if lines:
+                    _consume_event(result, "\n".join(lines))
+                if result["run_status"] is None:
+                    result["error"] = "SSE 已关闭，未收到 run_end"
         except Exception as exc:
             result["error"] = f"{type(exc).__name__}: {exc}"
         result["latency_ms"] = round((time.perf_counter() - started) * 1000, 2)
+        if session_id is not None:
+            try:
+                cleanup = await client.delete(f"{SESSION_ENDPOINT}/{session_id}")
+                cleanup.raise_for_status()
+            except Exception as exc:
+                result["cleanup_error"] = f"{type(exc).__name__}: {exc}"
         result["events"] = dict(result["events"])
         result["tool_names"] = [item.get("tool_name", "") for item in result["tool_calls"]]
         return result
+
+
+def _consume_event(result: dict, block: str) -> None:
+    event, payload = _parse_sse_block(block)
+    if not payload:  # 忽略 SSE 心跳注释。
+        return
+    envelope = json.loads(payload)
+    data = envelope["data"]
+    result["events"][event] += 1
+    if event == "run_start":
+        result["run_id"] = envelope.get("run_id")
+    elif event == "final_text":
+        text = str(data.get("text", ""))
+        result["answer"] = result["answer"] + text if data.get("delta") else text
+    elif event == "tool_start":
+        result["tool_calls"].append(data)
+    elif event == "run_end":
+        result["run_status"] = data["status"]
+        if data["status"] != "completed":
+            result["error"] = data.get("error") or data["status"]
 
 
 async def run(base_url: str, concurrency: int, timeout: float) -> Path:
@@ -102,26 +125,26 @@ async def run(base_url: str, concurrency: int, timeout: float) -> Path:
     semaphore = asyncio.Semaphore(concurrency)
     started = time.perf_counter()
     async with httpx.AsyncClient(base_url=base_url, timeout=request_timeout, limits=limits) as client:
-        response = await client.get("/api/chat/health")
+        response = await client.get("/health")
         if response.status_code != 200:
             raise RuntimeError(f"FastAPI health check failed: {response.status_code} {response.text}")
         results = await asyncio.gather(*(_send_case(client, case, semaphore) for case in cases))
 
     latencies = [item["latency_ms"] for item in results]
-    successful = [item for item in results if item["status_code"] == 200 and not item["error"]]
+    successful = [item for item in results if item["run_status"] == "completed" and not item["error"]]
     category_report: dict[str, dict[str, float | int]] = {}
     for category in sorted({item["category"] for item in results}):
         group = [item for item in results if item["category"] == category]
         category_report[category] = {
             "total": len(group),
-            "completed": sum(1 for item in group if item["status_code"] == 200),
+            "completed": sum(1 for item in group if item["run_status"] == "completed" and not item["error"]),
             "error_rate": round(sum(1 for item in group if item["error"]) / len(group), 4),
             "mean_latency_ms": round(statistics.mean(item["latency_ms"] for item in group), 2),
         }
 
     report = {
         "generated_at": datetime.now(timezone.utc).astimezone().isoformat(),
-        "endpoint": f"{base_url}/api/chat/stream",
+        "endpoint": f"{base_url}{CHAT_ENDPOINT}",
         "request_count": len(cases),
         "concurrency": concurrency,
         "wall_time_seconds": round(time.perf_counter() - started, 2),

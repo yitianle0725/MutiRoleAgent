@@ -128,6 +128,10 @@ npm run dev
 
 前端 Vite 会把 `/api` 请求代理到 `http://127.0.0.1:8000`。
 
+主应用通过 `POST /api/v1/chat/stream` 返回 SSE，首个 `run_start` 事件包含 `run_id`。可用 `GET /api/v1/runs/{run_id}` 查询状态，或用同一路径下的 `/events`、`/cancel` 和 `/retry` 查看事件、取消及重试。SSE 连接断开时仍在执行的请求会结算为 `cancelled`。
+
+已配置模型并启动主应用后，可运行 `python -m evaluation.fastapi_load_test`。脚本会建立临时 Work 会话发送评测请求，按 `run_end` 统计完成情况，并在每条请求结束后尝试删除该临时会话。
+
 ### 构建并由后端托管前端
 
 ```powershell

@@ -4,12 +4,15 @@ from __future__ import annotations
 
 import asyncio
 import uuid
+from contextlib import aclosing
 from datetime import datetime, timezone
 from collections.abc import AsyncIterator, Awaitable, Callable
 from dataclasses import dataclass
 from typing import Any
 
-from agent.results import AgentFactResult, OrchestratedTurnResult
+from anyio import CancelScope
+
+from agent.results import AgentFactResult, AgentRunStatus, OrchestratedTurnResult
 from agent.request import AgentRequest
 from agent.content import ContentBlock
 from agent.harness_events import HarnessEvent
@@ -17,7 +20,8 @@ from agent.decision_engine import DecisionEngine, decision_engine as default_dec
 from memory.session_store import SessionStore, session_store as default_session_store
 from runtime.context import RunContext
 from runtime.legacy_adapter import harness_to_run_event
-from runtime.settlement import RunSettlementGate, RunTerminalResult
+from runtime.settlement import RunTerminalResult
+from utils.logger_handler import logger
 
 from .session_runner import SessionAgentRunner
 from .roleplay import RoleplayEngine
@@ -69,6 +73,7 @@ class ConversationCoordinator:
         self._session_locks: dict[str, asyncio.Lock] = {}
         self._session_locks_guard = asyncio.Lock()
         self._tasks: dict[str, asyncio.Task[None]] = {}
+        self._active_streams: dict[str, asyncio.Task[None]] = {}
         self._tasks_lock = asyncio.Lock()
         self._completion_callbacks: dict[str, CompletionCallback] = {}
 
@@ -152,8 +157,10 @@ class ConversationCoordinator:
                 thread_id=session_id,
                 metadata={"user_id": user_id, "persona": persona},
             )
-            settlement = RunSettlementGate()
             persist_public_as_v2 = False
+            # 单事件缓冲让执行器可单独取消，同时保留流式输出的背压。
+            pending: asyncio.Queue[StreamEvent | None] = asyncio.Queue(maxsize=1)
+            worker: asyncio.Task[None] | None = None
 
             def bind(event: HarnessEvent) -> HarnessEvent:
                 return event.bind(
@@ -178,24 +185,8 @@ class ConversationCoordinator:
                         )
                 return bound
 
-            existing_run = await self._runs.get(run_context.run_id)
-            if existing_run is None:
-                await self._runs.create(
-                    session_id=session_id,
-                    thread_id=run_context.thread_id or session_id,
-                    prompt=prompt,
-                    run_id=run_context.run_id,
-                    user_id=user_id,
-                    persona=persona,
-                    trace_id=run_context.run_id,
-                )
-
-            yield await publish(HarnessEvent(
-                type="run_start",
-                data={"session_id": session_id},
-            ))
-
-            try:
+            async def execute() -> None:
+                nonlocal persist_public_as_v2
                 if self._context_builder and self._chat_executor and self._work_executor:
                     session = await self._context_builder.require_session(session_id)
                     context = await self._context_builder.build(session, prompt)
@@ -217,10 +208,11 @@ class ConversationCoordinator:
                                 runtime_event.to_dict(),
                             )
                     events: list[StreamEvent] = []
-                    async for event in executor.stream(prompt, context):
-                        event = await publish(event)
-                        events.append(event)
-                        yield event
+                    async with aclosing(executor.stream(prompt, context)) as stream:
+                        async for event in stream:
+                            event = await publish(event)
+                            events.append(event)
+                            await pending.put(event)
                     if session.mode == "chat":
                         runtime_event = trace_context.event(
                             "model_finished",
@@ -262,64 +254,95 @@ class ConversationCoordinator:
                         await asyncio.to_thread(
                             self._session_store.append_pair, session_id, prompt, response
                         )
-                        yield await publish(HarnessEvent.final_text(response))
+                        await pending.put(await publish(HarnessEvent.final_text(response)))
                     else:
-                        async for event in self._runner.stream(
+                        async with aclosing(self._runner.stream(
                             session_id,
                             prompt,
                             user_id=user_id,
                             persona=persona,
                             run_id=public_run_id,
-                        ):
-                            yield await publish(event)
-            except Exception as error:
-                message = f"{type(error).__name__}: {error}"
-                terminal = RunTerminalResult(status="failed", error=message)
-                if settlement.try_settle(terminal):
-                    if persist_public_as_v2:
-                        runtime_event = trace_context.event(
-                            "run_failed",
-                            {"status": "failed", "error": message},
-                        )
-                        await self._runs.append_event(
-                            trace_context.run_id,
-                            "runtime.event.v2",
-                            runtime_event.to_dict(),
-                        )
-                    await self._runs.set_status(
-                        run_context.run_id,
-                        "failed",
-                        error=message,
-                    )
-                    yield await publish(HarnessEvent(
-                        type="run_end",
-                        data={"status": "failed", "error": message},
-                    ))
-                return
+                        )) as stream:
+                            async for event in stream:
+                                await pending.put(await publish(event))
 
-            terminal = RunTerminalResult(status="completed")
-            if settlement.try_settle(terminal):
-                if persist_public_as_v2:
-                    runtime_event = trace_context.event(
-                        "run_finished",
-                        {"status": "completed"},
-                    )
-                    await self._runs.append_event(
-                        trace_context.run_id,
-                        "runtime.event.v2",
-                        runtime_event.to_dict(),
-                    )
-                await self._runs.set_status(run_context.run_id, "completed")
-                yield await publish(HarnessEvent(
-                    type="run_end",
-                    data={"status": "completed"},
-                ))
+            def wake_consumer(_: asyncio.Task[None]) -> None:
+                if pending.empty():
+                    pending.put_nowait(None)
+
+            terminal: RunTerminalResult | None = None
+            drained = False
+            turn_created = False
+            try:
+                with CancelScope(shield=True):
+                    existing_run = await self._runs.get(public_run_id)
+                    if existing_run is None:
+                        existing_run = await self._runs.create(
+                            session_id=session_id,
+                            thread_id=session_id,
+                            prompt=prompt,
+                            run_id=public_run_id,
+                            user_id=user_id,
+                            persona=persona,
+                            trace_id=public_run_id,
+                        )
+                    turn_created = True
+                started = await publish(HarnessEvent(type="run_start", data={"session_id": session_id}))
+                worker = asyncio.create_task(execute(), name=f"stream-run-{public_run_id}")
+                self._active_streams[public_run_id] = worker
+                worker.add_done_callback(wake_consumer)
+                yield started
+                while not pending.empty() or not worker.done():
+                    event = await pending.get()
+                    if event is None:
+                        break
+                    yield event
+                drained = True
+            except Exception as error:
+                if not turn_created:
+                    raise
+                terminal = RunTerminalResult(status="failed", error=f"{type(error).__name__}: {error}")
+            finally:
+                # Starlette 的断开信号会取消整个任务范围，终态仍需写入。
+                with CancelScope(shield=True):
+                    if worker is not None:
+                        if not worker.done() and not worker.cancelling():
+                            worker.cancel()
+                        (outcome,) = await asyncio.gather(worker, return_exceptions=True)
+                        self._active_streams.pop(public_run_id, None)
+                        if terminal is None:
+                            if isinstance(outcome, asyncio.CancelledError):
+                                reason = "用户取消任务" if drained else "流式连接已断开"
+                                terminal = RunTerminalResult(status="cancelled", error=reason)
+                            elif isinstance(outcome, BaseException):
+                                terminal = RunTerminalResult(
+                                    status="failed", error=f"{type(outcome).__name__}: {outcome}",
+                                )
+                            else:
+                                terminal = RunTerminalResult(status="completed")
+                    if turn_created:
+                        if terminal is None:
+                            terminal = RunTerminalResult(status="cancelled", error="流式连接已断开")
+                        run = await self._runs.set_status(
+                            public_run_id, terminal.status, error=terminal.error,
+                            clear_pending_input=True,
+                        )
+                        data = {"status": run.status}
+                        if run.error:
+                            data["error"] = run.error
+                        if persist_public_as_v2:
+                            event_type = "run_failed" if run.status == "failed" else "run_finished"
+                            runtime_event = trace_context.event(event_type, data)
+                            await self._runs.append_event(public_run_id, "runtime.event.v2", runtime_event.to_dict())
+                        end = await publish(HarnessEvent(type="run_end", data=data))
+            yield end
 
     async def handle_user_turn_stream(self, *args: Any, **kwargs: Any) -> AsyncIterator[StreamEvent]:
         """EchoBot 风格命名的统一流式入口。"""
 
-        async for event in self.stream_user_turn(*args, **kwargs):
-            yield event
+        async with aclosing(self.stream_user_turn(*args, **kwargs)) as events:
+            async for event in events:
+                yield event
 
     async def _get_session_lock(self, session_id: str) -> asyncio.Lock:
         async with self._session_locks_guard:
@@ -344,7 +367,7 @@ class ConversationCoordinator:
             response_text=response_text,
             completed=True,
             delegated=False,
-            status="completed",
+            status=fact.status,
             steps=fact.steps,
             role_name=persona,
             fact_result=fact,
@@ -374,6 +397,7 @@ class ConversationCoordinator:
     ) -> OrchestratedTurnResult:
         """启动后台 Agent 任务，立即返回 ACK 和 run_id。"""
 
+        ack = await self._roleplay.delegated_ack(prompt, persona=persona)
         thread_id = session_id
         run = await self._runs.create(
             session_id=session_id,
@@ -386,17 +410,16 @@ class ConversationCoordinator:
             trace_id=uuid.uuid4().hex,
             retry_of_run_id=retry_of_run_id,
         )
-        ack = await self._roleplay.delegated_ack(prompt, persona=persona)
-        task = asyncio.create_task(
-            self._run_background(
-                run,
-                user_id=user_id,
-                persona=persona,
-                completion_callback=completion_callback,
-            ),
-            name=f"agent-run-{run.run_id}",
-        )
         async with self._tasks_lock:
+            task = asyncio.create_task(
+                self._run_background(
+                    run,
+                    user_id=user_id,
+                    persona=persona,
+                    completion_callback=completion_callback,
+                ),
+                name=f"agent-run-{run.run_id}",
+            )
             self._tasks[run.run_id] = task
             if completion_callback is not None:
                 self._completion_callbacks[run.run_id] = completion_callback
@@ -447,27 +470,25 @@ class ConversationCoordinator:
         run = await self._runs.get(run_id)
         if run is None or run.status != "running":
             return run
-        callback = self._completion_callbacks.get(run_id)
+        worker = self._active_streams.get(run_id)
+        if worker is not None:
+            if worker.done():
+                return await self._runs.get(run_id)
+            if not worker.cancelling():
+                worker.cancel()
+            return await self._runs.set_status(run_id, "cancelled", error="用户取消任务")
+
         async with self._tasks_lock:
-            task = self._tasks.get(run_id)
-        if task is not None and not task.done():
-            cooperative = await self._runner.request_cancel(run_id)
-            if cooperative:
-                try:
-                    await asyncio.wait_for(asyncio.shield(task), timeout=1.0)
-                except TimeoutError:
-                    task.cancel()
-                    await asyncio.gather(task, return_exceptions=True)
-                except asyncio.CancelledError:
-                    pass
-            else:
+            task = self._tasks.pop(run_id, None)
+            callback = self._completion_callbacks.pop(run_id, None)
+            if task is not None:
                 task.cancel()
-                await asyncio.gather(task, return_exceptions=True)
         updated = await self._runs.set_status(
-            run_id, "cancelled", steps=run.steps, error="用户取消任务"
+            run_id, "cancelled", error="用户取消任务"
         )
-        await self._runs.append_event(run_id, "run.cancelled", {"reason": "用户取消任务", "steps": run.steps})
-        if callback and updated:
+        if task is not None:
+            await asyncio.gather(task, return_exceptions=True)
+        if callback and updated and updated.status == "cancelled":
             fact = AgentFactResult(status="cancelled", text="用户取消任务")
             response = await self._roleplay.present_agent_cancelled(fact.text)
             await callback(OrchestratedTurnResult(response_text=response, completed=True, delegated=True, run_id=run_id, status="cancelled", fact_result=fact))
@@ -482,8 +503,8 @@ class ConversationCoordinator:
         return await self.start_agent_turn(
             run.prompt,
             session_id=run.session_id,
-            user_id=user_id,
-            persona=persona,
+            user_id=user_id if user_id is not None else run.user_id,
+            persona=persona if persona is not None else run.persona,
             attempt=run.attempt + 1,
             retry_of_run_id=run.run_id,
             route_mode=run.route_mode,
@@ -514,7 +535,7 @@ class ConversationCoordinator:
             },
         )
         callback = self._completion_callbacks.get(run_id)
-        if callback and updated:
+        if callback and updated and updated.status == "waiting_for_input":
             fact = AgentFactResult(status="waiting_for_input", text=question, pending_user_input=updated.pending_user_input)
             response = await self._roleplay.present_waiting_for_input(question)
             await callback(OrchestratedTurnResult(response_text=response, completed=False, delegated=True, run_id=run_id, status="waiting_for_input", fact_result=fact))
@@ -559,6 +580,8 @@ class ConversationCoordinator:
         tool_events: list[dict[str, Any]] = []
         content_blocks: list[ContentBlock] = []
         steps = 0
+        status: AgentRunStatus = "failed"
+        error = ""
         async for event in self.stream_user_turn(prompt, session_id=session_id, user_id=user_id, persona=persona, run_id=run_id):
             if event.type == "final_text":
                 text = str(event.data.get("text", ""))
@@ -582,20 +605,21 @@ class ConversationCoordinator:
                         "schema_type": event.data.get("schema_type", ""),
                     },
                 ))
-            elif event.type == "run_end" and event.data.get("status") == "failed":
-                tool_events.append({
-                    "phase": "end",
-                    "tool_name": "harness",
-                    "result_preview": str(event.data.get("error", "执行失败")),
-                })
+            elif event.type == "run_end":
+                terminal_status = event.data.get("status")
+                if terminal_status in {"completed", "failed", "cancelled"}:
+                    status = terminal_status
+                error = str(event.data.get("error", ""))
         if response_text:
             content_blocks.insert(0, ContentBlock(type="text", data=response_text))
-        fact = AgentFactResult(status="completed", text=response_text, content=content_blocks, tool_events=tool_events, steps=steps)
-        for event in tool_events:
-            preview = str(event.get("result_preview") or "")
-            if preview.startswith(("[工具调用被拒绝]", "[工具执行失败]", "[参数错误]")):
-                fact.add_error(preview)
-        return fact
+        return AgentFactResult(
+            status=status,
+            text=error if status == "cancelled" else response_text,
+            content=content_blocks,
+            tool_events=tool_events,
+            errors=[error] if error and status == "failed" else [],
+            steps=steps,
+        )
 
     async def _present_fact(self, fact: AgentFactResult, prompt: str, persona: str | None) -> str:
         # Persona 已在 Chat/Work 的执行前 Prompt 中生效。成功结果直接返回，
@@ -617,25 +641,32 @@ class ConversationCoordinator:
         persona: str | None,
         completion_callback: CompletionCallback | None = None,
     ) -> None:
-        callback = completion_callback
         try:
-            fact = await self._collect_fact(run.prompt, session_id=run.session_id, user_id=user_id, persona=persona, run_id=run.run_id)
+            try:
+                fact = await self._collect_fact(
+                    run.prompt, session_id=run.session_id, user_id=user_id,
+                    persona=persona, run_id=run.run_id,
+                )
+            except Exception as exc:
+                error = f"{type(exc).__name__}: {exc}"
+                await self._runs.set_status(run.run_id, "failed", error=error)
+                fact = AgentFactResult(status="failed", errors=[error])
             response = await self._present_fact(fact, run.prompt, persona)
-            await self._runs.append_event(run.run_id, "run.result", {"response_text": response, "status": fact.status})
-            await self._runs.set_status(run.run_id, "completed", steps=fact.steps, summary=fact.text[:1200])
-            await self._runs.append_event(run.run_id, "turn_completed", {"steps": fact.steps})
-            if callback:
-                await callback(OrchestratedTurnResult(response_text=response, completed=True, delegated=True, run_id=run.run_id, status="completed", steps=fact.steps, role_name=persona, fact_result=fact))
-        except asyncio.CancelledError:
-            raise
-        except Exception as exc:
-            error = f"{type(exc).__name__}: {exc}"
-            await self._runs.set_status(run.run_id, "failed", error=error)
-            await self._runs.append_event(run.run_id, "turn_failed", {"error": error})
-            response = await self._roleplay.present_agent_failure(error, user_input=run.prompt, persona=persona)
-            if callback:
-                fact = AgentFactResult(status="failed", text=error, errors=[error])
-                await callback(OrchestratedTurnResult(response_text=response, completed=True, delegated=True, run_id=run.run_id, status="failed", role_name=persona, fact_result=fact))
+            await self._runs.append_event(run.run_id, "run.result", {
+                "response_text": response, "status": fact.status,
+                "steps": fact.steps, "summary": fact.text[:1200],
+            })
+            if fact.status == "completed":
+                await self._runs.append_event(run.run_id, "turn_completed", {"steps": fact.steps})
+            elif fact.status == "failed":
+                await self._runs.append_event(run.run_id, "turn_failed", {"error": "; ".join(fact.errors)})
+            if completion_callback:
+                await completion_callback(OrchestratedTurnResult(
+                    response_text=response, completed=True, delegated=True, run_id=run.run_id,
+                    status=fact.status, steps=fact.steps, role_name=persona, fact_result=fact,
+                ))
+        except Exception:
+            logger.exception("处理后台任务结果失败: run_id=%s", run.run_id)
         finally:
             async with self._tasks_lock:
                 self._tasks.pop(run.run_id, None)

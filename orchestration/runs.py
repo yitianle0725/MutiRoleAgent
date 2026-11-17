@@ -12,6 +12,7 @@ from typing import Any, Literal
 
 
 RunStatus = Literal["running", "completed", "failed", "cancelled", "waiting_for_input"]
+TERMINAL_STATUSES = {"completed", "failed", "cancelled"}
 
 
 @dataclass(slots=True)
@@ -80,14 +81,8 @@ class RunStore:
         event: str,
         data: dict[str, Any] | None = None,
     ) -> None:
-        record = {
-            "event": event,
-            "run_id": run_id,
-            "created_at": datetime.now(timezone.utc).isoformat(),
-            "data": data or {},
-        }
         async with self._lock:
-            await asyncio.to_thread(self._append_sync, run_id, record)
+            await asyncio.to_thread(self._append_sync, run_id, self._record(run_id, event, data or {}))
 
     async def get(self, run_id: str) -> AgentRun | None:
         async with self._lock:
@@ -128,11 +123,6 @@ class RunStore:
     ) -> AgentRun | None:
         """追加状态事件并返回重建后的运行记录。"""
 
-        current = await self.get(run_id)
-        if current is None:
-            return None
-        if current.status in {"completed", "failed", "cancelled"} and status != current.status:
-            return current
         data: dict[str, Any] = {"status": status}
         if steps is not None:
             data["steps"] = max(int(steps), 0)
@@ -144,8 +134,26 @@ class RunStore:
             data["pending_user_input"] = pending_user_input
         elif clear_pending_input:
             data["pending_user_input"] = None
-        await self.append_event(run_id, "run.status_changed", data)
-        return await self.get(run_id)
+        async with self._lock:
+            return await asyncio.to_thread(self._set_status_sync, run_id, data)
+
+    def _set_status_sync(self, run_id: str, data: dict[str, Any]) -> AgentRun | None:
+        records = self._read_sync(run_id)
+        current = self._rebuild(records)
+        if current is None or current.status in TERMINAL_STATUSES:
+            return current
+        record = self._record(run_id, "run.status_changed", data)
+        self._append_sync(run_id, record)
+        return self._rebuild([*records, record])
+
+    @staticmethod
+    def _record(run_id: str, event: str, data: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "event": event,
+            "run_id": run_id,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "data": data,
+        }
 
     async def recover_interrupted(self) -> int:
         """服务启动时将遗留 running 任务标为失败。"""
@@ -206,14 +214,21 @@ class RunStore:
         }
         run = AgentRun(**fields)
         for record in records[1:]:
+            run.updated_at = record.get("created_at", run.updated_at)
             data = record.get("data", {})
             if not isinstance(data, dict):
-                data = {}
-            run.updated_at = record.get("created_at", run.updated_at)
-            status = data.get("status")
-            if status in {"running", "completed", "failed", "cancelled", "waiting_for_input"}:
-                run.status = status
-            for key in ("steps", "summary", "error", "pending_user_input"):
-                if key in data:
-                    setattr(run, key, data[key])
+                continue
+            if record.get("event") == "run.status_changed":
+                if run.status in TERMINAL_STATUSES:
+                    continue
+                status = data.get("status")
+                if status in {"running", "completed", "failed", "cancelled", "waiting_for_input"}:
+                    run.status = status
+                for key in ("steps", "summary", "error", "pending_user_input"):
+                    if key in data:
+                        setattr(run, key, data[key])
+            elif record.get("event") == "run.result" and data.get("status") == run.status:
+                for key in ("steps", "summary"):
+                    if key in data:
+                        setattr(run, key, data[key])
         return run

@@ -8,6 +8,7 @@ import queue
 import threading
 import time
 import uuid
+from contextlib import aclosing
 from typing import Any
 
 from model.factory import chat_model
@@ -155,9 +156,15 @@ class ReactAgent:
     ):
         """执行唯一 Native 运行链并产出 Runtime v2 事件。"""
 
-        acquired = await asyncio.to_thread(
+        acquisition = asyncio.create_task(asyncio.to_thread(
             self._turn_lock.acquire, True, TURN_QUEUE_TIMEOUT,
-        )
+        ))
+        try:
+            acquired = await asyncio.shield(acquisition)
+        except asyncio.CancelledError:
+            if await acquisition:
+                self._turn_lock.release()
+            raise
         if not acquired:
             self.performance_monitor.record_rejection()
             raise RuntimeError("正在处理上一条消息，请等待其完成后再发送。")
@@ -167,9 +174,13 @@ class ReactAgent:
             self._turn_snapshot_start = self.performance_monitor.snapshot()
             self._current_outcome = "success"
             self.performance_monitor.start_turn()
-            async for event in self._execute_native_runtime_locked(query, run_context):
-                self._observe_event(event)
-                yield event
+            async with aclosing(self._execute_native_runtime_locked(query, run_context)) as events:
+                async for event in events:
+                    self._observe_event(event)
+                    yield event
+        except (asyncio.CancelledError, GeneratorExit):
+            self._current_outcome = "cancelled"
+            raise
         except Exception:
             self._current_outcome = "error"
             raise
@@ -239,20 +250,21 @@ class ReactAgent:
         active_skill: str | None = None
         terminal: RunEvent | None = None
         tracer.agent_path_start(len(history) + 1)
-        async for event in self.native_runtime.stream(request, run_context):
-            if event.type == "tool_call_started":
-                tool_name = str(event.data.get("tool_name", ""))
-                tracer.agent_tool_call(tool_name)
-                if tool_name == "invoke_skill":
-                    args = event.data.get("tool_args", {})
-                    if isinstance(args, dict):
-                        active_skill = str(args.get("skill_name") or "") or active_skill
-            elif event.type == "text_finished" and event.data.get("role") == "answer":
-                final_response = str(event.data.get("text", ""))
-            elif event.type in {"run_finished", "run_failed"}:
-                terminal = event
-                continue
-            yield event
+        async with aclosing(self.native_runtime.stream(request, run_context)) as events:
+            async for event in events:
+                if event.type == "tool_call_started":
+                    tool_name = str(event.data.get("tool_name", ""))
+                    tracer.agent_tool_call(tool_name)
+                    if tool_name == "invoke_skill":
+                        args = event.data.get("tool_args", {})
+                        if isinstance(args, dict):
+                            active_skill = str(args.get("skill_name") or "") or active_skill
+                elif event.type == "text_finished" and event.data.get("role") == "answer":
+                    final_response = str(event.data.get("text", ""))
+                elif event.type in {"run_finished", "run_failed"}:
+                    terminal = event
+                    continue
+                yield event
 
         if active_skill and final_response:
             structured = await self._postprocess_structured(final_response, active_skill)

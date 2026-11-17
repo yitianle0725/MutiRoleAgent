@@ -20,6 +20,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from api.routes import chat, persona, sessions, voice, web, runs
+from channels.platforms.fastapi import conversation_coordinator
 from memory.chat_db import chat_db
 
 # 前端构建产物目录（cd apps/web && npm run build）
@@ -38,6 +39,7 @@ def create_app() -> FastAPI:
         description="多角色 Agent 后端服务",
         lifespan=lifespan,
     )
+    app.state.conversation_coordinator = conversation_coordinator
 
     # ---- 前端托管（构建产物存在时才挂载） ----
     index_html = WEB_DIST / "index.html"
